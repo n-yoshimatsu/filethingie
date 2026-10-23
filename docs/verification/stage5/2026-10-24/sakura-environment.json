@@ -1,0 +1,39 @@
+{
+  "source": "利用者提供出力、2026-10-24",
+  "cli": {
+    "os": "FreeBSD 13.0-RELEASE-p15",
+    "php": "8.3.36",
+    "sapi": "cli",
+    "upload_max_filesize": "5M",
+    "post_max_size": "8M",
+    "memory_limit": "128M"
+  },
+  "web": {
+    "os": "FreeBSD",
+    "os_release": "13.0-RELEASE-p15",
+    "php": "8.3.36",
+    "sapi": "cgi-fcgi",
+    "https_flag": "on",
+    "extensions": {
+      "session": true,
+      "json": true,
+      "PDO": true,
+      "pdo_sqlite": true,
+      "zip": true,
+      "openssl": true,
+      "curl": true
+    },
+    "limits": {
+      "upload_max_filesize": "1024M",
+      "post_max_size": "1024M",
+      "memory_limit": "128M",
+      "max_execution_time": "30",
+      "display_errors": "",
+      "log_errors": "",
+      "opcache.enable": "1",
+      "opcache.validate_timestamps": "1"
+    }
+  },
+  "probe_cleanup": "未確認",
+  "application_acceptance": "NOT RUN"
+}

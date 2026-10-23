@@ -1,0 +1,47 @@
+const {chromium}=require(process.cwd()+'/tools/browser/node_modules/playwright-core');
+const fs=require('fs'),cp=require('child_process'),crypto=require('crypto');
+const service=process.argv[2], output=process.argv[3];
+fs.mkdirSync(output,{recursive:true});
+const record={case_id:service==='php83'?'TS-517':'TS-518',case:'分離配置パッケージ・index.php起動',started_at:new Date().toISOString(),checks:[],verdict:'INCONCLUSIVE'};
+const hash=x=>crypto.createHash('sha256').update(x).digest('hex');
+const run=args=>cp.execFileSync(args[0],args.slice(1),{encoding:'utf8'}).trim();
+const docker=(...args)=>run(['docker','compose','exec','-T',service,...args]);
+function expect(label,actual,expected){const ok=JSON.stringify(actual)===JSON.stringify(expected);record.checks.push({label,actual,expected,verdict:ok?'PASS':'FAIL'});if(!ok)throw Error(label);}
+(async()=>{let browser;try{
+ const old=docker('php','-r','echo hash_file("sha256", "ft2.php");');
+ docker('mkdir','/var/www/html/acceptance-stage5');docker('chown','www-data:www-data','/var/www/html/acceptance-stage5');
+ run(['docker','compose','cp','/tmp/ft-stage5-preview',service+':/tmp/preview-stage5']);
+ docker('php','-l','/tmp/preview-stage5/setup.php');
+ const port=service==='php83'?18443:18543;
+ const setup=run(['docker','compose','exec','-T','--user','www-data',service,'php','/tmp/preview-stage5/setup.php','/var/www/html/acceptance-stage5','/var/lib/filethingie','/var/www/html',`https://127.0.0.1:${port}/acceptance-stage5`]);
+ const field=name=>setup.split('\n').find(line=>line.startsWith(name+': ')).slice(name.length+2);
+ const url=field('Preview URL'),password=field('Password'),app=field('Public test directory'),priv=field('Private test directory');
+ record.setup=setup.replace(password,'<generated local fixture password>');
+ expect('Unchanged original entrypoint',docker('php','-r','echo hash_file("sha256", "ft2.php");'),old);
+ expect('Renamed entry identical',docker('php','-r','echo hash_file("sha256",$argv[1]);',app+'/index.php'),old);
+ expect('Private file mode',docker('php','-r','echo decoct(fileperms($argv[1]) & 0777);',app+'/config.php'),'600');
+ browser=await chromium.launch({executablePath:'/usr/bin/google-chrome',headless:true});
+ record.browser=browser.version();
+ // UI/path test only. Certificate validation is independently tested by TS-501/502.
+ const context=await browser.newContext({ignoreHTTPSErrors:true,locale:'ja-JP'}),page=await context.newPage();
+ const errors=[];page.on('pageerror',e=>errors.push(String(e)));
+ await page.goto(url,{waitUntil:'networkidle'});
+ expect('Renamed login form action',await page.locator('#loginbox').getAttribute('action'),'index.php');
+ await page.locator('#ft_user').fill('stage5');await page.locator('#ft_pass').fill(password);
+ await Promise.all([page.waitForNavigation(),page.locator('#login_button').click()]);
+ expect('Isolated authenticated list',await page.locator('#filelist').count(),1);
+ const content=Buffer.from('File Thingie acceptance\n日本語 UTF-8\n    spaces\tTAB\n');
+ await page.locator('#uploadsection input[type=file]:not(.safarihide)').setInputFiles({name:'acceptance-日本語.txt',mimeType:'text/plain',buffer:content});
+ await Promise.all([page.waitForNavigation(),page.locator('#uploadbutton input').click()]);
+ const response=await context.request.get(url+'?method=getfile&file='+encodeURIComponent('acceptance-日本語.txt'));
+ expect('Index route downloaded bytes',hash(await response.body()),hash(content));
+ expect('Private managed file bytes',docker('php','-r','echo hash_file("sha256",$argv[1]);',priv+'/files/acceptance-日本語.txt'),hash(content));
+ await Promise.all([page.waitForNavigation(),page.locator('#secondary_menu a[href*="act=log"]').click()]);
+ expect('Isolated SQLite log', (await page.locator('#log_table').textContent()).includes('acceptance-日本語.txt'),true);
+ expect('No browser exceptions',errors,[]);
+ const log=docker('cat',priv+'/php-error.log');fs.writeFileSync(output+'/php-error.log',log+'\n');
+ expect('Private PHP log has no diagnostics',/PHP (?:Fatal|Warning|Deprecated|Notice|Parse)/.test(log),false);
+ expect('Independent config log setting',docker('php','-r','include $argv[1];echo ini_get("log_errors");',app+'/config.php'),'1');
+ await page.screenshot({path:output+'/preview.png',fullPage:true});
+ record.verdict='PASS';
+}catch(e){record.verdict='FAIL';record.error=String(e);}finally{if(browser)await browser.close();record.finished_at=new Date().toISOString();fs.writeFileSync(output+'/result.json',JSON.stringify(record,null,2)+'\n');console.log(JSON.stringify({case_id:record.case_id,verdict:record.verdict,error:record.error}));process.exitCode=record.verdict==='PASS'?0:1;}})();

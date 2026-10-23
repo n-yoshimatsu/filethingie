@@ -8,6 +8,9 @@ on:
   workflow_dispatch:
 permissions:
   contents: read
+env:
+  # Match the PHP fixture and the local test host for date-filter inputs.
+  TZ: Asia/Tokyo
 concurrency:
   group: php-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true

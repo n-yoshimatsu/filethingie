@@ -1,0 +1,14 @@
+# Optional dependency/configuration failure profile; localhost fixtures only.
+services:
+  php83:
+    build:
+      args:
+        WITH_ZIP: "0"
+    environment:
+      FT_TEST_DEGRADED: "1"
+  php85:
+    build:
+      args:
+        WITH_ZIP: "0"
+    environment:
+      FT_TEST_DEGRADED: "1"

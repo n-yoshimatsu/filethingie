@@ -1,0 +1,67 @@
+{
+  "case_id": "LINT-201",
+  "service": "php83",
+  "case": "lint",
+  "started_at": "2026-10-23T23:11:55.002722+00:00",
+  "baseline_commit": "a7511ad57e65b64d603e9cb68a20359ad0a3a4e6",
+  "checkout_commit": "cfbce1549547f1b21990da7648b003ce5b523ede",
+  "container_matches_checkout": true,
+  "application_matches_upstream": false,
+  "container_image_id": "sha256:b4f85071f9dddcb2768a38aec5e9226f25c861138457c090997baa313823b60b",
+  "port_bindings": {
+    "80/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "18383"
+      }
+    ]
+  },
+  "cli_runtime": {
+    "php_version": "8.3.36",
+    "sapi": "cli",
+    "os_family": "Linux",
+    "integer_bytes": 8,
+    "server_software": null,
+    "extensions": {
+      "session": "8.3.36",
+      "json": "8.3.36",
+      "mbstring": "8.3.36",
+      "fileinfo": "8.3.36",
+      "PDO": "8.3.36",
+      "pdo_sqlite": "8.3.36",
+      "sqlite3": "8.3.36",
+      "zip": "1.22.3",
+      "zlib": "8.3.36",
+      "openssl": "8.3.36",
+      "curl": "8.3.36"
+    },
+    "ini": {
+      "error_reporting": "32767",
+      "display_errors": "",
+      "log_errors": "1",
+      "error_log": "/proc/self/fd/2",
+      "default_charset": "UTF-8",
+      "date.timezone": "Asia/Tokyo",
+      "upload_max_filesize": "2M",
+      "post_max_size": "8M",
+      "memory_limit": "128M",
+      "max_execution_time": "0",
+      "allow_url_fopen": "1",
+      "disable_functions": "",
+      "open_basedir": "",
+      "opcache.enable": ""
+    },
+    "functions": {
+      "exec": true,
+      "get_magic_quotes_gpc": false,
+      "sqlite_query": false
+    },
+    "ZipArchive": true
+  },
+  "files": 40,
+  "syntax_failures": 0,
+  "files_with_notices": 0,
+  "verdict": "PASS",
+  "log_command_exit_code": 0,
+  "finished_at": "2026-10-23T23:11:59.261902+00:00"
+}

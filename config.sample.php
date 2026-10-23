@@ -9,7 +9,8 @@ function ft_settings_external_load() {
 
   # Settings - Change as appropriate. See online documentation for explanations. #
   define("USERNAME", ""); // Your default username.
-  define("PASSWORD", ""); // Your default password.
+  define("PASSWORD_HASH", ""); // Generate with tools/hash-password.php. Never paste the plaintext password here.
+  define("ALLOW_LEGACY_PASSWORD", FALSE); // Enable only temporarily while migrating old password entries.
 
   $ft["settings"]["DIR"]               = "."; // Your default directory. Do NOT include a trailing slash!
   $ft["settings"]["LANG"]              = "en"; // Language. Do not change unless you have downloaded language file.
@@ -31,7 +32,7 @@ function ft_settings_external_load() {
   $ft["settings"]["LIMIT"]             = 0; // Restrict total dir file usage to this amount of bytes. Set to "0" for no limit.
   $ft["settings"]["REQUEST_URI"]       = FALSE; // Installation path. You only need to set this if $_SERVER['REQUEST_URI'] is not being set by your server.
   $ft["settings"]["HTTPS"] = FALSE; // Change to TRUE to enable HTTPS support.
-  $ft["settings"]["REMEMBERME"]        = FALSE; // Set to TRUE to enable the "remember me" feature at login.
+  $ft["settings"]["REMEMBERME"]        = FALSE; // Legacy setting: persistent login cookies are no longer supported.
   $ft["settings"]["PLUGINDIR"]         = 'plugins'; // Set to the path to your plugin folder. Do NOT include a trailing slash!
 
   # Plugin settings #
@@ -42,7 +43,7 @@ function ft_settings_external_load() {
      "converttabs" => FALSE
    )
   );
-  /*
+  /* Legacy external-editor integration: disabled in this release. See docs/STAGE4_MIGRATION.md.
   $ft["plugins"]["tinymce"] = array(
     "settings" => array(
       "path" => "tinymce/jscripts/tiny_mce/tiny_mce.js",
@@ -55,7 +56,7 @@ function ft_settings_external_load() {
 
   /*
   $ft['users']['REPLACE_WITH_USERNAME'] = array(
-    'password' => 'REPLACE_WITH_PASSWORD',
+    'password_hash' => 'REPLACE_WITH_PASSWORD_HASH',
     'group' => 'REPLACE_WITH_GROUPNAME'
   );
   */

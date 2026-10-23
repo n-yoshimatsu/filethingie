@@ -3,3 +3,6 @@ data/*
 .svn
 artifacts/
 __pycache__/
+
+# Local browser test dependency cache
+tools/browser/node_modules/

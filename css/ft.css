@@ -367,3 +367,10 @@ form#edit textarea {
 	background:#ffc;
 	width:250px;
 }
+/* Keep the POST logout and administration links inside the existing header. */
+#logout form { display:inline-block; margin:0 0 0 0.5em; }
+#logout #secondary_menu a { margin-left:0.75em; }
+#log_table { width:auto; min-width:660px; margin-top:1em; }
+#log_table th button { white-space:nowrap; }
+#log_table td { overflow-wrap:anywhere; max-width:360px; }
+#main form label { display:inline-block; margin:0.25em; }

@@ -2,7 +2,7 @@
 // Public fixture credentials for localhost containers only; never deploy this file.
 function ft_settings_external_load() {
     define('USERNAME', 'stage2');
-    define('PASSWORD', 'local-only-filethingie');
+    define('PASSWORD_HASH', '$2y$10$9NPcPoyxJGSxRLWPwb66PeAw5Dkc0ObCC1grogVxdRKkZHnZvgA0C');
     return [
         'settings' => [
             'DIR' => 'files',
@@ -29,8 +29,10 @@ function ft_settings_external_load() {
             'PLUGINDIR' => 'plugins',
         ],
         'users' => [
-            'viewer' => ['password' => 'local-only-viewer', 'group' => 'readers'],
-            'ungrouped' => ['password' => 'local-only-ungrouped'],
+            'legacy' => ['password' => 'local-only-legacy'],
+            'brokenhash' => ['password_hash' => '', 'password' => 'must-not-work'],
+            'viewer' => ['password_hash' => '$2y$10$MxkWDnm92Bw4eBm34qSmJeHf12i0Nfec331fjPzBayOg3Si4HrNSy', 'group' => 'readers'],
+            'ungrouped' => ['password_hash' => '$2y$10$cx8xerfYgs4w/9gfLS3OT.qCcOnjyAtIP6iWf2xFpTzaKnJeNYZn2'],
         ],
         'groups' => [
             'readers' => [
@@ -42,6 +44,14 @@ function ft_settings_external_load() {
             ],
         ],
         'plugins' => [
+            'log' => ['settings' => ['viewlogs' => true]],
+            'db' => ['settings' => ['path' => getenv('FT_TEST_DEGRADED') ? '/var/www/html/files/unsafe.sqlite' : '/var/lib/filethingie/test.sqlite', 'flushtables' => true]],
+            'zip' => true,
+            'config' => (bool)getenv('FT_TEST_DEGRADED'),
+            'fileinfo' => (bool)getenv('FT_TEST_DEGRADED'),
+            'tinymce' => (bool)getenv('FT_TEST_DEGRADED'),
+            'editorck' => (bool)getenv('FT_TEST_DEGRADED'),
+            'fckeditor' => (bool)getenv('FT_TEST_DEGRADED'),
             'search' => true,
             'edit' => ['settings' => ['editlist' => 'txt html htm css', 'converttabs' => false]],
         ],

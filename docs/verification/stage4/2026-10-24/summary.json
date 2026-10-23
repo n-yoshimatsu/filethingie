@@ -1,0 +1,402 @@
+[
+  {
+    "path": "browser1/php83/result.json",
+    "case_id": "TS-413",
+    "case": "Chromeブラウザー互換",
+    "verdict": "FAIL",
+    "checks": 6,
+    "requests": 0,
+    "latest": false,
+    "error": "Error: Long filename preserved\n    at expect (/mnt/ssd2/nfs_root/projects2/filethingie/tools/browser/stage4.cjs:18:20)\n    at main (/mnt/ssd2/nfs_root/projects2/filethingie/tools/browser/stage4.cjs:66:5)"
+  },
+  {
+    "path": "browser1/php85/result.json",
+    "case_id": "TS-414",
+    "case": "Chromeブラウザー互換",
+    "verdict": "FAIL",
+    "checks": 6,
+    "requests": 0,
+    "latest": false,
+    "error": "Error: Long filename preserved\n    at expect (/mnt/ssd2/nfs_root/projects2/filethingie/tools/browser/stage4.cjs:18:20)\n    at main (/mnt/ssd2/nfs_root/projects2/filethingie/tools/browser/stage4.cjs:66:5)"
+  },
+  {
+    "path": "browser2/php83/result.json",
+    "case_id": "TS-413",
+    "case": "Chromeブラウザー互換",
+    "verdict": "FAIL",
+    "checks": 13,
+    "requests": 0,
+    "latest": false,
+    "error": "Error: UI downloaded content\n    at expect (/mnt/ssd2/nfs_root/projects2/filethingie/tools/browser/stage4.cjs:18:20)\n    at main (/mnt/ssd2/nfs_root/projects2/filethingie/tools/browser/stage4.cjs:85:5)"
+  },
+  {
+    "path": "browser2/php85/result.json",
+    "case_id": "TS-414",
+    "case": "Chromeブラウザー互換",
+    "verdict": "FAIL",
+    "checks": 13,
+    "requests": 0,
+    "latest": false,
+    "error": "Error: UI downloaded content\n    at expect (/mnt/ssd2/nfs_root/projects2/filethingie/tools/browser/stage4.cjs:18:20)\n    at main (/mnt/ssd2/nfs_root/projects2/filethingie/tools/browser/stage4.cjs:85:5)"
+  },
+  {
+    "path": "browser3/php83/result.json",
+    "case_id": "TS-413",
+    "case": "Chromeブラウザー互換",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "browser3/php85/result.json",
+    "case_id": "TS-414",
+    "case": "Chromeブラウザー互換",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "final/auth-php83/result.json",
+    "case_id": "TS-407",
+    "case": "auth",
+    "verdict": "PASS",
+    "checks": 74,
+    "requests": 29,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/auth-php85/result.json",
+    "case_id": "TS-408",
+    "case": "auth",
+    "verdict": "PASS",
+    "checks": 74,
+    "requests": 29,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/basic-php83/result.json",
+    "case_id": "TS-401",
+    "case": "basic",
+    "verdict": "PASS",
+    "checks": 247,
+    "requests": 83,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/basic-php85/result.json",
+    "case_id": "TS-402",
+    "case": "basic",
+    "verdict": "PASS",
+    "checks": 247,
+    "requests": 83,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/browser-php83/result.json",
+    "case_id": "TS-413",
+    "case": "Chromeブラウザー互換",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/browser-php85/result.json",
+    "case_id": "TS-414",
+    "case": "Chromeブラウザー互換",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/content-php83/result.json",
+    "case_id": "TS-415",
+    "case": "content",
+    "verdict": "PASS",
+    "checks": 66,
+    "requests": 24,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/content-php85/result.json",
+    "case_id": "TS-416",
+    "case": "content",
+    "verdict": "PASS",
+    "checks": 66,
+    "requests": 24,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/degraded-php83/result.json",
+    "case_id": "TS-411",
+    "case": "degraded",
+    "verdict": "PASS",
+    "checks": 26,
+    "requests": 6,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/degraded-php85/result.json",
+    "case_id": "TS-412",
+    "case": "degraded",
+    "verdict": "PASS",
+    "checks": 26,
+    "requests": 6,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/groups-php83/result.json",
+    "case_id": "TS-405",
+    "case": "groups",
+    "verdict": "PASS",
+    "checks": 60,
+    "requests": 21,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/groups-php85/result.json",
+    "case_id": "TS-406",
+    "case": "groups",
+    "verdict": "PASS",
+    "checks": 60,
+    "requests": 21,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/lint-php83/result.json",
+    "case_id": "LINT-201",
+    "case": "lint",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/lint-php85/result.json",
+    "case_id": "LINT-202",
+    "case": "lint",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/negative-php83/result.json",
+    "case_id": "TS-403",
+    "case": "negative",
+    "verdict": "PASS",
+    "checks": 147,
+    "requests": 56,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/negative-php85/result.json",
+    "case_id": "TS-404",
+    "case": "negative",
+    "verdict": "PASS",
+    "checks": 147,
+    "requests": 56,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/plugins-php83/result.json",
+    "case_id": "TS-409",
+    "case": "plugins",
+    "verdict": "PASS",
+    "checks": 199,
+    "requests": 71,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/plugins-php85/result.json",
+    "case_id": "TS-410",
+    "case": "plugins",
+    "verdict": "PASS",
+    "checks": 199,
+    "requests": 71,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/startup-php83/result.json",
+    "case_id": "TS-201",
+    "case": "startup",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "final/startup-php85/result.json",
+    "case_id": "TS-202",
+    "case": "startup",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "latest": true,
+    "error": null
+  },
+  {
+    "path": "run1/auth-php83/result.json",
+    "case_id": "TS-407",
+    "case": "auth",
+    "verdict": "PASS",
+    "checks": 74,
+    "requests": 29,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/auth-php85/result.json",
+    "case_id": "TS-408",
+    "case": "auth",
+    "verdict": "PASS",
+    "checks": 74,
+    "requests": 29,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/basic-php83/result.json",
+    "case_id": "TS-401",
+    "case": "basic",
+    "verdict": "PASS",
+    "checks": 247,
+    "requests": 83,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/basic-php85/result.json",
+    "case_id": "TS-402",
+    "case": "basic",
+    "verdict": "PASS",
+    "checks": 247,
+    "requests": 83,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/groups-php83/result.json",
+    "case_id": "TS-405",
+    "case": "groups",
+    "verdict": "PASS",
+    "checks": 60,
+    "requests": 21,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/groups-php85/result.json",
+    "case_id": "TS-406",
+    "case": "groups",
+    "verdict": "PASS",
+    "checks": 60,
+    "requests": 21,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/lint-php83/result.json",
+    "case_id": "LINT-201",
+    "case": "lint",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/lint-php85/result.json",
+    "case_id": "LINT-202",
+    "case": "lint",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/negative-php83/result.json",
+    "case_id": "TS-403",
+    "case": "negative",
+    "verdict": "PASS",
+    "checks": 147,
+    "requests": 56,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/negative-php85/result.json",
+    "case_id": "TS-404",
+    "case": "negative",
+    "verdict": "PASS",
+    "checks": 147,
+    "requests": 56,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/plugins-php83/result.json",
+    "case_id": "TS-409",
+    "case": "plugins",
+    "verdict": "PASS",
+    "checks": 199,
+    "requests": 71,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/plugins-php85/result.json",
+    "case_id": "TS-410",
+    "case": "plugins",
+    "verdict": "PASS",
+    "checks": 199,
+    "requests": 71,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/startup-php83/result.json",
+    "case_id": "TS-201",
+    "case": "startup",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "latest": false,
+    "error": null
+  },
+  {
+    "path": "run1/startup-php85/result.json",
+    "case_id": "TS-202",
+    "case": "startup",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "latest": false,
+    "error": null
+  }
+]

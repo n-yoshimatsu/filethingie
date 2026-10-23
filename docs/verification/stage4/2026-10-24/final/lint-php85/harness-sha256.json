@@ -1,0 +1,12 @@
+{
+  "compose.yaml": "a209b5e45377c1a5e6ecfab6cf198c1e3f9d720aaaf04806ee528e8a2b813417",
+  ".dockerignore": "bb4111ccdcd9f0f51b6b5397b1349cd41bea0859568641c0a851d2300febb317",
+  "tools/stage2.py": "77a15a902315c21aa40be5141e8a34d586ff9319f1ea5fc0e772cf7396c507c7",
+  "dev/Dockerfile": "6e4cd9cb8f01a090896bb30ed2beca1011b381415f18a1d5a8f17110f83d9b50",
+  "dev/apache-test.conf": "b291c19c9cc4d4f35c423bb5f3bbe5d66186f11d8d26e77ee95fdf76eba0a1e6",
+  "dev/compose.stage4-degraded.yaml": "436e5f75e83bf776551826ed96d6bd8a7206889b2022ed52f59831f70f0c38d2",
+  "dev/config.test.php": "f75dd58ed4aeccbcffebe3059dd14200f710eb762f8deda67e042ef4ae855536",
+  "dev/php.ini": "4e596fe710d2355a74f2277776d3955e99a92c426ef66058973190794847c5a3",
+  "dev/runtime.php": "d1153f5eb7940a209fa4f707147743946961a6587b0912d51bce2103fe814ee0",
+  "dev/seed.php": "edd06058480c117043d1f3f3eb38700f719563de5d1a449bc030311e373c63d5"
+}

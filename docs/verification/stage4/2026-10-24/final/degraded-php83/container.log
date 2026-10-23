@@ -1,0 +1,6 @@
+php83-1  | 2026-10-23T23:10:51.641512855Z 172.18.0.1 - - [23/Oct/2026:23:10:51 +0000] "GET /__environment.php HTTP/1.1" 200 1302 "-" "filethingie-stage3/1"
+php83-1  | 2026-10-23T23:10:51.646475694Z 172.18.0.1 - - [23/Oct/2026:23:10:51 +0000] "GET /ft2.php HTTP/1.1" 200 4712 "-" "filethingie-stage3/1"
+php83-1  | 2026-10-23T23:10:51.697687299Z 172.18.0.1 - - [23/Oct/2026:23:10:51 +0000] "POST /ft2.php HTTP/1.1" 302 509 "-" "filethingie-stage3/1"
+php83-1  | 2026-10-23T23:10:51.702414260Z 172.18.0.1 - - [23/Oct/2026:23:10:51 +0000] "GET /ft2.php HTTP/1.1" 200 10214 "-" "filethingie-stage3/1"
+php83-1  | 2026-10-23T23:10:51.815483326Z 172.18.0.1 - - [23/Oct/2026:23:10:51 +0000] "GET /ft2.php?act=edit&file=ascii.txt HTTP/1.1" 200 9003 "-" "filethingie-stage3/1"
+php83-1  | 2026-10-23T23:10:51.821241272Z 172.18.0.1 - - [23/Oct/2026:23:10:51 +0000] "GET /ft2.php?method=getfile&dir=&file=ascii.txt HTTP/1.1" 200 425 "-" "filethingie-stage3/1"

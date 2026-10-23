@@ -59,7 +59,8 @@ function ft_edit_page($act) {
       if (ft_check_dir(ft_get_dir()) && ft_check_edit($_REQUEST['file']) && ft_check_fileactions() === TRUE && ft_check_filetype($_REQUEST['file']) && ft_check_file($_REQUEST['file'])) {
 				// Get file contents.
 				$filecontent = implode ("", file(ft_get_dir()."/{$_REQUEST["file"]}"));
-				$filecontent = htmlspecialchars($filecontent);
+				$lineending = str_contains($filecontent, "\r\n") ? 'crlf' : 'lf';
+        $filecontent = htmlspecialchars($filecontent);
 				if ($ft['plugins']['edit']['settings']['converttabs'] == TRUE) {
 					$filecontent = str_replace("\t", "    ", $filecontent);
 				}
@@ -85,6 +86,7 @@ function ft_edit_page($act) {
               <input type="hidden" name="file" id="file" value="'.ft_escape($_REQUEST['file']).'" />
               <input type="hidden" name="dir" id="dir" value="'.ft_escape($_REQUEST['dir']).'" />
   						<input type="hidden" name="act" value="savefile" />
+              <input type="hidden" name="lineending" id="lineending" value="'.$lineending.'" />
               <button type="button" id="save">'.t('Save').'</button>
   						<input type="submit" value="'.t('Save &amp; exit').'" name="submit" />
   						<input type="submit" value="'.t('Cancel').'" name="submit" />
@@ -130,7 +132,7 @@ function ft_edit_action($act) {
       if (strtolower($_REQUEST["submit"] ?? '') != strtolower(t("Cancel"))) {
 				// Check if file type can be edited.
         if (ft_check_dir(ft_get_dir()) && ft_check_edit($file) && ft_check_fileactions() === TRUE && ft_check_filetype($file) && ft_check_file($file)) {
-					$filecontent = ft_stripslashes($_REQUEST["filecontent"]);
+					$filecontent = ft_edit_lineendings(ft_stripslashes($_REQUEST["filecontent"]));
           if (!empty($_REQUEST["convertspaces"])) {
 						$filecontent = str_replace("    ", "\t", $filecontent);
 					}
@@ -169,7 +171,7 @@ function ft_edit_ajax($act) {
 		$file = trim(ft_stripslashes($_POST["file"]));
 		// Check if file type can be edited.
     if (ft_check_dir(ft_get_dir()) && ft_check_edit($file) && ft_check_fileactions() === TRUE && ft_check_filetype($file) && ft_check_file($file)) {
-			$filecontent = ft_stripslashes($_POST["filecontent"]);
+			$filecontent = ft_edit_lineendings(ft_stripslashes($_POST["filecontent"]));
       if (!empty($_POST["convertspaces"])) {
 				$filecontent = str_replace("    ", "\t", $filecontent);
 			}
@@ -205,21 +207,12 @@ function ft_edit_add_js_call() {
   $return = '';
   // Save via ajax (opposed to save & exit)
   if (!empty($_REQUEST['act']) && $_REQUEST['act'] == 'edit') {
-    $return .= '$("#save").click(function(){
+    $return .= '$("#save").on("click", function(){
   	$("#savestatus").empty().append("<p class=\"ok\">'.t('Saving file&hellip;').'</p>");
-  	$.post("'.ft_get_self().'", {method:\'ajax\', act:\'saveedit\', file: $(\'#file\').val(), dir: $(\'#dir\').val(), filecontent: $(\'#filecontent\').val(), convertspaces: $(\'#convertspaces\').val()}, function(data){
+    $.post("'.ft_get_self().'", {method:\'ajax\', act:\'saveedit\', file: $(\'#file\').val(), dir: $(\'#dir\').val(), filecontent: $(\'#filecontent\').val(), lineending: $(\'#lineending\').val(), convertspaces: $(\'#convertspaces\').is(\':checked\') ? \'on\' : \'\'}, function(data){
   		$("#savestatus").empty().append(data);
   	});
   });';
-  // Heartbeat to keep file locked.
-  $return .= 'ft.edit_beat = function(){
-    $.post("'.ft_get_self().'", {method:\'ajax\', act:\'edit_get_lock\', file: $(\'#file\').val(), dir: $(\'#dir\').val()}, function(data){
-  	});
-  };
-  ft.edit_heartbeat = setInterval(function() {
-    // Make ajax call to make sure file stays locked.
-    ft.edit_beat();
-  }, 30000);';
   } else {
     $return = 'ft.fileactions.edit = {type: "sendoff", link: "'.t('Edit').'", text: "'.t('Do you want to edit this file?').'", button: "'.t('Yes, edit file').'"};';
   }
@@ -318,4 +311,12 @@ function ft_edit_lock_set($file, $dir, $user) {
   //   $sql = "INSERT INTO edit (dir, file, user, timestamp) VALUES ('" . sqlite_escape_string($dir) . "','" . sqlite_escape_string($file) . "','" . sqlite_escape_string($user) . "'," . time() . ")";
   //   sqlite_query($ft['db']['link'], $sql);              
   // }
+}
+/** Restore the line-ending convention recorded by the edit form. */
+function ft_edit_lineendings($content) {
+  $ending = $_POST['lineending'] ?? '';
+  if ($ending === '') { return $content; }
+  if (!in_array($ending, array('lf', 'crlf'), TRUE)) { ft_bad_request(); }
+  $content = str_replace(array("\r\n", "\r"), "\n", $content);
+  return $ending === 'crlf' ? str_replace("\n", "\r\n", $content) : $content;
 }

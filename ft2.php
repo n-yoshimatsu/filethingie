@@ -37,29 +37,56 @@ $ft['groups'] = array();
 $ft['users'] = array();
 $ft['plugins'] = array();
 
-/**
- * Check if a login cookie is valid.
- *
- * @param $c
- *   The login cookie from $_COOKIE.
- * @return The username of the cookie user. FALSE if cookie is not valid.
- */
-function ft_check_cookie($c) {
+/** Authentication for PHP 8. Legacy remember cookies are deliberately not accepted. */
+function ft_credential($user) {
   global $ft;
-  // Check primary user.
-  if ($c == md5(USERNAME.PASSWORD)) {
-    return USERNAME;
+  if ($user === USERNAME && $user !== '') {
+    return defined('PASSWORD_HASH') ? array('hash', PASSWORD_HASH) : array('plain', defined('PASSWORD') ? PASSWORD : '');
   }
-  // Check users array.
-	if (is_array($ft['users']) && sizeof($ft['users']) > 0) {
-	  // Loop through users.
-	  foreach ($ft['users'] as $user => $a) {
-	    if ($c == md5($user.$a['password'])) {
-	      return $user;
-	    }
-	  }
-	}
-	return FALSE;
+  $entry = $ft['users'][$user] ?? array();
+  return array_key_exists('password_hash', $entry) ? array('hash', $entry['password_hash']) : array('plain', $entry['password'] ?? '');
+}
+
+function ft_session_validate() {
+  $user = $_SESSION['ft_user_'.MUTEX] ?? '';
+  if ($user === '') { return; }
+  $credential = ft_credential($user);
+  $fingerprint = hash('sha256', serialize($credential));
+  if (empty($credential[1]) || ($credential[0] === 'plain' && defined('ALLOW_LEGACY_PASSWORD') && !ALLOW_LEGACY_PASSWORD) || !hash_equals($fingerprint, $_SESSION['ft_credential'] ?? '')
+      || time() - ($_SESSION['ft_seen'] ?? 0) > 1800 || time() - ($_SESSION['ft_started'] ?? 0) > 28800) {
+    $_SESSION = array();
+    session_regenerate_id(TRUE);
+  } else {
+    $_SESSION['ft_seen'] = time();
+  }
+}
+
+function ft_csrf_token() {
+  if (empty($_SESSION['ft_csrf'])) { $_SESSION['ft_csrf'] = bin2hex(random_bytes(32)); }
+  return $_SESSION['ft_csrf'];
+}
+
+function ft_csrf_field() {
+  return '<input type="hidden" name="csrf_token" value="'.ft_csrf_token().'" />';
+}
+
+function ft_request_guard() {
+  $act = $_REQUEST['act'] ?? '';
+  if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $token = $_POST['csrf_token'] ?? ($_SERVER['HTTP_X_CSRF_TOKEN'] ?? '');
+    if (!is_string($token) || !hash_equals(ft_csrf_token(), $token)) {
+      http_response_code(403);
+      exit('Invalid CSRF token. Reload the page and try again.');
+    }
+  } elseif (!in_array($act, array('', 'error', 'edit', 'search', 'zip', 'log', 'log_csv', 'db', 'db_delete'), TRUE)) {
+    header('Allow: POST');
+    http_response_code(405);
+    exit('This action requires POST.');
+  }
+}
+
+function ft_is_admin() {
+  return LOGIN && ($_SESSION['ft_user_'.MUTEX] ?? '') === USERNAME && USERNAME !== '';
 }
 
 /**
@@ -175,60 +202,26 @@ function ft_check_filetype($file) {
  * @return TRUE if the user is authenticated.
  */
 function ft_check_login() {
-	global $ft;
-  $valid_login = 0;
-	if (LOGIN == TRUE) {
-		if (empty($_SESSION['ft_user_'.MUTEX])) {
-		  $cookie_mutex = str_replace('.', '_', MUTEX);
-			// Session variable has not been set. Check if there is a valid cookie or login form has been submitted or return false.
-      if (REMEMBERME == TRUE && !empty($_COOKIE['ft_user_'.$cookie_mutex])) {
-        // Verify cookie.
-        $cookie = ft_check_cookie($_COOKIE['ft_user_'.$cookie_mutex]);
-        if (!empty($cookie)) {
-  			  // Cookie valid. Login.
-  				$_SESSION['ft_user_'.MUTEX] = $cookie;
-  				ft_invoke_hook('loginsuccess', $cookie);
-  				ft_redirect();
-        }
-			}
-			if (!empty($_POST['act']) && $_POST['act'] == "dologin") {
-				// Check username and password from login form.
-        if (!empty($_POST['ft_user']) && $_POST['ft_user'] === USERNAME && ($_POST['ft_pass'] ?? '') === PASSWORD) {
-					// Valid login.
-					$_SESSION['ft_user_'.MUTEX] = USERNAME;
-					$valid_login = 1;
-				}
-				// Default user was not valid, we check additional users (if any).
-				if (is_array($ft['users']) && sizeof($ft['users']) > 0) {
-					// Check username and password.
-          if (array_key_exists($_POST['ft_user'] ?? '', $ft['users']) && $ft['users'][$_POST['ft_user']]['password'] === ($_POST['ft_pass'] ?? '')) {
-						// Valid login.
-						$_SESSION['ft_user_'.MUTEX] = $_POST['ft_user'];
-						$valid_login = 1;
-					}
-				}
-				if ($valid_login == 1) {
-				  // Set cookie.
-					if (!empty($_POST['ft_cookie']) && REMEMBERME) {
-					  setcookie('ft_user_'.MUTEX, md5($_POST['ft_user'].$_POST['ft_pass']), time()+60*60*24*3);
-					} else {
-					  // Delete cookie
-					  setcookie('ft_user_'.MUTEX, md5($_POST['ft_user'].$_POST['ft_pass']), time()-3600);
-					}
-					ft_invoke_hook('loginsuccess', $_POST['ft_user']);
-					ft_redirect();
-				} else {
-          ft_invoke_hook('loginfail', $_POST['ft_user'] ?? '');
-  				ft_redirect("act=error");
-				}
-			}
-			return FALSE;
-		} else {
-			return TRUE;
-		}
-	} else {
-		return TRUE;
-	}
+  if (!LOGIN) { return TRUE; }
+  if (!empty($_SESSION['ft_user_'.MUTEX])) { return TRUE; }
+  if (($_POST['act'] ?? '') === 'dologin') {
+    $user = $_POST['ft_user'] ?? '';
+    $password = $_POST['ft_pass'] ?? '';
+    [$kind, $stored] = ft_credential($user);
+    $valid = is_string($stored) && $stored !== '' && $password !== '' &&
+      ($kind === 'hash' ? ((password_get_info($stored)['algoName'] !== 'bcrypt' || strlen($password) <= 72) && password_verify($password, $stored)) :
+        ((!defined('ALLOW_LEGACY_PASSWORD') || ALLOW_LEGACY_PASSWORD === TRUE) && hash_equals($stored, $password)));
+    if ($valid) {
+      session_regenerate_id(TRUE);
+      $_SESSION = array('ft_user_'.MUTEX => $user, 'ft_credential' => hash('sha256', serialize(array($kind, $stored))),
+        'ft_started' => time(), 'ft_seen' => time());
+      ft_invoke_hook('loginsuccess', $user);
+      ft_redirect();
+    }
+    ft_invoke_hook('loginfail', $user);
+    ft_redirect('act=error');
+  }
+  return FALSE;
 }
 
 /**
@@ -598,25 +591,11 @@ function ft_do_action() {
 			  ft_set_message(t("Upload failed."), 'error');
         ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 			}
-    # Unzip
-    } elseif ($_REQUEST['act'] == "unzip" && ft_check_fileactions() === TRUE) {
-			// Check that file is set.
-			$file = ft_stripslashes($_REQUEST['file']);
-      if ($file !== '' && ft_check_file($file) && ft_check_filetype($file) && strtolower(ft_get_ext($file)) == 'zip' && is_file(ft_get_dir()."/".$file)) {
-			  $escapeddir = escapeshellarg(ft_get_dir()."/");
-			  $escapedfile = escapeshellarg(ft_get_dir()."/".$file);
-				if (!@exec("unzip -n ".$escapedfile." -d ".$escapeddir)) {
-          ft_set_message(t("!old could not be unzipped.", array('!old' => $file)), 'error');
-          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
-				} else {
-          ft_set_message(t("!old unzipped.", array('!old' => $file)));
-          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
-				}
-			} else {
-        ft_set_message(t("!old could not be unzipped.", array('!old' => $file)), 'error');
-        ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
-			}
-    # chmod
+    # Unzip (optional ZIP plugin; no shell commands).
+    } elseif ($_REQUEST['act'] === 'unzip' && ft_check_fileactions() === TRUE) {
+      $ok = ft_plugin_exists('zip') && ft_zip_extract($_REQUEST['file']);
+      ft_set_message($ok ? t('!old unzipped.', array('!old' => $_REQUEST['file'])) : t('!old could not be unzipped.', array('!old' => $_REQUEST['file'])), $ok ? 'ok' : 'error');
+      ft_redirect('dir='.rawurlencode($_REQUEST['dir']));
     } elseif ($_REQUEST['act'] == "chmod" && ft_check_fileactions() === TRUE && ADVANCEDACTIONS == TRUE) {
 			// Check that file is set.
 			$file = ft_stripslashes($_REQUEST['file']);
@@ -649,14 +628,11 @@ function ft_do_action() {
 		# logout
 		} elseif ($_REQUEST['act'] == "logout") {
       ft_invoke_hook('logout', ($_SESSION['ft_user_'.MUTEX] ?? ''));
-			$_SESSION = array();
-			if (isset($_COOKIE[session_name()])) {
-			   setcookie(session_name(), '', time()-42000, '/');
-			}
-			session_destroy();
-			// Delete persistent cookie
-		  setcookie('ft_user_'.MUTEX, '', time()-3600);
-			ft_redirect();
+      $_SESSION = array();
+      $params = session_get_cookie_params();
+      setcookie(session_name(), '', array('expires' => time()-3600, 'path' => $params['path'], 'secure' => $params['secure'], 'httponly' => TRUE, 'samesite' => 'Lax'));
+      session_destroy();
+      ft_redirect();
 		}
 	}
 }
@@ -917,7 +893,7 @@ function ft_get_root() {
  * @return File name.
  */
 function ft_get_self() {
-	return basename($_SERVER['PHP_SELF']);
+	return rawurlencode(basename(__FILE__));
 }
 
 /**
@@ -992,8 +968,15 @@ function ft_invoke_hook() {
   $return = array();
   if (isset($ft['loaded_plugins']) && is_array($ft['loaded_plugins'])) {
     foreach ($ft['loaded_plugins'] as $name) {
-      if (function_exists('ft_'.$name.'_'.$hook)) {
-        $result = call_user_func_array('ft_'.$name.'_'.$hook, $args);
+      if (ft_plugin_exists($name) && function_exists('ft_'.$name.'_'.$hook)) {
+        try {
+          $result = call_user_func_array('ft_'.$name.'_'.$hook, $args);
+        } catch (PDOException $e) {
+          if (!in_array($name, array('db', 'log'), TRUE)) { throw $e; }
+          ft_plugin_unload('db'); ft_plugin_unload('log');
+          ft_set_message('DB/log disabled: database operation failed. Check the private database and its permissions.', 'error');
+          continue;
+        }
         if (isset($result) && is_array($result)) {
           $return = array_merge_recursive($return, $result);
         }
@@ -1107,7 +1090,7 @@ function ft_make_body() {
 						$odd .= " seperator ";
 					}
 					$previous = $c['type'];
-					$str .= "<tr class='{$c['type']} $odd'>";
+					$str .= "<tr data-filename=\"".ft_escape($c['name'])."\" class='{$c['type']} $odd'>";
 					if ($c['writeable'] && ft_check_fileactions() === TRUE) {
 						$str .= "<td class='details'><span class='{$class}'>&loz;</span><span class='hide' style='display:none;'>&loz;</span></td>";
 					} else {
@@ -1184,11 +1167,11 @@ function ft_make_header() {
 	}
 	// Display logout link.
   if (LOGIN == TRUE) {
-	  $str .= '<div id="logout"><p>';
+	  $str .= '<div id="logout">';
 	  if (isset($ft['users']) && @count($ft['users']) > 0 && LOGIN == TRUE) {
 	    $str .= t('Logged in as !user ', array('!user' => $_SESSION['ft_user_'.MUTEX]));
 	  }
-	  $str .= ft_make_link(t("[logout]"), "act=logout", t("Logout of File Thingie")).'</p>';
+	  $str .= '<form method="post" action="'.ft_get_self().'"><div><input type="hidden" name="act" value="logout" /><button type="submit">'.t('[logout]').'</button></div></form>';
 	  $str .= '<div id="secondary_menu">' . implode("", ft_invoke_hook('secondary_menu')) . '</div>';
 	  $str .= '</div>';
 	}
@@ -1250,9 +1233,7 @@ function ft_make_login() {
 				<input type="hidden" name="act" value="dologin" />
 			</div>  <div class="checkbox">
     			  <input type="submit" value="'.t('Login').'" id="login_button" tabindex="10" />';
-	if (REMEMBERME) {
-		$str .= '<label for="ft_cookie" id="cookie_label"><input type="checkbox" name="ft_cookie" id="ft_cookie" tabindex="3" /> '.t('Remember me').'</label>';
-	}
+
 	$str .= '</div></div>
 	</form>';
 	return $str;
@@ -1294,13 +1275,13 @@ function ft_make_scripts() {
   global $ft;
   $scripts = array();
   if (INSTALL != "SIMPLE") {
-    $scripts[] = 'jquery-1.2.1.pack.js';
-    $scripts[] = 'filethingie.js';
+    $scripts[] = 'js/jquery-4.0.0.min.js';
+    $scripts[] = 'js/filethingie.js';
   }
   $result = ft_invoke_hook('add_js_file');
   $scripts = array_merge($scripts, $result);
   foreach ($scripts as $c) {
-    echo "<script type='text/javascript' charset='utf-8' src='js/{$c}'></script>\r\n";
+    echo "<script type='text/javascript' charset='utf-8' src='".ft_escape($c)."'></script>\r\n";
   }
 }
 
@@ -1441,8 +1422,13 @@ function ft_plugins_load() {
   $core = array('search', 'edit', 'tinymce');
   $ft['loaded_plugins'] = array();
   if (isset($ft['plugins']) && is_array($ft['plugins'])) {
+    if (isset($ft['plugins']['db'])) { $ft['plugins'] = array('db' => $ft['plugins']['db']) + $ft['plugins']; }
     foreach ($ft['plugins'] as $name => $v) {
       if ($v === FALSE || $v === NULL) {
+        continue;
+      }
+      if (!preg_match('/^[a-z][a-z0-9_]*$/D', $name) || in_array($name, array('config', 'fileinfo', 'tinymce', 'editorck', 'fckeditor'), TRUE)) {
+        ft_set_message(t('Plugin disabled in this release: !name. See docs/STAGE4_MIGRATION.md.', array('!name' => $name)), 'error');
         continue;
       }
       $ft['plugins'][$name] = is_array($v) ? $v : array();
@@ -1552,7 +1538,7 @@ function ft_redirect($query = '') {
  */
 function ft_validate_request_types() {
   $fields = array('act', 'method', 'dir', 'file', 'newvalue', 'newdir', 'type',
-    'ft_user', 'ft_pass', 'ft_cookie', 'q', 'filecontent', 'submit', 'convertspaces', 'sort', 'highlight');
+    'lineending', 'csrf_token', 'value', 'ft_submit', 'from', 'to', 'from_day', 'to_day', 'ft_user', 'ft_pass', 'ft_cookie', 'q', 'filecontent', 'submit', 'convertspaces', 'sort', 'highlight');
   foreach (array($_GET, $_POST, $_REQUEST) as $input) {
     foreach ($fields as $field) {
       if (isset($input[$field]) && (!is_string($input[$field]) || strpos($input[$field], "\0") !== FALSE)) {
@@ -1595,7 +1581,7 @@ function ft_sanitize_request() {
     ft_bad_request();
   }
   $act = $_REQUEST['act'] ?? '';
-  $file_actions = array('move', 'delete', 'rename', 'duplicate', 'symlink', 'chmod', 'unzip', 'edit', 'savefile', 'saveedit', 'edit_get_lock');
+  $file_actions = array('move', 'delete', 'rename', 'duplicate', 'symlink', 'chmod', 'unzip', 'zip', 'edit', 'savefile', 'saveedit', 'edit_get_lock');
   if (in_array($act, $file_actions, TRUE) && !isset($_REQUEST['file'])) {
     ft_bad_request();
   }
@@ -1631,12 +1617,19 @@ function ft_sanitize_request() {
   if (in_array($act, array('savefile', 'saveedit'), TRUE) && !isset($_REQUEST['filecontent'])) {
     ft_bad_request();
   }
-  foreach ($_FILES as $upload) {
+  $upload_names = $_POST['upload_names'] ?? array();
+  if (!is_array($upload_names)) { ft_bad_request(); }
+  foreach ($_FILES as $control => $upload) {
     // The UI submits individual file controls, not nested PHP upload arrays.
     foreach (array('name', 'tmp_name') as $key) {
       if (!isset($upload[$key]) || !is_string($upload[$key])) {
         ft_bad_request();
       }
+    }
+    if (array_key_exists($control, $upload_names)) {
+      $original = $upload_names[$control];
+      if (!ft_validate_filename($original) || str_replace(array(chr(13), chr(10), chr(34)), array('%0D', '%0A', '%22'), $original) !== $upload['name']) { ft_bad_request(); }
+      $_FILES[$control]['name'] = $original;
     }
     if (!isset($upload['error'], $upload['size']) || !is_int($upload['error']) || !is_int($upload['size'])) {
       ft_bad_request();
@@ -1660,7 +1653,7 @@ function ft_set_message($message = NULL, $type = 'ok') {
     if (!isset($_SESSION['ft_status'][$type])) {
       $_SESSION['ft_status'][$type] = array();
     }
-    $_SESSION['ft_status'][$type][] = $message;
+    if (!in_array($message, $_SESSION['ft_status'][$type], TRUE)) { $_SESSION['ft_status'][$type][] = $message; }
   }
 }
 
@@ -1694,7 +1687,7 @@ function ft_settings_load() {
   $settings = array();
 
   // Load external configuration if any.
-  $json = ft_settings_external('config.php');
+  $json = $ft['external_config'];
   if ($json) {
     // Merge settings.
     if (isset($json['settings']) && is_array($json['settings'])) {
@@ -1726,6 +1719,7 @@ function ft_settings_load() {
     die('Could not open config file. Please create config.php');
   }
 
+  ft_session_validate();
   // Save default settings before groups overwrite them.
   $ft['default_settings'] = $ft['settings'];
 
@@ -1769,6 +1763,7 @@ function ft_settings_load() {
   foreach ($settings as $k => $v) {
     define($k, $v);
   }
+  if (REMEMBERME) { ft_set_message('Remember me is no longer supported. Please sign in each session. See docs/STAGE4_MIGRATION.md.', 'error'); }
   // Clean up $ft.
   unset($ft['settings']);
 }
@@ -1829,12 +1824,26 @@ if (function_exists('date_default_timezone_set')) {
 if (headers_sent()) {
   $str = ft_make_headers_failed();
 } else {
+  ft_validate_request_types();
+  $_REQUEST = array_replace($_GET, $_POST);
+  $ft['external_config'] = ft_settings_external('config.php');
+  ini_set('session.use_strict_mode', '1');
+  ini_set('session.use_only_cookies', '1');
+  session_name('FTSID'.substr(hash('sha256', __FILE__), 0, 16));
+  $secure = (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') || !empty($ft['external_config']['settings']['HTTPS']);
+  session_set_cookie_params(array('lifetime' => 0, 'path' => '/', 'secure' => $secure, 'httponly' => TRUE, 'samesite' => 'Lax'));
   session_start();
+  // Ignore and expire old credential-derived cookies; old PHP sessions use a different name.
+  $legacy_cookie = 'ft_user_'.str_replace('.', '_', MUTEX);
+  if (isset($_COOKIE[$legacy_cookie])) { setcookie('ft_user_'.MUTEX, '', time()-3600); }
+  header('X-Content-Type-Options: nosniff');
+  header('X-Frame-Options: SAMEORIGIN');
   header("Content-Type: text/html; charset=UTF-8");
   header("Connection: close");
   ft_validate_request_types();
   // Prep settings
   ft_settings_load();
+  ft_request_guard();
   // Load plugins
   ft_plugins_load();
   ft_invoke_hook('init');
@@ -1902,6 +1911,7 @@ if (headers_sent()) {
     	$str .= ft_make_login();
   }
   $str .= ft_make_footer();
+  $str = preg_replace_callback('/(<form\b[^>]*\bmethod=[\"\']post[\"\'][^>]*>)/i', function($m) { return $m[1].'<div>'.ft_csrf_field().'</div>'; }, $str);
 }
 ?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
 	"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
@@ -1909,6 +1919,7 @@ if (headers_sent()) {
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="<?php echo LANG;?>" lang="<?php echo LANG;?>">
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="csrf-token" content="<?php echo ft_csrf_token();?>" />
 	<title>File Thingie <?php echo VERSION;?></title>
 	<link rel="author" href="http://www.solitude.dk/" title="Andreas Haugstrup Pedersen" />
 	<link rel="home" href="<?php echo ft_get_self();?>" title="<?php echo t('Go to home folder');?>" />
@@ -1924,6 +1935,9 @@ if (headers_sent()) {
 		}
 		// Set global object.
 		var ft = {fileactions:{}};
+    $.ajaxPrefilter(function(options, original, xhr) {
+      if (!options.crossDomain) { xhr.setRequestHeader('X-CSRF-Token', $('meta[name="csrf-token"]').attr('content')); }
+    });
 		// Prep upload section.
 		$('#uploadsection').parent().ft_upload({
 		  header:"<?php echo t('Files for upload:');?>",
@@ -1953,17 +1967,18 @@ if (headers_sent()) {
       directory: <?php echo json_encode($_REQUEST['dir'] ?? '', JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);?>,
 		  ok: "<?php echo t('Ok');?>",
 		  formpost: "<?php echo ft_get_self();?>",
+		  canunzip: <?php echo ft_plugin_exists('zip') ? 'true' : 'false';?>,
 		  advancedactions: "<?php if (ADVANCEDACTIONS === TRUE) {echo 'true';} else {echo 'false';}?>"
 		});
 
 		// Sort select box.
-		$('#sort').change(function(){
-		  $('#sort_form').submit();
+		$('#sort').on("change", function(){
+		  $('#sort_form').trigger("submit");
 		});
 		// Label highlight in 'create' box.
-    $('#new input[type=radio]').change(function(){
+    $('#new input[type=radio]').on("change", function(){
       $('label').removeClass('label_highlight');
-      $('label[@for='+$(this).attr('id')+']').addClass('label_highlight');
+      $('label[for='+$(this).attr('id')+']').addClass('label_highlight');
     });
 <?php echo implode("\r\n", ft_invoke_hook('add_js_call'));?>
 	});

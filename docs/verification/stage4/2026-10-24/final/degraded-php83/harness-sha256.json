@@ -1,0 +1,14 @@
+{
+  "compose.yaml": "a209b5e45377c1a5e6ecfab6cf198c1e3f9d720aaaf04806ee528e8a2b813417",
+  "tools/stage3.py": "fb1312579e79b1b149a71011842351bfce8d60d814f78634bbd2e855410d018a",
+  "tools/stage4.py": "b3539973ae38741a518ac18ade4bae58dcec650459adc6f73dcc0268dcd813db",
+  "tools/hash-password.php": "93efa69105b09c787d5618f4d03ef532295b19bd5570295dc7c6ae14b8fabd69",
+  "docs/STAGE4_TEST_PLAN.md": "5f14ba7397114f236c9165ed309aa76ec2113bf89ceab7c7f7e70af572ca0e54",
+  "dev/Dockerfile": "6e4cd9cb8f01a090896bb30ed2beca1011b381415f18a1d5a8f17110f83d9b50",
+  "dev/apache-test.conf": "b291c19c9cc4d4f35c423bb5f3bbe5d66186f11d8d26e77ee95fdf76eba0a1e6",
+  "dev/compose.stage4-degraded.yaml": "436e5f75e83bf776551826ed96d6bd8a7206889b2022ed52f59831f70f0c38d2",
+  "dev/config.test.php": "f75dd58ed4aeccbcffebe3059dd14200f710eb762f8deda67e042ef4ae855536",
+  "dev/php.ini": "4e596fe710d2355a74f2277776d3955e99a92c426ef66058973190794847c5a3",
+  "dev/runtime.php": "d1153f5eb7940a209fa4f707147743946961a6587b0912d51bce2103fe814ee0",
+  "dev/seed.php": "edd06058480c117043d1f3f3eb38700f719563de5d1a449bc030311e373c63d5"
+}

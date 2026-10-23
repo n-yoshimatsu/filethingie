@@ -1,5 +1,6 @@
 /* Local-only browser functional tests. No injected sessions or mocked API responses. */
-const {chromium} = require('playwright-core');
+const {chromium, firefox} = require('playwright-core');
+const useFirefox = process.env.FT_BROWSER === 'firefox';
 const fs = require('node:fs');
 const path = require('node:path');
 const crypto = require('node:crypto');
@@ -9,7 +10,7 @@ const [service, outputArg] = process.argv.slice(2);
 if (!['php83','php85'].includes(service) || !outputArg) throw Error('Usage: node tools/browser/stage4.cjs php83|php85 OUTPUT');
 const output = path.resolve(outputArg);
 fs.mkdirSync(output,{recursive:false});
-const record = {case_id: service === 'php83' ? 'TS-413' : 'TS-414',case:'Chromeブラウザー互換', service, started_at:new Date().toISOString(), verdict:'INCONCLUSIVE', checks:[], steps:[], errors:[], responses:[]};
+const record = {case_id: useFirefox ? (service === 'php83' ? 'TS-511' : 'TS-512') : (service === 'php83' ? 'TS-413' : 'TS-414'),case:useFirefox ? 'Firefoxブラウザー互換' : 'Chromeブラウザー互換', service, started_at:new Date().toISOString(), verdict:'INCONCLUSIVE', checks:[], steps:[], errors:[], responses:[]};
 function hash(value) { return crypto.createHash('sha256').update(value).digest('hex'); }
 function command(args) { return cp.execFileSync(args[0],args.slice(1),{cwd:root,encoding:'utf8'}).trim(); }
 function expect(label,actual,expected) {
@@ -32,7 +33,7 @@ async function main() {
     const php = '$r=[]; foreach(json_decode($argv[1],true) as $p) {$r[$p]=hash_file("sha256",$p === "dev/config.test.php" ? "config.php" : $p);} echo json_encode($r);';
     const actual = JSON.parse(command(['docker','compose','exec','-T',service,'php','-r',php,JSON.stringify(files)]));
     expect('Container source matches checkout',actual,record.source_sha256);
-    try { browser = await chromium.launch({executablePath:process.env.FT_CHROME || '/usr/bin/google-chrome',headless:true}); }
+    try { browser = useFirefox ? await firefox.launch({headless:true}) : await chromium.launch({executablePath:process.env.FT_CHROME || '/usr/bin/google-chrome',headless:true}); }
     catch(error) { record.verdict='BLOCKED';throw error; }
     record.browser_version=browser.version();
     const context=await browser.newContext({locale:'ja-JP',viewport:{width:1280,height:900},acceptDownloads:true});

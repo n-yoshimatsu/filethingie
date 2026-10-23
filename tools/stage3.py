@@ -71,6 +71,9 @@ class Case:
             raise RuntimeError('Expected localhost binding')
         self.port, self.image = int(ports[0]['HostPort']), bindings['Image']
 
+    def connection(self):
+        return http.client.HTTPConnection('127.0.0.1', self.port, timeout=20)
+
     def expect(self, label, actual, expected):
         passed = actual == expected
         self.checks.append({'check': label, 'expected': expected, 'actual': actual, 'verdict': 'PASS' if passed else 'FAIL'})
@@ -103,7 +106,7 @@ class Case:
             headers['Content-Type'] = 'application/x-www-form-urlencoded'
         if self.cookies:
             headers['Cookie'] = '; '.join(f'{key}={value}' for key, value in self.cookies.items())
-        connection = http.client.HTTPConnection('127.0.0.1', self.port, timeout=20)
+        connection = self.connection()
         try:
             connection.request(method, path, body=payload, headers=headers)
             response = connection.getresponse()

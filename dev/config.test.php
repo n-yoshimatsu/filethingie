@@ -6,8 +6,9 @@ function ft_settings_external_load() {
     return [
         'settings' => [
             'DIR' => 'files',
+            'URL_HOSTS' => getenv('FT_TEST_URL_HOSTS') ?: '',
             'LANG' => 'ja',
-            'MAXSIZE' => 2000000,
+            'MAXSIZE' => getenv('FT_TEST_MAXSIZE') !== false ? (int)getenv('FT_TEST_MAXSIZE') : 2000000,
             'PERMISSION' => 0644,
             'DIRPERMISSION' => 0755,
             'LOGIN' => true,

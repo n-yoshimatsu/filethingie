@@ -35,6 +35,10 @@ function ft_settings_external_load() {
   $ft["settings"]["REMEMBERME"]        = FALSE; // Legacy setting: persistent login cookies are no longer supported.
   $ft["settings"]["PLUGINDIR"]         = 'plugins'; // Set to the path to your plugin folder. Do NOT include a trailing slash!
 
+  // URL import is disabled unless exact HTTPS hostnames are listed (space-separated).
+  // Requires cURL, TLS verification and public IPv4. No redirects or overwrites.
+  $ft["settings"]["URL_HOSTS"] = "";
+
   # Plugin settings #
   $ft["plugins"]["search"] = TRUE;
   $ft["plugins"]["edit"] = array(

@@ -8,8 +8,10 @@
 | PHP | 8.3、8.5 | [password_verify](https://www.php.net/manual/en/function.password-verify.php)、[セッション設定](https://www.php.net/manual/en/session.security.ini.php)、[fputcsv](https://www.php.net/manual/en/function.fputcsv.php) |
 | PDO SQLite | DB／log使用時のみ必要 | 既存SQLite 3 DBとPDO。公開領域外の保存先が必要 |
 | ZipArchive | ZIP作成・展開時のみ必要 | [getStreamIndex](https://www.php.net/manual/en/ziparchive.getstreamindex.php)。外部unzipコマンドを不使用 |
-| Playwright Core | 1.56.1、開発試験専用、lockfileで固定 | [公式ドキュメント](https://playwright.dev/docs/library)。既存ローカルChromeを指定、本番へ配布不要 |
+| Playwright Core | 1.56.1、開発試験専用、lockfileで固定 | [公式ドキュメント](https://playwright.dev/docs/library)。既存ローカルChromeと対応Firefox 142.0.1を使用、本番へ配布不要 |
 
 File Thingie本体の原著作権表示と[LICENSE](../LICENSE)を維持。新jQueryのバイト列は公式配布と一致を照合し、検証記録にSHA-256を保存。npm依存は`tools/browser/package-lock.json`で固定。
 
 jQuery 4.0.0公式配布との照合値（SHA-256）：`39a546ea9ad97f8bfaf5d3e0e8f8556adb415e470e59007ada9759dce472adaa`。
+
+段階5のURL取得はPHP cURLを任意依存として使用します。未導入の場合はURL取得を無効化します。CIはGitHub Actionsのcheckout 7.0.1、setup-node 7.1.0、upload-artifact 7.0.2を検証時点の完全コミットSHAで固定しています。PHP基底イメージのdigestとnpm lockfileも維持しています。OSパッケージ、GitHub runner、Chromeの細部は結果に記録する方式であり、環境全体のビット単位の固定ではありません。

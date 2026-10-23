@@ -286,6 +286,78 @@ function ft_clean_settings($settings) {
   return $settings;
 }
 
+/** Copy into a new file only; concurrent uploads must never replace a winner. */
+function ft_store_new_file($source, $destination) {
+  $input = @fopen($source, 'rb');
+  if ($input === FALSE) { return FALSE; }
+  $output = @fopen($destination, 'xb');
+  if ($output === FALSE) { fclose($input); return FALSE; }
+  $size = fstat($input)['size'];
+  $ok = @stream_copy_to_stream($input, $output) === $size && fflush($output);
+  fclose($input);
+  fclose($output);
+  if (!$ok) { @unlink($destination); return FALSE; }
+  @chmod($destination, PERMISSION);
+  return TRUE;
+}
+
+/** Optional URL import: explicit HTTPS hosts, public IPv4, pinned DNS, bounded size. */
+function ft_url_import_enabled() {
+  return defined('URL_HOSTS') && is_string(URL_HOSTS) && trim(URL_HOSTS) !== '' && function_exists('curl_init');
+}
+
+function ft_import_url($url) {
+  if (!ft_url_import_enabled() || preg_match('/[\x00-\x20\x7f\\\\]/', $url)) { return FALSE; }
+  $parts = parse_url($url);
+  if ($parts === FALSE || ($parts['scheme'] ?? '') !== 'https' || isset($parts['user']) || isset($parts['pass'])
+      || isset($parts['fragment']) || ($parts['port'] ?? 443) !== 443) { return FALSE; }
+  $host = strtolower($parts['host'] ?? '');
+  $allowed = preg_split('/\s+/', strtolower(trim(URL_HOSTS)));
+  if (!in_array($host, $allowed, TRUE) || filter_var($host, FILTER_VALIDATE_DOMAIN, FILTER_FLAG_HOSTNAME) === FALSE
+      || filter_var($host, FILTER_VALIDATE_IP) !== FALSE) { return FALSE; }
+  $name = rawurldecode(basename($parts['path'] ?? ''));
+  if (!ft_validate_filename($name) || !ft_check_file($name) || !ft_check_filetype($name)) { return FALSE; }
+  $destination = ft_get_dir().'/'.$name;
+  if (file_exists($destination) || is_link($destination)) { return FALSE; }
+  // Restrict this optional feature to IPv4. All returned addresses must be public.
+  $addresses = @gethostbynamel($host);
+  if (!$addresses) { return FALSE; }
+  foreach ($addresses as $address) {
+    if (filter_var($address, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 | FILTER_FLAG_GLOBAL_RANGE) === FALSE) { return FALSE; }
+  }
+  $limit = MAXSIZE > 0 ? (int) MAXSIZE : 20 * 1024 * 1024;
+  if (LIMIT > 0) { $limit = min($limit, max(0, (int) LIMIT - ROOTDIRSIZE)); }
+  if ($limit <= 0) { return FALSE; }
+  $temp = tmpfile();
+  if ($temp === FALSE) { return FALSE; }
+  $bytes = 0;
+  $curl = curl_init($url);
+  curl_setopt_array($curl, array(
+    CURLOPT_PROTOCOLS => CURLPROTO_HTTPS,
+    CURLOPT_FOLLOWLOCATION => FALSE,
+    CURLOPT_PROXY => '',
+    CURLOPT_RESOLVE => array($host.':443:'.$addresses[0]),
+    CURLOPT_IPRESOLVE => CURL_IPRESOLVE_V4,
+    CURLOPT_SSL_VERIFYPEER => TRUE,
+    CURLOPT_SSL_VERIFYHOST => 2,
+    CURLOPT_CONNECTTIMEOUT => 5,
+    CURLOPT_TIMEOUT => 15,
+    CURLOPT_WRITEFUNCTION => function ($handle, $chunk) use ($temp, $limit, &$bytes) {
+      $length = strlen($chunk);
+      if ($bytes + $length > $limit) { return 0; }
+      $written = fwrite($temp, $chunk);
+      if ($written !== FALSE) { $bytes += $written; }
+      return $written === FALSE ? 0 : $written;
+    },
+  ));
+  $ok = curl_exec($curl) && curl_getinfo($curl, CURLINFO_RESPONSE_CODE) === 200;
+  // CurlHandle release by scope; curl_close() is deprecated as of PHP 8.5.
+  if ($ok && LIMIT > 0 && ft_get_dirsize(ft_get_root()) + $bytes > LIMIT) { $ok = FALSE; }
+  if ($ok) { $ok = ft_store_new_file(stream_get_meta_data($temp)['uri'], $destination); }
+  fclose($temp);
+  return $ok;
+}
+
 /**
  * Run all system actions based on the value of $_REQUEST['act'].
  */
@@ -322,34 +394,9 @@ function ft_do_action() {
           ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   			}
   		} elseif ($_POST['type'] == 'url') {
-  		  // Create from URL.
-        $newname = trim(substr($_POST['newdir'], strrpos($_POST['newdir'], '/')+1));
-        if (strlen($newname) > 0 && ft_check_filetype($newname) && ft_check_file($newname)) {
-          // Open file handlers.
-          $rh = fopen($_POST['newdir'], 'rb');
-          if ($rh === FALSE) {
-  					ft_set_message(t("Could not open URL. Possible reason: URL wrappers not enabled."), 'error');
-            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
-          }
-          $wh = fopen(ft_get_dir().'/'.$newname, 'wb');
-          if ($wh === FALSE) {
-  					ft_set_message(t("File could not be created."), 'error');
-            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
-          }
-          // Download anf write file.
-          while (!feof($rh)) {
-            if (fwrite($wh, fread($rh, 1024)) === FALSE) {
-    					ft_set_message(t("File could not be saved."), 'error');
-             }
-          }
-          fclose($rh);
-          fclose($wh);
-          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
-  			} else {
-					// Redirect
-					ft_set_message(t("File could not be created."), 'error');
-          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
-  			}
+        $ok = ft_import_url($_POST['newdir']);
+        ft_set_message(t($ok ? 'File created.' : 'File could not be created.'), $ok ? 'ok' : 'error');
+        ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
       } else {
   			// Create directory.
   			// Check input.
@@ -540,7 +587,7 @@ function ft_do_action() {
 							  $msglist++;
 							  ft_set_message(t('!file was not uploaded.', array('!file' => ft_get_nice_filename($c['name'], 20))) . ' ' . t("File already exists"), 'error');
 							} else {
-								if (@move_uploaded_file($c['tmp_name'], ft_get_dir()."/{$c['name']}")) {
+								if (is_uploaded_file($c['tmp_name']) && ft_store_new_file($c['tmp_name'], ft_get_dir()."/{$c['name']}")) {
 									@chmod(ft_get_dir()."/{$c['name']}", PERMISSION);
                   $uploaded_bytes += $c['size'];
 									// Success!
@@ -1345,7 +1392,7 @@ function ft_make_sidebar() {
 		<div>
 		  <input type="radio" name="type" value="folder" id="type-folder" checked="checked" /> <label for="type-folder" class="label_highlight">'.t('Folder').'</label>
 		  <input type="radio" name="type" value="file" id="type-file" /> <label for="type-file">'.t('File').'</label>
-		  <input type="radio" name="type" value="url" id="type-url" /> <label for="type-url">'.t('From URL').'</label>
+          '.(ft_url_import_enabled() ? '<input type="radio" name="type" value="url" id="type-url" /> <label for="type-url">'.t('From URL').'</label>' : '').'
 		</div>
 			<div>
 				<input type="text" name="newdir" id="newdir" size="16" />
@@ -1512,7 +1559,7 @@ function ft_redirect($query = '') {
     $_SERVER['REQUEST_URI'] = REQUEST_URI;
   }
   $protocol = 'http://';
-  if (HTTPS) {
+  if (HTTPS || (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off')) {
     $protocol = 'https://';
   }
   if (isset($_SERVER['REQUEST_URI'])) {

@@ -18,3 +18,10 @@ COPY dev/seed.php /opt/filethingie/seed.php
 COPY dev/php.ini /usr/local/etc/php/conf.d/zz-filethingie-test.ini
 COPY dev/apache-test.conf /etc/apache2/conf-enabled/filethingie-test.conf
 RUN php /opt/filethingie/seed.php && chown -R www-data:www-data files && mkdir -p /var/lib/filethingie && chown www-data:www-data /var/lib/filethingie
+
+# Disposable localhost TLS certificate, never included in a deployment package.
+COPY dev/apache-tls.conf /etc/apache2/sites-available/filethingie-tls.conf
+RUN openssl req -x509 -newkey rsa:2048 -nodes -days 30 -subj '/CN=localhost' \
+    -addext 'subjectAltName=DNS:localhost,IP:127.0.0.1' \
+    -keyout /etc/ssl/private/filethingie-test.key -out /etc/ssl/certs/filethingie-test.pem \
+    && a2enmod ssl && a2ensite filethingie-tls

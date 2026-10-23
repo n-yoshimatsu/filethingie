@@ -1,0 +1,9 @@
+services:
+  php83:
+    environment:
+      FT_TEST_URL_HOSTS: "raw.githubusercontent.com localhost"
+      FT_TEST_MAXSIZE: "${FT_TEST_MAXSIZE:-2000000}"
+  php85:
+    environment:
+      FT_TEST_URL_HOSTS: "raw.githubusercontent.com localhost"
+      FT_TEST_MAXSIZE: "${FT_TEST_MAXSIZE:-2000000}"

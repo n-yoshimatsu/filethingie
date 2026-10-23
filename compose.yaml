@@ -9,6 +9,7 @@ services:
         PHP_IMAGE: php:8.3-apache@sha256:1b8b5b0f31cc4552fa3da2f0f02556a8207cbca6e86ec4882ff7b6a644c84a2b
     ports:
       - "127.0.0.1:${FT_PHP83_PORT:-18383}:80"
+      - "127.0.0.1:${FT_PHP83_TLS_PORT:-18443}:443"
   php85:
     build:
       context: .
@@ -17,3 +18,4 @@ services:
         PHP_IMAGE: php:8.5-apache@sha256:7cd25eb48f9763dfeabe8fda3939897aca2001802fadeafa1b602f26c735ef96
     ports:
       - "127.0.0.1:${FT_PHP85_PORT:-18585}:80"
+      - "127.0.0.1:${FT_PHP85_TLS_PORT:-18543}:443"

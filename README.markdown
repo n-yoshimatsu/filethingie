@@ -12,7 +12,8 @@ File Thingie was one of my very first PHP projects and it's going on github so I
 段階4までの更新を行い、PHP 8.3.36／8.5.12とローカルChromeの最終20ケースがPASSです。
 認証・CSRF、DB／ログ／ZIP、jQuery、日本語表示を更新しました。
 未完成の設定画面・ファイル説明・旧外部エディター3種は無効化し、移行方法を明示しています。
-さくら実機への配置・受入とCIは後続段階です。現在は開発中の検証版です。
+段階5としてPHP 8.3／8.5のCI、HTTPS・URL取得・同時アップロード・Firefoxの検証を整備中です。
+さくら実機のCLI環境は確認済みで、Web環境と分離配置での受入は継続中です。現在は開発中の検証版です。
 
 - [移行計画と対応範囲](docs/PHP85_MIGRATION.md)
 - [既存機能と依存関係](docs/FEATURE_INVENTORY.md)
@@ -26,3 +27,6 @@ File Thingie was one of my very first PHP projects and it's going on github so I
 - [設定・認証・同梱プラグインの移行手順と対応表](docs/STAGE4_MIGRATION.md)
 - [段階4の試験条件](docs/STAGE4_TEST_PLAN.md)
 - [ブラウザー・PHP依存とライセンス](docs/DEPENDENCIES.md)
+
+- [段階5の試験条件](docs/STAGE5_TEST_PLAN.md)
+- [さくら・FreeBSD受入手順](docs/SAKURA_ACCEPTANCE.md)

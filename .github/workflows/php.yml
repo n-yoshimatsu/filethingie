@@ -1,0 +1,48 @@
+name: PHP integration
+on:
+  push:
+    branches: [php85-support, master]
+    paths-ignore: ['docs/**', 'README.markdown']
+  pull_request:
+    paths-ignore: ['docs/**', 'README.markdown']
+  workflow_dispatch:
+permissions:
+  contents: read
+concurrency:
+  group: php-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  integration:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    strategy:
+      fail-fast: false
+      matrix:
+        service: [php83, php85]
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: '24'
+          package-manager-cache: false
+      - name: Install browser harness
+        run: |
+          npm ci --prefix tools/browser --ignore-scripts
+          node tools/browser/node_modules/playwright-core/cli.js install --with-deps firefox
+          google-chrome --version
+      - name: Integration cases
+        run: python3 tools/ci.py "${{ matrix.service }}" --output "artifacts/ci-${{ matrix.service }}"
+      - name: Preserve test evidence
+        if: always()
+        uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
+        with:
+          name: php-${{ matrix.service }}-${{ github.run_attempt }}
+          path: artifacts/ci-${{ matrix.service }}/
+          if-no-files-found: warn
+          retention-days: 14
+      - name: Stop disposable containers
+        if: always()
+        run: docker compose down

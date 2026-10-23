@@ -1,0 +1,362 @@
+{
+  "recorded_at": "2026-10-23T22:20:25.459997+00:00",
+  "host": {
+    "kernel": {
+      "command": [
+        "uname",
+        "-sr"
+      ],
+      "exit_code": 0,
+      "stdout": "Linux 7.0.0-38-generic\n",
+      "stderr": ""
+    },
+    "docker": {
+      "command": [
+        "docker",
+        "version",
+        "--format",
+        "{{.Server.Version}}"
+      ],
+      "exit_code": 0,
+      "stdout": "29.9.2\n",
+      "stderr": ""
+    },
+    "compose": {
+      "command": [
+        "docker",
+        "compose",
+        "version"
+      ],
+      "exit_code": 0,
+      "stdout": "Docker Compose version v5.6.1\n",
+      "stderr": ""
+    },
+    "python": {
+      "command": [
+        "python3",
+        "--version"
+      ],
+      "exit_code": 0,
+      "stdout": "Python 3.12.3\n",
+      "stderr": ""
+    }
+  },
+  "services": {
+    "php83": {
+      "php_version": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php83",
+          "php",
+          "-v"
+        ],
+        "exit_code": 0,
+        "stdout": "PHP 8.3.36 (cli) (built: Oct 21 2026 15:57:18) (NTS)\nCopyright (c) The PHP Group\nZend Engine v4.3.36, Copyright (c) Zend Technologies\n    with Zend OPcache v8.3.36, Copyright (c), by Zend Technologies\n",
+        "stderr": ""
+      },
+      "os": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php83",
+          "cat",
+          "/etc/os-release"
+        ],
+        "exit_code": 0,
+        "stdout": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+        "stderr": ""
+      },
+      "apache": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php83",
+          "apache2ctl",
+          "-v"
+        ],
+        "exit_code": 0,
+        "stdout": "Server version: Apache/2.4.69 (Debian)\nServer built:   2026-10-01T16:54:08\n",
+        "stderr": ""
+      },
+      "unzip": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php83",
+          "sh",
+          "-c",
+          "command -v unzip"
+        ],
+        "exit_code": 127,
+        "stdout": "",
+        "stderr": ""
+      },
+      "php_ini": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php83",
+          "php",
+          "--ini"
+        ],
+        "exit_code": 0,
+        "stdout": "Configuration File (php.ini) Path: /usr/local/etc/php\nLoaded Configuration File:         (none)\nScan for additional .ini files in: /usr/local/etc/php/conf.d\nAdditional .ini files parsed:      /usr/local/etc/php/conf.d/docker-php-ext-opcache.ini,\n/usr/local/etc/php/conf.d/docker-php-ext-sodium.ini,\n/usr/local/etc/php/conf.d/zz-filethingie-test.ini\n\n",
+        "stderr": ""
+      },
+      "fixtures": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "--user",
+          "www-data",
+          "php83",
+          "php",
+          "-r",
+          "$r=[]; $it=new RecursiveIteratorIterator(new RecursiveDirectoryIterator(\"files\", FilesystemIterator::SKIP_DOTS)); foreach ($it as $file) {if ($file->isFile()) {$p=$file->getPathname(); $r[$p]=[\"sha256\"=>hash_file(\"sha256\",$p),\"bytes\"=>filesize($p),\"mode\"=>substr(sprintf(\"%o\",fileperms($p)),-4),\"readable\"=>is_readable($p),\"writable\"=>is_writable($p)];}} ksort($r); echo json_encode($r, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n    \"files\\/ascii.txt\": {\n        \"sha256\": \"8cd2900089ba48d92c7b7578015c8ccfbdeb503e690245ddd30eab0b56b16993\",\n        \"bytes\": 21,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    },\n    \"files\\/empty.txt\": {\n        \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n        \"bytes\": 0,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    },\n    \"files\\/nested\\/child.txt\": {\n        \"sha256\": \"0bcfd444f750d4c0e26d7010502fef29b14f934f47db0fedf201ecd02de0df67\",\n        \"bytes\": 15,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    },\n    \"files\\/read-only.txt\": {\n        \"sha256\": \"a62b7a6575fbb070bb7183a240338daa7b46ae42fe6e2324073110c697a5867d\",\n        \"bytes\": 18,\n        \"mode\": \"0444\",\n        \"readable\": true,\n        \"writable\": false\n    },\n    \"files\\/space name.txt\": {\n        \"sha256\": \"14ab91bb5d1758a3bf9905f542870714f440bf7fe84e20627932704b5335e874\",\n        \"bytes\": 18,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    },\n    \"files\\/日本語.txt\": {\n        \"sha256\": \"ac259481a8117ce5f593fd874647c99f0d40e499bb1f851a3888c5d7559210e2\",\n        \"bytes\": 34,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    }\n}",
+        "stderr": ""
+      },
+      "harness_lint": [
+        {
+          "command": [
+            "docker",
+            "compose",
+            "exec",
+            "-T",
+            "php83",
+            "php",
+            "-d",
+            "error_reporting=-1",
+            "-d",
+            "display_errors=stderr",
+            "-d",
+            "log_errors=0",
+            "-l"
+          ],
+          "exit_code": 0,
+          "stdout": "No syntax errors detected in Standard input code\n",
+          "stderr": "",
+          "input_file": "dev/config.test.php",
+          "input_sha256": "4d3af2eed2f4055b114c511f034c7c93b61e652c987b9e4b255fbb3a2d9e1056"
+        },
+        {
+          "command": [
+            "docker",
+            "compose",
+            "exec",
+            "-T",
+            "php83",
+            "php",
+            "-d",
+            "error_reporting=-1",
+            "-d",
+            "display_errors=stderr",
+            "-d",
+            "log_errors=0",
+            "-l"
+          ],
+          "exit_code": 0,
+          "stdout": "No syntax errors detected in Standard input code\n",
+          "stderr": "",
+          "input_file": "dev/runtime.php",
+          "input_sha256": "d1153f5eb7940a209fa4f707147743946961a6587b0912d51bce2103fe814ee0"
+        },
+        {
+          "command": [
+            "docker",
+            "compose",
+            "exec",
+            "-T",
+            "php83",
+            "php",
+            "-d",
+            "error_reporting=-1",
+            "-d",
+            "display_errors=stderr",
+            "-d",
+            "log_errors=0",
+            "-l"
+          ],
+          "exit_code": 0,
+          "stdout": "No syntax errors detected in Standard input code\n",
+          "stderr": "",
+          "input_file": "dev/seed.php",
+          "input_sha256": "edd06058480c117043d1f3f3eb38700f719563de5d1a449bc030311e373c63d5"
+        }
+      ]
+    },
+    "php85": {
+      "php_version": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php85",
+          "php",
+          "-v"
+        ],
+        "exit_code": 0,
+        "stdout": "PHP 8.5.12 (cli) (built: Oct 21 2026 15:49:40) (NTS)\nCopyright (c) The PHP Group\nBuilt by https://github.com/docker-library/php\nZend Engine v4.5.12, Copyright (c) Zend Technologies\n    with Zend OPcache v8.5.12, Copyright (c), by Zend Technologies\n",
+        "stderr": ""
+      },
+      "os": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php85",
+          "cat",
+          "/etc/os-release"
+        ],
+        "exit_code": 0,
+        "stdout": "PRETTY_NAME=\"Debian GNU/Linux 13 (trixie)\"\nNAME=\"Debian GNU/Linux\"\nVERSION_ID=\"13\"\nVERSION=\"13 (trixie)\"\nVERSION_CODENAME=trixie\nDEBIAN_VERSION_FULL=13.7\nID=debian\nHOME_URL=\"https://www.debian.org/\"\nSUPPORT_URL=\"https://www.debian.org/support\"\nBUG_REPORT_URL=\"https://bugs.debian.org/\"\n",
+        "stderr": ""
+      },
+      "apache": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php85",
+          "apache2ctl",
+          "-v"
+        ],
+        "exit_code": 0,
+        "stdout": "Server version: Apache/2.4.69 (Debian)\nServer built:   2026-10-01T16:54:08\n",
+        "stderr": ""
+      },
+      "unzip": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php85",
+          "sh",
+          "-c",
+          "command -v unzip"
+        ],
+        "exit_code": 127,
+        "stdout": "",
+        "stderr": ""
+      },
+      "php_ini": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "php85",
+          "php",
+          "--ini"
+        ],
+        "exit_code": 0,
+        "stdout": "Configuration File (php.ini) Path: \"/usr/local/etc/php\"\nLoaded Configuration File:         (none)\nScan for additional .ini files in: \"/usr/local/etc/php/conf.d\"\nAdditional .ini files parsed:      /usr/local/etc/php/conf.d/docker-php-ext-sodium.ini,\n/usr/local/etc/php/conf.d/zz-filethingie-test.ini\n\n",
+        "stderr": ""
+      },
+      "fixtures": {
+        "command": [
+          "docker",
+          "compose",
+          "exec",
+          "-T",
+          "--user",
+          "www-data",
+          "php85",
+          "php",
+          "-r",
+          "$r=[]; $it=new RecursiveIteratorIterator(new RecursiveDirectoryIterator(\"files\", FilesystemIterator::SKIP_DOTS)); foreach ($it as $file) {if ($file->isFile()) {$p=$file->getPathname(); $r[$p]=[\"sha256\"=>hash_file(\"sha256\",$p),\"bytes\"=>filesize($p),\"mode\"=>substr(sprintf(\"%o\",fileperms($p)),-4),\"readable\"=>is_readable($p),\"writable\"=>is_writable($p)];}} ksort($r); echo json_encode($r, JSON_UNESCAPED_UNICODE | JSON_PRETTY_PRINT);"
+        ],
+        "exit_code": 0,
+        "stdout": "{\n    \"files\\/ascii.txt\": {\n        \"sha256\": \"8cd2900089ba48d92c7b7578015c8ccfbdeb503e690245ddd30eab0b56b16993\",\n        \"bytes\": 21,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    },\n    \"files\\/empty.txt\": {\n        \"sha256\": \"e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855\",\n        \"bytes\": 0,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    },\n    \"files\\/nested\\/child.txt\": {\n        \"sha256\": \"0bcfd444f750d4c0e26d7010502fef29b14f934f47db0fedf201ecd02de0df67\",\n        \"bytes\": 15,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    },\n    \"files\\/read-only.txt\": {\n        \"sha256\": \"a62b7a6575fbb070bb7183a240338daa7b46ae42fe6e2324073110c697a5867d\",\n        \"bytes\": 18,\n        \"mode\": \"0444\",\n        \"readable\": true,\n        \"writable\": false\n    },\n    \"files\\/space name.txt\": {\n        \"sha256\": \"14ab91bb5d1758a3bf9905f542870714f440bf7fe84e20627932704b5335e874\",\n        \"bytes\": 18,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    },\n    \"files\\/日本語.txt\": {\n        \"sha256\": \"ac259481a8117ce5f593fd874647c99f0d40e499bb1f851a3888c5d7559210e2\",\n        \"bytes\": 34,\n        \"mode\": \"0644\",\n        \"readable\": true,\n        \"writable\": true\n    }\n}",
+        "stderr": ""
+      },
+      "harness_lint": [
+        {
+          "command": [
+            "docker",
+            "compose",
+            "exec",
+            "-T",
+            "php85",
+            "php",
+            "-d",
+            "error_reporting=-1",
+            "-d",
+            "display_errors=stderr",
+            "-d",
+            "log_errors=0",
+            "-l"
+          ],
+          "exit_code": 0,
+          "stdout": "No syntax errors detected in Standard input code\n",
+          "stderr": "",
+          "input_file": "dev/config.test.php",
+          "input_sha256": "4d3af2eed2f4055b114c511f034c7c93b61e652c987b9e4b255fbb3a2d9e1056"
+        },
+        {
+          "command": [
+            "docker",
+            "compose",
+            "exec",
+            "-T",
+            "php85",
+            "php",
+            "-d",
+            "error_reporting=-1",
+            "-d",
+            "display_errors=stderr",
+            "-d",
+            "log_errors=0",
+            "-l"
+          ],
+          "exit_code": 0,
+          "stdout": "No syntax errors detected in Standard input code\n",
+          "stderr": "",
+          "input_file": "dev/runtime.php",
+          "input_sha256": "d1153f5eb7940a209fa4f707147743946961a6587b0912d51bce2103fe814ee0"
+        },
+        {
+          "command": [
+            "docker",
+            "compose",
+            "exec",
+            "-T",
+            "php85",
+            "php",
+            "-d",
+            "error_reporting=-1",
+            "-d",
+            "display_errors=stderr",
+            "-d",
+            "log_errors=0",
+            "-l"
+          ],
+          "exit_code": 0,
+          "stdout": "No syntax errors detected in Standard input code\n",
+          "stderr": "",
+          "input_file": "dev/seed.php",
+          "input_sha256": "edd06058480c117043d1f3f3eb38700f719563de5d1a449bc030311e373c63d5"
+        }
+      ]
+    }
+  }
+}

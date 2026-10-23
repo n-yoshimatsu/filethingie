@@ -9,7 +9,11 @@ File Thingie was one of my very first PHP projects and it's going on github so I
 
 この開発ブランチでは、File Thingie 2.5.7をPHP 8.3とPHP 8.5に対応させます。
 実運用先はさくらのレンタルサーバ（FreeBSD／PHP 8.3）です。PHP 8.5も検証対象にします。
-現在は準備・調査段階です。PHPコードの互換性修正と動作検証は未実施です。
+段階2のローカル再現環境と修正前の基準試験を整備しました。
+PHP 8.3.36／8.5.12の両方で、未修正の本体が構文エラーにより起動できないことを確認しています。互換性修正とさくら実機での動作確認は未実施です。
 
 - [移行計画と対応範囲](docs/PHP85_MIGRATION.md)
 - [既存機能と依存関係](docs/FEATURE_INVENTORY.md)
+- [PHP 8.3／8.5の検証環境と実行手順](docs/STAGE2_ENVIRONMENT.md)
+- [段階2の試験条件](docs/STAGE2_TEST_PLAN.md)
+- [段階2の結果と未確認事項](docs/STAGE2_REPORT.md)

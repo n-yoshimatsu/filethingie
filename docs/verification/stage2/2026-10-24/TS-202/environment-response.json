@@ -1,0 +1,42 @@
+{
+    "php_version": "8.5.12",
+    "sapi": "apache2handler",
+    "os_family": "Linux",
+    "integer_bytes": 8,
+    "server_software": "Apache/2.4.69 (Debian)",
+    "extensions": {
+        "session": "8.5.12",
+        "json": "8.5.12",
+        "mbstring": "8.5.12",
+        "fileinfo": "8.5.12",
+        "PDO": "8.5.12",
+        "pdo_sqlite": "8.5.12",
+        "sqlite3": "8.5.12",
+        "zip": false,
+        "zlib": "8.5.12",
+        "openssl": "8.5.12",
+        "curl": "8.5.12"
+    },
+    "ini": {
+        "error_reporting": "30719",
+        "display_errors": "",
+        "log_errors": "1",
+        "error_log": "/proc/self/fd/2",
+        "default_charset": "UTF-8",
+        "date.timezone": "Asia/Tokyo",
+        "upload_max_filesize": "2M",
+        "post_max_size": "8M",
+        "memory_limit": "128M",
+        "max_execution_time": "30",
+        "allow_url_fopen": "1",
+        "disable_functions": "",
+        "open_basedir": "",
+        "opcache.enable": ""
+    },
+    "functions": {
+        "exec": true,
+        "get_magic_quotes_gpc": false,
+        "sqlite_query": false
+    },
+    "ZipArchive": false
+}

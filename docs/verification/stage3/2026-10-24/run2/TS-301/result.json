@@ -1,0 +1,55 @@
+{
+  "case_id": "TS-301",
+  "case": "basic",
+  "service": "php83",
+  "started_at": "2026-10-23T22:39:37.784043+00:00",
+  "parent_commit": "d347456c2753fb02196af814fc9ca96357a0cad0",
+  "verdict": "PASS",
+  "image_id": "sha256:1cbc3147d66cee54420d2aa70b2565cf6396c1e310f26386481f70db805b2de2",
+  "runtime": {
+    "php_version": "8.3.36",
+    "sapi": "apache2handler",
+    "os_family": "Linux",
+    "integer_bytes": 8,
+    "server_software": "Apache/2.4.69 (Debian)",
+    "extensions": {
+      "session": "8.3.36",
+      "json": "8.3.36",
+      "mbstring": "8.3.36",
+      "fileinfo": "8.3.36",
+      "PDO": "8.3.36",
+      "pdo_sqlite": "8.3.36",
+      "sqlite3": "8.3.36",
+      "zip": false,
+      "zlib": "8.3.36",
+      "openssl": "8.3.36",
+      "curl": "8.3.36"
+    },
+    "ini": {
+      "error_reporting": "32767",
+      "display_errors": "",
+      "log_errors": "1",
+      "error_log": "/proc/self/fd/2",
+      "default_charset": "UTF-8",
+      "date.timezone": "Asia/Tokyo",
+      "upload_max_filesize": "2M",
+      "post_max_size": "8M",
+      "memory_limit": "128M",
+      "max_execution_time": "30",
+      "allow_url_fopen": "1",
+      "disable_functions": "",
+      "open_basedir": "",
+      "opcache.enable": ""
+    },
+    "functions": {
+      "exec": true,
+      "get_magic_quotes_gpc": false,
+      "sqlite_query": false
+    },
+    "ZipArchive": false
+  },
+  "diagnostics": [],
+  "finished_at": "2026-10-23T22:39:38.249948+00:00",
+  "requests": 83,
+  "checks": 211
+}

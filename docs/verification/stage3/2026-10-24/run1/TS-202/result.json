@@ -1,0 +1,77 @@
+{
+  "case_id": "TS-202",
+  "service": "php85",
+  "case": "startup",
+  "started_at": "2026-10-23T22:38:49.087004+00:00",
+  "baseline_commit": "a7511ad57e65b64d603e9cb68a20359ad0a3a4e6",
+  "checkout_commit": "d347456c2753fb02196af814fc9ca96357a0cad0",
+  "container_matches_checkout": true,
+  "application_matches_upstream": false,
+  "container_image_id": "sha256:b32ff968624bf75cad18721fb4422deb971f26cd29e48e8f393761cb1299e506",
+  "port_bindings": {
+    "80/tcp": [
+      {
+        "HostIp": "127.0.0.1",
+        "HostPort": "18585"
+      }
+    ]
+  },
+  "cli_runtime": {
+    "php_version": "8.5.12",
+    "sapi": "cli",
+    "os_family": "Linux",
+    "integer_bytes": 8,
+    "server_software": null,
+    "extensions": {
+      "session": "8.5.12",
+      "json": "8.5.12",
+      "mbstring": "8.5.12",
+      "fileinfo": "8.5.12",
+      "PDO": "8.5.12",
+      "pdo_sqlite": "8.5.12",
+      "sqlite3": "8.5.12",
+      "zip": false,
+      "zlib": "8.5.12",
+      "openssl": "8.5.12",
+      "curl": "8.5.12"
+    },
+    "ini": {
+      "error_reporting": "30719",
+      "display_errors": "",
+      "log_errors": "1",
+      "error_log": "/proc/self/fd/2",
+      "default_charset": "UTF-8",
+      "date.timezone": "Asia/Tokyo",
+      "upload_max_filesize": "2M",
+      "post_max_size": "8M",
+      "memory_limit": "128M",
+      "max_execution_time": "0",
+      "allow_url_fopen": "1",
+      "disable_functions": "",
+      "open_basedir": "",
+      "opcache.enable": ""
+    },
+    "functions": {
+      "exec": true,
+      "get_magic_quotes_gpc": false,
+      "sqlite_query": false
+    },
+    "ZipArchive": false
+  },
+  "environment_http_status": 200,
+  "environment_ready": true,
+  "request": {
+    "method": "GET",
+    "url": "http://127.0.0.1:18585/ft2.php",
+    "cookies": null,
+    "body": null
+  },
+  "http_status": 200,
+  "login_fields_present": true,
+  "login_form_present": true,
+  "response_diagnostic": false,
+  "verdict": "PASS",
+  "log_command_exit_code": 0,
+  "server_diagnostic": false,
+  "finished_at": "2026-10-23T22:38:49.390752+00:00"
+}

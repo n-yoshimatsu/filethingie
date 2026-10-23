@@ -28,8 +28,19 @@ function ft_settings_external_load() {
             'REMEMBERME' => false,
             'PLUGINDIR' => 'plugins',
         ],
-        'users' => [],
-        'groups' => [],
+        'users' => [
+            'viewer' => ['password' => 'local-only-viewer', 'group' => 'readers'],
+            'ungrouped' => ['password' => 'local-only-ungrouped'],
+        ],
+        'groups' => [
+            'readers' => [
+                'DIR' => 'files/nested',
+                'UPLOAD' => false,
+                'CREATE' => false,
+                'FILEACTIONS' => false,
+                'plugins' => ['search' => false, 'edit' => true],
+            ],
+        ],
         'plugins' => [
             'search' => true,
             'edit' => ['settings' => ['editlist' => 'txt html htm css', 'converttabs' => false]],

@@ -70,6 +70,9 @@ function ft_check_cookie($c) {
  * @return TRUE if directory is not blacklisted.
  */
 function ft_check_dir($dir) {
+  if (!ft_path_in_root($dir)) {
+    return FALSE;
+  }
 	// Check against folder blacklist.
 	if (FOLDERBLACKLIST != "") {
 		$blacklist = explode(" ", FOLDERBLACKLIST);
@@ -106,12 +109,10 @@ function ft_check_fileactions() {
  * @param $file File name.
  * @return bool True if the filename is valid.
  */
-function ft_validate_filename($file)
-{
-	// Make sure the file doesn't start with a period, contain unwanted characters, or end in a period.
-	$pattern = '^[^\.]((\.)?(([\w~!]){1,}))+$';
-	$result = preg_match($pattern, $file);
-	return $result;
+function ft_validate_filename($file) {
+  return is_string($file) && $file !== '' && trim($file) === $file
+    && $file[0] !== '.' && substr($file, -1) !== '.'
+    && preg_match('~[/\\\\\x00-\x1f\x7f]~u', $file) === 0;
 }
 
 /**
@@ -192,7 +193,7 @@ function ft_check_login() {
 			}
 			if (!empty($_POST['act']) && $_POST['act'] == "dologin") {
 				// Check username and password from login form.
-				if (!empty($_POST['ft_user']) && $_POST['ft_user'] == USERNAME && $_POST['ft_pass'] == PASSWORD) {
+        if (!empty($_POST['ft_user']) && $_POST['ft_user'] === USERNAME && ($_POST['ft_pass'] ?? '') === PASSWORD) {
 					// Valid login.
 					$_SESSION['ft_user_'.MUTEX] = USERNAME;
 					$valid_login = 1;
@@ -200,7 +201,7 @@ function ft_check_login() {
 				// Default user was not valid, we check additional users (if any).
 				if (is_array($ft['users']) && sizeof($ft['users']) > 0) {
 					// Check username and password.
-					if (array_key_exists($_POST['ft_user'], $ft['users']) && $ft['users'][$_POST['ft_user']]['password'] == $_POST['ft_pass']) {
+          if (array_key_exists($_POST['ft_user'] ?? '', $ft['users']) && $ft['users'][$_POST['ft_user']]['password'] === ($_POST['ft_pass'] ?? '')) {
 						// Valid login.
 						$_SESSION['ft_user_'.MUTEX] = $_POST['ft_user'];
 						$valid_login = 1;
@@ -217,7 +218,7 @@ function ft_check_login() {
 					ft_invoke_hook('loginsuccess', $_POST['ft_user']);
 					ft_redirect();
 				} else {
-				  ft_invoke_hook('loginfail', $_POST['ft_user']);
+          ft_invoke_hook('loginfail', $_POST['ft_user'] ?? '');
   				ft_redirect("act=error");
 				}
 			}
@@ -312,20 +313,20 @@ function ft_do_action() {
   				if (file_exists($newfile)) {
   					// Redirect
             ft_set_message(t("File could not be created. File already exists."), 'error');
-  					ft_redirect("dir=".$_REQUEST['dir']);
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   				} elseif (@touch($newfile)) {
   					// Redirect.
   					ft_set_message(t("File created."));
-  					ft_redirect("dir=".$_REQUEST['dir']);
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   				} else {
   					// Redirect
   					ft_set_message(t("File could not be created."), 'error');
-  					ft_redirect("dir=".$_REQUEST['dir']);
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   				}
   			} else {
 					// Redirect
 					ft_set_message(t("File could not be created."), 'error');
-					ft_redirect("dir=".$_REQUEST['dir']);
+          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   			}
   		} elseif ($_POST['type'] == 'url') {
   		  // Create from URL.
@@ -335,12 +336,12 @@ function ft_do_action() {
           $rh = fopen($_POST['newdir'], 'rb');
           if ($rh === FALSE) {
   					ft_set_message(t("Could not open URL. Possible reason: URL wrappers not enabled."), 'error');
-  					ft_redirect("dir=".$_REQUEST['dir']);
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
           }
           $wh = fopen(ft_get_dir().'/'.$newname, 'wb');
           if ($wh === FALSE) {
   					ft_set_message(t("File could not be created."), 'error');
-  					ft_redirect("dir=".$_REQUEST['dir']);
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
           }
           // Download anf write file.
           while (!feof($rh)) {
@@ -350,11 +351,11 @@ function ft_do_action() {
           }
           fclose($rh);
           fclose($wh);
-					ft_redirect("dir=".$_REQUEST['dir']);
+          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   			} else {
 					// Redirect
 					ft_set_message(t("File could not be created."), 'error');
-					ft_redirect("dir=".$_REQUEST['dir']);
+          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   			}
       } else {
   			// Create directory.
@@ -368,11 +369,11 @@ function ft_do_action() {
   				$oldumask = umask(0);
   				if (strlen($_POST['newdir']) > 0 && @mkdir($newdir, DIRPERMISSION)) {
   					ft_set_message(t("Directory created."));
-  					ft_redirect("dir=".$_REQUEST['dir']);
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   				} else {
   					// Redirect
   					ft_set_message(t("Directory could not be created."), 'error');
-  					ft_redirect("dir=".$_REQUEST['dir']);
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   				}
   				umask($oldumask);
         // }
@@ -388,65 +389,65 @@ function ft_do_action() {
 			// Check for level.
 			if (substr_count($dir, "../") <= substr_count(ft_get_dir(), "/") && ft_check_move($dir) === TRUE) {
 				$dir  = ft_get_dir()."/".$dir;
-				if (!empty($file) && file_exists(ft_get_dir()."/".$file)) {
+        if ($file !== '' && file_exists(ft_get_dir()."/".$file)) {
 					// Check that destination exists and is a directory.
 					if (is_dir($dir)) {
 						// Move file.
-						if (@rename(ft_get_dir()."/".$file, $dir."/".$file)) {
+            if (!file_exists($dir."/".$file) && @rename(ft_get_dir()."/".$file, $dir."/".$file)) {
 							// Success.
 							ft_set_message(t("!old was moved to !new", array('!old' => $file, '!new' => $dir)));
-							ft_redirect("dir={$_REQUEST['dir']}");
+              ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 						} else {
 							// Error rename failed.
 							ft_set_message(t("!old could not be moved.", array('!old' => $file)), 'error');
-							ft_redirect("dir={$_REQUEST['dir']}");
+              ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 						}
 					} else {
 						// Error dest. isn't a dir or doesn't exist.
 						ft_set_message(t("Could not move file. !old does not exist or is not a directory.", array('!old' => $dir)), 'error');
-						ft_redirect("dir={$_REQUEST['dir']}");
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 					}
 				} else {
 					// Error source file doesn't exist.
 					ft_set_message(t("!old could not be moved. It doesn't exist.", array('!old' => $file)), 'error');
-					ft_redirect("dir={$_REQUEST['dir']}");
+          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 				}
 			} else {
 				// Error level
 				ft_set_message(t("!old could not be moved outside the base directory.", array('!old' => $file)), 'error');
-				ft_redirect("dir={$_REQUEST['dir']}");
+        ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 			}
 		# Delete
 		} elseif ($_REQUEST['act'] == "delete" && ft_check_fileactions() === TRUE) {
 			// Check that file is set.
 			$file = ft_stripslashes($_REQUEST['file']);
-			if (!empty($file) && ft_check_file($file)) {
+      if ($file !== '' && ft_check_file($file)) {
 				if (is_dir(ft_get_dir()."/".$file)) {
           if (DELETEFOLDERS == TRUE) {
             ft_rmdir_recurse(ft_get_dir()."/".$file);
           }
 					if (!@rmdir(ft_get_dir()."/".$file)) {
 					  ft_set_message(t("!old could not be deleted.", array('!old' => $file)), 'error');
-						ft_redirect("dir={$_REQUEST['dir']}");
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 					} else {
 					  ft_set_message(t("!old deleted.", array('!old' => $file)));
-						ft_redirect("dir={$_REQUEST['dir']}");
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 					}
 				} else {
 					if (!@unlink(ft_get_dir()."/".$file)) {
 					  ft_set_message(t("!old could not be deleted.", array('!old' => $file)), 'error');
-						ft_redirect("dir={$_REQUEST['dir']}");
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 					} else {
 					  ft_set_message(t("!old deleted.", array('!old' => $file)));
-						ft_redirect("dir={$_REQUEST['dir']}");
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 					}
 				}
 			} else {
 			  ft_set_message(t("!old could not be deleted.", array('!old' => $file)), 'error');
-				ft_redirect("dir={$_REQUEST['dir']}");
+        ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 			}
 		# Rename && Duplicate && Symlink
-		} elseif ($_REQUEST['act'] == "rename" || $_REQUEST['act'] == "duplicate" || $_REQUEST['act'] == "symlink" && ft_check_fileactions() === TRUE) {
+    } elseif (in_array($_REQUEST['act'], array("rename", "duplicate", "symlink"), TRUE) && ft_check_fileactions() === TRUE) {
 			// Check that both file and newvalue are set.
 			$old = trim(ft_stripslashes($_REQUEST['file']));
 			$new = trim(ft_stripslashes($_REQUEST['newvalue']));
@@ -466,7 +467,7 @@ function ft_do_action() {
 			  $m['destfail'] = t("Could not create symlink !new since it already exists.", array('!new' => $new));
 			  $m['emptyfail'] = t("Symlink could not be created since you didn't specify a name.");
 			}
-			if (!empty($old) && !empty($new)) {
+      if ($old !== '' && $new !== '') {
 				if (ft_check_filetype($new) && ft_check_file($new)) {
 					// Make sure destination file doesn't exist.
 					if (!file_exists(ft_get_dir()."/".$new)) {
@@ -476,11 +477,11 @@ function ft_do_action() {
 								if (@rename(ft_get_dir()."/".$old, ft_get_dir()."/".$new)) {
 									// Success.
 									ft_set_message(t("!old was renamed to !new", array('!old' => $old, '!new' => $new)));
-									ft_redirect("dir={$_REQUEST['dir']}");
+                  ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 								} else {
 									// Error rename failed.
 									ft_set_message(t("!old could not be renamed.", array('!old' => $old)), 'error');
-									ft_redirect("dir={$_REQUEST['dir']}");
+                  ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 								}
 							} elseif ($_REQUEST['act'] == 'symlink') {
 							  if (ADVANCEDACTIONS == TRUE) {
@@ -488,51 +489,57 @@ function ft_do_action() {
   								  @chmod(ft_get_dir()."/{$new}", PERMISSION);
   									// Success.
   									ft_set_message(t("Created symlink !new", array('!old' => $old, '!new' => $new)));
-  									ft_redirect("dir={$_REQUEST['dir']}");
+                    ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   								} else {
   									// Error symlink failed.
   									ft_set_message(t("Symlink to !old could not be created.", array('!old' => $old)), 'error');
-  									ft_redirect("dir={$_REQUEST['dir']}");
+                    ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   								}
 							  }
 							} else {
 								if (@copy(ft_get_dir()."/".$old, ft_get_dir()."/".$new)) {
 									// Success.
 									ft_set_message(t("!old was duplicated to !new", array('!old' => $old, '!new' => $new)));
-									ft_redirect("dir={$_REQUEST['dir']}");
+                  ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 								} else {
 									// Error rename failed.
 									ft_set_message(t("!old could not be duplicated.", array('!old' => $old)), 'error');
-									ft_redirect("dir={$_REQUEST['dir']}");
+                  ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 								}
 							}
 						} else {
 							// Error old file isn't writeable.
 							ft_set_message($m['writefail'], 'error');
-							ft_redirect("dir={$_REQUEST['dir']}");
+              ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 						}
 					} else {
 						// Error destination exists.
 						ft_set_message($m['destfail'], 'error');
-						ft_redirect("dir={$_REQUEST['dir']}");
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 					}
 				} else {
 					// Error file type not allowed.
 					ft_set_message($m['typefail'], 'error');
-					ft_redirect("dir={$_REQUEST['dir']}");
+          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 				}
 			} else {
 				// Error. File name not set.
 				ft_set_message($m['emptyfail'], 'error');
-				ft_redirect("dir={$_REQUEST['dir']}");
+        ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 			}
 		# upload
 		} elseif ($_REQUEST['act'] == "upload" && ft_check_upload() === TRUE && (LIMIT <= 0 || LIMIT > ROOTDIRSIZE)) {
 			// If we are to upload a file we will do so.
 			$msglist = 0;
+      $uploaded_bytes = 0;
 			foreach ($_FILES as $k => $c) {
-				if (!empty($c['name'])) {
+        if ($c['name'] !== '') {
 					$c['name'] = ft_stripslashes($c['name']);
+          if ($c['error'] === UPLOAD_ERR_OK &&
+              ((MAXSIZE > 0 && $c['size'] > MAXSIZE) ||
+               (LIMIT > 0 && ROOTDIRSIZE + $uploaded_bytes + $c['size'] > LIMIT))) {
+            $c['error'] = UPLOAD_ERR_FORM_SIZE;
+          }
 					if ($c['error'] == 0) {
 						// Upload was successfull
 						if (ft_validate_filename($c['name']) && ft_check_filetype($c['name']) && ft_check_file($c['name'])) {
@@ -542,6 +549,7 @@ function ft_do_action() {
 							} else {
 								if (@move_uploaded_file($c['tmp_name'], ft_get_dir()."/{$c['name']}")) {
 									@chmod(ft_get_dir()."/{$c['name']}", PERMISSION);
+                  $uploaded_bytes += $c['size'];
 									// Success!
   							  $msglist++;
                   ft_set_message(t('!file was uploaded.', array('!file' => ft_get_nice_filename($c['name'], 20))));
@@ -559,7 +567,7 @@ function ft_do_action() {
 						}
 					} else {
 						// An error occurred.
-						switch($_FILES["localfile"]["error"]) {
+            switch($c['error']) {
 							case 1:
 						    $msglist++;
 							  ft_set_message(t('!file was not uploaded.', array('!file' => ft_get_nice_filename($c['name'], 20))) . ' ' . t("The file was too large"), 'error');
@@ -585,34 +593,34 @@ function ft_do_action() {
 				}
 			}
 			if ($msglist > 0) {
-				ft_redirect("dir=".$_REQUEST['dir']);
+        ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 			} else {
 			  ft_set_message(t("Upload failed."), 'error');
-				ft_redirect("dir=".$_REQUEST['dir']);
+        ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 			}
     # Unzip
     } elseif ($_REQUEST['act'] == "unzip" && ft_check_fileactions() === TRUE) {
 			// Check that file is set.
 			$file = ft_stripslashes($_REQUEST['file']);
-			if (!empty($file) && ft_check_file($file) && ft_check_filetype($file) && strtolower(ft_get_ext($file)) == 'zip' && is_file(ft_get_dir()."/".$file)) {
+      if ($file !== '' && ft_check_file($file) && ft_check_filetype($file) && strtolower(ft_get_ext($file)) == 'zip' && is_file(ft_get_dir()."/".$file)) {
 			  $escapeddir = escapeshellarg(ft_get_dir()."/");
 			  $escapedfile = escapeshellarg(ft_get_dir()."/".$file);
 				if (!@exec("unzip -n ".$escapedfile." -d ".$escapeddir)) {
           ft_set_message(t("!old could not be unzipped.", array('!old' => $file)), 'error');
-					ft_redirect("dir={$_REQUEST['dir']}");
+          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 				} else {
           ft_set_message(t("!old unzipped.", array('!old' => $file)));
-					ft_redirect("dir={$_REQUEST['dir']}");
+          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 				}
 			} else {
         ft_set_message(t("!old could not be unzipped.", array('!old' => $file)), 'error');
-				ft_redirect("dir={$_REQUEST['dir']}");
+        ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 			}
     # chmod
     } elseif ($_REQUEST['act'] == "chmod" && ft_check_fileactions() === TRUE && ADVANCEDACTIONS == TRUE) {
 			// Check that file is set.
 			$file = ft_stripslashes($_REQUEST['file']);
-			if (!empty($file) && ft_check_file($file) && ft_check_filetype($file)) {
+      if ($file !== '' && ft_check_file($file) && ft_check_filetype($file)) {
   			// Check that chosen permission i valid
   			if (is_numeric($_REQUEST['newvalue'])) {
   			  $chmod = $_REQUEST['newvalue'];
@@ -624,23 +632,23 @@ function ft_do_action() {
   			  // Chmod
   			  if (@chmod(ft_get_dir()."/".$file, intval($chmod, 8))) {
   			    ft_set_message(t("Permissions changed for !old.", array('!old' => $file)));
-  			    ft_redirect("dir={$_REQUEST['dir']}");
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
     			  clearstatcache();
   			  } else {
   			    ft_set_message(t("Could not change permissions for !old.", array('!old' => $file)), 'error');
-    				ft_redirect("dir={$_REQUEST['dir']}");
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   			  }
   			} else {
 			    ft_set_message(t("Could not change permissions for !old.", array('!old' => $file)), 'error');
-  				ft_redirect("dir={$_REQUEST['dir']}");
+          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
   			}
 			} else {
 		    ft_set_message(t("Could not change permissions for !old.", array('!old' => $file)), 'error');
-				ft_redirect("dir={$_REQUEST['dir']}");
+        ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 			}
 		# logout
 		} elseif ($_REQUEST['act'] == "logout") {
-		  ft_invoke_hook('logout', $_SESSION['ft_user_'.MUTEX]);
+      ft_invoke_hook('logout', ($_SESSION['ft_user_'.MUTEX] ?? ''));
 			$_SESSION = array();
 			if (isset($_COOKIE[session_name()])) {
 			   setcookie(session_name(), '', time()-42000, '/');
@@ -659,18 +667,8 @@ function ft_do_action() {
  * @return Size in bytes.
  */
 function ft_get_bytes($val) {
-	$val = trim($val);
-	$last = strtolower($val{strlen($val)-1});
-	switch($last) {
-		// The 'G' modifier is available since PHP 5.1.0
-		case 'g':
-			$val *= 1024;
-		case 'm':
-			$val *= 1024;
-		case 'k':
-			$val *= 1024;
-	}
-	return $val;
+  $val = trim((string) $val);
+  return $val === '' ? 0 : ini_parse_quantity($val);
 }
 
 /**
@@ -692,6 +690,9 @@ function ft_get_dirsize($dirname) {
     $handle = opendir($dirname);
     while (false !== ($file = readdir($handle))) {
       if ($file != '.' && $file != '..' && is_readable($dirname . '/' . $file)) {
+        if (is_link($dirname . '/' . $file)) {
+          continue;
+        }
         if (is_dir($dirname . '/' . $file)) {
           if (ft_check_dir($dirname . '/' . $file)) {
             $dirname_stack[] = $dirname . '/' . $file;
@@ -763,6 +764,9 @@ function ft_get_filelist($dir, $sort = 'name') {
 		// Creates an array with all file names in current directory.
 		while (($file = readdir($dirlink)) !== false) {
 			if ($file != "." && $file != ".." && ((!is_dir("{$dir}/{$file}") && ft_check_file($file) && ft_check_filetype($file)) || is_dir("{$dir}/{$file}") && ft_check_dir("{$dir}/{$file}"))) { // Hide these two special cases and files and filetypes in blacklists.
+        if (!ft_path_in_root($dir.'/'.$file)) {
+          continue;
+        }
 				$c = array();
 				$c['name'] = $file;
         // $c['shortname'] = ft_get_nice_filename($file, 20);
@@ -844,15 +848,12 @@ function ft_get_filelist($dir, $sort = 'name') {
  * @return Human-readable string of upload limit.
  */
 function ft_get_max_upload() {
-  $post_max = ft_get_bytes(ini_get('post_max_size'));
-  $upload = ft_get_bytes(ini_get('upload_max_filesize'));
-  // Compare ini settings.
-  $max = (($post_max > $upload) ? $upload : $post_max);
-  // Compare with MAXSIZE.
-  if ($max > MAXSIZE) {
-    $max = MAXSIZE;
-  }
-  return ft_get_nice_filesize($max);
+  $limits = array_filter(array(
+    ft_get_bytes(ini_get('post_max_size')),
+    ft_get_bytes(ini_get('upload_max_filesize')),
+    (int) MAXSIZE,
+  ), function ($limit) { return $limit > 0; });
+  return ft_get_nice_filesize($limits ? min($limits) : 0);
 }
 
 /**
@@ -871,8 +872,9 @@ function ft_get_nice_filename($name, $limit = -1) {
       $noext = substr($name, 0, strrpos($name, '.'));
     }
     $ext = ft_get_ext($name);
-    if (strlen($noext)-3 > $limit) {
-      $name = substr($noext, 0, $limit).'...';
+    $characters = preg_split('//u', $noext, -1, PREG_SPLIT_NO_EMPTY);
+    if ($characters !== FALSE && count($characters)-3 > $limit) {
+      $name = implode('', array_slice($characters, 0, $limit)).'...';
       if ($ext != '') {
         $name = $name. '.' .$ext;
       }
@@ -1066,7 +1068,7 @@ function ft_make_body() {
         }
         $str .= ">{$v}</option>";
       }
-      $str .= "</select><input type=\"hidden\" name=\"dir\" value=\"".$_REQUEST['dir']."\" /></div></form></th>";
+      $str .= "</select><input type=\"hidden\" name=\"dir\" value=\"".ft_escape($_REQUEST['dir'])."\" /></div></form></th>";
 			$str .= "</tr></thead>";
 			$str .= "<tbody>";
 			$countfiles = 0;
@@ -1113,10 +1115,7 @@ function ft_make_body() {
 					}
 				  $plugin_data = implode('', ft_invoke_hook('filename', $c['name']));
 					if ($c['type'] == "file"){
-					  $link = "<a href=\"".ft_get_dir()."/".rawurlencode($c['name'])."\" title=\"" .t('Show !file', array('!file' => $c['name'])). "\">{$c['shortname']}</a>";
-					  if (HIDEFILEPATHS == TRUE) {
-					    $link = ft_make_link($c['shortname'], 'method=getfile&amp;dir='.rawurlencode($_REQUEST['dir']).'&amp;file='.$c['name'], t('Show !file', array('!file' => $c['name'])));
-					  }
+          $link = ft_file_link($c['name'], $_REQUEST['dir'], $c['shortname']);
 						$str .= "<td class='name'>{$link}{$plugin_data}</td><td class='size'>".ft_get_nice_filesize($c['size']);
 						$countfiles++;
 					} else {
@@ -1214,17 +1213,23 @@ function ft_make_headers_failed() {
  *   String for the HTML title attribute. Optional.
  * @return String containing the HTML link.
  */
+function ft_escape($value) {
+  return htmlspecialchars((string) $value, ENT_QUOTES | ENT_SUBSTITUTE, 'UTF-8');
+}
+
 function ft_make_link($text, $query = "", $title = "") {
-	$str = "<a href=\"".ft_get_self();
-	if (!empty($query)) {
-		$str .= "?{$query}";
-	}
-	$str .= "\"";
-	if (!empty($title)) {
-		$str .= "title=\"{$title}\"";
-	}
-	$str .= ">{$text}</a>";
-	return $str;
+  $url = ft_get_self().($query !== '' ? '?'.html_entity_decode($query, ENT_QUOTES, 'UTF-8') : '');
+  return '<a href="'.ft_escape($url).'" title="'.ft_escape(html_entity_decode($title, ENT_QUOTES, 'UTF-8')).'">'.ft_escape($text).'</a>';
+}
+
+/** Create a file link with separately encoded URL and HTML values. */
+function ft_file_link($file, $dir, $label) {
+  $title = t('Show !file', array('!file' => $file));
+  if (HIDEFILEPATHS) {
+    return ft_make_link($label, 'method=getfile&dir='.rawurlencode($dir).'&file='.rawurlencode($file), $title);
+  }
+  $url = implode('/', array_map('rawurlencode', explode('/', ft_get_root().$dir))).'/'.rawurlencode($file);
+  return '<a href="'.ft_escape($url).'" title="'.ft_escape(html_entity_decode($title, ENT_QUOTES, 'UTF-8')).'">'.ft_escape($label).'</a>';
 }
 
 /**
@@ -1340,7 +1345,7 @@ function ft_make_sidebar() {
     				<input type="hidden" name="MAX_FILE_SIZE" value="'.MAXSIZE.'" />
     				<input type="file" class="upload" name="localfile" id="localfile-0" size="12" />
     				<input type="hidden" name="act" value="upload" />
-    				<input type="hidden" name="dir" value="'.$_REQUEST['dir'].'" />
+            <input type="hidden" name="dir" value="'.ft_escape($_REQUEST['dir']).'" />
     			</div>
     			<div id="uploadbutton">
     				<input type="submit" name="submit" value="'.t('Upload').'" />
@@ -1364,7 +1369,7 @@ function ft_make_sidebar() {
 			<div>
 				<input type="text" name="newdir" id="newdir" size="16" />
 				<input type="hidden" name="act" value="createdir" />
-				<input type="hidden" name="dir" value="'.$_REQUEST['dir'].'" />
+        <input type="hidden" name="dir" value="'.ft_escape($_REQUEST['dir']).'" />
 				<input type="submit" id="mkdirsubmit" name="submit" value="'.t('Ok').'" />
 			</div>
 		</form>
@@ -1437,11 +1442,15 @@ function ft_plugins_load() {
   $ft['loaded_plugins'] = array();
   if (isset($ft['plugins']) && is_array($ft['plugins'])) {
     foreach ($ft['plugins'] as $name => $v) {
+      if ($v === FALSE || $v === NULL) {
+        continue;
+      }
+      $ft['plugins'][$name] = is_array($v) ? $v : array();
       // Include plugin file. We only need to load core modules if the install type is expanded.
       if (!in_array($name, $core) || (in_array($name, $core) && INSTALL != 'SIMPLE')) {
         // Not a core plugin or we're in expanded mode. Load file.
         if (file_exists(PLUGINDIR.'/'.$name.'.plugin.php')) {
-          @include_once(PLUGINDIR.'/'.$name.'.plugin.php');
+          include_once(PLUGINDIR.'/'.$name.'.plugin.php');
           $ft['loaded_plugins'][] = $name;
         } else {
           ft_set_message(t('Could not load !name plugin. File not found.', array('!name' => $name)), 'error');
@@ -1452,6 +1461,18 @@ function ft_plugins_load() {
       }
     }
   }
+  foreach ($ft['loaded_plugins'] as $name) {
+    $info = function_exists('ft_'.$name.'_info') ? call_user_func('ft_'.$name.'_info') : array();
+    $defaults = array();
+    foreach ($info['settings'] ?? array() as $key => $definition) {
+      if (array_key_exists('default', $definition)) {
+        $defaults[$key] = $definition['default'];
+      }
+    }
+    $configured = $ft['plugins'][$name]['settings'] ?? array();
+    $ft['plugins'][$name]['settings'] = array_replace($defaults, is_array($configured) ? $configured : array());
+  }
+
 }
 
 /**
@@ -1529,57 +1550,98 @@ function ft_redirect($query = '') {
 /**
  * Clean user input in $_REQUEST.
  */
-function ft_sanitize_request() {
-  // Kill null bytes
-  foreach ($_REQUEST as $k => $v) {
-    $_REQUEST[$k] = str_replace("\0", 'NULL', $_REQUEST[$k]);
-    $_REQUEST[$k] = str_replace(chr(0), 'NULL', $_REQUEST[$k]);
-  }
-  if ($_FILES && is_array($_FILES)) {
-    foreach ($_FILES as $k => $v) {
-      $_FILES[$k]['name'] = str_replace("\0", 'NULL', $_FILES[$k]['name']);
-      $_FILES[$k]['name'] = str_replace(chr(0), 'NULL', $_FILES[$k]['name']);
-      $_FILES[$k]['name'] = urldecode($_FILES[$k]['name']);
-      $_FILES[$k]['name'] = str_replace("&#00", 'NULL', $_FILES[$k]['name']);
+function ft_validate_request_types() {
+  $fields = array('act', 'method', 'dir', 'file', 'newvalue', 'newdir', 'type',
+    'ft_user', 'ft_pass', 'ft_cookie', 'q', 'filecontent', 'submit', 'convertspaces', 'sort', 'highlight');
+  foreach (array($_GET, $_POST, $_REQUEST) as $input) {
+    foreach ($fields as $field) {
+      if (isset($input[$field]) && (!is_string($input[$field]) || strpos($input[$field], "\0") !== FALSE)) {
+        ft_bad_request();
+      }
     }
   }
+}
 
-	// Make sure 'dir' cannot be changed to open directories outside the stated FT directory.
-	if (!empty($_REQUEST['dir']) && strstr($_REQUEST['dir'], "..") || !empty($_REQUEST['dir']) && strstr($_REQUEST['dir'], "./") || empty($_REQUEST['dir'])) {
-		unset($_REQUEST['dir']);
-	}
-	// Set 'dir' to empty if it isn't set.
-	if (!isset($_REQUEST['dir']) || empty($_REQUEST['dir'])) {
-		$_REQUEST['dir'] = "";
-	}
-	// If 'dir' is set to just / it is a security risk.
-	if (trim($_REQUEST['dir']) == '/') {
-	  unset($_REQUEST['dir']);
+function ft_bad_request() {
+  http_response_code(400);
+  exit('Invalid request.');
+}
+
+/** Check resolved paths with a directory boundary, including symlinks. */
+function ft_path_in_root($path) {
+  $root = realpath(ft_get_root());
+  $path = realpath($path);
+  return $root !== FALSE && $path !== FALSE
+    && ($path === $root || str_starts_with($path, rtrim($root, DIRECTORY_SEPARATOR).DIRECTORY_SEPARATOR));
+}
+
+function ft_sanitize_request() {
+  $_REQUEST['dir'] = $_REQUEST['dir'] ?? '';
+  $_REQUEST['q'] = $_REQUEST['q'] ?? '';
+  if ($_REQUEST['dir'] === '/') {
+    $_REQUEST['dir'] = '';
   }
-	// Nuke slashes from 'file' and 'newvalue'
-	if (!empty($_REQUEST['file'])) {
-		$_REQUEST['file'] = trim(str_replace("/", "", $_REQUEST['file']));
-	}
-	if (!empty($_REQUEST['act']) && $_REQUEST['act'] != "move") {
-		if (!empty($_REQUEST['newvalue'])) {
-			$_REQUEST['newvalue'] = str_replace("/", "", $_REQUEST['newvalue']);
-			// Nuke ../ for 'newvalue' when not moving files.
-			if (stristr($_REQUEST['newvalue'], "..") || empty($_REQUEST['newvalue'])) {
-				unset($_REQUEST['newvalue']);
-			}
-		}
-	}
-	// Nuke ../ for 'file' and newdir
-	if (!empty($_REQUEST['file']) && stristr($_REQUEST['file'], "..") || empty($_REQUEST['file'])) {
-		unset($_REQUEST['file']);
-	}
-	if (!empty($_POST['newdir']) && stristr($_POST['newdir'], "..") || empty($_POST['newdir'])) {
-		unset($_POST['newdir']);
-	}
-	// Set 'q' (search queries) to empty if it isn't set.
-	if (empty($_REQUEST['q'])) {
-		$_REQUEST['q'] = "";
-	}
+  if ($_REQUEST['dir'] !== '') {
+    if ($_REQUEST['dir'][0] !== '/') {
+      ft_bad_request();
+    }
+    foreach (explode('/', substr($_REQUEST['dir'], 1)) as $segment) {
+      if (!ft_validate_filename($segment)) {
+        ft_bad_request();
+      }
+    }
+  }
+  if (!ft_path_in_root(ft_get_dir()) || !is_dir(ft_get_dir()) || !ft_check_dir(ft_get_dir())) {
+    ft_bad_request();
+  }
+  $act = $_REQUEST['act'] ?? '';
+  $file_actions = array('move', 'delete', 'rename', 'duplicate', 'symlink', 'chmod', 'unzip', 'edit', 'savefile', 'saveedit', 'edit_get_lock');
+  if (in_array($act, $file_actions, TRUE) && !isset($_REQUEST['file'])) {
+    ft_bad_request();
+  }
+  if (isset($_REQUEST['file'])) {
+    $file = $_REQUEST['file'];
+    $path = ft_get_dir().'/'.$file;
+    if (!ft_validate_filename($file) || !ft_check_file($file) || !ft_check_filetype($file)
+        || ((file_exists($path) || is_link($path)) && !ft_path_in_root($path))) {
+      ft_bad_request();
+    }
+  }
+  if ($act === 'createdir') {
+    if (!isset($_POST['newdir'], $_POST['type']) || !in_array($_POST['type'], array('file', 'folder', 'url'), TRUE)) {
+      ft_bad_request();
+    }
+    if ($_POST['type'] !== 'url' && !ft_validate_filename($_POST['newdir'])) {
+      ft_bad_request();
+    }
+  }
+  if (in_array($act, array('rename', 'duplicate', 'symlink', 'move', 'chmod'), TRUE)) {
+    if (!isset($_REQUEST['newvalue']) || $_REQUEST['newvalue'] === '') {
+      ft_bad_request();
+    }
+    if ($act === 'move') {
+      $destination = ft_get_dir().'/'.$_REQUEST['newvalue'];
+      if (!ft_path_in_root($destination) || !is_dir($destination)) {
+        ft_bad_request();
+      }
+    } elseif (!ft_validate_filename($_REQUEST['newvalue'])) {
+      ft_bad_request();
+    }
+  }
+  if (in_array($act, array('savefile', 'saveedit'), TRUE) && !isset($_REQUEST['filecontent'])) {
+    ft_bad_request();
+  }
+  foreach ($_FILES as $upload) {
+    // The UI submits individual file controls, not nested PHP upload arrays.
+    foreach (array('name', 'tmp_name') as $key) {
+      if (!isset($upload[$key]) || !is_string($upload[$key])) {
+        ft_bad_request();
+      }
+    }
+    if (!isset($upload['error'], $upload['size']) || !is_int($upload['error']) || !is_int($upload['size'])) {
+      ft_bad_request();
+    }
+  }
 }
 
 /**
@@ -1635,25 +1697,25 @@ function ft_settings_load() {
   $json = ft_settings_external('config.php');
   if ($json) {
     // Merge settings.
-    if (is_array($json['settings'])) {
+    if (isset($json['settings']) && is_array($json['settings'])) {
       foreach ($json['settings'] as $k => $v) {
         $ft['settings'][$k] = $v;
       }
     }
     // Merge users.
-    if (is_array($json['users'])) {
+    if (isset($json['users']) && is_array($json['users'])) {
       foreach ($json['users'] as $k => $v) {
         $ft['users'][$k] = $v;
       }
     }
     // Merge groups.
-    if (is_array($json['groups'])) {
+    if (isset($json['groups']) && is_array($json['groups'])) {
       foreach ($json['groups'] as $k => $v) {
         $ft['groups'][$k] = $v;
       }
     }
     // Overwrite plugins
-    if (is_array($json['plugins'])) {
+    if (isset($json['plugins']) && is_array($json['plugins'])) {
       $ft['plugins'] = $json['plugins'];
       // foreach ($json['plugins'] as $k => $v) {
       //   $ft['plugins'][$k] = $v;
@@ -1675,6 +1737,7 @@ function ft_settings_load() {
     is_array($ft['groups']) &&
     is_array($ft['users']) &&
     array_key_exists($_SESSION['ft_user_'.MUTEX], $ft['users']) &&
+    isset($ft['users'][$_SESSION['ft_user_'.MUTEX]]['group']) &&
     isset($ft['groups'][$ft['users'][$_SESSION['ft_user_'.MUTEX]]['group']]) &&
     is_array($ft['groups'][$ft['users'][$_SESSION['ft_user_'.MUTEX]]['group']])) {
       $current_group = $ft['groups'][$ft['users'][$_SESSION['ft_user_'.MUTEX]]['group']];
@@ -1711,18 +1774,15 @@ function ft_settings_load() {
 }
 
 /**
- * Strips slashes from string if magic quotes are on.
+ * Preserve input on the supported PHP 8 runtimes (legacy helper name).
  *
  * @param $string
  *   String to filter.
  * @return The filtered string.
  */
 function ft_stripslashes($string) {
-  if (get_magic_quotes_gpc()) {
-    return stripslashes($string);
-  } else {
-    return $string;
-  }
+  // PHP 8 has no magic quotes. Preserve literal quotes and backslashes.
+  return $string;
 }
 
 /**
@@ -1748,7 +1808,7 @@ function t($msg, $vars = array(), $js = FALSE) {
   // Replace vars
   if (count($vars) > 0) {
     foreach ($vars as $k => $v) {
-      $msg = str_replace($k, $v, $msg);
+      $msg = str_replace($k, ft_escape($v), $msg);
     }
   }
   if ($js) {
@@ -1772,6 +1832,7 @@ if (headers_sent()) {
   session_start();
   header("Content-Type: text/html; charset=UTF-8");
   header("Connection: close");
+  ft_validate_request_types();
   // Prep settings
   ft_settings_load();
   // Load plugins
@@ -1788,7 +1849,7 @@ if (headers_sent()) {
 
   $str = "";
   // Request is a file download.
-  if (!empty($_GET['method']) && $_GET['method'] == 'getfile' && !empty($_GET['file'])) {
+  if (!empty($_GET['method']) && $_GET['method'] == 'getfile' && isset($_GET['file']) && $_GET['file'] !== '') {
     if (ft_check_login()) {
       ft_sanitize_request();
       // Make sure we don't run out of time to send the file.
@@ -1797,17 +1858,20 @@ if (headers_sent()) {
       @ini_set("zlib.output_compression", "Off");
       @session_write_close();
       // Open file for reading
-      if(!$fdl=@fopen(ft_get_dir().'/'.$_GET['file'],'rb')){
+      if (!is_file(ft_get_dir().'/'.$_REQUEST['file'])) {
+        http_response_code(404);
+        exit("File not found.");
+      }
+      if(!$fdl=@fopen(ft_get_dir().'/'.$_REQUEST['file'],'rb')){
           die("Cannot Open File!");
       } else {
-        ft_invoke_hook('download', ft_get_dir(), $_GET['file']);
+        ft_invoke_hook('download', ft_get_dir(), $_REQUEST['file']);
         header("Cache-Control: ");// leave blank to avoid IE errors
         header("Pragma: ");// leave blank to avoid IE errors
         header("Content-type: application/octet-stream");
-        header("Content-Disposition: attachment; filename=\"".htmlentities($_GET['file'])."\"");
-        header("Content-length:".(string)(filesize(ft_get_dir().'/'.$_GET['file'])));
+        header("Content-Disposition: attachment; filename=\"download\"; filename*=UTF-8''".rawurlencode($_REQUEST['file']));
+        header("Content-length:".(string)(filesize(ft_get_dir().'/'.$_REQUEST['file'])));
         header ("Connection: close");
-        sleep(1);
         fpassthru($fdl);
       }
     } else {
@@ -1886,7 +1950,7 @@ if (headers_sent()) {
       unzip_button: "<?php echo t('Yes, unzip it');?>",
       chmod: "<?php echo t('Set permissions to:');?>",
       symlink: "<?php echo t('Create symlink called:');?>",
-		  directory: "<?php if (!empty($_REQUEST['dir'])) {echo $_REQUEST['dir'];}?>",
+      directory: <?php echo json_encode($_REQUEST['dir'] ?? '', JSON_HEX_TAG | JSON_HEX_AMP | JSON_HEX_APOS | JSON_HEX_QUOT);?>,
 		  ok: "<?php echo t('Ok');?>",
 		  formpost: "<?php echo ft_get_self();?>",
 		  advancedactions: "<?php if (ADVANCEDACTIONS === TRUE) {echo 'true';} else {echo 'false';}?>"

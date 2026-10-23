@@ -52,11 +52,11 @@ function ft_edit_page($act) {
   $str = '';
   if ($act == 'edit') {
 		$_REQUEST['file'] = trim(ft_stripslashes($_REQUEST['file']));
-		$str = "<h2>".t('Edit file:')." {$_REQUEST['file']}</h2>";
+    $str = "<h2>".t('Edit file:').' '.ft_escape($_REQUEST['file']).'</h2>';
 		// Check that file exists and that it's writeable.
 		if (is_writeable(ft_get_dir()."/".$_REQUEST['file'])) {
 			// Check that filetype is editable.
-			if (ft_check_dir(ft_get_dir()) && ft_check_edit($_REQUEST['file']) && ft_check_fileactions() === TRUE && ft_check_filetype($_REQUEST['file']) && ft_check_filetype($_REQUEST['file'])) {
+      if (ft_check_dir(ft_get_dir()) && ft_check_edit($_REQUEST['file']) && ft_check_fileactions() === TRUE && ft_check_filetype($_REQUEST['file']) && ft_check_file($_REQUEST['file'])) {
 				// Get file contents.
 				$filecontent = implode ("", file(ft_get_dir()."/{$_REQUEST["file"]}"));
 				$filecontent = htmlspecialchars($filecontent);
@@ -75,15 +75,15 @@ function ft_edit_page($act) {
         }
 				if ($lock === FALSE) {
 				  // File is not locked. Set a new lock for the current user.
-  				ft_edit_lock_set($_REQUEST["file"], ft_get_dir(), $_SESSION['ft_user_'.MUTEX]);
+          ft_edit_lock_set($_REQUEST["file"], ft_get_dir(), ($_SESSION['ft_user_'.MUTEX] ?? ''));
 				  // Make form or show lock message.
   				$str .= '<form id="edit" action="'.ft_get_self().'" method="post">
   					<div>
   						<textarea cols="76" rows="20" name="filecontent" id="filecontent">'.$filecontent.'</textarea>
   					</div>
   					<div>
-  						<input type="hidden" name="file" id="file" value="'.$_REQUEST['file'].'" />
-  						<input type="hidden" name="dir" id="dir" value="'.$_REQUEST['dir'].'" />
+              <input type="hidden" name="file" id="file" value="'.ft_escape($_REQUEST['file']).'" />
+              <input type="hidden" name="dir" id="dir" value="'.ft_escape($_REQUEST['dir']).'" />
   						<input type="hidden" name="act" value="savefile" />
               <button type="button" id="save">'.t('Save').'</button>
   						<input type="submit" value="'.t('Save &amp; exit').'" name="submit" />
@@ -127,11 +127,11 @@ function ft_edit_action($act) {
 			// Delete any locks on this file.
 			ft_edit_lock_clear($file, ft_get_dir());
 			// Check for edit or cancel
-			if (strtolower($_REQUEST["submit"]) != strtolower(t("Cancel"))) {        
+      if (strtolower($_REQUEST["submit"] ?? '') != strtolower(t("Cancel"))) {
 				// Check if file type can be edited.
-				if (ft_check_dir(ft_get_dir()) && ft_check_edit($file) && ft_check_fileactions() === TRUE && ft_check_filetype($file) && ft_check_filetype($file)) {
+        if (ft_check_dir(ft_get_dir()) && ft_check_edit($file) && ft_check_fileactions() === TRUE && ft_check_filetype($file) && ft_check_file($file)) {
 					$filecontent = ft_stripslashes($_REQUEST["filecontent"]);
-					if ($_REQUEST["convertspaces"] != "") {
+          if (!empty($_REQUEST["convertspaces"])) {
 						$filecontent = str_replace("    ", "\t", $filecontent);
 					}
 					if (is_writeable(ft_get_dir()."/{$file}")) {
@@ -140,18 +140,18 @@ function ft_edit_action($act) {
 							fputs ($fp, $filecontent);
 							fclose($fp);
 							ft_set_message(t("!old was saved.", array('!old' => $file)));
-							ft_redirect("dir={$_REQUEST['dir']}");
+              ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 						} else {
 							ft_set_message(t("!old could not be edited.", array('!old' => $file)), 'error');
-							ft_redirect("dir={$_REQUEST['dir']}");
+              ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 						}
 					} else {
 						ft_set_message(t("!old could not be edited.", array('!old' => $file)), 'error');
-						ft_redirect("dir={$_REQUEST['dir']}");
+            ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 					}
 				} else {
 					ft_set_message(t("Could not edit file. This file type is not editable."), 'error');
-					ft_redirect("dir={$_REQUEST['dir']}");
+          ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
 				}
 			} else {
 				ft_redirect("dir=".rawurlencode($_REQUEST['dir']));
@@ -168,9 +168,9 @@ function ft_edit_ajax($act) {
 		// Do save file.
 		$file = trim(ft_stripslashes($_POST["file"]));
 		// Check if file type can be edited.
-		if (ft_check_dir(ft_get_dir()) && ft_check_edit($file) && ft_check_fileactions() === TRUE && ft_check_filetype($file) && ft_check_filetype($file)) {
+    if (ft_check_dir(ft_get_dir()) && ft_check_edit($file) && ft_check_fileactions() === TRUE && ft_check_filetype($file) && ft_check_file($file)) {
 			$filecontent = ft_stripslashes($_POST["filecontent"]);
-			if ($_POST["convertspaces"] != "") {
+      if (!empty($_POST["convertspaces"])) {
 				$filecontent = str_replace("    ", "\t", $filecontent);
 			}
 			if (is_writeable(ft_get_dir()."/{$file}")) {
@@ -193,7 +193,7 @@ function ft_edit_ajax($act) {
       echo '<p class="error">' . t("Could not edit file. This file type is not editable.") . '</p>';
 		}
   } elseif ($act == 'edit_get_lock') {
-    ft_edit_lock_set($_POST['file'], $_POST['dir'], $_SESSION['ft_user_'.MUTEX]);
+    ft_edit_lock_set($_POST['file'], $_POST['dir'], ($_SESSION['ft_user_'.MUTEX] ?? ''));
     echo 'File locked.';
   }
 }

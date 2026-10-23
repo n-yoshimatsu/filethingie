@@ -576,7 +576,7 @@ function ft_config_build_widget($name, $value) {
  *   Array of current settings.
  * @return HTML for output.
  */
-function ft_config_make_settings($type = 'default', $currentvalues) {
+function ft_config_make_settings($type, $currentvalues) {
   global $ft;
   $str = '<fieldset id="settings"><legend>'.t('Customize settings').'</legend><table>';
   foreach($ft['default_settings'] as $name => $value) {

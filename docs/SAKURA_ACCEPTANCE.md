@@ -78,4 +78,6 @@ PHPログは検証用configの読込み後のみ`log_errors=1`、E_ALL、非公�
 
 入力資料は検証用URLと同じフォルダーの`acceptance-input/日本語.txt`（UTF-8／LF）と`acceptance-input/empty.txt`（0 byte）。端末へ保存後、アプリへアップロードする操作。管理対象DIRは公開外の空のfiles、公開された入力資料とは別の場所。初期一覧の空表示が正常な状態。
 
+テキストのブラウザー保存が困難な場合は、[入力資料ZIP](verification/stage5/2026-10-24/acceptance-input.zip)を保存して解凍する方法。[ZIPのSHA-256](verification/stage5/2026-10-24/acceptance-input-SHA256SUMS)と、元の配備パッケージ内の2ファイルとのハッシュ一致確認済み。ZIP自体ではなく、解凍した`日本語.txt`と`empty.txt`をアプリからアップロードする手順。試験入力の内容・転送経路・判定基準の変更なし。
+
 環境診断の`ft-php-check-...`と検証版の`ft-stage5-.../index.php`は別のURL。前者への`acceptance-input/`追加では入力ファイルの取得不可。利用者の取得エラーは前者のURLでの報告、アプリのダウンロード機能のFAILを示す証跡とは異なる記録。

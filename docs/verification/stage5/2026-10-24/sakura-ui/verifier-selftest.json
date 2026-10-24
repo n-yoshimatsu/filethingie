@@ -1,0 +1,59 @@
+{
+  "harness_sha256": "35b1a356ef2cc5198d22286743b3279f055ffc8e00b9855fdf1500cb2ffe91a9",
+  "results": [
+    {
+      "environment": "php83",
+      "checks": [
+        {
+          "name": "generated preview fixture accepted",
+          "result": "PASS",
+          "assertions": 16
+        },
+        {
+          "name": "diagnostic line detected",
+          "result": "PASS"
+        },
+        {
+          "name": "configuration permission mismatch detected",
+          "result": "PASS"
+        },
+        {
+          "name": "application hash mismatch detected",
+          "result": "PASS"
+        },
+        {
+          "name": "non-preview directory rejected",
+          "result": "PASS"
+        }
+      ],
+      "scope": "確認ツールの人工fixtureによる自己検証。さくら実機の検証結果ではない記録"
+    },
+    {
+      "environment": "php85",
+      "checks": [
+        {
+          "name": "generated preview fixture accepted",
+          "result": "PASS",
+          "assertions": 16
+        },
+        {
+          "name": "diagnostic line detected",
+          "result": "PASS"
+        },
+        {
+          "name": "configuration permission mismatch detected",
+          "result": "PASS"
+        },
+        {
+          "name": "application hash mismatch detected",
+          "result": "PASS"
+        },
+        {
+          "name": "non-preview directory rejected",
+          "result": "PASS"
+        }
+      ],
+      "scope": "確認ツールの人工fixtureによる自己検証。さくら実機の検証結果ではない記録"
+    }
+  ]
+}

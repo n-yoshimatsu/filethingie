@@ -1,0 +1,543 @@
+{
+  "case_id": "SA-503",
+  "scope": "実機Chrome UIのログ・CSV・ZIP",
+  "started_at": "2026-10-24T00:41:21.017Z",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "label": "Initial login form",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "jQuery version",
+      "actual": "4.0.0",
+      "expected": "4.0.0",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Incorrect app password rejected",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "One application session cookie",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Secure cookie",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "HttpOnly cookie",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "SameSite cookie",
+      "actual": "Lax",
+      "expected": "Lax",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Create destination absent: ft-auto-plugins-30f8e304b3",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Created folder: ft-auto-plugins-30f8e304b3",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Upload destination absent: 日本語.txt",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Upload destination absent: empty.txt",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Upload selection count",
+      "actual": 2,
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Uploaded: 日本語.txt",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Uploaded: empty.txt",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "日本語.txt",
+      "expected": "日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 日本語.txt",
+      "actual": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e",
+      "expected": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "empty.txt",
+      "expected": "empty.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: empty.txt",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "ft-auto-plugins-30f8e304b3",
+      "expected": "ft-auto-plugins-30f8e304b3",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "ft-auto-plugins-30f8e304b3.zip",
+      "expected": "ft-auto-plugins-30f8e304b3.zip",
+      "verdict": "PASS"
+    },
+    {
+      "label": "ZIP contains exact input files",
+      "actual": {
+        "ft-auto-plugins-30f8e304b3/empty.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "ft-auto-plugins-30f8e304b3/日本語.txt": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e"
+      },
+      "expected": {
+        "ft-auto-plugins-30f8e304b3/日本語.txt": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e",
+        "ft-auto-plugins-30f8e304b3/empty.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "verdict": "PASS"
+    },
+    {
+      "label": "Upload destination absent: 展開確認.zip",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Upload selection count",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Uploaded: 展開確認.zip",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "展開確認.zip",
+      "expected": "展開確認.zip",
+      "verdict": "PASS"
+    },
+    {
+      "label": "ZIP extraction directory created",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "日本語.txt",
+      "expected": "日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 日本語.txt",
+      "actual": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e",
+      "expected": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "empty.txt",
+      "expected": "empty.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: empty.txt",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "展開確認.zip",
+      "expected": "展開確認.zip",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Existing extraction destination rejected",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "日本語.txt",
+      "expected": "日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 日本語.txt",
+      "actual": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e",
+      "expected": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "empty.txt",
+      "expected": "empty.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: empty.txt",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Log records upload: 日本語.txt",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Log records download: 日本語.txt",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Log records upload: empty.txt",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Log records download: empty.txt",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Login event in log",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Type and inclusive date filter",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Filtered log retains both uploads",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "CSV header",
+      "actual": [
+        "Type",
+        "Message",
+        "Location",
+        "Timestamp",
+        "User"
+      ],
+      "expected": [
+        "Type",
+        "Message",
+        "Location",
+        "Timestamp",
+        "User"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "label": "CSV agrees with filtered UI",
+      "actual": [
+        [
+          "upload",
+          "File uploaded.",
+          "<managed-root>/ft-auto-plugins-30f8e304b3/展開確認.zip",
+          "2026-10-24 09:41:29",
+          "stage5"
+        ],
+        [
+          "upload",
+          "File uploaded.",
+          "<managed-root>/ft-auto-plugins-30f8e304b3/日本語.txt",
+          "2026-10-24 09:41:26",
+          "stage5"
+        ],
+        [
+          "upload",
+          "File uploaded.",
+          "<managed-root>/ft-auto-plugins-30f8e304b3/empty.txt",
+          "2026-10-24 09:41:26",
+          "stage5"
+        ],
+        [
+          "upload",
+          "File uploaded.",
+          "<private-preview>/files/empty.txt",
+          "2026-10-24 09:13:34",
+          "stage5"
+        ],
+        [
+          "upload",
+          "File uploaded.",
+          "<private-preview>/files/日本語.txt",
+          "2026-10-24 09:13:26",
+          "stage5"
+        ]
+      ],
+      "expected": [
+        [
+          "upload",
+          "File uploaded.",
+          "<managed-root>/ft-auto-plugins-30f8e304b3/展開確認.zip",
+          "2026-10-24 09:41:29",
+          "stage5"
+        ],
+        [
+          "upload",
+          "File uploaded.",
+          "<managed-root>/ft-auto-plugins-30f8e304b3/日本語.txt",
+          "2026-10-24 09:41:26",
+          "stage5"
+        ],
+        [
+          "upload",
+          "File uploaded.",
+          "<managed-root>/ft-auto-plugins-30f8e304b3/empty.txt",
+          "2026-10-24 09:41:26",
+          "stage5"
+        ],
+        [
+          "upload",
+          "File uploaded.",
+          "<private-preview>/files/empty.txt",
+          "2026-10-24 09:13:34",
+          "stage5"
+        ],
+        [
+          "upload",
+          "File uploaded.",
+          "<private-preview>/files/日本語.txt",
+          "2026-10-24 09:13:26",
+          "stage5"
+        ]
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "日本語.txt",
+      "expected": "日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: 日本語.txt",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "empty.txt",
+      "expected": "empty.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: empty.txt",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "ft-auto-plugins-30f8e304b3",
+      "expected": "ft-auto-plugins-30f8e304b3",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: ft-auto-plugins-30f8e304b3",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "展開確認",
+      "expected": "展開確認",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: 展開確認",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "展開確認.zip",
+      "expected": "展開確認.zip",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: 展開確認.zip",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "日本語.txt",
+      "expected": "日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: 日本語.txt",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "empty.txt",
+      "expected": "empty.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: empty.txt",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Test directory emptied",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "ft-auto-plugins-30f8e304b3",
+      "expected": "ft-auto-plugins-30f8e304b3",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: ft-auto-plugins-30f8e304b3",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Final logout",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "No browser exceptions or server errors",
+      "actual": [],
+      "expected": [],
+      "verdict": "PASS"
+    }
+  ],
+  "steps": [
+    "通常フォームでのHTTPSログイン。セッション・内部値の注入なし",
+    "新規専用フォルダー内での操作開始",
+    {
+      "download": "日本語.txt",
+      "bytes": 55,
+      "sha256": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e"
+    },
+    {
+      "download": "empty.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "download": "ft-auto-plugins-30f8e304b3.zip",
+      "bytes": 511,
+      "sha256": "4fc88a24b4f559952c3e091d3b605b2020a3991b6a69767f20c5f4db4c76f8be"
+    },
+    {
+      "download": "日本語.txt",
+      "bytes": 55,
+      "sha256": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e"
+    },
+    {
+      "download": "empty.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "download": "日本語.txt",
+      "bytes": 55,
+      "sha256": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e"
+    },
+    {
+      "download": "empty.txt",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "download": "filethingie-log.csv",
+      "bytes": 738,
+      "sha256": "bb2787c759f613f8e8cf6c50a8eff75fdca2de4781ca881c8c52a16e638a9ed6"
+    }
+  ],
+  "errors": [],
+  "test_directory": "ft-auto-plugins-30f8e304b3",
+  "request_counts": {
+    "GET 200": 127,
+    "POST 302": 16,
+    "POST 200": 1
+  },
+  "remaining": [
+    "非公開SQLite・設定・PHPログの配置と権限確認"
+  ],
+  "overall_case_verdict": "実機内部の確認を含む全体判定は別途",
+  "harness_sha256": "84e30f882c6483bdfdf04c6263e78a30fd8d7965d41db47f6ec967db886bcf93",
+  "browser_version": "156.0.8078.47",
+  "client_os": "linux",
+  "fixture_cleanup": "新規作成した検証用フォルダー・ファイルをUIから削除済み",
+  "finished_at": "2026-10-24T00:41:49.725Z",
+  "publication_note": "サーバー名・非公開保存先の伏字化。CSV比較は元データで実施済み、公開記録は伏字化後の内容。画面画像・ダウンロード本文は非公開のローカル証跡として保持。"
+}

@@ -1,0 +1,447 @@
+{
+  "case_id": "SA-502",
+  "scope": "実機Chrome UIの基本操作・認証",
+  "started_at": "2026-10-24T00:40:40.949Z",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "label": "Initial login form",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "jQuery version",
+      "actual": "4.0.0",
+      "expected": "4.0.0",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Incorrect app password rejected",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "One application session cookie",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Secure cookie",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "HttpOnly cookie",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "SameSite cookie",
+      "actual": "Lax",
+      "expected": "Lax",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Create destination absent: ft-auto-basic-9b76923524",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Created folder: ft-auto-basic-9b76923524",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Create destination absent: 受入テスト",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Created folder: 受入テスト",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Create destination absent: 操作テスト.txt",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Created file: 操作テスト.txt",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "操作テスト.txt",
+      "expected": "操作テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "New file empty",
+      "actual": "",
+      "expected": "",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "操作テスト.txt",
+      "expected": "操作テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "AJAX save persisted after reopening",
+      "actual": "保存確認1",
+      "expected": "保存確認1",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "操作テスト.txt",
+      "expected": "操作テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Normal save persisted after reopening",
+      "actual": "保存確認1\n保存確認2",
+      "expected": "保存確認1\n保存確認2",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "操作テスト.txt",
+      "expected": "操作テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 操作テスト.txt",
+      "actual": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "expected": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "操作テスト.txt",
+      "expected": "操作テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Copy visible",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "複製テスト.txt",
+      "expected": "複製テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 複製テスト.txt",
+      "actual": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "expected": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "操作テスト.txt",
+      "expected": "操作テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 操作テスト.txt",
+      "actual": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "expected": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "複製テスト.txt",
+      "expected": "複製テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Existing name collision rejected",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "複製テスト.txt",
+      "expected": "複製テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 複製テスト.txt",
+      "actual": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "expected": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "操作テスト.txt",
+      "expected": "操作テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 操作テスト.txt",
+      "actual": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "expected": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "複製テスト.txt",
+      "expected": "複製テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Old name removed",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "New name visible",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "変更後の日本語.txt",
+      "expected": "変更後の日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 変更後の日本語.txt",
+      "actual": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "expected": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "変更後の日本語.txt",
+      "expected": "変更後の日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Moved file absent in origin",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "変更後の日本語.txt",
+      "expected": "変更後の日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 変更後の日本語.txt",
+      "actual": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "expected": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Japanese search finds moved file",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "変更後の日本語.txt",
+      "expected": "変更後の日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Search download content",
+      "actual": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "expected": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "変更後の日本語.txt",
+      "expected": "変更後の日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: 変更後の日本語.txt",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "受入テスト",
+      "expected": "受入テスト",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: 受入テスト",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Logout returns login form",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Reload stays logged out",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Unauthenticated download returns login form",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Login restored for fixture cleanup",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded filename",
+      "actual": "操作テスト.txt",
+      "expected": "操作テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Downloaded bytes: 操作テスト.txt",
+      "actual": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "expected": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "操作テスト.txt",
+      "expected": "操作テスト.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: 操作テスト.txt",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Test directory emptied",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Action uses complete name",
+      "actual": "ft-auto-basic-9b76923524",
+      "expected": "ft-auto-basic-9b76923524",
+      "verdict": "PASS"
+    },
+    {
+      "label": "Deleted: ft-auto-basic-9b76923524",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Final logout",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "No browser exceptions or server errors",
+      "actual": [],
+      "expected": [],
+      "verdict": "PASS"
+    }
+  ],
+  "steps": [
+    "通常フォームでのHTTPSログイン。セッション・内部値の注入なし",
+    "新規専用フォルダー内での操作開始",
+    {
+      "download": "操作テスト.txt",
+      "bytes": 27,
+      "sha256": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201"
+    },
+    {
+      "download": "複製テスト.txt",
+      "bytes": 27,
+      "sha256": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201"
+    },
+    {
+      "download": "操作テスト.txt",
+      "bytes": 27,
+      "sha256": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201"
+    },
+    {
+      "download": "複製テスト.txt",
+      "bytes": 27,
+      "sha256": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201"
+    },
+    {
+      "download": "操作テスト.txt",
+      "bytes": 27,
+      "sha256": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201"
+    },
+    {
+      "download": "変更後の日本語.txt",
+      "bytes": 27,
+      "sha256": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201"
+    },
+    {
+      "download": "変更後の日本語.txt",
+      "bytes": 27,
+      "sha256": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201"
+    },
+    {
+      "download": "変更後の日本語.txt",
+      "bytes": 27,
+      "sha256": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201"
+    },
+    {
+      "download": "操作テスト.txt",
+      "bytes": 27,
+      "sha256": "0f2e8276c3d889c7eaa12ed58ce39b59cf884bea1a53835829c3eee3d5acd201"
+    }
+  ],
+  "errors": [],
+  "test_directory": "ft-auto-basic-9b76923524",
+  "request_counts": {
+    "GET 200": 134,
+    "POST 302": 19,
+    "POST 200": 5,
+    "GET 302": 1
+  },
+  "remaining": [
+    "非公開PHPログの確認"
+  ],
+  "overall_case_verdict": "実機内部の確認を含む全体判定は別途",
+  "harness_sha256": "84e30f882c6483bdfdf04c6263e78a30fd8d7965d41db47f6ec967db886bcf93",
+  "browser_version": "156.0.8078.47",
+  "client_os": "linux",
+  "fixture_cleanup": "新規作成した検証用フォルダー・ファイルをUIから削除済み",
+  "finished_at": "2026-10-24T00:41:12.704Z",
+  "publication_note": "サーバー名・非公開保存先の伏字化。CSV比較は元データで実施済み、公開記録は伏字化後の内容。画面画像・ダウンロード本文は非公開のローカル証跡として保持。"
+}

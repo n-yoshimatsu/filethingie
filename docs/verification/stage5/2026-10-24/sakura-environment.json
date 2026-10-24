@@ -36,7 +36,7 @@
   },
   "probe_cleanup": "未確認",
   "application_acceptance": {
-    "source": "利用者回答、2026-10-24。直接操作による確認ではない記録",
+    "source": "先行する利用者の手動操作に関する回答、2026-10-24。直接操作による確認ではない履歴。後続の自動実行結果はautomated_acceptance参照",
     "client": {
       "browser": "Chrome",
       "browser_version": "未確認",
@@ -53,5 +53,14 @@
       "transfer_evidence": "sakura-transfer.json"
     },
     "SA-503": "NOT RUN"
+  },
+  "automated_acceptance": {
+    "source": "Ubuntu Chromeから実機検証版への直接HTTPS操作、2026-10-24",
+    "evidence": "sakura-ui/summary.json",
+    "basic_checks": 62,
+    "plugin_checks": 64,
+    "direct_url_checks": 6,
+    "web_verdict": "PASS",
+    "remaining": "サーバー内部の配置・権限・PHPログ確認待ち、SA-502／503全体判定未実施"
   }
 }

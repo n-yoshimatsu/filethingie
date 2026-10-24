@@ -1,0 +1,35 @@
+{
+  "source": "Ubuntu Chromeからさくら検証版への実HTTPS操作",
+  "browser": "156.0.8078.47",
+  "runs": [
+    {
+      "phase": "basic",
+      "case_id": "SA-502",
+      "verdict": "PASS",
+      "checks": 62,
+      "started_at": "2026-10-24T00:40:40.949Z",
+      "finished_at": "2026-10-24T00:41:12.704Z"
+    },
+    {
+      "phase": "plugins",
+      "case_id": "SA-503",
+      "verdict": "PASS",
+      "checks": 64,
+      "started_at": "2026-10-24T00:41:21.017Z",
+      "finished_at": "2026-10-24T00:41:49.725Z"
+    },
+    {
+      "phase": "protection",
+      "case_id": "SA-503",
+      "verdict": "PASS",
+      "checks": 6,
+      "started_at": "2026-10-24T00:42:57.504Z",
+      "finished_at": "2026-10-24T00:43:00.138Z"
+    }
+  ],
+  "total_checks": 132,
+  "overall_SA_502": "PHPログ確認待ち、全体判定未実施",
+  "overall_SA_503": "サーバー内配置・権限・PHPログ確認待ち、全体判定未実施",
+  "credential_cleanup": "ブラウザー試験終了後に本人限定の資格情報ファイル・親ディレクトリを削除",
+  "artifacts_privacy": "資格情報・実URL・サーバーフルパスの公開記録への収録なし"
+}

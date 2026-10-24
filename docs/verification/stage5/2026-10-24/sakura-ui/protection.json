@@ -1,0 +1,82 @@
+{
+  "case_id": "SA-503",
+  "scope": "実機HTTPSの設定・DB・ログ直接URL保護",
+  "started_at": "2026-10-24T00:42:57.504Z",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "label": "Configuration request status",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Configuration response exposes no content",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Private file not served at preview URL: test.sqlite",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Private file not served at preview URL: php-error.log",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Private file not served at preview URL: deployment.json",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "No browser exceptions or server errors",
+      "actual": [],
+      "expected": [],
+      "verdict": "PASS"
+    }
+  ],
+  "steps": [
+    {
+      "file": "config.php",
+      "status": 200,
+      "bytes": 0
+    },
+    {
+      "file": "test.sqlite",
+      "status": 404,
+      "bytes": 236
+    },
+    {
+      "file": "php-error.log",
+      "status": 404,
+      "bytes": 236
+    },
+    {
+      "file": "deployment.json",
+      "status": 404,
+      "bytes": 236
+    }
+  ],
+  "errors": [],
+  "test_directory": "ft-auto-protection-ea03d477d3",
+  "request_counts": {
+    "GET 200": 1,
+    "GET 404": 3
+  },
+  "remaining": [
+    "非公開SQLite・設定・PHPログの配置と権限確認"
+  ],
+  "overall_case_verdict": "実機内部の確認を含む全体判定は別途",
+  "harness_sha256": "d3a9479bd5ad80336f24b9b65619acb954d9ded8a73fc163cbbc00c804abcc00",
+  "browser_version": "156.0.8078.47",
+  "client_os": "linux",
+  "fixture_cleanup": "読取り専用確認、検証データの作成なし",
+  "finished_at": "2026-10-24T00:43:00.138Z",
+  "publication_note": "サーバー名・非公開保存先の伏字化。CSV比較は元データで実施済み、公開記録は伏字化後の内容。画面画像・ダウンロード本文は非公開のローカル証跡として保持。"
+}

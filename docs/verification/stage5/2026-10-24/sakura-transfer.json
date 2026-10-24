@@ -1,0 +1,29 @@
+{
+  "case_id": "SA-502",
+  "substep": "日本語・空ファイルのアップロードとダウンロード内容一致",
+  "recorded_at_utc": "2026-10-24T00:22:26.441621+00:00",
+  "source": "利用者提供のWindows PowerShell Get-FileHash出力。アプリからダウンロードしたファイルの選択を依頼した回答。端末への直接アクセスによる計測ではない記録",
+  "privacy": "利用者名・端末フルパスの非収録",
+  "application_source_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+  "client": {
+    "os": "Windows（詳細版未確認）",
+    "browser": "Chrome（詳細版未確認）"
+  },
+  "files": [
+    {
+      "name": "日本語.txt",
+      "expected_sha256": "6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e",
+      "reported_sha256": "6BB6A2B9C3419A359D34F0B4AEA0DEAE66B360BD4BF7255E4C844DBEB0E9F83E",
+      "verdict": "PASS"
+    },
+    {
+      "name": "empty.txt",
+      "expected_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "reported_sha256": "E3B0C44298FC1C149AFBF4C8996FB92427AE41E4649B934CA495991B7852B855",
+      "verdict": "PASS"
+    }
+  ],
+  "substep_verdict": "PASS",
+  "overall_SA_502_verdict": "実施中・判定未実施",
+  "remaining": "作成・通常／AJAX編集・複製・改名・移動・検索・削除・認証とログ等の残る受入項目"
+}

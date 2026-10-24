@@ -46,10 +46,11 @@
     "SA-502": {
       "installation_command": "実行済みとの回答。その後の利用者CLI出力でft-stage5配下のindex.php配置を確認",
       "login_and_empty_list": "先行の選択肢1回答は旧環境診断URLとの混同により単独の確認根拠として保留。その後、正しいURLとZIP入力資料の案内に続いて検証版へのアップロード完了との回答",
-      "file_transfer_and_remaining_operations": "同一入力ZIP提供後、アップロード、Chromeでのダウンロードとファイル確認完了との利用者回答。SHA-256による転送内容比較・残りの基本操作は結果待ち",
+      "file_transfer_and_remaining_operations": "Windows上のChromeでアップロード・ダウンロードした2ファイルについて、利用者提供のSHA-256が配布元と一致。転送部分はPASS、残りの基本操作は継続中",
       "overall_verdict": "実施中・判定未実施",
       "input_preparation": "テキスト保存が成立しない状態を記録後、同一入力ZIPを提供。アップロード完了回答により入力準備の阻害解消",
-      "previous_blocked": "旧環境診断URLとの混同により入力資料取得前に停止。CLIで正しい検証版配置先を確認して再開。アプリ転送機能のFAIL判定なし"
+      "previous_blocked": "旧環境診断URLとの混同により入力資料取得前に停止。CLIで正しい検証版配置先を確認して再開。アプリ転送機能のFAIL判定なし",
+      "transfer_evidence": "sakura-transfer.json"
     },
     "SA-503": "NOT RUN"
   }

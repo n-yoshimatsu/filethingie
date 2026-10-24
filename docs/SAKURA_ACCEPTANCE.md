@@ -52,11 +52,13 @@ php tools/sakura-probe.php '/実際の公開ディレクトリ' 'https://実際�
 |---|---|
 | SA-501 CLI側環境情報 | 取得済み |
 | SA-501 Web側環境情報 | 利用者提供出力によるPASS、cgi-fcgi／必要拡張／HTTPSの確認 |
-| SA-502 分離配置・基本受入 | 実施中・判定未実施。同一入力ZIPの提供後、アップロード、Windows上のChromeでのダウンロードとファイル確認完了との利用者回答。SHA-256による内容比較・残りの基本操作は結果待ち。Windows・ブラウザー詳細版は未確認 |
+| SA-502 分離配置・基本受入 | 実施中・全体判定未実施。Windows上のChromeでの日本語・空ファイル転送は、利用者提供SHA-256と配布元の一致によるPASS。作成・編集等の残る基本操作は結果待ち。Windows・ブラウザー詳細版は未確認 |
 | SA-503 任意機能・権限 | NOT RUN |
 | 既存本番データ移行・本番切替 | 対象外、段階6の前提確認待ち |
 
 実機の必要範囲が未実施の間は段階5全体の受入完了としない扱い。
+
+[転送の照合記録](verification/stage5/2026-10-24/sakura-transfer.json)。実際の入力名は、後述の分離配備パッケージに含む`日本語.txt`と`empty.txt`。手順6の一般例にある`acceptance-`接頭辞とは異なる実施名の記録。配布元マニフェストと利用者のPowerShell出力に基づく内容比較、端末フルパスの非収録。
 
 ## 分離配置用パッケージ
 
@@ -91,5 +93,16 @@ Add-Type -AssemblyName System.Windows.Forms; $ftDialog = New-Object System.Windo
 比較対象は[配布元マニフェスト](verification/stage5/2026-10-24/preview/manifest.json)の入力ファイルSHA-256。`日本語.txt`は`6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e`、`empty.txt`は`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`。ハッシュ文字列の大文字・小文字の区別なし。報告対象はファイル名とHash値のみ、Windows利用者名を含むフルパスの提示不要。
 
 根拠：[Get-FileHash](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash?view=powershell-5.1)、[OpenFileDialog](https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.openfiledialog?view=windowsdesktop-9.0)。手順の整備と、利用者PCでの実行結果の受領との区別。
+
+### 作成と2種類の編集保存
+
+SA-502手順7の利用者操作用の具体化。新規の検証データのみの操作、既存本番データへの適用なし。
+
+1. 最初の一覧の「フォルダー作成」で「フォルダー」を選択、`受入テスト`の作成。一覧への追加確認。
+2. 同じ欄の「ファイル」で`操作テスト.txt`の作成。行の左端の◇から「編集」・「編集する」を選択、初期内容が空であることの確認。
+3. 1行目に`保存確認1`を入力して「保存」の実行。完了表示後の「キャンセル」による一覧への復帰、編集画面を再度開いた際の内容残存確認。AJAX保存の持続確認。
+4. 2行目に`保存確認2`を追加して「保存して終了」の実行。再編集時の2行残存と一覧への復帰。通常保存の持続確認。
+
+後続の複製・改名・移動・検索・削除は別の操作記録。作成・保存だけでこれらをPASSにしない扱い。
 
 環境診断の`ft-php-check-...`と検証版の`ft-stage5-.../index.php`は別のURL。前者への`acceptance-input/`追加では入力ファイルの取得不可。利用者の取得エラーは前者のURLでの報告、アプリのダウンロード機能のFAILを示す証跡とは異なる記録。

@@ -8,7 +8,7 @@ PHP 8.3.36／8.5.12のGitHub Actionsで32ケースすべてPASS。HTTPハーネ�
 
 最終CI対象は`3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4`。[GitHub Actions実行結果](https://github.com/n-yoshimatsu/filethingie/actions/runs/40041215267)と、取得済み両ジョブの証跡による確認。その後の`96ffd8456545f06049ba67d17dd2e860268f2074`は受入用資料・パッケージの追加、アプリ本体の変更なし。
 
-さくら実機は、利用者提供出力によるFreeBSD 13.0-RELEASE-p15／PHP 8.3.36／cgi-fcgi／HTTPS・必要拡張の確認済み。旧環境診断URLとの混同と端末への試料保存で一時停止後、CLI検索で検証版配置先を確認、同一入力ZIPを提供。続く利用者回答によるアップロード、Chromeでのダウンロードとファイル確認完了の記録。SHA-256による内容比較・編集・任意機能・権限の実機受入は継続中。実時間アイドル期限2ケースはPASS、8時間の絶対期限2ケースは実行中であり、段階5全体の完了判定は未実施。
+さくら実機は、利用者提供出力によるFreeBSD 13.0-RELEASE-p15／PHP 8.3.36／cgi-fcgi／HTTPS・必要拡張の確認済み。旧環境診断URLとの混同と端末への試料保存で一時停止後、CLI検索で検証版配置先を確認、同一入力ZIPを提供。Windows上のChromeでのアップロード・ダウンロードについて、利用者提供の2ファイルのSHA-256が配布元と完全一致、転送部分はPASS。作成・編集・任意機能・権限等の実機受入は継続中。実時間アイドル期限2ケースはPASS、8時間の絶対期限2ケースは実行中であり、段階5全体の完了判定は未実施。
 
 | ケース（8.3／8.5） | 確認内容 | 最新結果・証跡 |
 |---|---|---|
@@ -32,7 +32,7 @@ PHP 8.3.36／8.5.12のGitHub Actionsで32ケースすべてPASS。HTTPハーネ�
 | TS-515／516 | 実時間絶対期限 | 実行中・判定未実施、5分ごとのGET・8時間10秒 |
 | TS-517／518 | 分離配置パッケージ・index.php起動 | ローカル PASS／PASS |
 | SA-501 | さくら環境情報 | 利用者提供のCLI・Web出力によるPASS |
-| SA-502 | さくら基本受入 | 実施中・判定未実施。アップロード、Chromeでのダウンロードとファイル確認完了との回答。SHA-256による内容比較・残りの操作は結果待ち |
+| SA-502 | さくら基本受入 | 実施中・全体判定未実施。日本語・空ファイルの転送内容は利用者提供SHA-256一致によるPASS。作成・編集等の残りの操作は結果待ち |
 | SA-503 | さくら任意機能・権限 | NOT RUN |
 
 長時間4ケースは2026年10月24日08:40:44 JST開始。30分／8時間の仕様値・時計・セッション値の変更なし。アイドル期限は同日09:10:54 JST終了、無操作1,810.006秒／1,810.018秒、中間HTTP要求0件、両PHPのログイン画面復帰・PHP診断通知なし。開始直後の認証成功や途中GETのみを期限失効のPASSへ代用しない扱い。絶対期限2ケースは継続中。
@@ -58,6 +58,7 @@ Linux／Apache 2.4.69、PHP 8.3.36／8.5.12。CIのChrome 155.0.8059.39、ロー
 - [全短時間試験アーカイブ](verification/stage5/2026-10-24/stage5-evidence.tar.gz)、[内部ファイルのSHA-256](verification/stage5/2026-10-24/archive-manifest.json)
 - [PHP 8.3 Chrome画面](verification/stage5/2026-10-24/php83-browser.png)、[PHP 8.5 Chrome画面](verification/stage5/2026-10-24/php85-browser.png)、[PHP 8.3 Firefox画面](verification/stage5/2026-10-24/php83-firefox.png)、[PHP 8.5 Firefox画面](verification/stage5/2026-10-24/php85-firefox.png)
 - [利用者提供のさくら環境情報と受入状況](verification/stage5/2026-10-24/sakura-environment.json)
+- [さくらの転送内容照合結果](verification/stage5/2026-10-24/sakura-transfer.json)
 
 アーカイブSHA-256：`a4a7082e4331ff2f59074e6577201761d9de98ac9d006b304b1d445369b0b515`。再展開による全内部ファイルのハッシュ一致確認済み。86試行分の記録（81 PASS・3 FAIL・2 BLOCKED）の保存。最新合格ケース数とは異なる再試行込みの集計。
 

@@ -1,0 +1,276 @@
+{
+  "case_id": "SA-601",
+  "name": "本番棚卸し",
+  "verdict": "PASS",
+  "evidence_origin": "利用者提供CLI出力。サーバーへ直接接続した結果ではない記録",
+  "attachment_sha256": "74e4f57a1b4cd188e8ad5e8ac0eede70e8ed8e03c195e2172c40905b5788a73f",
+  "result": {
+    "scope": "段階6 本番移行前の読取り専用棚卸し",
+    "checked_at_utc": "2026-10-24T09:16:33+00:00",
+    "php": "8.3.36",
+    "sapi": "cli",
+    "config_analysis": {
+      "mode": "静的な単純リテラル代入の候補。設定の実行・実効値の確定ではない解析",
+      "unsupported_assignments": 0,
+      "other_function_calls": 0,
+      "dynamic_constructs": [],
+      "settings": {
+        "LOGIN": {
+          "literal": true,
+          "value": false
+        },
+        "HIDEFILEPATHS": {
+          "literal": true,
+          "value": false
+        },
+        "MAXSIZE": {
+          "literal": true,
+          "value": 52428800
+        },
+        "LIMIT": {
+          "literal": true,
+          "value": 0
+        },
+        "HTTPS": {
+          "literal": true,
+          "value": true
+        },
+        "REMEMBERME": {
+          "literal": true,
+          "value": false
+        },
+        "UPLOAD": {
+          "literal": true,
+          "value": true
+        },
+        "CREATE": {
+          "literal": true,
+          "value": true
+        },
+        "FILEACTIONS": {
+          "literal": true,
+          "value": true
+        },
+        "DELETEFOLDERS": {
+          "literal": true,
+          "value": false
+        },
+        "ADVANCEDACTIONS": {
+          "literal": true,
+          "value": false
+        },
+        "PERMISSION": {
+          "literal": true,
+          "value": 420
+        },
+        "DIRPERMISSION": {
+          "literal": true,
+          "value": 511
+        },
+        "LANG": {
+          "literal": true,
+          "value": "en"
+        }
+      },
+      "credential_definitions_present": [
+        "USERNAME",
+        "PASSWORD"
+      ],
+      "additional_user_literal_keys": 0,
+      "group_literal_keys": 0,
+      "known_plugin_declarations": [
+        "edit",
+        "search"
+      ],
+      "unknown_plugin_declarations": 0
+    },
+    "managed_directory_candidate": {
+      "literal_candidate": true,
+      "relative_setting": true,
+      "same_as_application": false,
+      "inside_web_root": true,
+      "inside_home": true,
+      "metadata": {
+        "exists": true,
+        "symlink": false,
+        "type": "directory",
+        "mode": "0755",
+        "readable": true,
+        "bytes": null
+      },
+      "inventory": {
+        "complete": true,
+        "files": 337,
+        "directories": 84,
+        "bytes": 1154034640,
+        "symlinks": 0,
+        "unreadable_directories": 0,
+        "other_entries": 0
+      }
+    },
+    "basic_auth": {
+      "htaccess_chain": [
+        {
+          "ancestor_level": 0,
+          "metadata": {
+            "exists": true,
+            "symlink": false,
+            "type": "file",
+            "mode": "0644",
+            "readable": true,
+            "bytes": 121
+          },
+          "basic_directive": true,
+          "auth_user_file_directives": 1,
+          "auth_group_file_directives": 0,
+          "access_require_directive": true
+        },
+        {
+          "ancestor_level": 3,
+          "metadata": {
+            "exists": true,
+            "symlink": false,
+            "type": "file",
+            "mode": "0644",
+            "readable": true,
+            "bytes": 177
+          },
+          "basic_directive": true,
+          "auth_user_file_directives": 1,
+          "auth_group_file_directives": 0,
+          "access_require_directive": false
+        }
+      ],
+      "credential_file_metadata": [
+        {
+          "role": "users",
+          "absolute_literal_path": true,
+          "resolves": true,
+          "inside_web_root": true,
+          "metadata": {
+            "exists": true,
+            "symlink": false,
+            "type": "file",
+            "mode": "0644",
+            "readable": true,
+            "bytes": 152
+          }
+        },
+        {
+          "role": "users",
+          "absolute_literal_path": true,
+          "resolves": false
+        }
+      ],
+      "note": "Apache設定全体・条件分岐を含む実効認証範囲は別途確認。認証ファイル本文の非読取り"
+    },
+    "installed_roles": {
+      "index.php": {
+        "exists": true,
+        "symlink": false,
+        "type": "file",
+        "mode": "0644",
+        "readable": true,
+        "bytes": 64089
+      },
+      "ft2.php": {
+        "exists": false
+      },
+      "config.php": {
+        "exists": true,
+        "symlink": false,
+        "type": "file",
+        "mode": "0644",
+        "readable": true,
+        "bytes": 3891
+      },
+      "hooks.php": {
+        "exists": true,
+        "symlink": false,
+        "type": "file",
+        "mode": "0644",
+        "readable": true,
+        "bytes": 4740
+      },
+      "users.sh": {
+        "exists": true,
+        "symlink": false,
+        "type": "file",
+        "mode": "0700",
+        "readable": true,
+        "bytes": 228
+      },
+      "users.txt": {
+        "exists": true,
+        "symlink": false,
+        "type": "file",
+        "mode": "0644",
+        "readable": true,
+        "bytes": 21
+      },
+      "php.ini": {
+        "exists": true,
+        "symlink": false,
+        "type": "file",
+        "mode": "0644",
+        "readable": true,
+        "bytes": 118
+      },
+      "php.ini~": {
+        "exists": true,
+        "symlink": false,
+        "type": "file",
+        "mode": "0644",
+        "readable": true,
+        "bytes": 116
+      },
+      "phpinfo.php": {
+        "exists": true,
+        "symlink": false,
+        "type": "file",
+        "mode": "0644",
+        "readable": true,
+        "bytes": 21
+      },
+      ".htpasswd": {
+        "exists": true,
+        "symlink": false,
+        "type": "file",
+        "mode": "0644",
+        "readable": true,
+        "bytes": 152
+      }
+    },
+    "source_reference_flags": {
+      "users.sh": {
+        "htpasswd": true,
+        "REMOTE_USER": false,
+        "PHP_AUTH_USER": false,
+        "users.txt": true,
+        "config.php": false
+      },
+      "index.php": {
+        "htpasswd": false,
+        "REMOTE_USER": false,
+        "PHP_AUTH_USER": false,
+        "users.txt": false,
+        "config.php": true
+      },
+      "hooks.php": {
+        "htpasswd": false,
+        "REMOTE_USER": false,
+        "PHP_AUTH_USER": false,
+        "users.txt": false,
+        "config.php": false
+      }
+    },
+    "home_free_bytes": 2584517959680,
+    "privacy": "パスワード・ハッシュ・ユーザー名・グループ名・保存ファイル名・フルパス・設定本文の非出力。ファイル作成・変更なし。"
+  },
+  "limitations": [
+    "設定値は静的候補。実効値・Apache認証範囲の評価対象外",
+    "保存先の実名とソース差分の未確定",
+    "ファイルシステム空き容量と契約アカウント残容量の区別",
+    "本番書込み・バックアップ・切替の未実施"
+  ]
+}

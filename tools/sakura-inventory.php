@@ -90,6 +90,8 @@ function ft_inv_counts($root) {
     }
     return $r;
 }
+// Reuse only the non-executing parser from the CLI backup helper.
+if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') !== __FILE__) { return; }
 if ($argc!==4) { ft_inv_stop('Usage: php sakura-inventory.php APPLICATION_DIRECTORY HOME_DIRECTORY WEB_ROOT'); }
 [$app,$home,$webroot]=array_map('realpath',array_slice($argv,1));
 if (!$app||!$home||!$webroot||is_link($argv[1])||!str_starts_with($app,$webroot.'/')

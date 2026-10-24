@@ -1,0 +1,53 @@
+{
+  "scope": "段階6 棚卸し・配布候補・保全ツールの準備。本番保全コピーと切替は未実施",
+  "results": [
+    {
+      "case_id": "SA-601",
+      "verdict": "PASS",
+      "evidence": "sakura-inventory.json",
+      "scope": "利用者提供の棚卸し出力のレビュー"
+    },
+    {
+      "case_id": "TS-601",
+      "php": "8.3.36",
+      "verdict": "PASS",
+      "checks": 32,
+      "evidence": "inventory-recheck-php83.json"
+    },
+    {
+      "case_id": "TS-602",
+      "php": "8.5.12",
+      "verdict": "PASS",
+      "checks": 32,
+      "evidence": "inventory-recheck-php85.json"
+    },
+    {
+      "case_id": "TS-603",
+      "verdict": "PASS",
+      "checks": 8,
+      "evidence": "package.json"
+    },
+    {
+      "case_id": "TS-604",
+      "php": "8.3.36",
+      "verdict": "PASS",
+      "checks": 34,
+      "evidence": "backup-php83.json"
+    },
+    {
+      "case_id": "TS-605",
+      "php": "8.5.12",
+      "verdict": "PASS",
+      "checks": 34,
+      "evidence": "backup-php85.json"
+    }
+  ],
+  "source_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+  "tool_hashes": {
+    "build-stage6.py": "02219a30e39340952c893cfba18695a2dd607057afa05f2e2b41497ba03a517d",
+    "sakura-backup.php": "0ea76cd4ceabd6ab3754f796af1b078f7793db464baaab67e8a8637188248f4a",
+    "sakura-inventory.php": "6bc4f2d72a8c0a06b87d1a76418f0ace2b126a4ea09262977bfe4aec0576ae36",
+    "stage6-backup-test.php": "a5016917a60351bff25ff88055f8aac3268ae894539dab9ebd67b7b6265fa50a",
+    "stage6-package-test.py": "0c99409e597c43fc94d9257a7f818021ec7eda3f33f5f309ecec9a2a9abed17f"
+  }
+}

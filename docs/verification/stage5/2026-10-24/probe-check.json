@@ -1,0 +1,62 @@
+[
+  {
+    "service": "php83",
+    "runtime": {
+      "php": "8.3.36",
+      "sapi": "apache2handler",
+      "os": "Linux",
+      "os_release": "7.0.0-38-generic",
+      "https_flag": "on",
+      "extensions": {
+        "session": true,
+        "json": true,
+        "PDO": true,
+        "pdo_sqlite": true,
+        "zip": true,
+        "openssl": true,
+        "curl": true
+      },
+      "limits": {
+        "upload_max_filesize": "2M",
+        "post_max_size": "8M",
+        "memory_limit": "128M",
+        "max_execution_time": "30",
+        "display_errors": "",
+        "log_errors": "1",
+        "opcache.enable": "",
+        "opcache.validate_timestamps": "1"
+      }
+    },
+    "helper_sha256": "81f6b519be56623325768781c0b0e63a2598db4a6fc71ad2c37030a23ec2a014"
+  },
+  {
+    "service": "php85",
+    "runtime": {
+      "php": "8.5.12",
+      "sapi": "apache2handler",
+      "os": "Linux",
+      "os_release": "7.0.0-38-generic",
+      "https_flag": "on",
+      "extensions": {
+        "session": true,
+        "json": true,
+        "PDO": true,
+        "pdo_sqlite": true,
+        "zip": true,
+        "openssl": true,
+        "curl": true
+      },
+      "limits": {
+        "upload_max_filesize": "2M",
+        "post_max_size": "8M",
+        "memory_limit": "128M",
+        "max_execution_time": "30",
+        "display_errors": "",
+        "log_errors": "1",
+        "opcache.enable": "",
+        "opcache.validate_timestamps": "1"
+      }
+    },
+    "helper_sha256": "81f6b519be56623325768781c0b0e63a2598db4a6fc71ad2c37030a23ec2a014"
+  }
+]

@@ -1,0 +1,207 @@
+{
+  "first": {
+    "id": 40040895072,
+    "url": "https://github.com/n-yoshimatsu/filethingie/actions/runs/40040895072",
+    "commit": "db2c7d4a03fb2f58f4897fd4d82140223483982c",
+    "status": "cancelled",
+    "php85": {
+      "passed": 15,
+      "failed": 1,
+      "case_id": "TS-410",
+      "cause": "UTC runner date differs from Asia/Tokyo PHP fixture"
+    },
+    "php83": {
+      "cases": "NOT RUN",
+      "phase": "browser dependencies installation",
+      "status": "cancelled by successor"
+    }
+  },
+  "final": {
+    "id": 40041215267,
+    "url": "https://github.com/n-yoshimatsu/filethingie/actions/runs/40041215267",
+    "commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+    "status": "success",
+    "jobs": [
+      {
+        "id": 120712642758,
+        "name": "integration (php85)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 40041215267,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install browser harness",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Integration cases",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Preserve test evidence",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Stop disposable containers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          }
+        ]
+      },
+      {
+        "id": 120712643003,
+        "name": "integration (php83)",
+        "status": "completed",
+        "conclusion": "success",
+        "run_id": 40041215267,
+        "logs_url": null,
+        "steps": [
+          {
+            "name": "Set up job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 1
+          },
+          {
+            "name": "Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 2
+          },
+          {
+            "name": "Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 3
+          },
+          {
+            "name": "Install browser harness",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 4
+          },
+          {
+            "name": "Integration cases",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 5
+          },
+          {
+            "name": "Preserve test evidence",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 6
+          },
+          {
+            "name": "Stop disposable containers",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 7
+          },
+          {
+            "name": "Post Run actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 13
+          },
+          {
+            "name": "Post Run actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 14
+          },
+          {
+            "name": "Complete job",
+            "status": "completed",
+            "conclusion": "success",
+            "number": 15
+          }
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "id": 12539701110,
+        "name": "php-php83-1",
+        "size_in_bytes": 1143412,
+        "url": "https://api.github.com/repos/n-yoshimatsu/filethingie/actions/artifacts/12539701110",
+        "archive_download_url": "https://api.github.com/repos/n-yoshimatsu/filethingie/actions/artifacts/12539701110/zip",
+        "expired": false,
+        "created_at": "2026-10-23T23:45:17Z",
+        "expires_at": "2026-11-06T23:45:16Z",
+        "updated_at": "2026-10-23T23:45:17Z",
+        "digest": "sha256:8ccd7dbc88892161925652c2109cbac7fb7952f841e7c8f791381701f1a67540",
+        "workflow_run": {
+          "id": 40041215267,
+          "repository_id": 1431591157,
+          "head_repository_id": 1431591157,
+          "head_branch": "php85-support",
+          "head_sha": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4"
+        }
+      },
+      {
+        "id": 12539346872,
+        "name": "php-php85-1",
+        "size_in_bytes": 1150560,
+        "url": "https://api.github.com/repos/n-yoshimatsu/filethingie/actions/artifacts/12539346872",
+        "archive_download_url": "https://api.github.com/repos/n-yoshimatsu/filethingie/actions/artifacts/12539346872/zip",
+        "expired": false,
+        "created_at": "2026-10-23T23:45:21Z",
+        "expires_at": "2026-11-06T23:45:20Z",
+        "updated_at": "2026-10-23T23:45:21Z",
+        "digest": "sha256:d49d4c67253d78778742238b199c393b3ff258dc52cf2024b4c7380beffbb053",
+        "workflow_run": {
+          "id": 40041215267,
+          "repository_id": 1431591157,
+          "head_repository_id": 1431591157,
+          "head_branch": "php85-support",
+          "head_sha": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4"
+        }
+      }
+    ]
+  }
+}

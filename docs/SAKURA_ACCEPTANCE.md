@@ -52,7 +52,7 @@ php tools/sakura-probe.php '/実際の公開ディレクトリ' 'https://実際�
 |---|---|
 | SA-501 CLI側環境情報 | 取得済み |
 | SA-501 Web側環境情報 | 利用者提供出力によるPASS、cgi-fcgi／必要拡張／HTTPSの確認 |
-| SA-502 分離配置・基本受入 | NOT RUN |
+| SA-502 分離配置・基本受入 | 実施中・判定未実施。旧環境診断URLでの入力取得により一時BLOCKED。その後のCLI検索で検証版index.phpの配置を確認、正しいURLでのログイン・転送結果待ち |
 | SA-503 任意機能・権限 | NOT RUN |
 | 既存本番データ移行・本番切替 | 対象外、段階6の前提確認待ち |
 
@@ -77,3 +77,5 @@ php setup.php 公開配置先の親ディレクトリ 非公開配置先の親�
 PHPログは検証用configの読込み後のみ`log_errors=1`、E_ALL、非公開の`php-error.log`へ出力する構成。既存環境のphp.iniの変更なし。設定読込み前の起動エラーまで捕捉する保証なし。`Acceptance setup completed. No application request yet.`はセットアップの確認行、PHPエラーではない行。
 
 入力資料は検証用URLと同じフォルダーの`acceptance-input/日本語.txt`（UTF-8／LF）と`acceptance-input/empty.txt`（0 byte）。端末へ保存後、アプリへアップロードする操作。管理対象DIRは公開外の空のfiles、公開された入力資料とは別の場所。初期一覧の空表示が正常な状態。
+
+環境診断の`ft-php-check-...`と検証版の`ft-stage5-.../index.php`は別のURL。前者への`acceptance-input/`追加では入力ファイルの取得不可。利用者の取得エラーは前者のURLでの報告、アプリのダウンロード機能のFAILを示す証跡とは異なる記録。

@@ -1,0 +1,1808 @@
+{
+  "service": "php85",
+  "finished_at": "2026-10-23T23:45:20.179396+00:00",
+  "results": [
+    {
+      "case_id": "LINT-202",
+      "service": "php85",
+      "case": "lint",
+      "started_at": "2026-10-23T23:44:26.809143+00:00",
+      "baseline_commit": "a7511ad57e65b64d603e9cb68a20359ad0a3a4e6",
+      "checkout_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "container_matches_checkout": true,
+      "application_matches_upstream": false,
+      "container_image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "port_bindings": {
+        "443/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18543"
+          }
+        ],
+        "80/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18585"
+          }
+        ]
+      },
+      "cli_runtime": {
+        "php_version": "8.5.12",
+        "sapi": "cli",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": null,
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "0",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "files": 40,
+      "syntax_failures": 0,
+      "files_with_notices": 0,
+      "verdict": "PASS",
+      "log_command_exit_code": 0,
+      "finished_at": "2026-10-23T23:44:31.438087+00:00",
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-202",
+      "service": "php85",
+      "case": "startup",
+      "started_at": "2026-10-23T23:44:31.533111+00:00",
+      "baseline_commit": "a7511ad57e65b64d603e9cb68a20359ad0a3a4e6",
+      "checkout_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "container_matches_checkout": true,
+      "application_matches_upstream": false,
+      "container_image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "port_bindings": {
+        "443/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18543"
+          }
+        ],
+        "80/tcp": [
+          {
+            "HostIp": "127.0.0.1",
+            "HostPort": "18585"
+          }
+        ]
+      },
+      "cli_runtime": {
+        "php_version": "8.5.12",
+        "sapi": "cli",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": null,
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "0",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "environment_http_status": 200,
+      "environment_ready": true,
+      "request": {
+        "method": "GET",
+        "url": "http://127.0.0.1:18585/ft2.php",
+        "cookies": null,
+        "body": null
+      },
+      "http_status": 200,
+      "login_fields_present": true,
+      "login_form_present": true,
+      "response_diagnostic": false,
+      "verdict": "PASS",
+      "log_command_exit_code": 0,
+      "server_diagnostic": false,
+      "finished_at": "2026-10-23T23:44:31.904904+00:00",
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-402",
+      "case": "basic",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:32.009984+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:44:32.870821+00:00",
+      "requests": 83,
+      "checks": 247,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-404",
+      "case": "negative",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:32.973122+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:44:33.655947+00:00",
+      "requests": 56,
+      "checks": 147,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-406",
+      "case": "groups",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:33.736319+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:44:34.367541+00:00",
+      "requests": 21,
+      "checks": 60,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-408",
+      "case": "auth",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:34.453178+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:44:35.502651+00:00",
+      "requests": 29,
+      "checks": 74,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-410",
+      "case": "plugins",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:35.569890+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:44:37.635425+00:00",
+      "requests": 71,
+      "checks": 199,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-416",
+      "case": "content",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:37.737635+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:44:38.337774+00:00",
+      "requests": 24,
+      "checks": 66,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-502",
+      "case": "https",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:38.410747+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:44:39.867475+00:00",
+      "requests": 11,
+      "checks": 35,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-504",
+      "case": "url_disabled",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:39.974585+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:44:40.480362+00:00",
+      "requests": 6,
+      "checks": 19,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-510",
+      "case": "concurrent",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:40.590415+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:44:41.581222+00:00",
+      "requests": 58,
+      "checks": 141,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-414",
+      "case": "Chromeブラウザー互換",
+      "service": "php85",
+      "started_at": "2026-10-23T23:44:41.802Z",
+      "verdict": "PASS",
+      "checks": [
+        {
+          "label": "Container source matches checkout",
+          "actual": {
+            "ft2.php": "7f92d19434dd31aa4cc75dcf07c3d5ca35d7d8484f02085592d2eb2cabaf8096",
+            "config.sample.php": "ae2bc2559723db88f7fac0ea9d031fa91c3673e398ae913ab206e547d1b1120d",
+            "hooks.php": "00f4a6152a80daec9cdd033064dfd72b34f850dd552c436453e5622be35a403b",
+            "dev/config.test.php": "9c01b070bc7c86f47f3a44e1d0a7ed6ba3876877016cdab141cbe664432ea5fe",
+            "js/filethingie.js": "ced8951cf8e9867936f3586e3a94a7a5d4495e19fb0bcd29915b080adea594b4",
+            "js/jquery-4.0.0.min.js": "39a546ea9ad97f8bfaf5d3e0e8f8556adb415e470e59007ada9759dce472adaa",
+            "css/ft.css": "9a6b8a6d72d838bcf531842c797453a20e3a16bd9c19137607960e98ec4d826f",
+            "locales/ja.php": "1c16808b16067bc24ad665be22ca40d5c1b88b2572626cbb65ab20d6efddf45c",
+            "plugins/config.plugin.php": "7b569df8706aa52da2f6af4377cc53b52c7d1c0b77a9c964a8de7c60fa490da3",
+            "plugins/db.plugin.php": "ca4aa6ead13c7d1e787c3995eb4aaeeef4a4b27c5e1e6670d8e4bf6790a80243",
+            "plugins/edit.plugin.php": "e2ffdfa0a25d12e0ad706c6b56eed0e14a92f6bcb653e89d714459825b9e270d",
+            "plugins/editorck.plugin.php": "49ca3467cc629f54a50ded479ff145702a7301dfb69cd2daa7be3cb5530a7e1d",
+            "plugins/fckeditor.plugin.php": "e69350b5305c3e80685b0147dd3c1bea853a933e00377665c7e5fb5048be566d",
+            "plugins/fileinfo.plugin.php": "210209924a2e68806a4b0a14bfe00fbf6466318f75bf36a02d1b2dc6ce489f64",
+            "plugins/log.plugin.php": "505fddb18b0ca0b91e0db0793813a3c23388cdb5b966028d8c8a11e099849cf5",
+            "plugins/search.plugin.php": "9953cb911b8b6d89ff4eb45a63f281f9933f0b75efb43a18c976278ff73da434",
+            "plugins/tinymce.plugin.php": "23a5919290a735853cfd5c7112b8c2a70384ad7efc5c87decc6a2c61c53fe55c",
+            "plugins/zip.plugin.php": "e080c8e87570c896578037b5b2545e61c94672451720c11a24e7f1b7b5730048"
+          },
+          "expected": {
+            "ft2.php": "7f92d19434dd31aa4cc75dcf07c3d5ca35d7d8484f02085592d2eb2cabaf8096",
+            "config.sample.php": "ae2bc2559723db88f7fac0ea9d031fa91c3673e398ae913ab206e547d1b1120d",
+            "hooks.php": "00f4a6152a80daec9cdd033064dfd72b34f850dd552c436453e5622be35a403b",
+            "dev/config.test.php": "9c01b070bc7c86f47f3a44e1d0a7ed6ba3876877016cdab141cbe664432ea5fe",
+            "js/filethingie.js": "ced8951cf8e9867936f3586e3a94a7a5d4495e19fb0bcd29915b080adea594b4",
+            "js/jquery-4.0.0.min.js": "39a546ea9ad97f8bfaf5d3e0e8f8556adb415e470e59007ada9759dce472adaa",
+            "css/ft.css": "9a6b8a6d72d838bcf531842c797453a20e3a16bd9c19137607960e98ec4d826f",
+            "locales/ja.php": "1c16808b16067bc24ad665be22ca40d5c1b88b2572626cbb65ab20d6efddf45c",
+            "plugins/config.plugin.php": "7b569df8706aa52da2f6af4377cc53b52c7d1c0b77a9c964a8de7c60fa490da3",
+            "plugins/db.plugin.php": "ca4aa6ead13c7d1e787c3995eb4aaeeef4a4b27c5e1e6670d8e4bf6790a80243",
+            "plugins/edit.plugin.php": "e2ffdfa0a25d12e0ad706c6b56eed0e14a92f6bcb653e89d714459825b9e270d",
+            "plugins/editorck.plugin.php": "49ca3467cc629f54a50ded479ff145702a7301dfb69cd2daa7be3cb5530a7e1d",
+            "plugins/fckeditor.plugin.php": "e69350b5305c3e80685b0147dd3c1bea853a933e00377665c7e5fb5048be566d",
+            "plugins/fileinfo.plugin.php": "210209924a2e68806a4b0a14bfe00fbf6466318f75bf36a02d1b2dc6ce489f64",
+            "plugins/log.plugin.php": "505fddb18b0ca0b91e0db0793813a3c23388cdb5b966028d8c8a11e099849cf5",
+            "plugins/search.plugin.php": "9953cb911b8b6d89ff4eb45a63f281f9933f0b75efb43a18c976278ff73da434",
+            "plugins/tinymce.plugin.php": "23a5919290a735853cfd5c7112b8c2a70384ad7efc5c87decc6a2c61c53fe55c",
+            "plugins/zip.plugin.php": "e080c8e87570c896578037b5b2545e61c94672451720c11a24e7f1b7b5730048"
+          },
+          "verdict": "PASS"
+        },
+        {
+          "label": "Japanese login label",
+          "actual": "ログイン",
+          "expected": "ログイン",
+          "verdict": "PASS"
+        },
+        {
+          "label": "jQuery version",
+          "actual": "4.0.0",
+          "expected": "4.0.0",
+          "verdict": "PASS"
+        },
+        {
+          "label": "Authenticated file list",
+          "actual": 1,
+          "expected": 1,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Two selected files",
+          "actual": 2,
+          "expected": 2,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Uploaded names rendered as text",
+          "actual": 0,
+          "expected": 0,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Long filename preserved",
+          "actual": 1,
+          "expected": 1,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Full name in action form",
+          "actual": "stage4-ブラウザー'\"&<img src=x>.txt",
+          "expected": "stage4-ブラウザー'\"&<img src=x>.txt",
+          "verdict": "PASS"
+        },
+        {
+          "label": "No filename HTML injection",
+          "actual": 0,
+          "expected": 0,
+          "verdict": "PASS"
+        },
+        {
+          "label": "CSRF in dynamic form",
+          "actual": 64,
+          "expected": 64,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Editor original content",
+          "actual": "ブラウザー UTF-8\n    preserve spaces\tTAB\n",
+          "expected": "ブラウザー UTF-8\n    preserve spaces\tTAB\n",
+          "verdict": "PASS"
+        },
+        {
+          "label": "Spaces preserved with unchecked option",
+          "actual": "ブラウザー UTF-8\n    preserve spaces\tTAB\n    AJAX保存\n",
+          "expected": "ブラウザー UTF-8\n    preserve spaces\tTAB\n    AJAX保存\n",
+          "verdict": "PASS"
+        },
+        {
+          "label": "UI downloaded content",
+          "actual": "084624c50beabb918e62d76f8fff0a6a9e64fa366bea3c4eeee27a8a9609741f",
+          "expected": "084624c50beabb918e62d76f8fff0a6a9e64fa366bea3c4eeee27a8a9609741f",
+          "verdict": "PASS"
+        },
+        {
+          "label": "Search result full filename in URL",
+          "actual": true,
+          "expected": true,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Log ascending sort",
+          "actual": [
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user"
+          ],
+          "expected": [
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user"
+          ],
+          "verdict": "PASS"
+        },
+        {
+          "label": "Log descending sort",
+          "actual": [
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download"
+          ],
+          "expected": [
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "user",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "upload",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download",
+            "download"
+          ],
+          "verdict": "PASS"
+        },
+        {
+          "label": "Logout form",
+          "actual": 1,
+          "expected": 1,
+          "verdict": "PASS"
+        },
+        {
+          "label": "No JavaScript or required asset errors",
+          "actual": [],
+          "expected": [],
+          "verdict": "PASS"
+        }
+      ],
+      "steps": [
+        "UI login using public fixture credentials",
+        {
+          "operation": "select two files and submit upload",
+          "files": [
+            {
+              "name": "stage4-ブラウザー'\"&<img src=x>.txt",
+              "sha256": "f869ffa65cc00c888095559af46160329e2b2984c6ea24239d1b797c2f17bc82"
+            },
+            {
+              "name": "stage4-browser empty.txt",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        "Normal save with spaces-to-tabs, then UI download",
+        "Search Japanese name and inspect logs"
+      ],
+      "errors": [],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/css/ft.css",
+          "status": 200,
+          "kind": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 302,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/css/ft.css",
+          "status": 200,
+          "kind": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 302,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php?dir=",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/css/ft.css",
+          "status": 200,
+          "kind": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/css/ft.css",
+          "status": 200,
+          "kind": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "xhr"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 302,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php?dir=",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/css/ft.css",
+          "status": 200,
+          "kind": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php?method=getfile&dir=&file=stage4-%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%83%BC%27%22%26%3Cimg%20src%3Dx%3E.txt",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "xhr"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php?act=log",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/css/ft.css",
+          "status": 200,
+          "kind": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 302,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/css/ft.css",
+          "status": 200,
+          "kind": "stylesheet"
+        }
+      ],
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "source_sha256": {
+        "ft2.php": "7f92d19434dd31aa4cc75dcf07c3d5ca35d7d8484f02085592d2eb2cabaf8096",
+        "config.sample.php": "ae2bc2559723db88f7fac0ea9d031fa91c3673e398ae913ab206e547d1b1120d",
+        "hooks.php": "00f4a6152a80daec9cdd033064dfd72b34f850dd552c436453e5622be35a403b",
+        "dev/config.test.php": "9c01b070bc7c86f47f3a44e1d0a7ed6ba3876877016cdab141cbe664432ea5fe",
+        "js/filethingie.js": "ced8951cf8e9867936f3586e3a94a7a5d4495e19fb0bcd29915b080adea594b4",
+        "js/jquery-4.0.0.min.js": "39a546ea9ad97f8bfaf5d3e0e8f8556adb415e470e59007ada9759dce472adaa",
+        "css/ft.css": "9a6b8a6d72d838bcf531842c797453a20e3a16bd9c19137607960e98ec4d826f",
+        "locales/ja.php": "1c16808b16067bc24ad665be22ca40d5c1b88b2572626cbb65ab20d6efddf45c",
+        "plugins/config.plugin.php": "7b569df8706aa52da2f6af4377cc53b52c7d1c0b77a9c964a8de7c60fa490da3",
+        "plugins/db.plugin.php": "ca4aa6ead13c7d1e787c3995eb4aaeeef4a4b27c5e1e6670d8e4bf6790a80243",
+        "plugins/edit.plugin.php": "e2ffdfa0a25d12e0ad706c6b56eed0e14a92f6bcb653e89d714459825b9e270d",
+        "plugins/editorck.plugin.php": "49ca3467cc629f54a50ded479ff145702a7301dfb69cd2daa7be3cb5530a7e1d",
+        "plugins/fckeditor.plugin.php": "e69350b5305c3e80685b0147dd3c1bea853a933e00377665c7e5fb5048be566d",
+        "plugins/fileinfo.plugin.php": "210209924a2e68806a4b0a14bfe00fbf6466318f75bf36a02d1b2dc6ce489f64",
+        "plugins/log.plugin.php": "505fddb18b0ca0b91e0db0793813a3c23388cdb5b966028d8c8a11e099849cf5",
+        "plugins/search.plugin.php": "9953cb911b8b6d89ff4eb45a63f281f9933f0b75efb43a18c976278ff73da434",
+        "plugins/tinymce.plugin.php": "23a5919290a735853cfd5c7112b8c2a70384ad7efc5c87decc6a2c61c53fe55c",
+        "plugins/zip.plugin.php": "e080c8e87570c896578037b5b2545e61c94672451720c11a24e7f1b7b5730048"
+      },
+      "harness_sha256": "0a6a64e454906db469cf090382beb59b6b4b0126728d78f9a30cf5988dbe02d5",
+      "browser_version": "155.0.8059.39",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "php_diagnostics": [],
+      "finished_at": "2026-10-23T23:45:00.078Z",
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-512",
+      "case": "Firefoxブラウザー互換",
+      "service": "php85",
+      "started_at": "2026-10-23T23:45:01.950Z",
+      "verdict": "PASS",
+      "checks": [
+        {
+          "label": "Container source matches checkout",
+          "actual": {
+            "ft2.php": "7f92d19434dd31aa4cc75dcf07c3d5ca35d7d8484f02085592d2eb2cabaf8096",
+            "config.sample.php": "ae2bc2559723db88f7fac0ea9d031fa91c3673e398ae913ab206e547d1b1120d",
+            "hooks.php": "00f4a6152a80daec9cdd033064dfd72b34f850dd552c436453e5622be35a403b",
+            "dev/config.test.php": "9c01b070bc7c86f47f3a44e1d0a7ed6ba3876877016cdab141cbe664432ea5fe",
+            "js/filethingie.js": "ced8951cf8e9867936f3586e3a94a7a5d4495e19fb0bcd29915b080adea594b4",
+            "js/jquery-4.0.0.min.js": "39a546ea9ad97f8bfaf5d3e0e8f8556adb415e470e59007ada9759dce472adaa",
+            "css/ft.css": "9a6b8a6d72d838bcf531842c797453a20e3a16bd9c19137607960e98ec4d826f",
+            "locales/ja.php": "1c16808b16067bc24ad665be22ca40d5c1b88b2572626cbb65ab20d6efddf45c",
+            "plugins/config.plugin.php": "7b569df8706aa52da2f6af4377cc53b52c7d1c0b77a9c964a8de7c60fa490da3",
+            "plugins/db.plugin.php": "ca4aa6ead13c7d1e787c3995eb4aaeeef4a4b27c5e1e6670d8e4bf6790a80243",
+            "plugins/edit.plugin.php": "e2ffdfa0a25d12e0ad706c6b56eed0e14a92f6bcb653e89d714459825b9e270d",
+            "plugins/editorck.plugin.php": "49ca3467cc629f54a50ded479ff145702a7301dfb69cd2daa7be3cb5530a7e1d",
+            "plugins/fckeditor.plugin.php": "e69350b5305c3e80685b0147dd3c1bea853a933e00377665c7e5fb5048be566d",
+            "plugins/fileinfo.plugin.php": "210209924a2e68806a4b0a14bfe00fbf6466318f75bf36a02d1b2dc6ce489f64",
+            "plugins/log.plugin.php": "505fddb18b0ca0b91e0db0793813a3c23388cdb5b966028d8c8a11e099849cf5",
+            "plugins/search.plugin.php": "9953cb911b8b6d89ff4eb45a63f281f9933f0b75efb43a18c976278ff73da434",
+            "plugins/tinymce.plugin.php": "23a5919290a735853cfd5c7112b8c2a70384ad7efc5c87decc6a2c61c53fe55c",
+            "plugins/zip.plugin.php": "e080c8e87570c896578037b5b2545e61c94672451720c11a24e7f1b7b5730048"
+          },
+          "expected": {
+            "ft2.php": "7f92d19434dd31aa4cc75dcf07c3d5ca35d7d8484f02085592d2eb2cabaf8096",
+            "config.sample.php": "ae2bc2559723db88f7fac0ea9d031fa91c3673e398ae913ab206e547d1b1120d",
+            "hooks.php": "00f4a6152a80daec9cdd033064dfd72b34f850dd552c436453e5622be35a403b",
+            "dev/config.test.php": "9c01b070bc7c86f47f3a44e1d0a7ed6ba3876877016cdab141cbe664432ea5fe",
+            "js/filethingie.js": "ced8951cf8e9867936f3586e3a94a7a5d4495e19fb0bcd29915b080adea594b4",
+            "js/jquery-4.0.0.min.js": "39a546ea9ad97f8bfaf5d3e0e8f8556adb415e470e59007ada9759dce472adaa",
+            "css/ft.css": "9a6b8a6d72d838bcf531842c797453a20e3a16bd9c19137607960e98ec4d826f",
+            "locales/ja.php": "1c16808b16067bc24ad665be22ca40d5c1b88b2572626cbb65ab20d6efddf45c",
+            "plugins/config.plugin.php": "7b569df8706aa52da2f6af4377cc53b52c7d1c0b77a9c964a8de7c60fa490da3",
+            "plugins/db.plugin.php": "ca4aa6ead13c7d1e787c3995eb4aaeeef4a4b27c5e1e6670d8e4bf6790a80243",
+            "plugins/edit.plugin.php": "e2ffdfa0a25d12e0ad706c6b56eed0e14a92f6bcb653e89d714459825b9e270d",
+            "plugins/editorck.plugin.php": "49ca3467cc629f54a50ded479ff145702a7301dfb69cd2daa7be3cb5530a7e1d",
+            "plugins/fckeditor.plugin.php": "e69350b5305c3e80685b0147dd3c1bea853a933e00377665c7e5fb5048be566d",
+            "plugins/fileinfo.plugin.php": "210209924a2e68806a4b0a14bfe00fbf6466318f75bf36a02d1b2dc6ce489f64",
+            "plugins/log.plugin.php": "505fddb18b0ca0b91e0db0793813a3c23388cdb5b966028d8c8a11e099849cf5",
+            "plugins/search.plugin.php": "9953cb911b8b6d89ff4eb45a63f281f9933f0b75efb43a18c976278ff73da434",
+            "plugins/tinymce.plugin.php": "23a5919290a735853cfd5c7112b8c2a70384ad7efc5c87decc6a2c61c53fe55c",
+            "plugins/zip.plugin.php": "e080c8e87570c896578037b5b2545e61c94672451720c11a24e7f1b7b5730048"
+          },
+          "verdict": "PASS"
+        },
+        {
+          "label": "Japanese login label",
+          "actual": "ログイン",
+          "expected": "ログイン",
+          "verdict": "PASS"
+        },
+        {
+          "label": "jQuery version",
+          "actual": "4.0.0",
+          "expected": "4.0.0",
+          "verdict": "PASS"
+        },
+        {
+          "label": "Authenticated file list",
+          "actual": 1,
+          "expected": 1,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Two selected files",
+          "actual": 2,
+          "expected": 2,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Uploaded names rendered as text",
+          "actual": 0,
+          "expected": 0,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Long filename preserved",
+          "actual": 1,
+          "expected": 1,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Full name in action form",
+          "actual": "stage4-ブラウザー'\"&<img src=x>.txt",
+          "expected": "stage4-ブラウザー'\"&<img src=x>.txt",
+          "verdict": "PASS"
+        },
+        {
+          "label": "No filename HTML injection",
+          "actual": 0,
+          "expected": 0,
+          "verdict": "PASS"
+        },
+        {
+          "label": "CSRF in dynamic form",
+          "actual": 64,
+          "expected": 64,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Editor original content",
+          "actual": "ブラウザー UTF-8\n    preserve spaces\tTAB\n",
+          "expected": "ブラウザー UTF-8\n    preserve spaces\tTAB\n",
+          "verdict": "PASS"
+        },
+        {
+          "label": "Spaces preserved with unchecked option",
+          "actual": "ブラウザー UTF-8\n    preserve spaces\tTAB\n    AJAX保存\n",
+          "expected": "ブラウザー UTF-8\n    preserve spaces\tTAB\n    AJAX保存\n",
+          "verdict": "PASS"
+        },
+        {
+          "label": "UI downloaded content",
+          "actual": "084624c50beabb918e62d76f8fff0a6a9e64fa366bea3c4eeee27a8a9609741f",
+          "expected": "084624c50beabb918e62d76f8fff0a6a9e64fa366bea3c4eeee27a8a9609741f",
+          "verdict": "PASS"
+        },
+        {
+          "label": "Search result full filename in URL",
+          "actual": true,
+          "expected": true,
+          "verdict": "PASS"
+        },
+        {
+          "label": "Log ascending sort",
+          "actual": [
+            "download",
+            "download",
+            "upload",
+            "upload",
+            "user"
+          ],
+          "expected": [
+            "download",
+            "download",
+            "upload",
+            "upload",
+            "user"
+          ],
+          "verdict": "PASS"
+        },
+        {
+          "label": "Log descending sort",
+          "actual": [
+            "user",
+            "upload",
+            "upload",
+            "download",
+            "download"
+          ],
+          "expected": [
+            "user",
+            "upload",
+            "upload",
+            "download",
+            "download"
+          ],
+          "verdict": "PASS"
+        },
+        {
+          "label": "Logout form",
+          "actual": 1,
+          "expected": 1,
+          "verdict": "PASS"
+        },
+        {
+          "label": "No JavaScript or required asset errors",
+          "actual": [],
+          "expected": [],
+          "verdict": "PASS"
+        }
+      ],
+      "steps": [
+        "UI login using public fixture credentials",
+        {
+          "operation": "select two files and submit upload",
+          "files": [
+            {
+              "name": "stage4-ブラウザー'\"&<img src=x>.txt",
+              "sha256": "f869ffa65cc00c888095559af46160329e2b2984c6ea24239d1b797c2f17bc82"
+            },
+            {
+              "name": "stage4-browser empty.txt",
+              "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+            }
+          ]
+        },
+        "Normal save with spaces-to-tabs, then UI download",
+        "Search Japanese name and inspect logs"
+      ],
+      "errors": [],
+      "responses": [
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/css/ft.css",
+          "status": 200,
+          "kind": "stylesheet"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 302,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 302,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php?dir=",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "xhr"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 302,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php?dir=",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php?method=getfile&dir=&file=stage4-%E3%83%96%E3%83%A9%E3%82%A6%E3%82%B6%E3%83%BC%27%22%26%3Cimg%20src%3Dx%3E.txt",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "xhr"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php?act=log",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 302,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/ft2.php",
+          "status": 200,
+          "kind": "document"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/jquery-4.0.0.min.js",
+          "status": 200,
+          "kind": "script"
+        },
+        {
+          "url": "http://127.0.0.1:18585/js/filethingie.js",
+          "status": 200,
+          "kind": "script"
+        }
+      ],
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "source_sha256": {
+        "ft2.php": "7f92d19434dd31aa4cc75dcf07c3d5ca35d7d8484f02085592d2eb2cabaf8096",
+        "config.sample.php": "ae2bc2559723db88f7fac0ea9d031fa91c3673e398ae913ab206e547d1b1120d",
+        "hooks.php": "00f4a6152a80daec9cdd033064dfd72b34f850dd552c436453e5622be35a403b",
+        "dev/config.test.php": "9c01b070bc7c86f47f3a44e1d0a7ed6ba3876877016cdab141cbe664432ea5fe",
+        "js/filethingie.js": "ced8951cf8e9867936f3586e3a94a7a5d4495e19fb0bcd29915b080adea594b4",
+        "js/jquery-4.0.0.min.js": "39a546ea9ad97f8bfaf5d3e0e8f8556adb415e470e59007ada9759dce472adaa",
+        "css/ft.css": "9a6b8a6d72d838bcf531842c797453a20e3a16bd9c19137607960e98ec4d826f",
+        "locales/ja.php": "1c16808b16067bc24ad665be22ca40d5c1b88b2572626cbb65ab20d6efddf45c",
+        "plugins/config.plugin.php": "7b569df8706aa52da2f6af4377cc53b52c7d1c0b77a9c964a8de7c60fa490da3",
+        "plugins/db.plugin.php": "ca4aa6ead13c7d1e787c3995eb4aaeeef4a4b27c5e1e6670d8e4bf6790a80243",
+        "plugins/edit.plugin.php": "e2ffdfa0a25d12e0ad706c6b56eed0e14a92f6bcb653e89d714459825b9e270d",
+        "plugins/editorck.plugin.php": "49ca3467cc629f54a50ded479ff145702a7301dfb69cd2daa7be3cb5530a7e1d",
+        "plugins/fckeditor.plugin.php": "e69350b5305c3e80685b0147dd3c1bea853a933e00377665c7e5fb5048be566d",
+        "plugins/fileinfo.plugin.php": "210209924a2e68806a4b0a14bfe00fbf6466318f75bf36a02d1b2dc6ce489f64",
+        "plugins/log.plugin.php": "505fddb18b0ca0b91e0db0793813a3c23388cdb5b966028d8c8a11e099849cf5",
+        "plugins/search.plugin.php": "9953cb911b8b6d89ff4eb45a63f281f9933f0b75efb43a18c976278ff73da434",
+        "plugins/tinymce.plugin.php": "23a5919290a735853cfd5c7112b8c2a70384ad7efc5c87decc6a2c61c53fe55c",
+        "plugins/zip.plugin.php": "e080c8e87570c896578037b5b2545e61c94672451720c11a24e7f1b7b5730048"
+      },
+      "harness_sha256": "0a6a64e454906db469cf090382beb59b6b4b0126728d78f9a30cf5988dbe02d5",
+      "browser_version": "142.0.1",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "php_diagnostics": [],
+      "finished_at": "2026-10-23T23:45:08.421Z",
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-506",
+      "case": "url",
+      "service": "php85",
+      "started_at": "2026-10-23T23:45:10.088591+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:45:13.029958+00:00",
+      "requests": 29,
+      "checks": 110,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-508",
+      "case": "url_size",
+      "service": "php85",
+      "started_at": "2026-10-23T23:45:14.702804+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:8f4897cdc40b99ae40c82737d7dad507db3d5077ca3ff441884bb019554765c6",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": "1.22.8",
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": true
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:45:15.331698+00:00",
+      "requests": 6,
+      "checks": 20,
+      "runner_exit_code": 0
+    },
+    {
+      "case_id": "TS-412",
+      "case": "degraded",
+      "service": "php85",
+      "started_at": "2026-10-23T23:45:19.710452+00:00",
+      "parent_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS",
+      "image_id": "sha256:f46a16e3f2822faaf79ede10da4f3149dfb88bd41df7edc82085ec2c259ffa48",
+      "runtime": {
+        "php_version": "8.5.12",
+        "sapi": "apache2handler",
+        "os_family": "Linux",
+        "integer_bytes": 8,
+        "server_software": "Apache/2.4.69 (Debian)",
+        "extensions": {
+          "session": "8.5.12",
+          "json": "8.5.12",
+          "mbstring": "8.5.12",
+          "fileinfo": "8.5.12",
+          "PDO": "8.5.12",
+          "pdo_sqlite": "8.5.12",
+          "sqlite3": "8.5.12",
+          "zip": false,
+          "zlib": "8.5.12",
+          "openssl": "8.5.12",
+          "curl": "8.5.12"
+        },
+        "ini": {
+          "error_reporting": "30719",
+          "display_errors": "",
+          "log_errors": "1",
+          "error_log": "/proc/self/fd/2",
+          "default_charset": "UTF-8",
+          "date.timezone": "Asia/Tokyo",
+          "upload_max_filesize": "2M",
+          "post_max_size": "8M",
+          "memory_limit": "128M",
+          "max_execution_time": "30",
+          "allow_url_fopen": "1",
+          "disable_functions": "",
+          "open_basedir": "",
+          "opcache.enable": ""
+        },
+        "functions": {
+          "exec": true,
+          "get_magic_quotes_gpc": false,
+          "sqlite_query": false
+        },
+        "ZipArchive": false
+      },
+      "diagnostics": [],
+      "finished_at": "2026-10-23T23:45:20.122942+00:00",
+      "requests": 6,
+      "checks": 26,
+      "runner_exit_code": 0
+    }
+  ]
+}

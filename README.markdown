@@ -29,4 +29,5 @@ File Thingie was one of my very first PHP projects and it's going on github so I
 - [ブラウザー・PHP依存とライセンス](docs/DEPENDENCIES.md)
 
 - [段階5の試験条件](docs/STAGE5_TEST_PLAN.md)
+- [段階5のCI結果・証跡・継続中の確認](docs/STAGE5_REPORT.md)
 - [さくら・FreeBSD受入手順](docs/SAKURA_ACCEPTANCE.md)

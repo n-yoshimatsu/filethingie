@@ -35,5 +35,15 @@
     }
   },
   "probe_cleanup": "未確認",
-  "application_acceptance": "NOT RUN"
+  "application_acceptance": {
+    "source": "利用者回答、2026-10-24。直接操作による確認ではない記録",
+    "SA-502": {
+      "installation_command": "実行済みとの回答。その後の利用者CLI出力でft-stage5配下のindex.php配置を確認",
+      "login_and_empty_list": "選択肢1の回答を受領後、旧環境診断URLとの混同が判明。検証版へのログイン成功との対応は未確認",
+      "file_transfer_and_remaining_operations": "旧環境診断フォルダーでの入力取得エラーを記録。正しい検証版URLを案内後のログイン・転送結果待ち",
+      "overall_verdict": "実施中・判定未実施",
+      "previous_blocked": "旧環境診断URLとの混同により入力資料取得前に停止。CLIで正しい検証版配置先を確認して再開。アプリ転送機能のFAIL判定なし"
+    },
+    "SA-503": "NOT RUN"
+  }
 }

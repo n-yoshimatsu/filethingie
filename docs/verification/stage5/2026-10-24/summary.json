@@ -1,0 +1,862 @@
+[
+  {
+    "path": "run1/lint-php83/result.json",
+    "case_id": "LINT-201",
+    "verdict": "BLOCKED",
+    "checks": 0,
+    "requests": 0,
+    "error": "('docker', 'compose', 'exec', '-T', 'php83', 'php', '-r', '$r=[]; foreach (json_decode($argv[1], true) as $p) {$r[$p]=hash_file(\"sha256\", $p);} echo json_encode($r);', '[\"config.sample.php\", \"ft2.php\", \"hooks.php\", \"locales/bg.php\", \"locales/bn.php\", \"locales/bs.php\", \"locales/ca.php\", \"locales/cy.php\", \"locales/cz.php\", \"locales/da.php\", \"locales/de.php\", \"locales/es.php\", \"locales/fa.php\", \"locales/fi.php\", \"locales/fr.php\", \"locales/hu.php\", \"locales/it.php\", \"locales/ja.php\", \"locales/lv.php\", \"locales/nl.php\", \"locales/no.php\", \"locales/pl.php\", \"locales/pt-br.php\", \"locales/pt-pt.php\", \"locales/ro.php\", \"locales/ru.php\", \"locales/sk.php\", \"locales/sv.php\", \"locales/tr.php\", \"locales/vn.php\", \"plugins/config.plugin.php\", \"plugins/db.plugin.php\", \"plugins/edit.plugin.php\", \"plugins/editorck.plugin.php\", \"plugins/fckeditor.plugin.php\", \"plugins/fileinfo.plugin.php\", \"plugins/log.plugin.php\", \"plugins/search.plugin.php\", \"plugins/tinymce.plugin.php\", \"plugins/zip.plugin.php\"]'): service \"php83\" is not running\n",
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run1/lint-php85/result.json",
+    "case_id": "LINT-202",
+    "verdict": "BLOCKED",
+    "checks": 0,
+    "requests": 0,
+    "error": "('docker', 'compose', 'exec', '-T', 'php85', 'php', '-r', '$r=[]; foreach (json_decode($argv[1], true) as $p) {$r[$p]=hash_file(\"sha256\", $p);} echo json_encode($r);', '[\"config.sample.php\", \"ft2.php\", \"hooks.php\", \"locales/bg.php\", \"locales/bn.php\", \"locales/bs.php\", \"locales/ca.php\", \"locales/cy.php\", \"locales/cz.php\", \"locales/da.php\", \"locales/de.php\", \"locales/es.php\", \"locales/fa.php\", \"locales/fi.php\", \"locales/fr.php\", \"locales/hu.php\", \"locales/it.php\", \"locales/ja.php\", \"locales/lv.php\", \"locales/nl.php\", \"locales/no.php\", \"locales/pl.php\", \"locales/pt-br.php\", \"locales/pt-pt.php\", \"locales/ro.php\", \"locales/ru.php\", \"locales/sk.php\", \"locales/sv.php\", \"locales/tr.php\", \"locales/vn.php\", \"plugins/config.plugin.php\", \"plugins/db.plugin.php\", \"plugins/edit.plugin.php\", \"plugins/editorck.plugin.php\", \"plugins/fckeditor.plugin.php\", \"plugins/fileinfo.plugin.php\", \"plugins/log.plugin.php\", \"plugins/search.plugin.php\", \"plugins/tinymce.plugin.php\", \"plugins/zip.plugin.php\"]'): service \"php85\" is not running\n",
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/auth-php83/result.json",
+    "case_id": "TS-407",
+    "verdict": "PASS",
+    "checks": 74,
+    "requests": 29,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/auth-php85/result.json",
+    "case_id": "TS-408",
+    "verdict": "PASS",
+    "checks": 74,
+    "requests": 29,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/basic-php83/result.json",
+    "case_id": "TS-401",
+    "verdict": "PASS",
+    "checks": 247,
+    "requests": 83,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/basic-php85/result.json",
+    "case_id": "TS-402",
+    "verdict": "PASS",
+    "checks": 247,
+    "requests": 83,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/content-php83/result.json",
+    "case_id": "TS-415",
+    "verdict": "PASS",
+    "checks": 66,
+    "requests": 24,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/content-php85/result.json",
+    "case_id": "TS-416",
+    "verdict": "PASS",
+    "checks": 66,
+    "requests": 24,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/groups-php83/result.json",
+    "case_id": "TS-405",
+    "verdict": "PASS",
+    "checks": 60,
+    "requests": 21,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/groups-php85/result.json",
+    "case_id": "TS-406",
+    "verdict": "PASS",
+    "checks": 60,
+    "requests": 21,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/https-php83/result.json",
+    "case_id": "TS-501",
+    "verdict": "PASS",
+    "checks": 35,
+    "requests": 11,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/https-php85/result.json",
+    "case_id": "TS-502",
+    "verdict": "PASS",
+    "checks": 35,
+    "requests": 11,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/lint-php83/result.json",
+    "case_id": "LINT-201",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/lint-php85/result.json",
+    "case_id": "LINT-202",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/negative-php83/result.json",
+    "case_id": "TS-403",
+    "verdict": "PASS",
+    "checks": 147,
+    "requests": 56,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/negative-php85/result.json",
+    "case_id": "TS-404",
+    "verdict": "PASS",
+    "checks": 147,
+    "requests": 56,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/plugins-php83/result.json",
+    "case_id": "TS-409",
+    "verdict": "PASS",
+    "checks": 199,
+    "requests": 71,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/plugins-php85/result.json",
+    "case_id": "TS-410",
+    "verdict": "PASS",
+    "checks": 199,
+    "requests": 71,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/startup-php83/result.json",
+    "case_id": "TS-201",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/startup-php85/result.json",
+    "case_id": "TS-202",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/url_disabled-php83/result.json",
+    "case_id": "TS-503",
+    "verdict": "FAIL",
+    "checks": 18,
+    "requests": 6,
+    "error": "Disabled URL import error",
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run2/url_disabled-php85/result.json",
+    "case_id": "TS-504",
+    "verdict": "FAIL",
+    "checks": 18,
+    "requests": 6,
+    "error": "Disabled URL import error",
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/browser-php83/result.json",
+    "case_id": "TS-413",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/browser-php85/result.json",
+    "case_id": "TS-414",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/concurrent-php83/result.json",
+    "case_id": "TS-509",
+    "verdict": "PASS",
+    "checks": 141,
+    "requests": 58,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/concurrent-php85/result.json",
+    "case_id": "TS-510",
+    "verdict": "PASS",
+    "checks": 141,
+    "requests": 58,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/degraded-php83/result.json",
+    "case_id": "TS-411",
+    "verdict": "PASS",
+    "checks": 26,
+    "requests": 6,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/degraded-php85/result.json",
+    "case_id": "TS-412",
+    "verdict": "PASS",
+    "checks": 26,
+    "requests": 6,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/firefox-php83/result.json",
+    "case_id": "TS-511",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/firefox-php85/result.json",
+    "case_id": "TS-512",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/url-php83/result.json",
+    "case_id": "TS-505",
+    "verdict": "PASS",
+    "checks": 110,
+    "requests": 29,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/url-php85/result.json",
+    "case_id": "TS-506",
+    "verdict": "PASS",
+    "checks": 110,
+    "requests": 29,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/url_disabled-php83/result.json",
+    "case_id": "TS-503",
+    "verdict": "PASS",
+    "checks": 19,
+    "requests": 6,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/url_disabled-php85/result.json",
+    "case_id": "TS-504",
+    "verdict": "PASS",
+    "checks": 19,
+    "requests": 6,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/url_size-php83/result.json",
+    "case_id": "TS-507",
+    "verdict": "PASS",
+    "checks": 20,
+    "requests": 6,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "run3/url_size-php85/result.json",
+    "case_id": "TS-508",
+    "verdict": "PASS",
+    "checks": 20,
+    "requests": 6,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "preview/php83/result.json",
+    "case_id": "TS-517",
+    "verdict": "PASS",
+    "checks": 11,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": true
+  },
+  {
+    "path": "preview/php85/result.json",
+    "case_id": "TS-518",
+    "verdict": "PASS",
+    "checks": 11,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": true
+  },
+  {
+    "path": "ci-first/php85/auth-php85/result.json",
+    "case_id": "TS-408",
+    "verdict": "PASS",
+    "checks": 74,
+    "requests": 29,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/basic-php85/result.json",
+    "case_id": "TS-402",
+    "verdict": "PASS",
+    "checks": 247,
+    "requests": 83,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/chrome-php85/result.json",
+    "case_id": "TS-414",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/concurrent-php85/result.json",
+    "case_id": "TS-510",
+    "verdict": "PASS",
+    "checks": 141,
+    "requests": 58,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/content-php85/result.json",
+    "case_id": "TS-416",
+    "verdict": "PASS",
+    "checks": 66,
+    "requests": 24,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/degraded-php85/result.json",
+    "case_id": "TS-412",
+    "verdict": "PASS",
+    "checks": 26,
+    "requests": 6,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/firefox-php85/result.json",
+    "case_id": "TS-512",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/groups-php85/result.json",
+    "case_id": "TS-406",
+    "verdict": "PASS",
+    "checks": 60,
+    "requests": 21,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/https-php85/result.json",
+    "case_id": "TS-502",
+    "verdict": "PASS",
+    "checks": 35,
+    "requests": 11,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/lint-php85/result.json",
+    "case_id": "LINT-202",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/negative-php85/result.json",
+    "case_id": "TS-404",
+    "verdict": "PASS",
+    "checks": 147,
+    "requests": 56,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/plugins-php85/result.json",
+    "case_id": "TS-410",
+    "verdict": "FAIL",
+    "checks": 44,
+    "requests": 16,
+    "error": "Log inclusive date filter",
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/startup-php85/result.json",
+    "case_id": "TS-202",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/url-php85/result.json",
+    "case_id": "TS-506",
+    "verdict": "PASS",
+    "checks": 110,
+    "requests": 29,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/url_disabled-php85/result.json",
+    "case_id": "TS-504",
+    "verdict": "PASS",
+    "checks": 19,
+    "requests": 6,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-first/php85/url_size-php85/result.json",
+    "case_id": "TS-508",
+    "verdict": "PASS",
+    "checks": 20,
+    "requests": 6,
+    "error": null,
+    "final_ci": false,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/auth-php83/result.json",
+    "case_id": "TS-407",
+    "verdict": "PASS",
+    "checks": 74,
+    "requests": 29,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/basic-php83/result.json",
+    "case_id": "TS-401",
+    "verdict": "PASS",
+    "checks": 247,
+    "requests": 83,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/chrome-php83/result.json",
+    "case_id": "TS-413",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/concurrent-php83/result.json",
+    "case_id": "TS-509",
+    "verdict": "PASS",
+    "checks": 141,
+    "requests": 58,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/content-php83/result.json",
+    "case_id": "TS-415",
+    "verdict": "PASS",
+    "checks": 66,
+    "requests": 24,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/degraded-php83/result.json",
+    "case_id": "TS-411",
+    "verdict": "PASS",
+    "checks": 26,
+    "requests": 6,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/firefox-php83/result.json",
+    "case_id": "TS-511",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/groups-php83/result.json",
+    "case_id": "TS-405",
+    "verdict": "PASS",
+    "checks": 60,
+    "requests": 21,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/https-php83/result.json",
+    "case_id": "TS-501",
+    "verdict": "PASS",
+    "checks": 35,
+    "requests": 11,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/lint-php83/result.json",
+    "case_id": "LINT-201",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/negative-php83/result.json",
+    "case_id": "TS-403",
+    "verdict": "PASS",
+    "checks": 147,
+    "requests": 56,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/plugins-php83/result.json",
+    "case_id": "TS-409",
+    "verdict": "PASS",
+    "checks": 199,
+    "requests": 71,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/startup-php83/result.json",
+    "case_id": "TS-201",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/url-php83/result.json",
+    "case_id": "TS-505",
+    "verdict": "PASS",
+    "checks": 110,
+    "requests": 29,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/url_disabled-php83/result.json",
+    "case_id": "TS-503",
+    "verdict": "PASS",
+    "checks": 19,
+    "requests": 6,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php83/url_size-php83/result.json",
+    "case_id": "TS-507",
+    "verdict": "PASS",
+    "checks": 20,
+    "requests": 6,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/auth-php85/result.json",
+    "case_id": "TS-408",
+    "verdict": "PASS",
+    "checks": 74,
+    "requests": 29,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/basic-php85/result.json",
+    "case_id": "TS-402",
+    "verdict": "PASS",
+    "checks": 247,
+    "requests": 83,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/chrome-php85/result.json",
+    "case_id": "TS-414",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/concurrent-php85/result.json",
+    "case_id": "TS-510",
+    "verdict": "PASS",
+    "checks": 141,
+    "requests": 58,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/content-php85/result.json",
+    "case_id": "TS-416",
+    "verdict": "PASS",
+    "checks": 66,
+    "requests": 24,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/degraded-php85/result.json",
+    "case_id": "TS-412",
+    "verdict": "PASS",
+    "checks": 26,
+    "requests": 6,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/firefox-php85/result.json",
+    "case_id": "TS-512",
+    "verdict": "PASS",
+    "checks": 18,
+    "requests": 0,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/groups-php85/result.json",
+    "case_id": "TS-406",
+    "verdict": "PASS",
+    "checks": 60,
+    "requests": 21,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/https-php85/result.json",
+    "case_id": "TS-502",
+    "verdict": "PASS",
+    "checks": 35,
+    "requests": 11,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/lint-php85/result.json",
+    "case_id": "LINT-202",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/negative-php85/result.json",
+    "case_id": "TS-404",
+    "verdict": "PASS",
+    "checks": 147,
+    "requests": 56,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/plugins-php85/result.json",
+    "case_id": "TS-410",
+    "verdict": "PASS",
+    "checks": 199,
+    "requests": 71,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/startup-php85/result.json",
+    "case_id": "TS-202",
+    "verdict": "PASS",
+    "checks": 0,
+    "requests": 0,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/url-php85/result.json",
+    "case_id": "TS-506",
+    "verdict": "PASS",
+    "checks": 110,
+    "requests": 29,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/url_disabled-php85/result.json",
+    "case_id": "TS-504",
+    "verdict": "PASS",
+    "checks": 19,
+    "requests": 6,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  },
+  {
+    "path": "ci-final/php85/url_size-php85/result.json",
+    "case_id": "TS-508",
+    "verdict": "PASS",
+    "checks": 20,
+    "requests": 6,
+    "error": null,
+    "final_ci": true,
+    "preview": false
+  }
+]

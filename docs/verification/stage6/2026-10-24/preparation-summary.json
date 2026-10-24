@@ -1,11 +1,23 @@
 {
-  "scope": "段階6 棚卸し・配布候補・保全ツールの準備。本番保全コピーと切替は未実施",
+  "scope": "段階6 棚卸し・配布候補・保全ツールと本番保全コピーの確認。実機隔離復元と本番切替は未実施",
   "results": [
     {
       "case_id": "SA-601",
       "verdict": "PASS",
       "evidence": "sakura-inventory.json",
       "scope": "利用者提供の棚卸し出力のレビュー"
+    },
+    {
+      "case_id": "SA-602",
+      "php": "8.3.36",
+      "verdict": "PASS",
+      "evidence": "sakura-backup.json",
+      "scope": "利用者提供の非公開保全コピー出力のレビュー"
+    },
+    {
+      "case_id": "SA-603",
+      "verdict": "NOT RUN",
+      "scope": "本番保全コピーの隔離復元。利用者実行待ち"
     },
     {
       "case_id": "TS-601",

@@ -1,0 +1,49 @@
+{
+  "scope": "段階6 本番切替と本番受入の統合判定",
+  "accepted_at_utc": "2026-10-24T16:15:45+00:00",
+  "accepted_at_jst": "2026-10-25T01:15:45+09:00",
+  "environment": {
+    "hosting": "さくらのレンタルサーバ・スタンダード",
+    "os": "FreeBSD 13.0-RELEASE-p15",
+    "php": "8.3.36",
+    "web_sapi": "cgi-fcgi",
+    "authentication": "既存Basic認証のみ、LOGIN=false"
+  },
+  "SA-608": {
+    "name": "本番停止・最終バックアップ・配置・再開",
+    "verdict": "PASS",
+    "evidence": [
+      "sakura-production-stop.json",
+      "sakura-production-maintenance.json",
+      "sakura-production-backup.json",
+      "sakura-production-apply.json",
+      "sakura-production-maintenance-after-apply.json",
+      "sakura-production-resume.json"
+    ]
+  },
+  "SA-609": {
+    "name": "切替後のBasic認証・表示・通常操作と内部照合",
+    "verdict": "PASS",
+    "browser_checks": 87,
+    "internal_checks": 7,
+    "total_checks": 94,
+    "evidence": [
+      "sakura-production-browser.json",
+      "sakura-production-verify.json"
+    ]
+  },
+  "managed_files_at_acceptance": 337,
+  "deployed_targets": 49,
+  "application_files": 46,
+  "source_commit": "e02ca328c9668f0e4ce1374751f25647fdaa57f6",
+  "kit_sha256": "61c43a8a50b5173a1fb4aeefda64b4136d12c664e1624d3bb0e590b7ea4c8b65",
+  "preparation_and_backup_ids_match": true,
+  "credentials_deleted": true,
+  "incomplete_invocations_retained": [
+    "sakura-production-verify-incomplete.json",
+    "sakura-production-verify-incomplete-2.json"
+  ],
+  "invocation_diagnosis": "引数確認ではCLIのargv正常。初回2回の具体的な呼出し差は未特定。同じ固定版のftc_executeにverify・HOME・準備IDを明示して7項目を照合。判定基準の変更なし",
+  "scope_note": "最終照合時点の結果。通常利用再開後の変更を不一致とする継続監視ではない範囲",
+  "privacy": "URL・実パス・認証情報・実保存名・固有表示・配備IDの非公開"
+}

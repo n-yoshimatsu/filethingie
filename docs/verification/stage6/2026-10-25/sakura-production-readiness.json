@@ -1,0 +1,22 @@
+{
+  "case_id": "SA-608",
+  "step": "ready",
+  "scope": "Basic認証とWeb停止の観測。配置・バックアップの判定対象外",
+  "started_at": "2026-10-24T15:54:30.366Z",
+  "checks": [
+    {
+      "name": "未認証のfavicon取得401",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "name": "Basic認証後のfavicon取得200",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    }
+  ],
+  "verdict": "PASS",
+  "finished_at": "2026-10-24T15:54:30.588Z"
+}

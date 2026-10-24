@@ -1,0 +1,18 @@
+{
+  "case_id": "SA-609",
+  "step": "最終CLI照合の初回呼出し",
+  "step_verdict": "BLOCKED",
+  "tool_output": {
+    "verdict": "INCOMPLETE",
+    "message": "Usage: php sakura-cutover.php ACTION HOME PREPARATION_ID [--writers-idle|--web-503-confirmed]",
+    "action": null,
+    "managed_user_files_written_by_tool": false,
+    "basic_credential_file_written_by_tool": false,
+    "instruction": "状態を確認し、停止中の入口を維持。未確認の再開なし"
+  },
+  "diagnosis": "引数不足、action未指定による照合開始前の終了。配備状態変更の証拠なし",
+  "subsequent_action": "同じverify操作の全引数付き再実行",
+  "browser_verdict": "PASS",
+  "browser_checks": 87,
+  "final_server_verification": "NOT RUN"
+}

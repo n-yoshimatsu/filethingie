@@ -1,0 +1,16 @@
+{
+  "scope": "段階6 本番切替の状態管理",
+  "checked_at_utc": "2026-10-24T16:03:06+00:00",
+  "php": "8.3.36",
+  "action": "resume",
+  "preparation_id": "<private-preparation>",
+  "phase": "LIVE",
+  "maintenance_index_on_disk": false,
+  "web_status": "別途HTTP確認が必要",
+  "final_backup_id": "<private-final-backup>",
+  "managed_user_files_written_by_tool": false,
+  "basic_credential_file_written_by_tool": false,
+  "verification": null,
+  "verdict": "COMPLETED",
+  "evidence_source": "利用者提供CLI出力"
+}

@@ -1,6 +1,6 @@
-# 段階6 準備段階の結果
+# 段階6 本番移行・受入・配布準備の結果
 
-2026年10月25日更新。段階6全体は進行中、本番の切替・正式タグは未実施。
+2026年10月25日更新。本番切替SA-608と本番受入SA-609はPASS、通常利用の再開案内済み。正式タグ・GitHub Releaseは準備中。以下の準備段階の未実施記載は各時点の経緯、最新結果は末尾の本番受入節。
 
 ## 検証済みの範囲
 
@@ -58,7 +58,7 @@ docker compose run --rm --no-deps -T -v "$PWD:/workspace:ro" --entrypoint php ph
 
 ## 残る作業
 
-最終停止バックアップ・切替・再確認、正式リリース。非公開資材準備SA-607は完了。現在の公開URL・Basic認証・既存保存データ・表示変更の維持方針。[表示差分の確認手順](STAGE6_DISPLAY.md)。
+正式タグとGitHub Releaseの公開。本番の最終停止バックアップ・切替・再確認は完了。現在の公開URL・Basic認証・既存保存データ・表示変更の維持確認済み。[表示差分の確認手順](STAGE6_DISPLAY.md)。
 
 認証の未解決参照は取得した事実として記録、現在の認証不良とする断定なし。旧PHPアプリを戻してもPHP 8.3での稼働回復とは別問題のため、旧ソースの保全とサービス復旧の区別。
 
@@ -122,3 +122,42 @@ Web操作終了時点では、サーバー内の配備ファイル・複製337�
 初回TS-616／617は再開HTTP 200の条件でFAIL、後続は未実施。CLIとWebの人工環境アカウント差による0600設定の読取り不可。CLIをWebと同じ利用者とする前提の修正、製品コード・判定基準変更なし。同一条件の再試験で全項目PASS。[初回証跡と診断](verification/stage6/2026-10-25/trials/diagnosis.json)。
 
 準備版f2a68bd2の総合CIは両PHPでsuccess。[CI記録](verification/stage6/2026-10-25/cutover-prepare-ci.json)。新しい切替ツールの機能確認は上記ローカル試験による別証跡。実機SA-608の停止・最終保全・切替、SA-609の本番Web受入・内部照合、正式配布は未実施。
+
+## SA-608の本番切替
+
+利用者による開始・進行中操作終了の確認後、固定版e02ca328の切替キットを使用。停止は2026年10月25日00:55:35 JST、最終バックアップ完了00:59:29、配置完了01:01:11、入口再開01:03:06。準備ID・最終バックアップIDの各出力間一致。
+
+停止直後と配置後の両時点で、未認証401・認証後GET／空POST 503、本文・Cache-Control・Retry-AfterをHTTPSで照合。受入済み46ソースと設定・保護を含む49対象の配置。保存データ・Basic認証ファイルへのツール書込みなし。停止時バックアップはオンライン保全コピーと別の新規記録。[SA-608統合証跡](verification/stage6/2026-10-25/sakura-production-acceptance.json)。
+
+## SA-609の本番Web受入と最終内部照合
+
+実機HTTPS・Chromeの通常操作87項目PASS。Basic認証・追加ログインなし・表示引継ぎ、日本語／空ファイルのアップロードと実保存ハッシュ、同名拒否、作成・名前変更・編集・検索・移動・削除・CSRF拒否、設定・旧診断／管理ファイルの保護。新規専用フォルダー内だけでの変更とUIからの全試験データ削除。[Web証跡](verification/stage6/2026-10-25/sakura-production-browser.json)。
+
+利用者提供の2026年10月24日16:15:45 UTC（25日01:15:45 JST）の最終CLI出力で7項目PASS。配置49ファイルの不一致0、保存337ファイルと停止時バックアップの一致、Basic認証ファイル・faviconの不変、PHPログ0バイト、非公開設定0600、メンテナンス入口の解除。[内部証跡](verification/stage6/2026-10-25/sakura-production-verify.json)。SA-609はWeb87＋内部7＝94項目PASS、SA-608も必要なCLI・HTTP証跡を合わせてPASS。
+
+初回2回のverify呼出しはUsage表示による検査開始前のINCOMPLETE。引数診断ではCLI・register_argc_argv=1・verify/testの受領を確認。実際の初回コマンドとの差は未特定、利用者の入力誤りやPHP設定不備とする断定なし。同じ固定版のftc_executeへverify・HOME・準備IDを明示して最終照合を実施。対象・ロック・7項目・合否条件の変更なし。[初回](verification/stage6/2026-10-25/sakura-production-verify-incomplete.json)、[2回目](verification/stage6/2026-10-25/sakura-production-verify-incomplete-2.json)、[引数診断](verification/stage6/2026-10-25/sakura-production-argument-diagnostic.json)、[ローカルでの呼出し等価性確認](verification/stage6/2026-10-25/cutover-cli-dispatch.json)。追加診断を実機Web再試験として数えない集計。
+
+最終照合後に通常利用の再開案内。これらは照合時点の結果、以降の通常アップロード・編集をバックアップ不一致とする継続監視ではない範囲。固定版e02ca328の[総合CI](https://github.com/n-yoshimatsu/filethingie/actions/runs/40108828217)もPHP 8.3／8.5の両ジョブsuccess。
+
+## 後片付けと保管対象
+
+- 本番試験フォルダー・試験データ：通常UIによる削除と最終データ一致の確認済み。
+- 作業端末の一時Basic認証情報：ファイルと空の親ディレクトリの削除済み。[後片付け記録](verification/stage6/2026-10-25/sakura-production-cleanup.json)。
+- 本番参照中の非公開準備フォルダー：config.php・PHPログ・切替計画の継続保管。削除不可の現用配置。
+- 停止時バックアップ、従来の保全コピー・隔離復元：復旧と検証のための継続保管。
+- 段階5プレビュー・段階6リハーサル、サーバー上の取得用キット：今回の削除対象外。将来の片付け時に現用設定・バックアップと区別し、個別の配置を再確認する対象。最初のPHP診断ページは以前の利用者回答で削除済み。
+- 実環境の画面・固有表示・実パス・認証情報・配備ID：公開証跡への非掲載。公開記録には合否と件数、非機密の照合情報だけを記載。
+
+## TS-620の正式配布物照合
+
+配布識別名php83-85-20261025、ソース固定元e02ca328c9668f0e4ce1374751f25647fdaa57f6。受入済みアプリ46ファイルとバイト単位で一致。導入・更新・復元手順、本体・jQueryのライセンス、パスワードハッシュ生成ツール、manifestの同梱。実設定・認証・保存データ・試験用アカウントの非同梱。
+
+同じ入力からのZIP再現、受入版一致、ライセンス、非混入、全ファイルmanifest、手順、SHA-256、既存出力への上書き拒否の8項目PASS。[照合証跡](verification/stage6/2026-10-25/release-package.json)、[配布ZIP](releases/2026-10-25/filethingie-php83-85-20261025.zip)、[SHA-256](releases/2026-10-25/SHA256SUMS)、[リリースノート](RELEASE_NOTES.md)、[導入・更新・復元手順](RELEASE_GUIDE.md)。本番の再配置は不要。
+
+正式タグ・GitHub Releaseは未公開。準備済み資材と公開操作の区別。[公開準備状況](verification/stage6/2026-10-25/release-readiness.json)。GitHubプラグインにRelease作成機能なし、CLI認証は無効のため再認証待ち。
+
+再現コマンド（新規出力先の指定）：
+
+```bash
+python3 tools/release-package-check.py artifacts/stage6/reproduce-release
+```

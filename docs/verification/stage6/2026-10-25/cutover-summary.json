@@ -1,5 +1,5 @@
 {
-  "scope": "切替ツールのローカル検証とSA-607実機準備の受領。実機切替は未実施",
+  "scope": "切替ツールのローカル検証と実機SA-607〜609の完了記録",
   "actual_sakura": [
     {
       "case_id": "SA-607",
@@ -8,13 +8,15 @@
     },
     {
       "case_id": "SA-608",
-      "verdict": "NOT RUN",
-      "scope": "本番停止・最終バックアップ・配置・再開"
+      "verdict": "PASS",
+      "scope": "本番停止・最終バックアップ・配置・再開",
+      "evidence": "sakura-production-acceptance.json"
     },
     {
       "case_id": "SA-609",
-      "verdict": "NOT RUN",
-      "scope": "本番URLのWeb操作と内部照合"
+      "verdict": "PASS",
+      "scope": "本番URLのWeb操作と内部照合",
+      "evidence": "sakura-production-acceptance.json"
     }
   ],
   "local_results": [

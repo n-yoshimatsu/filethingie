@@ -5,16 +5,16 @@ For bug reports use the github issue tracker.
 
 File Thingie was one of my very first PHP projects and it's going on github so I will feel motivated to writing a more modern version.
 
-## PHP 8.3とPHP 8.5への対応計画
+## PHP 8.3とPHP 8.5への対応
 
-この開発ブランチでは、File Thingie 2.5.7をPHP 8.3とPHP 8.5に対応させます。
-実運用先はさくらのレンタルサーバ（FreeBSD／PHP 8.3）です。PHP 8.5も検証対象にします。
+このブランチは、File Thingie 2.5.7をPHP 8.3とPHP 8.5へ対応させたフォークです。
+さくらのレンタルサーバ（FreeBSD／PHP 8.3.36）への本番移行・受入が完了しました。PHP 8.5.12はローカルとCIで検証しています。
 段階4までの更新を行い、PHP 8.3.36／8.5.12とローカルChromeの最終20ケースがPASSです。
 認証・CSRF、DB／ログ／ZIP、jQuery、日本語表示を更新しました。
 未完成の設定画面・ファイル説明・旧外部エディター3種は無効化し、移行方法を明示しています。
 段階5でPHP 8.3／8.5のCIを追加し、32ケースがPASSです。HTTPS・URL取得・同時アップロード・Firefoxも検証しました。
-さくら実機のPHP 8.3.36／FreeBSDで、分離配置の受入SA-501〜503がPASS。Web操作132比較と利用者提供の内部確認16比較の合計148比較が一致。現在は開発中の検証版、既存本番データの移行は段階6の対象。
-30分の無操作期限・8時間の絶対期限も両PHPで実時間試験がPASS。段階5の予定41ケースは合格、CI・総合検証・さくら受入の完了。既存設定・保存データの本番移行は段階6の対象。
+さくら実機のPHP 8.3.36／FreeBSDで、分離配置の受入SA-501〜503がPASS。Web操作132比較と利用者提供の内部確認16比較の合計148比較が一致。分離配置での確認結果、本番移行の結果は段階6に記載。
+30分の無操作期限・8時間の絶対期限も両PHPで実時間試験がPASS。段階5の予定41ケースは合格、CI・総合検証・さくら受入の完了。既存設定・保存データの本番移行も段階6で完了。
 
 - [移行計画と対応範囲](docs/PHP85_MIGRATION.md)
 - [既存機能と依存関係](docs/FEATURE_INVENTORY.md)
@@ -33,4 +33,10 @@ File Thingie was one of my very first PHP projects and it's going on github so I
 - [段階5の完了結果・CI・証跡](docs/STAGE5_REPORT.md)
 - [さくら・FreeBSD受入手順](docs/SAKURA_ACCEPTANCE.md)
 
-段階6は本番棚卸し・非公開の保全コピー・実機隔離復元が完了。既存のBasic認証だけの利用方式を維持する方針。表示差分のレビューと引継ぎ実装、両PHPでのBasic認証リハーサルのローカル試験も完了。さくらの複製環境での受入と本番切替資材の非公開準備も完了。次は停止時バックアップと本番切替・受入、正式配布は未実施。[移行・バックアップ・復元の手順と状況](docs/STAGE6_MIGRATION.md)、[準備段階の結果](docs/STAGE6_REPORT.md)。
+段階6の本番切替・受入が完了。既存のBasic認証、表示、保存先とURLを維持し、Chrome87項目と内部照合7項目の計94項目がPASSです。保存337ファイルと停止時バックアップの一致、PHPログ0バイトを最終照合時に確認しました。正式配布のタグ・GitHub Releaseは準備中です。
+
+- [本番移行・受入の結果](docs/STAGE6_REPORT.md)
+- [導入・更新・復元手順](docs/RELEASE_GUIDE.md)
+- [配布版の変更点と検証範囲](docs/RELEASE_NOTES.md)
+- [本番受入版の配布ZIP](docs/releases/2026-10-25/filethingie-php83-85-20261025.zip)・[SHA-256](docs/releases/2026-10-25/SHA256SUMS)
+- [移行全体の手順と状況](docs/STAGE6_MIGRATION.md)

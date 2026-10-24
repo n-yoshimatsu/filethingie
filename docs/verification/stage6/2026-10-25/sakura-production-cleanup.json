@@ -1,0 +1,13 @@
+{
+  "scope": "本番受入用の一時認証情報の後片付け",
+  "checked_at_utc": "2026-10-24T16:25:32.629153+00:00",
+  "temporary_basic_credentials_deleted": true,
+  "credential_directory_removed": true,
+  "production_test_data_removed_via_ui": true,
+  "original_managed_data_verified_after_test": true,
+  "live_private_configuration_retained": true,
+  "final_backup_retained": true,
+  "prior_preview_environments_removed": false,
+  "prior_preview_environments_note": "今回の削除対象外、保管対象と後片付け対象を文書化",
+  "verdict": "PASS"
+}

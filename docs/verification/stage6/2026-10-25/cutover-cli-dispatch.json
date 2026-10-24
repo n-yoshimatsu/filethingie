@@ -1,0 +1,9 @@
+{
+  "case_id": "TS-618",
+  "scope": "CLI照合部分の呼出し方法の追加診断。Chrome操作全体の再実行ではない範囲",
+  "php": "8.3.36",
+  "argument_call": "PASS",
+  "inline_call": "PASS",
+  "seven_checks_identical": true,
+  "production_used": false
+}

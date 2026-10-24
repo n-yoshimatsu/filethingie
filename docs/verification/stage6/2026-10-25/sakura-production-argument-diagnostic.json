@@ -1,0 +1,13 @@
+{
+  "scope": "最終CLI照合の引数診断",
+  "source": "利用者提供のPHP実行結果",
+  "sapi": "cli",
+  "register_argc_argv": "1",
+  "args": [
+    "Standard input code",
+    "verify",
+    "test"
+  ],
+  "interpretation": "人工引数の到達と登録設定の正常確認。通常ファイル実行での2回のUsage応答の原因は未確定",
+  "next_invocation": "同一の固定版ftc_execute(verify)へのPHP内定数指定。対象・排他・7照合条件の維持"
+}

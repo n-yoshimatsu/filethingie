@@ -1,0 +1,76 @@
+{
+  "case_id": "SA-608",
+  "step": "maintenance",
+  "scope": "Basic認証とWeb停止の観測。配置・バックアップの判定対象外",
+  "started_at": "2026-10-24T16:01:39.660Z",
+  "checks": [
+    {
+      "name": "未認証のfavicon取得401",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "name": "Basic認証後のfavicon取得200",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "name": "未認証の入口401",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "name": "GET停止応答503",
+      "actual": 503,
+      "expected": 503,
+      "verdict": "PASS"
+    },
+    {
+      "name": "GET停止本文の一致",
+      "actual": "File Thingie is temporarily unavailable for maintenance.",
+      "expected": "File Thingie is temporarily unavailable for maintenance.",
+      "verdict": "PASS"
+    },
+    {
+      "name": "GETキャッシュ禁止",
+      "actual": "no-store",
+      "expected": "no-store",
+      "verdict": "PASS"
+    },
+    {
+      "name": "GETRetry-After",
+      "actual": "300",
+      "expected": "300",
+      "verdict": "PASS"
+    },
+    {
+      "name": "POST停止応答503",
+      "actual": 503,
+      "expected": 503,
+      "verdict": "PASS"
+    },
+    {
+      "name": "POST停止本文の一致",
+      "actual": "File Thingie is temporarily unavailable for maintenance.",
+      "expected": "File Thingie is temporarily unavailable for maintenance.",
+      "verdict": "PASS"
+    },
+    {
+      "name": "POSTキャッシュ禁止",
+      "actual": "no-store",
+      "expected": "no-store",
+      "verdict": "PASS"
+    },
+    {
+      "name": "POSTRetry-After",
+      "actual": "300",
+      "expected": "300",
+      "verdict": "PASS"
+    }
+  ],
+  "verdict": "PASS",
+  "finished_at": "2026-10-24T16:01:40.286Z"
+}

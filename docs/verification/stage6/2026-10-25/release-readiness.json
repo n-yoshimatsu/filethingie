@@ -1,0 +1,15 @@
+{
+  "release": "php83-85-20261025",
+  "title": "File Thingie PHP 8.3／8.5版 — 2026-10-25",
+  "application_source_commit": "e02ca328c9668f0e4ce1374751f25647fdaa57f6",
+  "production_acceptance": "PASS",
+  "package_checks": "PASS",
+  "package_check_count": 8,
+  "assets_directory": "docs/releases/2026-10-25",
+  "archive_sha256": "2ba7ea7b961ec7a4dea9743203687b1ab7032bb24877296eaf424fbdc4ebccf4",
+  "tag_published": false,
+  "github_release_published": false,
+  "publication_status": "PREPARED",
+  "remaining_requirement": "GitHub Release作成に使用するCLIの再認証。GitHubプラグインの既存機能にRelease・タグ作成なし",
+  "requires_production_redeployment": false
+}

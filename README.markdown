@@ -32,3 +32,5 @@ File Thingie was one of my very first PHP projects and it's going on github so I
 - [段階5の試験条件](docs/STAGE5_TEST_PLAN.md)
 - [段階5の完了結果・CI・証跡](docs/STAGE5_REPORT.md)
 - [さくら・FreeBSD受入手順](docs/SAKURA_ACCEPTANCE.md)
+
+段階6は本番移行前の棚卸し準備中。既存のBasic認証だけの利用方式を維持する方針。[移行・バックアップ・復元の手順と状況](docs/STAGE6_MIGRATION.md)。

@@ -1,0 +1,20 @@
+[
+  {
+    "case_id": "TS-601",
+    "php": "8.3.36",
+    "verdict": "PASS",
+    "inventory_sha256": "210c0062aecf1f629949fa1be04d91a89cdeae0e63b19a58d99347a1049fdfd8",
+    "harness_sha256": "1ee6dbacf67622c77e88adb123480f8ce7737fe12c88746f944ec36926317deb",
+    "checks": 32,
+    "scope": "人工fixtureの確認ツール試験。本番の棚卸しは未実施"
+  },
+  {
+    "case_id": "TS-602",
+    "php": "8.5.12",
+    "verdict": "PASS",
+    "inventory_sha256": "210c0062aecf1f629949fa1be04d91a89cdeae0e63b19a58d99347a1049fdfd8",
+    "harness_sha256": "1ee6dbacf67622c77e88adb123480f8ce7737fe12c88746f944ec36926317deb",
+    "checks": 32,
+    "scope": "人工fixtureの確認ツール試験。本番の棚卸しは未実施"
+  }
+]

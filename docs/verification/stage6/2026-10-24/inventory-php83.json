@@ -1,0 +1,349 @@
+{
+  "case_id": "TS-601",
+  "name": "移行前棚卸し",
+  "php": "8.3.36",
+  "scope": "人工fixtureによるツール検証。本番移行結果ではない記録",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "name": "正常fixtureの終了状態",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "name": "PHP診断通知なし",
+      "actual": "",
+      "expected": "",
+      "verdict": "PASS"
+    },
+    {
+      "name": "LOGIN=false候補とコメント無視",
+      "actual": {
+        "literal": true,
+        "value": false
+      },
+      "expected": {
+        "literal": true,
+        "value": false
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "8進数権限の読取り",
+      "actual": 420,
+      "expected": 420,
+      "verdict": "PASS"
+    },
+    {
+      "name": "主ユーザー資格情報の存在のみ",
+      "actual": [
+        "USERNAME",
+        "PASSWORD"
+      ],
+      "expected": [
+        "USERNAME",
+        "PASSWORD"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "name": "追加ユーザー数",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "name": "グループ数",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "name": "プラグイン宣言",
+      "actual": [
+        "edit",
+        "search"
+      ],
+      "expected": [
+        "edit",
+        "search"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "name": "DIR候補の集計",
+      "actual": {
+        "complete": true,
+        "files": 2,
+        "directories": 0,
+        "bytes": 16,
+        "symlinks": 1,
+        "unreadable_directories": 0,
+        "other_entries": 0
+      },
+      "expected": {
+        "complete": true,
+        "files": 2,
+        "directories": 0,
+        "bytes": 16,
+        "symlinks": 1,
+        "unreadable_directories": 0,
+        "other_entries": 0
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "祖先.htaccess件数",
+      "actual": 2,
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "name": "Basic宣言",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "引用符付き認証ファイル",
+      "actual": "0600",
+      "expected": "0600",
+      "verdict": "PASS"
+    },
+    {
+      "name": "認証ファイルの非公開配置",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "設定内の副作用非実行",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "関数呼出しの要確認フラグ",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "全fixture内容・権限・リンク不変",
+      "actual": {
+        "inventory.php": {
+          "mode": 420,
+          "sha256": "210c0062aecf1f629949fa1be04d91a89cdeae0e63b19a58d99347a1049fdfd8"
+        },
+        "private": {
+          "mode": 448,
+          "sha256": null
+        },
+        "private/passwords": {
+          "mode": 384,
+          "sha256": "d43603d5114b334271999849bc96b2d9ef7e9b9bd436d21c6e5884774addd513"
+        },
+        "www": {
+          "mode": 493,
+          "sha256": null
+        },
+        "www/.htaccess": {
+          "mode": 420,
+          "sha256": "81aa2e4b580762dd8705b58e7080d67d54642a18f6910737b495b2a4a494b170"
+        },
+        "www/app": {
+          "mode": 493,
+          "sha256": null
+        },
+        "www/app/.htaccess": {
+          "mode": 420,
+          "sha256": "2e249a42e1e4c2a3b33f22ec948194a5fb541a2d13c1c00f28b23ea2652bdb5b"
+        },
+        "www/app/config.php": {
+          "mode": 384,
+          "sha256": "2083c2765605d7959031be49f9b8a758b34c8a78e0aa4ad7632e01692a57b6c4"
+        },
+        "www/app/files": {
+          "mode": 493,
+          "sha256": null
+        },
+        "www/app/files/empty.txt": {
+          "mode": 420,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "www/app/files/link": {
+          "link": "<fixture>/private"
+        },
+        "www/app/files/日本語.txt": {
+          "mode": 420,
+          "sha256": "a70790243536b69f24b1b741a4408ce366f11dd5bbfec785af43381c9d0ec417"
+        },
+        "www/app/index.php": {
+          "mode": 420,
+          "sha256": "806f0ad18886f131d463ab5c979ad490a71060d0ec064281046f4622f85c200d"
+        },
+        "www/app/users.sh": {
+          "mode": 420,
+          "sha256": "707aff303be2db403f6fa88b2a6f127800c02f0f28150ef314f0e6e836ff619d"
+        }
+      },
+      "expected": {
+        "inventory.php": {
+          "mode": 420,
+          "sha256": "210c0062aecf1f629949fa1be04d91a89cdeae0e63b19a58d99347a1049fdfd8"
+        },
+        "private": {
+          "mode": 448,
+          "sha256": null
+        },
+        "private/passwords": {
+          "mode": 384,
+          "sha256": "d43603d5114b334271999849bc96b2d9ef7e9b9bd436d21c6e5884774addd513"
+        },
+        "www": {
+          "mode": 493,
+          "sha256": null
+        },
+        "www/.htaccess": {
+          "mode": 420,
+          "sha256": "81aa2e4b580762dd8705b58e7080d67d54642a18f6910737b495b2a4a494b170"
+        },
+        "www/app": {
+          "mode": 493,
+          "sha256": null
+        },
+        "www/app/.htaccess": {
+          "mode": 420,
+          "sha256": "2e249a42e1e4c2a3b33f22ec948194a5fb541a2d13c1c00f28b23ea2652bdb5b"
+        },
+        "www/app/config.php": {
+          "mode": 384,
+          "sha256": "2083c2765605d7959031be49f9b8a758b34c8a78e0aa4ad7632e01692a57b6c4"
+        },
+        "www/app/files": {
+          "mode": 493,
+          "sha256": null
+        },
+        "www/app/files/empty.txt": {
+          "mode": 420,
+          "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+        },
+        "www/app/files/link": {
+          "link": "<fixture>/private"
+        },
+        "www/app/files/日本語.txt": {
+          "mode": 420,
+          "sha256": "a70790243536b69f24b1b741a4408ce366f11dd5bbfec785af43381c9d0ec417"
+        },
+        "www/app/index.php": {
+          "mode": 420,
+          "sha256": "806f0ad18886f131d463ab5c979ad490a71060d0ec064281046f4622f85c200d"
+        },
+        "www/app/users.sh": {
+          "mode": 420,
+          "sha256": "707aff303be2db403f6fa88b2a6f127800c02f0f28150ef314f0e6e836ff619d"
+        }
+      },
+      "verdict": "PASS"
+    },
+    {
+      "name": "秘密情報・ファイル名の非出力 16",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "秘密情報・ファイル名の非出力 17",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "秘密情報・ファイル名の非出力 18",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "秘密情報・ファイル名の非出力 19",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "秘密情報・ファイル名の非出力 20",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "秘密情報・ファイル名の非出力 21",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "秘密情報・ファイル名の非出力 22",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "秘密情報・ファイル名の非出力 23",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "秘密情報・ファイル名の非出力 24",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "動的式のPHP診断通知なし",
+      "actual": "",
+      "expected": "",
+      "verdict": "PASS"
+    },
+    {
+      "name": "動的DIRの候補未確定",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "動的式の未対応代入記録",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "DIRリンクの集計非実行",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "設定リンクの拒否",
+      "actual": 2,
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "name": "設定リンク拒否時の本文非出力",
+      "actual": "",
+      "expected": "",
+      "verdict": "PASS"
+    },
+    {
+      "name": "公開ルート外アプリ指定の拒否",
+      "actual": 2,
+      "expected": 2,
+      "verdict": "PASS"
+    }
+  ],
+  "inventory_sha256": "210c0062aecf1f629949fa1be04d91a89cdeae0e63b19a58d99347a1049fdfd8",
+  "harness_sha256": "1ee6dbacf67622c77e88adb123480f8ce7737fe12c88746f944ec36926317deb"
+}

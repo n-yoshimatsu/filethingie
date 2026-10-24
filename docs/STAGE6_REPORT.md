@@ -17,7 +17,7 @@
 | TS-608／609 | Basic認証だけのリハーサル配置 | PASS | PHP 8.3／8.5で各23比較、複製一致・設定非実行・原本不変・未対応認証や改変コピーの停止 |
 | TS-610／611 | Basic認証だけの画面・通常操作 | PASS | 両PHP＋Chromeで各46比較、認証・表示・日本語／空ファイルの保存ハッシュ・同名拒否・作成／名前変更／移動／編集／検索／削除・CSRF・保護設定・PHPログ |
 
-ローカル11ケース322比較のPASS、利用者提供証跡によるSA-601〜604のPASS。ローカル試験環境はLinuxコンテナー。さくらFreeBSDでは保全コピーと隔離復元を確認済み、表示差分の取得も確認済み、移行リハーサルは未実施。ツールの合格と本番移行完了の区別。
+ローカル15ケース484比較のPASS、利用者提供証跡によるSA-601〜604のPASS。ローカル試験環境はLinuxコンテナー。さくらFreeBSDでは保全コピーと隔離復元を確認済み、表示差分の取得も確認済み、移行リハーサルは初回配置でFAIL、修正版での実機再実行待ち。ツールの合格と本番移行完了の区別。
 
 最初のコピー試験は両PHPで34比較PASS。その後、子フォルダーの.htaccessからの認証ファイル参照を追加保全対象とした同じシナリオの再実行も各34比較PASS。掲載証跡は最終版。失敗を省略したPASS記録ではない経緯。
 
@@ -64,7 +64,7 @@ docker compose run --rm --no-deps -T -v "$PWD:/workspace:ro" --entrypoint php ph
 
 ## Basic認証リハーサル資材と検証経緯
 
-[配置キット](verification/stage6/2026-10-24/sakura-rehearsal.zip)、[SHA-256](verification/stage6/2026-10-24/sakura-rehearsal-SHA256SUMS)、[配置範囲](STAGE6_REHEARSAL.md)。段階5固定ソースを基準に4ファイルの表示対応を追加したキット。従来の配布候補ZIPは固定証跡として保持、更新版リハーサルキットとは別資材。さくらのWeb受入前、PREPAREDを稼働合格と扱わない状態。
+[修正版配置キット](verification/stage6/2026-10-24/sakura-rehearsal-relative-dir.zip)、[SHA-256](verification/stage6/2026-10-24/sakura-rehearsal-relative-dir-SHA256SUMS)、[配置範囲](STAGE6_REHEARSAL.md)。段階5固定ソースを基準に4ファイルの表示対応を追加したキット。従来の配布候補ZIPは固定証跡として保持、更新版リハーサルキットとは別資材。さくらのWeb受入前、PREPAREDを稼働合格と扱わない状態。
 
 TS-610初回は試験用configの必須項目不足によるHTTP 500。完全なサンプル設定を基にした同じBasic-only条件へfixtureを修正。2回目はDevTools経由のテキストレスポンスがChromeの文字コード解釈後のUTF-8になり、元バイト列と不一致。実保存操作の代用として誤った観測方法だったため、ChromeのAlt＋クリックによる通常ダウンロードと保存ファイルのSHA-256へ訂正。条件や同一性判定の緩和なし。[途中の失敗記録](verification/stage6/2026-10-24/rehearsal-trials)。文字コード未指定の直接テキスト表示はサーバー設定・ブラウザー依存、保存内容の一致と表示時の符号化の区別。
 
@@ -75,3 +75,11 @@ TS-610初回は試験用configの必須項目不足によるHTTP 500。完全な
 表示設定なしの既存Chrome試験TS-413／414も両PHPで各18比較PASS。[PHP 8.3証跡](verification/stage6/2026-10-24/default-browser-php83.json)、[PHP 8.5証跡](verification/stage6/2026-10-24/default-browser-php85.json)。同じソースからのキット再生成によるZIP一致、同梱PHP全ファイルの両版での構文確認も完了。
 
 更新版コミットff788bd02effa0bb4673056759b23a429a4133a8の[総合CI run 40098383165](https://github.com/n-yoshimatsu/filethingie/actions/runs/40098383165)もPHP 8.3／8.5の両ジョブsuccess。[完了記録](verification/stage6/2026-10-24/rehearsal-ci.json)。本番切替やさくらでのリハーサル実施を意味する結果ではない範囲。
+
+## SA-605の初回失敗と相対保存先への対応
+
+初回実機配置の判定はFAIL。ツール出力はINCOMPLETE、非公開の準備先作成後・公開前の停止。[受領結果と診断](verification/stage6/2026-10-24/sakura-rehearsal-incomplete.json)。LOGIN=false・HIDEFILEPATHS=false、DIR=./filesと保全コピー内filesへの解決一致を利用者提供の追加出力で確認。移行ツールがfilesとの文字列一致を要求したことが原因。既存設定の誤りではない事象。
+
+修正はCLI移行ツールの受入条件と不一致時の設定名表示のみ。DIRのfilesと./filesを受入れ、元の表記の保持。LOGIN／HIDEFILEPATHSの厳密なfalse条件、動的設定・管理外パスの拒否、複製データの照合の維持。アプリ46ファイル・manifestは前回のCI合格版ff788bdとバイト単位で同一。旧キットは失敗記録の固定資材として保持。
+
+TS-612／613は各35比較PASS、./filesでの複製先への解決・設定保持・他の保存先と認証条件変更の拒否。TS-614／615は同設定でのChrome操作各46比較PASS。元のfilesケースTS-608／609も各23比較PASS。今回6ケース208比較、ZIP再生成の一致。[資材と検証の対応](verification/stage6/2026-10-24/relative-dir-identity.json)。既存ケースの結果は履歴として保持、ローカル成功をSA-605のPASSへ転記しない扱い。修正版の実機再配置・SA-606のWeb確認・本番切替は未実施。

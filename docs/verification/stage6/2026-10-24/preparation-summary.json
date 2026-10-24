@@ -79,7 +79,7 @@
       "case_id": "TS-608",
       "verdict": "PASS",
       "checks": 23,
-      "evidence": "rehearsal-php83.json"
+      "evidence": "files-regression-php83.json"
     },
     {
       "case_id": "TS-610",
@@ -91,7 +91,7 @@
       "case_id": "TS-609",
       "verdict": "PASS",
       "checks": 23,
-      "evidence": "rehearsal-php85.json"
+      "evidence": "files-regression-php85.json"
     },
     {
       "case_id": "TS-611",
@@ -101,13 +101,38 @@
     },
     {
       "case_id": "SA-605",
-      "verdict": "NOT RUN",
-      "scope": "さくらのBasic認証リハーサル配置・照合"
+      "verdict": "FAIL",
+      "scope": "初回実機配置の./files拒否。修正版での実機再実行待ち",
+      "evidence": "sakura-rehearsal-incomplete.json"
     },
     {
       "case_id": "SA-606",
       "verdict": "NOT RUN",
       "scope": "さくらのBasic認証だけの画面・通常操作"
+    },
+    {
+      "case_id": "TS-612",
+      "verdict": "PASS",
+      "checks": 35,
+      "evidence": "relative-dir-php83.json"
+    },
+    {
+      "case_id": "TS-614",
+      "verdict": "PASS",
+      "checks": 46,
+      "evidence": "relative-browser-php83/result.json"
+    },
+    {
+      "case_id": "TS-613",
+      "verdict": "PASS",
+      "checks": 35,
+      "evidence": "relative-dir-php85.json"
+    },
+    {
+      "case_id": "TS-615",
+      "verdict": "PASS",
+      "checks": 46,
+      "evidence": "relative-browser-php85/result.json"
     }
   ],
   "source_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
@@ -120,10 +145,10 @@
     "sakura-display-diff.php": "1b1fa8aa840e0a345fdbfde1ab5912ca2682d6ce13d2b5d9e6bf11feb3272469",
     "stage6-diff-test.php": "addcdf404e696e8bc7933fadbf63726d2f825d56232d589fe2058856313a6aee",
     "build-stage6-diff.py": "24f41c3e12d3271ad1d83d4d67cada8ae00b1d6a17789760eccddef17d623320",
-    "sakura-rehearsal.php": "f8719b2b0077966e8efb8b9ad0ee6c440521c280582051c11f592202af527140",
-    "stage6-rehearsal-test.php": "157b8883bf2e6c761465aaecd21be88bcd2d3a1ff87582fd48c0fbc7b6989545",
+    "sakura-rehearsal.php": "e1878fc77d96af960ea5ea405aa8acb93cddc3a3f6acd5c13ca6a67365ee97ed",
+    "stage6-rehearsal-test.php": "4a460efb3893a0a1378350e61248bf31c0be53f70b00f9638e829906b9e7a48e",
     "build-stage6-rehearsal.py": "c9135b8491610f9499a4b3ffcf4729f20a0a331afbfc8804c1a434324c07a186",
-    "stage6.cjs": "67debe0bcabdd93a873645386f1b735bcd8d2688a9fdbadc54758ceab8bdc744"
+    "stage6.cjs": "c0b80f6a446f18c223241153b769264dd9b904b6cdc44254a60e1965e1ee6d1c"
   },
   "rehearsal_application_files": {
     "LICENSE": "60be50732c7642ccb6d1df338fa8453e883e788758e0397941568e837c3c823c",
@@ -187,5 +212,7 @@
       "evidence": "default-browser-php85.json"
     }
   ],
-  "rehearsal_kit_sha256": "75f470a892900ff097e4010343f0f8f5320868b5b2fa5851521d93d209434f7c"
+  "rehearsal_kit_sha256": "92a2942c441b766360000218a118bdeed4506b6a724acb35b2370bcfa9984c8a",
+  "previous_rehearsal_kit_sha256": "75f470a892900ff097e4010343f0f8f5320868b5b2fa5851521d93d209434f7c",
+  "rehearsal_kit": "sakura-rehearsal-relative-dir.zip"
 }

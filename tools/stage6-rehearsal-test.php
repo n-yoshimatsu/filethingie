@@ -1,13 +1,15 @@
 <?php
 // Synthetic, disposable local fixture. Never uses production paths or credentials.
-if(PHP_SAPI!=='cli'||$argc!==4) {exit(2);}
+if(PHP_SAPI!=='cli'||!in_array($argc,[4,5],true)) {exit(2);}
+$relativeCase=$argc===5;
+if($relativeCase && $argv[4]!=='./files') {exit(2);}
 [$kit,$base,$url]=array_slice($argv,1);require $kit.'/sakura-rehearsal.php';
 $home=$base.'/home';$app=$home.'/www/app';$checks=[];
 function check_r($label,$actual,$expected) {
     global $checks;$ok=$actual===$expected;$checks[]=compact('label','actual','expected')+['verdict'=>$ok?'PASS':'FAIL'];
     if(!$ok){throw new RuntimeException($label);}
 }
-$record=['case_id'=>str_starts_with(PHP_VERSION,'8.3.')?'TS-608':'TS-609','name'=>'Basic認証だけのリハーサル配置','php'=>PHP_VERSION,'verdict'=>'INCONCLUSIVE'];
+$record=['case_id'=>$relativeCase?(str_starts_with(PHP_VERSION,'8.3.')?'TS-612':'TS-613'):(str_starts_with(PHP_VERSION,'8.3.')?'TS-608':'TS-609'),'name'=>$relativeCase?'相対保存先 ./files のリハーサル配置':'Basic認証だけのリハーサル配置','php'=>PHP_VERSION,'verdict'=>'INCONCLUSIVE'];
 try {
     mkdir($base,0700);mkdir($home);mkdir($home.'/www');mkdir($app);mkdir($app.'/files');mkdir($app.'/files/existing');
     file_put_contents($app.'/files/既存.txt',"既存の日本語ファイル\n");file_put_contents($app.'/files/empty.txt','');
@@ -37,7 +39,7 @@ OLD;
     file_put_contents($app.'/index.php',$index);mkdir($app.'/css');file_put_contents($app.'/css/ft.css',"#background:#326532 !important;\nbackground:#8d93c8 !important;\n");
     file_put_contents($app.'/favicon.ico',hex2bin('0000010001000101000001002000300000001600000028000000010000000200000001002000000000000400000000000000000000000000000000000000c8938dff00000000'));
     $config=ftb_read($kit.'/app/config.sample.php');
-    foreach (['DIR'=>'files','LOGIN'=>false,'HIDEFILEPATHS'=>false,'HTTPS'=>true,'MAXSIZE'=>52428800] as $key=>$value) {
+    foreach (['DIR'=>$relativeCase?'./files':'files','LOGIN'=>false,'HIDEFILEPATHS'=>false,'HTTPS'=>true,'MAXSIZE'=>52428800] as $key=>$value) {
         $pattern='/(\$ft\["settings"\]\["'.$key.'"\]\s*=\s*)[^;]+;/';
         $config=preg_replace_callback($pattern,fn($m)=>$m[1].var_export($value,true).';',$config,1,$count);
         ftb_need($count===1,'Complete fixture setting not found.');
@@ -51,6 +53,25 @@ OLD;
     $sourceBackup=ftb_tree($backup);$created=null;
     $result=ftr_run($backup,$home,$home.'/www',$url,$created);$public=$app.'/'.$result['rehearsal_id'];
     check_r('配置状態',$result['verdict'],'PREPARED');
+    if ($relativeCase) {
+        // Independent static parse of the generated private config; no execution.
+        $generated=ft_inv_config(file_get_contents($created.'/config.php'));
+        check_r('元の相対保存先表記の維持',$generated['settings']['DIR']['value'],'./files');
+        check_r('コピー先内の保存先解決',realpath($public.'/'.$generated['settings']['DIR']['value']),realpath($public.'/files'));
+        foreach (['../files','/files','files/other','files/../files'] as $invalid) {
+            $badConfig=str_replace("'./files'",var_export($invalid,true),$config);$rejected=false;
+            try { ftr_config($badConfig,[],$created); } catch(RuntimeException $e) { $rejected=true; }
+            check_r('未対応保存先の拒否 '.$invalid,$rejected,true);
+        }
+        foreach (['LOGIN','HIDEFILEPATHS'] as $key) {
+            $pattern='/(\\$ft\\["settings"\\]\\["'.$key.'"\\]\\s*=\\s*)false;/';
+            $badConfig=preg_replace_callback($pattern,fn($m)=>$m[1].'true;',$config,1,$count);
+            check_r('拒否試験の入力成立 '.$key,$count,1);$rejected=false;$message='';
+            try { ftr_config($badConfig,[],$created); } catch(RuntimeException $e) { $rejected=true;$message=$e->getMessage(); }
+            check_r('認証・直接リンク条件の維持 '.$key,$rejected,true);
+            check_r('不一致設定名の通知 '.$key,str_contains($message,$key),true);
+        }
+    }
     check_r('設定非実行',defined('USERNAME'),false);
     check_r('保全コピー不変',ftb_tree($backup)===$sourceBackup,true);
     $unchanged=true;foreach($before as $rel=>$entry) {if($rel!=='.' && ftb_entry($app.'/'.$rel)!==$entry){$unchanged=false;}}

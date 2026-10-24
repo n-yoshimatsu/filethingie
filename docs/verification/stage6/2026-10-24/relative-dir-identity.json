@@ -1,0 +1,22 @@
+{
+  "kit_sha256": "92a2942c441b766360000218a118bdeed4506b6a724acb35b2370bcfa9984c8a",
+  "application_46_files_unchanged_from_commit": "ff788bd02effa0bb4673056759b23a429a4133a8",
+  "application_manifest_identical": true,
+  "reproducible_zip": true,
+  "local_cases": [
+    "TS-608",
+    "TS-609",
+    "TS-612",
+    "TS-613",
+    "TS-614",
+    "TS-615"
+  ],
+  "checks": 208,
+  "source_sha256": {
+    "tools/sakura-rehearsal.php": "e1878fc77d96af960ea5ea405aa8acb93cddc3a3f6acd5c13ca6a67365ee97ed",
+    "tools/stage6-rehearsal-test.php": "4a460efb3893a0a1378350e61248bf31c0be53f70b00f9638e829906b9e7a48e",
+    "tools/browser/stage6.cjs": "c0b80f6a446f18c223241153b769264dd9b904b6cdc44254a60e1965e1ee6d1c",
+    "docs/STAGE6_REHEARSAL.md": "688da3a122d2d1010855a5c595e85963c974435d4e5e0068cd0006a7bbcdda26"
+  },
+  "sakura_retry": "NOT RUN"
+}

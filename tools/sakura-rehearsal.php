@@ -38,9 +38,14 @@ function ftr_presentation($index,$css) {
 function ftr_config($source,$presentation,$private) {
     $parsed=ft_inv_config($source);
     ftb_need($parsed['unknown']===0 && !$parsed['dynamic'] && $parsed['otherCalls']===0 && !$parsed['users'] && !$parsed['groups'], 'Configuration requires individual review.');
-    foreach (['LOGIN'=>false,'DIR'=>'files','HIDEFILEPATHS'=>false] as $key=>$expected) {
-        ftb_need(($parsed['settings'][$key]['literal']??false) && $parsed['settings'][$key]['value']===$expected,'Rehearsal requires the reviewed Basic-only files configuration.');
+    foreach (['LOGIN'=>false,'HIDEFILEPATHS'=>false] as $key=>$expected) {
+        ftb_need(($parsed['settings'][$key]['literal']??false) && $parsed['settings'][$key]['value']===$expected,'Rehearsal requires literal '.$key.'=false.');
     }
+    // Both reviewed relative spellings refer to the copied files directory.
+    // Keep the original setting; do not accept arbitrary paths or coerce booleans.
+    $dir=$parsed['settings']['DIR']??[];
+    ftb_need(($dir['literal']??false) && in_array($dir['value'],['files','./files'],true),
+        'Rehearsal DIR must be the literal relative path files or ./files.');
     ftb_need(!array_diff(array_keys($parsed['plugins']),['edit','search']),'Only the reviewed edit/search plugins are supported.');
     ftb_need(($parsed['settings']['PLUGINDIR']['value']??'plugins')==='plugins'
         && ($parsed['settings']['REQUEST_URI']['value']??false)===false,'Plugin or request paths require review.');

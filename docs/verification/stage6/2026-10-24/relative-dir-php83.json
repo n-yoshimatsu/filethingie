@@ -1,0 +1,227 @@
+{
+    "case_id": "TS-612",
+    "name": "相対保存先 ./files のリハーサル配置",
+    "php": "8.3.36",
+    "verdict": "PASS",
+    "fixture_url": "https://127.0.0.1:18843/app/ft-stage6-rehearsal-20261024-133915-4ff3ed38b6/index.php",
+    "checks": [
+        {
+            "label": "配置状態",
+            "actual": "PREPARED",
+            "expected": "PREPARED",
+            "verdict": "PASS"
+        },
+        {
+            "label": "元の相対保存先表記の維持",
+            "actual": "./files",
+            "expected": "./files",
+            "verdict": "PASS"
+        },
+        {
+            "label": "コピー先内の保存先解決",
+            "actual": "/tmp/ft-rehearsal-local/home/www/app/ft-stage6-rehearsal-20261024-133915-4ff3ed38b6/files",
+            "expected": "/tmp/ft-rehearsal-local/home/www/app/ft-stage6-rehearsal-20261024-133915-4ff3ed38b6/files",
+            "verdict": "PASS"
+        },
+        {
+            "label": "未対応保存先の拒否 ../files",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "未対応保存先の拒否 /files",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "未対応保存先の拒否 files/other",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "未対応保存先の拒否 files/../files",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "拒否試験の入力成立 LOGIN",
+            "actual": 1,
+            "expected": 1,
+            "verdict": "PASS"
+        },
+        {
+            "label": "認証・直接リンク条件の維持 LOGIN",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "不一致設定名の通知 LOGIN",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "拒否試験の入力成立 HIDEFILEPATHS",
+            "actual": 1,
+            "expected": 1,
+            "verdict": "PASS"
+        },
+        {
+            "label": "認証・直接リンク条件の維持 HIDEFILEPATHS",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "不一致設定名の通知 HIDEFILEPATHS",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "設定非実行",
+            "actual": false,
+            "expected": false,
+            "verdict": "PASS"
+        },
+        {
+            "label": "保全コピー不変",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "既存ファイル・子フォルダー不変",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "複製ファイル内容",
+            "actual": "既存の日本語ファイル\n",
+            "expected": "既存の日本語ファイル\n",
+            "verdict": "PASS"
+        },
+        {
+            "label": "複製空ファイル",
+            "actual": 0,
+            "expected": 0,
+            "verdict": "PASS"
+        },
+        {
+            "label": "複製権限",
+            "actual": 489,
+            "expected": 489,
+            "verdict": "PASS"
+        },
+        {
+            "label": "複製更新時刻",
+            "actual": 1792849155,
+            "expected": 1792849155,
+            "verdict": "PASS"
+        },
+        {
+            "label": "別inode",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "非公開親0700",
+            "actual": 448,
+            "expected": 448,
+            "verdict": "PASS"
+        },
+        {
+            "label": "非公開設定0600",
+            "actual": 384,
+            "expected": 384,
+            "verdict": "PASS"
+        },
+        {
+            "label": "認証情報の公開複製なし",
+            "actual": false,
+            "expected": false,
+            "verdict": "PASS"
+        },
+        {
+            "label": "既存のBasic認証参照",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "タイトル復号",
+            "actual": "Fixture & files",
+            "expected": "Fixture & files",
+            "verdict": "PASS"
+        },
+        {
+            "label": "案内文修正",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "配色復元",
+            "actual": "#8d93c8",
+            "expected": "#8d93c8",
+            "verdict": "PASS"
+        },
+        {
+            "label": "幅復元",
+            "actual": {
+                "filelist_width": 420,
+                "sidebar_width": 280,
+                "upload_width": 260
+            },
+            "expected": {
+                "filelist_width": 420,
+                "sidebar_width": 280,
+                "upload_width": 260
+            },
+            "verdict": "PASS"
+        },
+        {
+            "label": "未対応認証の停止 Require all granted",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "未対応認証の停止 AuthType Digest",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "未対応認証の停止 RewriteEngine On",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "改変バックアップ拒否",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "label": "拒否時の新規先なし",
+            "actual": null,
+            "expected": null,
+            "verdict": "PASS"
+        },
+        {
+            "label": "バックアップ復旧",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        }
+    ]
+}

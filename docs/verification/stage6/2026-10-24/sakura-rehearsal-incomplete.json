@@ -1,0 +1,35 @@
+{
+  "case_id": "SA-605",
+  "name": "さくらのBasic認証リハーサル配置・照合",
+  "verdict": "FAIL",
+  "evidence_origin": "利用者提供のCLI出力と追加の読取り専用診断。直接SSH実行ではない記録",
+  "kit_commit": "ff788bd02effa0bb4673056759b23a429a4133a8",
+  "kit_sha256": "75f470a892900ff097e4010343f0f8f5320868b5b2fa5851521d93d209434f7c",
+  "result": {
+    "verdict": "INCOMPLETE",
+    "message": "Rehearsal requires the reviewed Basic-only files configuration.",
+    "private_directory_id": "<private-rehearsal-id>",
+    "production_existing_files_modified": false
+  },
+  "diagnostic": {
+    "LOGIN": {
+      "literal": true,
+      "type": "bool",
+      "is_false": true
+    },
+    "HIDEFILEPATHS": {
+      "literal": true,
+      "type": "bool",
+      "is_false": true
+    },
+    "DIR": {
+      "literal": true,
+      "exact_files": false,
+      "dot_files": true,
+      "resolves_to_backup_files": true
+    }
+  },
+  "cause": "保全記録では解決後のfilesを確認済み、移行ツールでは元の表記もfilesに限定した不適切な条件。./filesの正しい設定を拒否",
+  "effect": "公開前・データ複製前の停止。作成した非公開親と空のpublic作業ディレクトリのみ。既存設定・データの変更なし",
+  "remaining": "修正版の実機再配置とWeb受入は未実施"
+}

@@ -1,12 +1,13 @@
 // Local synthetic Basic-only migration rehearsal through normal Chrome operations.
 const {chromium,request}=require('playwright-core');
 const fs=require('node:fs'),path=require('node:path'),cp=require('node:child_process'),crypto=require('node:crypto');
-const [service,outArg]=process.argv.slice(2),out=path.resolve(outArg),container='ft-stage6-'+service;
+const [service,outArg,variant]=process.argv.slice(2),out=path.resolve(outArg),container='ft-stage6-'+service;
+if(variant && variant!=='relative-dir') throw Error('Unsupported case variant');
 if(!['php83','php85'].includes(service)) throw Error('Local fixture service required');
 fs.mkdirSync(out,{recursive:false});
 const state=JSON.parse(cp.execFileSync('docker',['exec',container,'cat','/tmp/ft-rehearsal-local/state.json'],{encoding:'utf8'}));
 const url=state.url,base=new URL('./',url).href;
-const rec={case_id:service==='php83'?'TS-610':'TS-611',name:'Basic認証だけの画面・通常操作',service,verdict:'INCONCLUSIVE',checks:[],errors:[]};
+const rec={case_id:variant?(service==='php83'?'TS-614':'TS-615'):(service==='php83'?'TS-610':'TS-611'),name:variant?'相対保存先 ./files の画面・通常操作':'Basic認証だけの画面・通常操作',service,verdict:'INCONCLUSIVE',checks:[],errors:[]};
 const hash=b=>crypto.createHash('sha256').update(b).digest('hex');
 function eq(label,actual,expected){const ok=JSON.stringify(actual)===JSON.stringify(expected);rec.checks.push({label,actual,expected,verdict:ok?'PASS':'FAIL'});if(!ok)throw Error(label);}
 (async()=>{let browser;

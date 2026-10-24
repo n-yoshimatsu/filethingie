@@ -52,7 +52,7 @@ php tools/sakura-probe.php '/実際の公開ディレクトリ' 'https://実際�
 |---|---|
 | SA-501 CLI側環境情報 | 取得済み |
 | SA-501 Web側環境情報 | 利用者提供出力によるPASS、cgi-fcgi／必要拡張／HTTPSの確認 |
-| SA-502 分離配置・基本受入 | 実施中・判定未実施。同一入力ZIPの提供後、アップロード、Chromeでのダウンロードとファイル確認完了との利用者回答。SHA-256による内容比較・残りの基本操作は結果待ち。クライアントOS・ブラウザー詳細版は未確認 |
+| SA-502 分離配置・基本受入 | 実施中・判定未実施。同一入力ZIPの提供後、アップロード、Windows上のChromeでのダウンロードとファイル確認完了との利用者回答。SHA-256による内容比較・残りの基本操作は結果待ち。Windows・ブラウザー詳細版は未確認 |
 | SA-503 任意機能・権限 | NOT RUN |
 | 既存本番データ移行・本番切替 | 対象外、段階6の前提確認待ち |
 
@@ -79,5 +79,17 @@ PHPログは検証用configの読込み後のみ`log_errors=1`、E_ALL、非公�
 入力資料は検証用URLと同じフォルダーの`acceptance-input/日本語.txt`（UTF-8／LF）と`acceptance-input/empty.txt`（0 byte）。端末へ保存後、アプリへアップロードする操作。管理対象DIRは公開外の空のfiles、公開された入力資料とは別の場所。初期一覧の空表示が正常な状態。
 
 テキストのブラウザー保存が困難な場合は、[入力資料ZIP](verification/stage5/2026-10-24/acceptance-input.zip)を保存して解凍する方法。[ZIPのSHA-256](verification/stage5/2026-10-24/acceptance-input-SHA256SUMS)と、元の配備パッケージ内の2ファイルとのハッシュ一致確認済み。ZIP自体ではなく、解凍した`日本語.txt`と`empty.txt`をアプリからアップロードする手順。試験入力の内容・転送経路・判定基準の変更なし。
+
+### Windows側での転送後の内容確認
+
+Chromeのダウンロード先がWindows内の場合、Windows側のPowerShellでの計算。WSLからSSH接続したUbuntu・さくら上のファイルとの取り違え防止。`Windowsキー＋R`から`powershell`を起動後、次の1行の実行。選択画面でアプリからダウンロードした2ファイルをCtrlキー併用で選択。ファイルへの書込みなし。
+
+```powershell
+Add-Type -AssemblyName System.Windows.Forms; $ftDialog = New-Object System.Windows.Forms.OpenFileDialog; $ftDialog.Multiselect = $true; if ($ftDialog.ShowDialog() -eq 'OK') { Get-FileHash -Algorithm SHA256 -LiteralPath $ftDialog.FileNames | Format-List Path,Hash }; $ftDialog.Dispose()
+```
+
+比較対象は[配布元マニフェスト](verification/stage5/2026-10-24/preview/manifest.json)の入力ファイルSHA-256。`日本語.txt`は`6bb6a2b9c3419a359d34f0b4aea0deae66b360bd4bf7255e4c844dbeb0e9f83e`、`empty.txt`は`e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`。ハッシュ文字列の大文字・小文字の区別なし。報告対象はファイル名とHash値のみ、Windows利用者名を含むフルパスの提示不要。
+
+根拠：[Get-FileHash](https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.utility/get-filehash?view=powershell-5.1)、[OpenFileDialog](https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.openfiledialog?view=windowsdesktop-9.0)。手順の整備と、利用者PCでの実行結果の受領との区別。
 
 環境診断の`ft-php-check-...`と検証版の`ft-stage5-.../index.php`は別のURL。前者への`acceptance-input/`追加では入力ファイルの取得不可。利用者の取得エラーは前者のURLでの報告、アプリのダウンロード機能のFAILを示す証跡とは異なる記録。

@@ -40,7 +40,8 @@
     "client": {
       "browser": "Chrome",
       "browser_version": "未確認",
-      "os": "回答待ち"
+      "os": "Windows（詳細版未確認）",
+      "ssh_route": "Windows上のWSL Ubuntuから別のUbuntuを経由してさくらへSSH接続、利用者回答による記録"
     },
     "SA-502": {
       "installation_command": "実行済みとの回答。その後の利用者CLI出力でft-stage5配下のindex.php配置を確認",

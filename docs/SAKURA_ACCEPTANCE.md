@@ -13,7 +13,7 @@ session, json, PDO, pdo_sqlite, zip, openssl, curl: true
 upload_max_filesize=5M / post_max_size=8M / memory_limit=128M
 ```
 
-CLIとWeb情報の利用者提供出力による確認済み。Web側はPHP 8.3.36、cgi-fcgi、FreeBSD 13.0-RELEASE-p15、HTTPS=on。session／json／PDO／pdo_sqlite／zip／openssl／curlはすべて有効。Web側upload_max_filesizeとpost_max_sizeは1024M、memory_limitは128M、max_execution_timeは30秒。display_errorsとlog_errorsは無効、opcache.enableとopcache.validate_timestampsは有効。CLIとWebで異なる容量上限の記録。診断ページ削除の実施結果は未受領。最初の複数行コマンドの改行消失による`uname`引数エラー、`&&`連結後の正常取得。
+CLIとWeb情報の利用者提供出力による確認済み。Web側はPHP 8.3.36、cgi-fcgi、FreeBSD 13.0-RELEASE-p15、HTTPS=on。session／json／PDO／pdo_sqlite／zip／openssl／curlはすべて有効。Web側upload_max_filesizeとpost_max_sizeは1024M、memory_limitは128M、max_execution_timeは30秒。display_errorsとlog_errorsは無効、opcache.enableとopcache.validate_timestampsは有効。CLIとWebで異なる容量上限の記録。診断ページ削除は利用者回答による確認済み。最初の複数行コマンドの改行消失による`uname`引数エラー、`&&`連結後の正常取得。
 
 Web確認用の`tools/sakura-probe.php`はCLI専用。既存の公開ディレクトリと対応HTTPS URLを引数として、乱数付きの新規ディレクトリとPHPファイルを排他的に作成する機能。30分の表示期限、選択した実行環境情報だけのJSON出力、認証情報・Cookie・環境変数・phpinfoの出力なし。既存Basic認証の配下ならブラウザーでの既存認証が必要な構成。
 
@@ -52,11 +52,11 @@ php tools/sakura-probe.php '/実際の公開ディレクトリ' 'https://実際�
 |---|---|
 | SA-501 CLI側環境情報 | 取得済み |
 | SA-501 Web側環境情報 | 利用者提供出力によるPASS、cgi-fcgi／必要拡張／HTTPSの確認 |
-| SA-502 分離配置・基本受入 | 実施中・全体判定未実施。Windows上のChromeでの日本語・空ファイル転送は、利用者提供SHA-256と配布元の一致によるPASS。Ubuntu Chromeの基本操作・認証62比較もPASS、PHPログの内部確認待ち。Windows側の詳細版は未確認 |
-| SA-503 任意機能・権限 | ログ・CSV・ZIP64比較、直接URL保護6比較はPASS。非公開配置・権限・PHPログのCLI確認待ち、全体判定未実施 |
+| SA-502 分離配置・基本受入 | PASS。Windows転送2ファイルのSHA-256一致、Ubuntu Chromeの基本操作・認証62比較、利用者提供の操作後PHPログ追加行0件。Windows側の詳細版は未確認 |
+| SA-503 任意機能・権限 | PASS。ログ・CSV・ZIP64比較、直接URL保護6比較、利用者提供CLI出力による非公開配置・権限・PHPログの確認 |
 | 既存本番データ移行・本番切替 | 対象外、段階6の前提確認待ち |
 
-実機の必要範囲が未実施の間は段階5全体の受入完了としない扱い。
+[総合受入記録](verification/stage5/2026-10-24/sakura-acceptance.json)によるSA-501〜503のPASS。Web自動操作132比較とサーバー内部16比較の計148比較、Windows転送・環境情報・ツール自己検証とは別集計。段階5全体は8時間絶対期限TS-515／516の結果待ち。診断ページの後片付けは利用者回答による削除済み確認。
 
 [転送の照合記録](verification/stage5/2026-10-24/sakura-transfer.json)。実際の入力名は、後述の分離配備パッケージに含む`日本語.txt`と`empty.txt`。手順6の一般例にある`acceptance-`接頭辞とは異なる実施名の記録。配布元マニフェストと利用者のPowerShell出力に基づく内容比較、端末フルパスの非収録。
 
@@ -138,4 +138,6 @@ php tools/sakura-verify.php 検証版公開フォルダー 非公開配置の親
 
 配備48ファイルのSHA-256、公開外のデータ配置、設定0600・非公開親0700・ログ0600、設定内の保存先とSQLiteヘッダー、PHPログのセットアップ確認行以外の行数の確認。設定PHPの実行、DB書込み、ファイル内容変更なし。設定本文・パスワード・ログ本文・フルパスの出力なし。ログに追加行がある場合はFAIL、空のログと確認行のみの場合は診断通知なしの判定。
 
-PHP 8.3／8.5の人工fixtureで、正常状態・ログ追加行・設定権限不一致・ソース不一致・検証用以外のディレクトリ拒否の計10自己検証のPASS。[自己検証記録](verification/stage5/2026-10-24/sakura-ui/verifier-selftest.json)。このツールの自己検証と、さくら実機での実行結果との区別。実機出力は未受領。
+PHP 8.3／8.5の人工fixtureで、正常状態・ログ追加行・設定権限不一致・ソース不一致・検証用以外のディレクトリ拒否の計10自己検証のPASS。[自己検証記録](verification/stage5/2026-10-24/sakura-ui/verifier-selftest.json)。このツールの自己検証と、さくら実機での実行結果との区別。2026年10月24日09:54:05 JSTの利用者提供実機出力は16比較すべてPASS。
+
+[サーバー内部の実機出力](verification/stage5/2026-10-24/sakura-server.json)による配備48ファイルのSHA-256一致、非公開親・保存先0700、設定・SQLite・ログ0600の確認。PHPログはセットアップ確認行以外0行、確認行だけのSHA-256とも一致。実機Web操作終了後のログ検査。利用者によるCLI実行結果の受領であり、実行者の直接SSH実測とは異なる証跡源。

@@ -1,0 +1,69 @@
+{
+  "assessed_at_utc": "2026-10-24T00:54:05+00:00",
+  "application_source_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+  "environment": "さくらスタンダード／FreeBSD 13.0-RELEASE-p15／Web PHP 8.3.36 cgi-fcgi",
+  "verifier": {
+    "source_commit": "a4a4b5a3361775524c7ebed190c42e3fd0940fef",
+    "path": "tools/sakura-verify.php",
+    "sha256": "35b1a356ef2cc5198d22286743b3279f055ffc8e00b9855fdf1500cb2ffe91a9"
+  },
+  "evidence_sources": {
+    "web_environment": "利用者提供のWeb診断出力",
+    "windows_transfer": "利用者提供のWindows Chrome操作報告とPowerShell SHA-256出力",
+    "browser_automation": "実行者のUbuntu Chromeから実機HTTPS画面への直接操作",
+    "server_verification": "利用者がさくらSSH端末で実行したCLI確認ツールのJSON出力。実行者による直接SSH実測ではない記録"
+  },
+  "cases": [
+    {
+      "case_id": "SA-501",
+      "name": "さくら環境情報",
+      "verdict": "PASS",
+      "evidence": [
+        "sakura-environment.json"
+      ]
+    },
+    {
+      "case_id": "SA-502",
+      "name": "さくら基本受入",
+      "verdict": "PASS",
+      "evidence": [
+        "sakura-transfer.json",
+        "sakura-ui/basic.json",
+        "sakura-server.json"
+      ],
+      "basis": "分離配置、通常認証、転送内容、作成・2種保存・複製・改名・移動・日本語検索・削除・ログアウト、操作後PHPログ追加行0件の確認"
+    },
+    {
+      "case_id": "SA-503",
+      "name": "さくら任意機能・権限",
+      "verdict": "PASS",
+      "evidence": [
+        "sakura-ui/plugins.json",
+        "sakura-ui/protection.json",
+        "sakura-server.json"
+      ],
+      "basis": "有効化したログ・CSV・ZIPの実操作、公開外保存、設定・SQLite・PHPログの配置と権限、直接URL保護の確認"
+    }
+  ],
+  "comparison_counts": {
+    "browser_automation": 132,
+    "server_verification": 16,
+    "total": 148,
+    "note": "画面側と内部確認の比較項目数。先行Windows転送2ハッシュ・環境情報・ツール自己検証10件とは別集計"
+  },
+  "pending": {
+    "stage5": "8時間絶対期限TS-515／516の完了結果",
+    "stage6": "既存設定・保存ファイル・DBの移行、本番切替、バックアップ／復元、正式配布"
+  },
+  "limits": [
+    "既存本番データの移行試験を含めない範囲",
+    "実機での複数ユーザー・負荷・大量データ試験を含めない範囲",
+    "CLI検証の成功をWebのSAPI確認へ代用しない扱い"
+  ],
+  "privacy": "資格情報・本番設定・実URL・サーバーのフルパスの非収録",
+  "probe_cleanup": {
+    "status": "削除済み",
+    "source": "利用者の選択肢1回答、2026-10-24",
+    "directly_observed": false
+  }
+}

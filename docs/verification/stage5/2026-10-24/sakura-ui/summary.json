@@ -28,8 +28,9 @@
     }
   ],
   "total_checks": 132,
-  "overall_SA_502": "PHPログ確認待ち、全体判定未実施",
-  "overall_SA_503": "サーバー内配置・権限・PHPログ確認待ち、全体判定未実施",
+  "overall_SA_502": "PASS。後続の利用者提供PHPログ結果との総合判定",
+  "overall_SA_503": "PASS。後続の利用者提供サーバー内配置・権限・PHPログ結果との総合判定",
   "credential_cleanup": "ブラウザー試験終了後に本人限定の資格情報ファイル・親ディレクトリを削除",
-  "artifacts_privacy": "資格情報・実URL・サーバーフルパスの公開記録への収録なし"
+  "artifacts_privacy": "資格情報・実URL・サーバーフルパスの公開記録への収録なし",
+  "combined_evidence": "../sakura-acceptance.json"
 }

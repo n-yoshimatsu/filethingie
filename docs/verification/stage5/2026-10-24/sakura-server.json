@@ -1,0 +1,109 @@
+{
+  "scope": "SA-502／SA-503のサーバー内配置・権限・PHPログ確認",
+  "checked_at_utc": "2026-10-24T00:54:05+00:00",
+  "php": "8.3.36",
+  "sapi": "cli",
+  "source_files": 48,
+  "checks": [
+    {
+      "name": "配備記録のソースコミット",
+      "actual": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "expected": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "verdict": "PASS"
+    },
+    {
+      "name": "公開・非公開配置の記録一致",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "配備48ファイルのSHA-256不一致一覧",
+      "actual": [],
+      "expected": [],
+      "verdict": "PASS"
+    },
+    {
+      "name": "非公開親ディレクトリの権限",
+      "actual": "0700",
+      "expected": "0700",
+      "verdict": "PASS"
+    },
+    {
+      "name": "管理ファイル保存先の分離",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "管理ファイル保存先の権限",
+      "actual": "0700",
+      "expected": "0700",
+      "verdict": "PASS"
+    },
+    {
+      "name": "config.phpの通常ファイル確認",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "config.phpの権限",
+      "actual": "0600",
+      "expected": "0600",
+      "verdict": "PASS"
+    },
+    {
+      "name": "php-error.logの通常ファイル確認",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "php-error.logの権限",
+      "actual": "0600",
+      "expected": "0600",
+      "verdict": "PASS"
+    },
+    {
+      "name": "deployment.jsonの通常ファイル確認",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "deployment.jsonの権限",
+      "actual": "0600",
+      "expected": "0600",
+      "verdict": "PASS"
+    },
+    {
+      "name": "設定内の保存先・DB・PHPログの非公開配置",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "SQLiteの通常ファイル確認",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "SQLiteのヘッダー",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "PHPログのセットアップ確認行以外の行数",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    }
+  ],
+  "php_log_sha256": "28c353237a190f13c0b99429858b2aefba7a572e822be5c1d3201284c76cd552",
+  "sqlite_mode": "0600",
+  "verdict": "PASS",
+  "privacy": "パスワード・設定本文・DB内容・ログ本文・サーバーのフルパスの非出力"
+}

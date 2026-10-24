@@ -1,0 +1,27 @@
+{
+  "case_id": "SA-605",
+  "name": "さくらのBasic認証リハーサル配置・照合",
+  "verdict": "PASS",
+  "evidence_origin": "利用者提供のCLI出力。直接SSH実行ではない記録",
+  "kit_commit": "167ec018d79feeeec0c4754d0646c49fc72b7b9a",
+  "kit_sha256": "92a2942c441b766360000218a118bdeed4506b6a724acb35b2370bcfa9984c8a",
+  "result": {
+    "scope": "段階6 保全コピーからのBasic認証だけの移行リハーサル配置。既存アプリの切替なし",
+    "checked_at_utc": "2026-10-24T13:45:33+00:00",
+    "php": "8.3.36",
+    "verdict": "PREPARED",
+    "rehearsal_id": "<private-rehearsal-id>",
+    "preview_url": "<private-preview-url>",
+    "managed_files": 337,
+    "managed_copy_hashes_modes_mtime_match": true,
+    "configuration_executed_during_setup": false,
+    "production_existing_files_modified": false,
+    "basic_credentials_reused": true,
+    "application_login": false,
+    "display_customization_imported": true,
+    "same_name_notice_corrected": true,
+    "web_acceptance": "NOT RUN"
+  },
+  "previous_trial": "sakura-rehearsal-incomplete.json",
+  "remaining": "SA-606のWeb受入・サーバー内部確認、本番切替"
+}

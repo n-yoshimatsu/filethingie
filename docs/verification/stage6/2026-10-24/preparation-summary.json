@@ -101,14 +101,19 @@
     },
     {
       "case_id": "SA-605",
-      "verdict": "FAIL",
-      "scope": "初回実機配置の./files拒否。修正版での実機再実行待ち",
-      "evidence": "sakura-rehearsal-incomplete.json"
+      "verdict": "PASS",
+      "scope": "修正版キットによる実機配置・337ファイル照合。Web受入とは別の判定",
+      "evidence": "sakura-rehearsal-prepared.json",
+      "previous_trial": "sakura-rehearsal-incomplete.json"
     },
     {
       "case_id": "SA-606",
-      "verdict": "NOT RUN",
-      "scope": "さくらのBasic認証だけの画面・通常操作"
+      "verdict": "INCONCLUSIVE",
+      "scope": "実機Chromeの84比較一致。サーバー内配備・データ不変・ログ照合待ち",
+      "browser_verdict": "PASS",
+      "browser_checks": 84,
+      "server_verification": "NOT RUN",
+      "evidence": "sakura-rehearsal-browser.json"
     },
     {
       "case_id": "TS-612",
@@ -148,7 +153,12 @@
     "sakura-rehearsal.php": "e1878fc77d96af960ea5ea405aa8acb93cddc3a3f6acd5c13ca6a67365ee97ed",
     "stage6-rehearsal-test.php": "4a460efb3893a0a1378350e61248bf31c0be53f70b00f9638e829906b9e7a48e",
     "build-stage6-rehearsal.py": "c9135b8491610f9499a4b3ffcf4729f20a0a331afbfc8804c1a434324c07a186",
-    "stage6.cjs": "c0b80f6a446f18c223241153b769264dd9b904b6cdc44254a60e1965e1ee6d1c"
+    "stage6.cjs": "c0b80f6a446f18c223241153b769264dd9b904b6cdc44254a60e1965e1ee6d1c",
+    "sakura-rehearsal-verify.php": "249779c8059c1bb59dfc27c9de9a5863725e712c0c82b16406600eb79c6e0f06",
+    "build-stage6-verifier.py": "811c74230158369c8524c9c8879468c102ede847f6c67911ac018f41c40b22e1",
+    "sakura-credentials.py": "72a0569c89d0bcd77d1d2f35e48a020306d53dc9ea73344add12b4caefa038c4",
+    "stage6-verifier-check.php": "99a45d7033e8869f703647ac769034e1857b8873c463894ed95e178a7364dbd8",
+    "sakura-stage6.cjs": "17d2f8ba87a440390156c92e201ac9591671e71a93853bd33f3c39e7e233d0ad"
   },
   "rehearsal_application_files": {
     "LICENSE": "60be50732c7642ccb6d1df338fa8453e883e788758e0397941568e837c3c823c",
@@ -214,5 +224,19 @@
   ],
   "rehearsal_kit_sha256": "92a2942c441b766360000218a118bdeed4506b6a724acb35b2370bcfa9984c8a",
   "previous_rehearsal_kit_sha256": "75f470a892900ff097e4010343f0f8f5320868b5b2fa5851521d93d209434f7c",
-  "rehearsal_kit": "sakura-rehearsal-relative-dir.zip"
+  "rehearsal_kit": "sakura-rehearsal-relative-dir.zip",
+  "verifier_selfchecks": [
+    {
+      "php": "8.3.36",
+      "verdict": "PASS",
+      "checks": 11,
+      "evidence": "verifier-selfcheck-php83.json"
+    },
+    {
+      "php": "8.5.12",
+      "verdict": "PASS",
+      "checks": 11,
+      "evidence": "verifier-selfcheck-php85.json"
+    }
+  ]
 }

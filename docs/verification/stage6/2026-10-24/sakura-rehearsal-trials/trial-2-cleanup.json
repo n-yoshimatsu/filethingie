@@ -1,0 +1,9 @@
+{
+  "case_id": "SA-606",
+  "scope": "2回目停止時の新規試験データだけの通常UIによる後片付け",
+  "verdict": "PASS",
+  "test_directory": "<new-test-directory>",
+  "removed_test_files": 2,
+  "removed_test_directories": 2,
+  "checked_at": "2026-10-24T14:00:02.789Z"
+}

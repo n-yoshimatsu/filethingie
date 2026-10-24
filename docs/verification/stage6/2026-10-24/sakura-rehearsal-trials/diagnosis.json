@@ -1,0 +1,25 @@
+{
+  "scope": "SA-606の自動化処理の停止・修正経緯。試験条件・製品コードの変更なし",
+  "trials": [
+    {
+      "trial": 1,
+      "harness_verdict": "BLOCKED",
+      "cause": "編集画面はPOSTで描画されURLにdirがなく、操作先制限が停止。保存前の46比較一致",
+      "repair": "実際の編集フォーム内のdirとfileの確認、送信先制限の継続",
+      "cleanup": "trial-1-cleanup.json"
+    },
+    {
+      "trial": 2,
+      "harness_verdict": "FAIL",
+      "case_interpretation": "試験入力の不備による移動以降の未評価。正しい相対入力による製品の移動機能はこの試行では未検証",
+      "cause": "現在フォルダー基準の移動先欄へ管理ルート基準のパスを指定。拒否画面後のフォルダー操作待ちでタイムアウト",
+      "invalid_observation": "移動元からの除去の比較は一覧画面の存在確認なし。移動成功の根拠としての使用なし",
+      "repair": "通常UIの相対移動先指定と、各画面遷移のHTTP 200の確認",
+      "cleanup": "trial-2-cleanup.json"
+    }
+  ],
+  "final_trial": "../sakura-rehearsal-browser.json",
+  "final_browser_checks": 84,
+  "final_browser_verdict": "PASS",
+  "server_internal_verification": "NOT RUN"
+}

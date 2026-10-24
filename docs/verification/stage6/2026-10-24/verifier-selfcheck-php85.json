@@ -1,0 +1,51 @@
+{
+    "scope": "CLI照合ツールのローカル自己検証。実機SA-606とは別の記録",
+    "php": "8.5.12",
+    "verdict": "PASS",
+    "checks": [
+        {
+            "name": "配置後の正常な人工fixture",
+            "verdict": "PASS"
+        },
+        {
+            "name": "検証処理による公開・非公開ファイル変更なし",
+            "verdict": "PASS"
+        },
+        {
+            "name": "不一致検出 配備アプリファイルの不一致数",
+            "verdict": "PASS"
+        },
+        {
+            "name": "不一致検出 複製データの内容・権限・更新時刻の不一致数",
+            "verdict": "PASS"
+        },
+        {
+            "name": "不一致検出 非公開設定の生成時内容との一致",
+            "verdict": "PASS"
+        },
+        {
+            "name": "不一致検出 PHPログのバイト数",
+            "verdict": "PASS"
+        },
+        {
+            "name": "設定権限の不一致検出",
+            "verdict": "PASS"
+        },
+        {
+            "name": "試験ファイル残存の検出",
+            "verdict": "PASS"
+        },
+        {
+            "name": "シンボリックリンクの拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "人工fixtureの後片付け・復元一致",
+            "verdict": "PASS"
+        },
+        {
+            "name": "復元後の再照合",
+            "verdict": "PASS"
+        }
+    ]
+}

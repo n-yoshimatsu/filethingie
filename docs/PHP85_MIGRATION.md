@@ -1,6 +1,6 @@
 # File Thingie PHP 8.3とPHP 8.5への移行計画
 
-2026年10月25日の最新状況：段階6の本番切替・受入完了。Chrome87項目と内部7項目の計94項目PASS、保存337ファイルと停止時バックアップの一致、既存Basic認証の継続。正式タグ・GitHub Releaseは準備中。[最新結果](STAGE6_REPORT.md)、[導入・更新・復元](RELEASE_GUIDE.md)。以下の各段階の未確認記載は当時の記録。
+2026年10月25日の最新状況：段階6の本番切替・受入完了。Chrome87項目と内部7項目の計94項目PASS、保存337ファイルと停止時バックアップの一致、既存Basic認証の継続。[正式版php83-85-20261025](https://github.com/n-yoshimatsu/filethingie/releases/tag/php83-85-20261025)のタグ・GitHub Release公開済み、段階6完了。[最新結果](STAGE6_REPORT.md)、[導入・更新・復元](RELEASE_GUIDE.md)。以下の各段階の未確認記載は当時の記録。
 
 File Thingie 2.5.7のファイル管理機能をPHP 8.3とPHP 8.5で利用できるようにするための移行計画です。
 既存の基本操作と設定をできるだけ維持し、互換性修正、認証・ファイル操作の見直し、機能検証を段階的に行います。

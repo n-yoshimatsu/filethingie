@@ -33,10 +33,10 @@ File Thingie was one of my very first PHP projects and it's going on github so I
 - [段階5の完了結果・CI・証跡](docs/STAGE5_REPORT.md)
 - [さくら・FreeBSD受入手順](docs/SAKURA_ACCEPTANCE.md)
 
-段階6の本番切替・受入が完了。既存のBasic認証、表示、保存先とURLを維持し、Chrome87項目と内部照合7項目の計94項目がPASSです。保存337ファイルと停止時バックアップの一致、PHPログ0バイトを最終照合時に確認しました。正式配布のタグ・GitHub Releaseは準備中です。
+段階6の本番切替・受入が完了。既存のBasic認証、表示、保存先とURLを維持し、Chrome87項目と内部照合7項目の計94項目がPASSです。保存337ファイルと停止時バックアップの一致、PHPログ0バイトを最終照合時に確認しました。[正式版php83-85-20261025](https://github.com/n-yoshimatsu/filethingie/releases/tag/php83-85-20261025)を公開し、段階6まで完了しました。
 
 - [本番移行・受入の結果](docs/STAGE6_REPORT.md)
 - [導入・更新・復元手順](docs/RELEASE_GUIDE.md)
 - [配布版の変更点と検証範囲](docs/RELEASE_NOTES.md)
-- [本番受入版の配布ZIP](docs/releases/2026-10-25/filethingie-php83-85-20261025.zip)・[SHA-256](docs/releases/2026-10-25/SHA256SUMS)
+- [正式版php83-85-20261025](https://github.com/n-yoshimatsu/filethingie/releases/tag/php83-85-20261025)（配布ZIP・SHA-256・manifest）
 - [移行全体の手順と状況](docs/STAGE6_MIGRATION.md)

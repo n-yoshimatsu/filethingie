@@ -7,12 +7,14 @@
   "package_check_count": 8,
   "assets_directory": "docs/releases/2026-10-25",
   "archive_sha256": "2ba7ea7b961ec7a4dea9743203687b1ab7032bb24877296eaf424fbdc4ebccf4",
-  "tag_published": false,
-  "github_release_published": false,
-  "publication_status": "PREPARED",
-  "remaining_requirement": "GitHub Release作成に使用するCLIの再認証。GitHubプラグインの既存機能にRelease・タグ作成なし",
+  "tag_published": true,
+  "github_release_published": true,
+  "publication_status": "PUBLISHED",
+  "remaining_requirement": null,
   "requires_production_redeployment": false,
   "release_target_commit": "ba9db1478380cf7ee2a7bee81c02326e4af0eb3e",
   "ci_verdict": "PASS",
-  "ci_evidence": "release-ci.json"
+  "ci_evidence": "release-ci.json",
+  "publication_evidence": "release-publication.json",
+  "release_url": "https://github.com/n-yoshimatsu/filethingie/releases/tag/php83-85-20261025"
 }

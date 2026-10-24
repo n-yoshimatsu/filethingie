@@ -1,6 +1,6 @@
 # PHP 8.3／8.5配布候補
 
-状態：段階5合格時点の旧配布候補を固定証跡として保持。後続の表示対応を含む本番移行は完了。現在の配布版は[リリースノート](RELEASE_NOTES.md)と[導入・更新・復元手順](RELEASE_GUIDE.md)を参照。正式タグ・GitHub Releaseは準備中。以下は旧候補の記録。
+状態：段階5合格時点の旧配布候補を固定証跡として保持。後続の表示対応を含む本番移行は完了。現在の配布版は[リリースノート](RELEASE_NOTES.md)と[導入・更新・復元手順](RELEASE_GUIDE.md)を参照。[正式版php83-85-20261025](https://github.com/n-yoshimatsu/filethingie/releases/tag/php83-85-20261025)のタグ・GitHub Release公開済み、段階6完了。以下は旧候補の記録。
 
 アプリ固定元：`3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4`。
 `app/index.php`は固定元`ft2.php`のバイト単位の複製。PHP 8.3.36／8.5.12でのアプリ検証、さくらPHP 8.3.36／cgi-fcgiでの分離配置受入済み。PHP 8.5のさくら実機検証は対象外。

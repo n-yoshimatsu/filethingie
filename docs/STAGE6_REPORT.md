@@ -1,6 +1,6 @@
 # 段階6 本番移行・受入・配布準備の結果
 
-2026年10月25日更新。本番切替SA-608と本番受入SA-609はPASS、通常利用の再開案内済み。正式タグ・GitHub Releaseは準備中。以下の準備段階の未実施記載は各時点の経緯、最新結果は末尾の本番受入節。
+2026年10月25日更新。本番切替SA-608と本番受入SA-609はPASS、通常利用の再開案内済み。[正式版php83-85-20261025](https://github.com/n-yoshimatsu/filethingie/releases/tag/php83-85-20261025)のタグ・GitHub Release公開済み、段階6完了。以下の準備段階の未実施記載は各時点の経緯、最新結果は末尾の本番受入・正式公開節。
 
 ## 検証済みの範囲
 
@@ -56,9 +56,9 @@ docker compose run --rm --no-deps -T -v "$PWD:/workspace:ro" --entrypoint php ph
 docker compose run --rm --no-deps -T -v "$PWD:/workspace:ro" --entrypoint php php85 /workspace/tools/stage6-backup-test.php /workspace/artifacts/stage6/reproduce-kit
 ```
 
-## 残る作業
+## 完了状況
 
-正式タグとGitHub Releaseの公開。本番の最終停止バックアップ・切替・再確認は完了。現在の公開URL・Basic認証・既存保存データ・表示変更の維持確認済み。[表示差分の確認手順](STAGE6_DISPLAY.md)。
+正式タグとGitHub Releaseの公開・照合完了。段階6の予定作業完了。本番の最終停止バックアップ・切替・再確認は完了。現在の公開URL・Basic認証・既存保存データ・表示変更の維持確認済み。[表示差分の確認手順](STAGE6_DISPLAY.md)。
 
 認証の未解決参照は取得した事実として記録、現在の認証不良とする断定なし。旧PHPアプリを戻してもPHP 8.3での稼働回復とは別問題のため、旧ソースの保全とサービス復旧の区別。
 
@@ -154,7 +154,7 @@ Web操作終了時点では、サーバー内の配備ファイル・複製337�
 
 同じ入力からのZIP再現、受入版一致、ライセンス、非混入、全ファイルmanifest、手順、SHA-256、既存出力への上書き拒否の8項目PASS。[照合証跡](verification/stage6/2026-10-25/release-package.json)、[配布ZIP](releases/2026-10-25/filethingie-php83-85-20261025.zip)、[SHA-256](releases/2026-10-25/SHA256SUMS)、[リリースノート](RELEASE_NOTES.md)、[導入・更新・復元手順](RELEASE_GUIDE.md)。本番の再配置は不要。
 
-正式タグ・GitHub Releaseは未公開。準備済み資材と公開操作の区別。[公開準備状況](verification/stage6/2026-10-25/release-readiness.json)。GitHubプラグインにRelease作成機能なし、CLI認証は無効のため再認証待ち。
+この資材照合時点では正式タグ・GitHub Releaseは未公開。CLI再認証後の公開結果は末尾。[公開状況](verification/stage6/2026-10-25/release-readiness.json)。
 
 再現コマンド（新規出力先の指定）：
 
@@ -163,3 +163,11 @@ python3 tools/release-package-check.py artifacts/stage6/reproduce-release
 ```
 
 配布準備コミットba9db147の総合CIもPHP 8.3／8.5の両ジョブsuccess。[CI記録](verification/stage6/2026-10-25/release-ci.json)。公開先から再取得したZIPのSHA-256・CRCも一致。
+
+## 正式公開と段階6の完了
+
+2026年10月25日01:37:34 JST、[正式版php83-85-20261025](https://github.com/n-yoshimatsu/filethingie/releases/tag/php83-85-20261025)のタグ・GitHub Release公開。タグの対象は総合CI成功済みba9db1478380cf7ee2a7bee81c02326e4af0eb3e。Releaseはdraft=false・prerelease=false、配布ZIP・SHA256SUMS・manifest.json・RELEASE_NOTES.mdの4ファイル添付。
+
+全4添付物の未認証ダウンロード成功、ローカル資材とのバイト単位の一致。配布ZIPのSHA-256は`2ba7ea7b961ec7a4dea9743203687b1ab7032bb24877296eaf424fbdc4ebccf4`。[公開照合記録](verification/stage6/2026-10-25/release-publication.json)。本番受入済みアプリと同一内容、本番への再配置なし。
+
+棚卸し・保全・隔離復元・表示移行・リハーサル・停止時バックアップ・本番切替・受入・配布・手順整備の完了。保管対象と将来の後片付け対象は前節の記録。本番で参照する非公開設定フォルダーと最終バックアップの継続保管、通常利用可能な状態。

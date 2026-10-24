@@ -1,0 +1,70 @@
+{
+  "release": "php83-85-20261025",
+  "tag_commit": "ba9db1478380cf7ee2a7bee81c02326e4af0eb3e",
+  "tag_target_matches": true,
+  "anonymous_asset_downloads": [
+    {
+      "name": "RELEASE_NOTES.md",
+      "bytes": 2418,
+      "sha256": "74071d85d906506e859534cdd4d04288346617f69ea2c588bf1e30f490ae20fe",
+      "verdict": "PASS"
+    },
+    {
+      "name": "SHA256SUMS",
+      "bytes": 100,
+      "sha256": "5d473e5bf9907eb69c449ced9019e66d1823be105c6aeeb3113c62667831f88f",
+      "verdict": "PASS"
+    },
+    {
+      "name": "filethingie-php83-85-20261025.zip",
+      "bytes": 167528,
+      "sha256": "2ba7ea7b961ec7a4dea9743203687b1ab7032bb24877296eaf424fbdc4ebccf4",
+      "verdict": "PASS"
+    },
+    {
+      "name": "manifest.json",
+      "bytes": 9430,
+      "sha256": "430c0261c6e4c1670e52276faba17aeebf1ca9354acdc8acef2b4c8dd9b08ad2",
+      "verdict": "PASS"
+    }
+  ],
+  "verdict": "PASS",
+  "release_id": 422850328,
+  "url": "https://github.com/n-yoshimatsu/filethingie/releases/tag/php83-85-20261025",
+  "published_at_utc": "2026-10-24T16:37:34Z",
+  "draft": false,
+  "prerelease": false,
+  "assets": [
+    {
+      "id": 672764544,
+      "name": "filethingie-php83-85-20261025.zip",
+      "size": 167528,
+      "digest": "sha256:2ba7ea7b961ec7a4dea9743203687b1ab7032bb24877296eaf424fbdc4ebccf4",
+      "url": "https://github.com/n-yoshimatsu/filethingie/releases/download/php83-85-20261025/filethingie-php83-85-20261025.zip"
+    },
+    {
+      "id": 672764542,
+      "name": "manifest.json",
+      "size": 9430,
+      "digest": "sha256:430c0261c6e4c1670e52276faba17aeebf1ca9354acdc8acef2b4c8dd9b08ad2",
+      "url": "https://github.com/n-yoshimatsu/filethingie/releases/download/php83-85-20261025/manifest.json"
+    },
+    {
+      "id": 672764547,
+      "name": "RELEASE_NOTES.md",
+      "size": 2418,
+      "digest": "sha256:74071d85d906506e859534cdd4d04288346617f69ea2c588bf1e30f490ae20fe",
+      "url": "https://github.com/n-yoshimatsu/filethingie/releases/download/php83-85-20261025/RELEASE_NOTES.md"
+    },
+    {
+      "id": 672764545,
+      "name": "SHA256SUMS",
+      "size": 100,
+      "digest": "sha256:5d473e5bf9907eb69c449ced9019e66d1823be105c6aeeb3113c62667831f88f",
+      "url": "https://github.com/n-yoshimatsu/filethingie/releases/download/php83-85-20261025/SHA256SUMS"
+    }
+  ],
+  "scope": "正式タグ・GitHub Release・匿名での全添付物取得の照合",
+  "published_at_jst": "2026-10-25T01:37:34+09:00",
+  "production_redeployment_performed": false
+}

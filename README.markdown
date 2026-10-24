@@ -33,4 +33,4 @@ File Thingie was one of my very first PHP projects and it's going on github so I
 - [段階5の完了結果・CI・証跡](docs/STAGE5_REPORT.md)
 - [さくら・FreeBSD受入手順](docs/SAKURA_ACCEPTANCE.md)
 
-段階6は本番棚卸し・非公開の保全コピーが完了、配布候補と保全・隔離復元ツールを準備済み。既存のBasic認証だけの利用方式を維持する方針。現行2ファイルの差分確認と実機隔離復元を進める段階、本番切替・正式配布は未実施。[移行・バックアップ・復元の手順と状況](docs/STAGE6_MIGRATION.md)、[準備段階の結果](docs/STAGE6_REPORT.md)。
+段階6は本番棚卸し・非公開の保全コピー・実機隔離復元が完了。既存のBasic認証だけの利用方式を維持する方針。現行2ファイルの表示・デザイン差分を確認する段階、本番切替・正式配布は未実施。[移行・バックアップ・復元の手順と状況](docs/STAGE6_MIGRATION.md)、[準備段階の結果](docs/STAGE6_REPORT.md)。

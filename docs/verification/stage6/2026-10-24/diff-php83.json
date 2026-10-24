@@ -1,0 +1,142 @@
+{
+  "case_id": "TS-606",
+  "name": "既存表示差分の抽出",
+  "php": "8.3.36",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "name": "差分ありをエラーにしない終了状態",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "name": "PHP診断なし",
+      "actual": "",
+      "expected": "",
+      "verdict": "PASS"
+    },
+    {
+      "name": "比較完了",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "index.phpの差分検出",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "index.phpの通常表示差分の出力",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "css/ft.cssの差分検出",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "css/ft.cssの通常表示差分の出力",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "タイトル変更の抽出",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "色変更の抽出",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "ホームパスの非出力",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "設定本文の非出力",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "設定の非実行",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "比較元内容の不変",
+      "actual": "b1b4447a5a3a8bb9490c1146470c47fe489950378fa400f39105feb1ef5db11c",
+      "expected": "b1b4447a5a3a8bb9490c1146470c47fe489950378fa400f39105feb1ef5db11c",
+      "verdict": "PASS"
+    },
+    {
+      "name": "自作した一時ファイルの後片付け",
+      "actual": [],
+      "expected": [],
+      "verdict": "PASS"
+    },
+    {
+      "name": "CRLFだけの差を無視",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "CSSのCRLFだけの差を無視",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "認証語検出時の差分保留",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "保留した差分の非出力",
+      "actual": [],
+      "expected": [],
+      "verdict": "PASS"
+    },
+    {
+      "name": "検出した秘密文字列の非出力",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "保全コピーの改変拒否",
+      "actual": 2,
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "name": "改変時に比較完了を主張しない結果",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "name": "比較元リンクの拒否",
+      "actual": 2,
+      "expected": 2,
+      "verdict": "PASS"
+    }
+  ],
+  "tool_sha256": "1b1fa8aa840e0a345fdbfde1ab5912ca2682d6ce13d2b5d9e6bf11feb3272469",
+  "harness_sha256": "addcdf404e696e8bc7933fadbf63726d2f825d56232d589fe2058856313a6aee"
+}

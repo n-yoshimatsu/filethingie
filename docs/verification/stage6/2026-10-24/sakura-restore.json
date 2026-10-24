@@ -1,0 +1,24 @@
+{
+  "case_id": "SA-603",
+  "name": "本番保全コピーの隔離復元",
+  "verdict": "PASS",
+  "evidence_origin": "利用者がチャットへ貼付したJSON。エージェントによる直接SSH実行ではない記録",
+  "redaction": "保全・復元の識別名を非公開化",
+  "result": {
+    "scope": "段階6 新規の非公開ディレクトリへの隔離復元。公開・本番上書き・アプリ実行なし",
+    "checked_at_utc": "2026-10-24T12:28:21+00:00",
+    "php": "8.3.36",
+    "verdict": "PASS",
+    "backup_id": "<private-backup-id>",
+    "restore_id": "<private-restore-id>",
+    "application_files": 543,
+    "extra_files": 1,
+    "content_modes_mtime_match": true,
+    "production_modified": false
+  },
+  "backup_identity_matches_previous_result": true,
+  "limitations": [
+    "内容・通常権限・更新時刻の復元照合。元所有者・ACL・拡張属性・ハードリンク関係の復元は対象外",
+    "旧アプリのWeb実行・サービス復旧・本番切替の未実施"
+  ]
+}

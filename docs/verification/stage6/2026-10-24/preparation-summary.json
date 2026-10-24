@@ -1,5 +1,5 @@
 {
-  "scope": "段階6 棚卸し・配布候補・保全ツールと本番保全コピーの確認。実機隔離復元と本番切替は未実施",
+  "scope": "段階6 棚卸し・配布候補・本番保全コピー・隔離復元の確認。表示差分確認と本番切替は未実施",
   "results": [
     {
       "case_id": "SA-601",
@@ -16,8 +16,15 @@
     },
     {
       "case_id": "SA-603",
+      "verdict": "PASS",
+      "scope": "利用者提供の本番保全コピーの隔離復元結果のレビュー",
+      "php": "8.3.36",
+      "evidence": "sakura-restore.json"
+    },
+    {
+      "case_id": "SA-604",
       "verdict": "NOT RUN",
-      "scope": "本番保全コピーの隔離復元。利用者実行待ち"
+      "scope": "保全コピー内の表示関連2ファイルの比較・内容確認待ち"
     },
     {
       "case_id": "TS-601",
@@ -52,6 +59,20 @@
       "verdict": "PASS",
       "checks": 34,
       "evidence": "backup-php85.json"
+    },
+    {
+      "case_id": "TS-606",
+      "verdict": "PASS",
+      "php": "8.3.36",
+      "checks": 22,
+      "evidence": "diff-php83.json"
+    },
+    {
+      "case_id": "TS-607",
+      "verdict": "PASS",
+      "php": "8.5.12",
+      "checks": 22,
+      "evidence": "diff-php85.json"
     }
   ],
   "source_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
@@ -60,6 +81,9 @@
     "sakura-backup.php": "0ea76cd4ceabd6ab3754f796af1b078f7793db464baaab67e8a8637188248f4a",
     "sakura-inventory.php": "6bc4f2d72a8c0a06b87d1a76418f0ace2b126a4ea09262977bfe4aec0576ae36",
     "stage6-backup-test.php": "a5016917a60351bff25ff88055f8aac3268ae894539dab9ebd67b7b6265fa50a",
-    "stage6-package-test.py": "0c99409e597c43fc94d9257a7f818021ec7eda3f33f5f309ecec9a2a9abed17f"
+    "stage6-package-test.py": "0c99409e597c43fc94d9257a7f818021ec7eda3f33f5f309ecec9a2a9abed17f",
+    "sakura-display-diff.php": "1b1fa8aa840e0a345fdbfde1ab5912ca2682d6ce13d2b5d9e6bf11feb3272469",
+    "stage6-diff-test.php": "addcdf404e696e8bc7933fadbf63726d2f825d56232d589fe2058856313a6aee",
+    "build-stage6-diff.py": "24f41c3e12d3271ad1d83d4d67cada8ae00b1d6a17789760eccddef17d623320"
   }
 }

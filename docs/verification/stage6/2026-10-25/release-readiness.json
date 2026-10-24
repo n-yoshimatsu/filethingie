@@ -11,5 +11,8 @@
   "github_release_published": false,
   "publication_status": "PREPARED",
   "remaining_requirement": "GitHub Release作成に使用するCLIの再認証。GitHubプラグインの既存機能にRelease・タグ作成なし",
-  "requires_production_redeployment": false
+  "requires_production_redeployment": false,
+  "release_target_commit": "ba9db1478380cf7ee2a7bee81c02326e4af0eb3e",
+  "ci_verdict": "PASS",
+  "ci_evidence": "release-ci.json"
 }

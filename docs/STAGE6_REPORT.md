@@ -161,3 +161,5 @@ Web操作終了時点では、サーバー内の配備ファイル・複製337�
 ```bash
 python3 tools/release-package-check.py artifacts/stage6/reproduce-release
 ```
+
+配布準備コミットba9db147の総合CIもPHP 8.3／8.5の両ジョブsuccess。[CI記録](verification/stage6/2026-10-25/release-ci.json)。公開先から再取得したZIPのSHA-256・CRCも一致。

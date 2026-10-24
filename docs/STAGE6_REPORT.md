@@ -73,3 +73,5 @@ TS-610初回は試験用configの必須項目不足によるHTTP 500。完全な
 公開証跡の画面は人工fixture、実データ・サイト固有の表示文字列・本番認証情報の非掲載。初期のPHP構文チェックで検出した文字列連結の誤りは、機能試験開始前に修正済み。
 
 表示設定なしの既存Chrome試験TS-413／414も両PHPで各18比較PASS。[PHP 8.3証跡](verification/stage6/2026-10-24/default-browser-php83.json)、[PHP 8.5証跡](verification/stage6/2026-10-24/default-browser-php85.json)。同じソースからのキット再生成によるZIP一致、同梱PHP全ファイルの両版での構文確認も完了。
+
+更新版コミットff788bd02effa0bb4673056759b23a429a4133a8の[総合CI run 40098383165](https://github.com/n-yoshimatsu/filethingie/actions/runs/40098383165)もPHP 8.3／8.5の両ジョブsuccess。[完了記録](verification/stage6/2026-10-24/rehearsal-ci.json)。本番切替やさくらでのリハーサル実施を意味する結果ではない範囲。

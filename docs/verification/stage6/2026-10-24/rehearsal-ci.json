@@ -1,0 +1,22 @@
+{
+  "head_sha": "ff788bd02effa0bb4673056759b23a429a4133a8",
+  "run_id": 40098383165,
+  "status": "completed",
+  "conclusion": "success",
+  "url": "https://github.com/n-yoshimatsu/filethingie/actions/runs/40098383165",
+  "updated_at": "2026-10-24T13:32:02Z",
+  "jobs": [
+    {
+      "name": "integration (php85)",
+      "status": "completed",
+      "conclusion": "success",
+      "completed_at": "2026-10-24T13:32:01Z"
+    },
+    {
+      "name": "integration (php83)",
+      "status": "completed",
+      "conclusion": "success",
+      "completed_at": "2026-10-24T13:31:51Z"
+    }
+  ]
+}

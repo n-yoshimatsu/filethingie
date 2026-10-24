@@ -1,0 +1,58 @@
+[
+  {
+    "case_id": "TS-515",
+    "case": "実時間絶対期限",
+    "verdict": "PASS",
+    "started_at": "2026-10-23T23:40:44.282616+00:00",
+    "finished_at": "2026-10-24T07:40:54.667309+00:00",
+    "php": "8.3.36",
+    "environment": "Linux Apacheローカル検証環境",
+    "elapsed": {
+      "seconds": 28810.004701106
+    },
+    "active_session_checks": 94,
+    "checks": 295,
+    "requests": 99,
+    "diagnostics": [],
+    "access_log_review": {
+      "maintenance_gets": 94,
+      "maintenance_interval_seconds_min": 300.0,
+      "maintenance_interval_seconds_max": 301.0,
+      "last_authenticated_get_utc": "2026-10-24T07:30:45+00:00",
+      "final_get_utc": "2026-10-24T07:40:54+00:00",
+      "last_gap_seconds": 609.0,
+      "idle_timeout_seconds": 1800,
+      "note": "5分間隔の維持GET94回。最終認証確認は開始約7時間50分後、最終失効確認まで約10分9秒。30分無操作条件への未到達"
+    },
+    "source_files_verified": 45,
+    "test_plan_note": "開始時の試験計画をハッシュ照合して保存。後日の変更は分離配置ケースTS-517／518の追記、絶対期限の条件変更なし"
+  },
+  {
+    "case_id": "TS-516",
+    "case": "実時間絶対期限",
+    "verdict": "PASS",
+    "started_at": "2026-10-23T23:40:44.307841+00:00",
+    "finished_at": "2026-10-24T07:40:54.669577+00:00",
+    "php": "8.5.12",
+    "environment": "Linux Apacheローカル検証環境",
+    "elapsed": {
+      "seconds": 28810.0067261
+    },
+    "active_session_checks": 94,
+    "checks": 295,
+    "requests": 99,
+    "diagnostics": [],
+    "access_log_review": {
+      "maintenance_gets": 94,
+      "maintenance_interval_seconds_min": 300.0,
+      "maintenance_interval_seconds_max": 301.0,
+      "last_authenticated_get_utc": "2026-10-24T07:30:45+00:00",
+      "final_get_utc": "2026-10-24T07:40:54+00:00",
+      "last_gap_seconds": 609.0,
+      "idle_timeout_seconds": 1800,
+      "note": "5分間隔の維持GET94回。最終認証確認は開始約7時間50分後、最終失効確認まで約10分9秒。30分無操作条件への未到達"
+    },
+    "source_files_verified": 45,
+    "test_plan_note": "開始時の試験計画をハッシュ照合して保存。後日の変更は分離配置ケースTS-517／518の追記、絶対期限の条件変更なし"
+  }
+]

@@ -56,7 +56,7 @@ php tools/sakura-probe.php '/実際の公開ディレクトリ' 'https://実際�
 | SA-503 任意機能・権限 | PASS。ログ・CSV・ZIP64比較、直接URL保護6比較、利用者提供CLI出力による非公開配置・権限・PHPログの確認 |
 | 既存本番データ移行・本番切替 | 対象外、段階6の前提確認待ち |
 
-[総合受入記録](verification/stage5/2026-10-24/sakura-acceptance.json)によるSA-501〜503のPASS。Web自動操作132比較とサーバー内部16比較の計148比較、Windows転送・環境情報・ツール自己検証とは別集計。段階5全体は8時間絶対期限TS-515／516の結果待ち。診断ページの後片付けは利用者回答による削除済み確認。
+[総合受入記録](verification/stage5/2026-10-24/sakura-acceptance.json)によるSA-501〜503のPASS。Web自動操作132比較とサーバー内部16比較の計148比較、Windows転送・環境情報・ツール自己検証とは別集計。後続のローカル8時間絶対期限TS-515／516もPASS、[段階5完了記録](verification/stage5/2026-10-24/completion.json)への反映済み。診断ページの後片付けは利用者回答による削除済み確認。
 
 [転送の照合記録](verification/stage5/2026-10-24/sakura-transfer.json)。実際の入力名は、後述の分離配備パッケージに含む`日本語.txt`と`empty.txt`。手順6の一般例にある`acceptance-`接頭辞とは異なる実施名の記録。配布元マニフェストと利用者のPowerShell出力に基づく内容比較、端末フルパスの非収録。
 

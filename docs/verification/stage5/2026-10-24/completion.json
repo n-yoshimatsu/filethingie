@@ -1,0 +1,49 @@
+{
+  "stage": 5,
+  "status": "完了",
+  "assessed_at_utc": "2026-10-24T08:46:20.737430+00:00",
+  "scope": "PHP 8.3／8.5の総合検証・CI・さくらFreeBSD受入",
+  "completion_basis": {
+    "ci_regression": {
+      "cases": 32,
+      "verdict": "PASS",
+      "source_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+      "evidence": [
+        "ci-final/",
+        "ci-runs.json"
+      ]
+    },
+    "local_preview": {
+      "cases": 2,
+      "verdict": "PASS",
+      "evidence": "summary.json中のTS-517／518"
+    },
+    "real_time_sessions": {
+      "cases": 4,
+      "verdict": "PASS",
+      "evidence": [
+        "idle-summary.json",
+        "absolute-summary.json"
+      ]
+    },
+    "sakura_acceptance": {
+      "cases": 3,
+      "verdict": "PASS",
+      "evidence": "sakura-acceptance.json"
+    },
+    "followup_ci": {
+      "conclusion": "success",
+      "evidence": "ci-followup.json"
+    },
+    "probe_cleanup": "利用者回答による削除済み確認"
+  },
+  "distinct_planned_cases": 41,
+  "counting_note": "CI32ケース、分離配置2ケース、実時間4ケース、さくら3ケース。重複したローカル通常回帰・再試行・内部比較項目との別集計",
+  "remaining_stage5": [],
+  "stage6_status": "未着手：既存設定・保存データ・DBの移行、本番切替、バックアップ／復元、正式配布",
+  "limitations": [
+    "FreeBSDの実時間8時間試験ではなく、Linux上のPHP 8.3／8.5での実時間試験",
+    "Safari・実機複数ユーザー・大量データ・FreeBSD負荷・全操作同時更新は未検証",
+    "未対応プラグインとURL取得制限等はSTAGE5_REPORT.mdの記載どおり"
+  ]
+}

@@ -39,10 +39,10 @@
     "source": "利用者回答、2026-10-24。直接操作による確認ではない記録",
     "SA-502": {
       "installation_command": "実行済みとの回答。その後の利用者CLI出力でft-stage5配下のindex.php配置を確認",
-      "login_and_empty_list": "選択肢1の回答を受領後、旧環境診断URLとの混同が判明。検証版へのログイン成功との対応は未確認",
-      "file_transfer_and_remaining_operations": "正しいリンクは開けるが保存してもファイルができないとの回答。同一バイト列の2ファイルをZIPで提供後の結果待ち",
-      "overall_verdict": "BLOCKED",
-      "blocking_reason": "入力資料の端末保存が未成立、アプリの転送操作前の阻害。アプリ転送機能のFAIL判定なし",
+      "login_and_empty_list": "先行の選択肢1回答は旧環境診断URLとの混同により単独の確認根拠として保留。その後、正しいURLとZIP入力資料の案内に続いて検証版へのアップロード完了との回答",
+      "file_transfer_and_remaining_operations": "同一バイト列の2ファイルをZIPで提供後、アップロード完了との利用者回答。アプリからのダウンロード・転送内容比較・残りの基本操作は結果待ち",
+      "overall_verdict": "実施中・判定未実施",
+      "input_preparation": "テキスト保存が成立しない状態を記録後、同一入力ZIPを提供。アップロード完了回答により入力準備の阻害解消",
       "previous_blocked": "旧環境診断URLとの混同により入力資料取得前に停止。CLIで正しい検証版配置先を確認して再開。アプリ転送機能のFAIL判定なし"
     },
     "SA-503": "NOT RUN"

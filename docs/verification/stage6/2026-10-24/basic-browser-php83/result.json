@@ -1,0 +1,299 @@
+{
+  "case_id": "TS-610",
+  "name": "Basic認証だけの画面・通常操作",
+  "service": "php83",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "label": "未認証401 index.php",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "未認証401 files/既存.txt",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "未認証401 css/ft.css",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "アプリログインなし",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "一覧表示",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "管理設定ファイルの非表示",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "ページタイトル",
+      "actual": "Fixture & files",
+      "expected": "Fixture & files",
+      "verdict": "PASS"
+    },
+    {
+      "label": "見出し文字列",
+      "actual": "会議 <&>",
+      "expected": "会議 <&>",
+      "verdict": "PASS"
+    },
+    {
+      "label": "案内文字列・HTML非実行",
+      "actual": "同じファイル名の登録は、上書きしません。\nファイル名の案内。\n日付と登録者名の追加。\n引用符 \" & <script>。",
+      "expected": "同じファイル名の登録は、上書きしません。\nファイル名の案内。\n日付と登録者名の追加。\n引用符 \" & <script>。",
+      "verdict": "PASS"
+    },
+    {
+      "label": "案内内スクリプトなし",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "配色",
+      "actual": "rgb(141, 147, 200)",
+      "expected": "rgb(141, 147, 200)",
+      "verdict": "PASS"
+    },
+    {
+      "label": "3箇所の幅",
+      "actual": [
+        "420px",
+        "280px",
+        "260px"
+      ],
+      "expected": [
+        "420px",
+        "280px",
+        "260px"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "label": "作成メニュー",
+      "actual": [
+        "folder"
+      ],
+      "expected": [
+        "folder"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "label": "空のフッター",
+      "actual": "",
+      "expected": "",
+      "verdict": "PASS"
+    },
+    {
+      "label": "favicon",
+      "actual": "favicon.ico",
+      "expected": "favicon.ico",
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 config.php",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 config.sample.php",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 .htaccess",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 files/",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "アップロード一覧 試験-日本語.txt",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接filesリンク 試験-日本語.txt",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存ファイルSHA256 試験-日本語.txt",
+      "actual": "c71ab2d50bce51190dd364e6ba4765d25cf1fa907a5c76a05fd645531fdacc96",
+      "expected": "c71ab2d50bce51190dd364e6ba4765d25cf1fa907a5c76a05fd645531fdacc96",
+      "verdict": "PASS"
+    },
+    {
+      "label": "アップロード一覧 試験-empty.txt",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接filesリンク 試験-empty.txt",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存ファイルSHA256 試験-empty.txt",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verdict": "PASS"
+    },
+    {
+      "label": "同名エラー表示",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "同名で内容不変",
+      "actual": "c71ab2d50bce51190dd364e6ba4765d25cf1fa907a5c76a05fd645531fdacc96",
+      "expected": "c71ab2d50bce51190dd364e6ba4765d25cf1fa907a5c76a05fd645531fdacc96",
+      "verdict": "PASS"
+    },
+    {
+      "label": "複製・解凍項目なし",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "空メニュー項目なし",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "label": "フォルダー作成",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "名前変更",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "編集元内容",
+      "actual": "転送確認 日本語\n",
+      "expected": "転送確認 日本語\n",
+      "verdict": "PASS"
+    },
+    {
+      "label": "編集保存内容",
+      "actual": "編集後 日本語\n",
+      "expected": "編集後 日本語\n",
+      "verdict": "PASS"
+    },
+    {
+      "label": "検索結果",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "移動元から除去",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "移動先表示",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "ファイル削除",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "空フォルダー削除",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "空ファイル削除",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "CSRFなし変更403",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "CSRF拒否で未作成",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "管理設定への削除要求拒否",
+      "actual": 400,
+      "expected": 400,
+      "verdict": "PASS"
+    },
+    {
+      "label": "管理設定ファイルの保持",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "PHPログ空",
+      "actual": "",
+      "expected": "",
+      "verdict": "PASS"
+    },
+    {
+      "label": "元の日本語内容不変",
+      "actual": "既存の日本語ファイル\n",
+      "expected": "既存の日本語ファイル\n",
+      "verdict": "PASS"
+    },
+    {
+      "label": "ブラウザーエラーなし",
+      "actual": [],
+      "expected": [],
+      "verdict": "PASS"
+    }
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "harness_sha256": "67debe0bcabdd93a873645386f1b735bcd8d2688a9fdbadc54758ceab8bdc744"
+}

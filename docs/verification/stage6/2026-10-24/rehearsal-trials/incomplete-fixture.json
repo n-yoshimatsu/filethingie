@@ -1,0 +1,30 @@
+{
+  "case_id": "TS-610",
+  "name": "Basic認証だけの画面・通常操作",
+  "service": "php83",
+  "verdict": "FAIL",
+  "checks": [
+    {
+      "label": "未認証401 index.php",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "未認証401 files/既存.txt",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "未認証401 css/ft.css",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    }
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "error": "page.goto: net::ERR_HTTP_RESPONSE_CODE_FAILURE at https://127.0.0.1:18843/app/ft-stage6-rehearsal-20261024-131625-db515a0e36/index.php\nCall log:\n\u001b[2m  - navigating to \"https://127.0.0.1:18843/app/ft-stage6-rehearsal-20261024-131625-db515a0e36/index.php\", waiting until \"networkidle\"\u001b[22m\n",
+  "harness_sha256": "5bf12d5e1ec9890755694953c79d957e3c2925a345ad8c3e98c6385992e49464"
+}

@@ -17,14 +17,14 @@ body, h1, h2, .navigation, #sidebar form #sidebar #files_list, #filelist .filede
 	color:#000;  
 }
 #filelist tr.rowhover, a:hover, h1, #sidebar h2, #filelist th, #filelist tfoot td, #filelist .hover, #filelist tr.rowhover .details span.hide {
-	background:#326532 !important;
+	background:var(--ft-accent, #326532) !important;
 	color:#fff !important;
 }
 .error {color:red;}
-.ok {color:#326532;}
+.ok {color:var(--ft-accent, #326532);}
 .hidden {display:none;}
 a {
-	color:#326532;
+	color:var(--ft-accent, #326532);
 	text-decoration:none;
 }
 a:hover {
@@ -74,7 +74,7 @@ table {
 }
 th {
   font-weight:bold;
-  background:#326532;
+  background:var(--ft-accent, #326532);
   color:#fff;
 }
 th, td {
@@ -266,7 +266,7 @@ dl#searchlist dd a:hover {
 	font-weight:bold;
 }
 #filelist tr.rowhover {
-	background:#326532;
+	background:var(--ft-accent, #326532);
 	color:#fff;
 }
 #filelist .hover, #filelist .filedetails ul li {
@@ -357,13 +357,13 @@ form#edit textarea {
 	padding-bottom:50px;
 }
 .seperator {
-	border-top:2px solid #326532;
+	border-top:2px solid var(--ft-accent, #326532);
 }
 #versioninfo {
 	display:none;
 	margin:1em 2em;
 	padding:0.5em;
-	border:2px solid #326532;
+	border:2px solid var(--ft-accent, #326532);
 	background:#ffc;
 	width:250px;
 }
@@ -374,3 +374,5 @@ form#edit textarea {
 #log_table th button { white-space:nowrap; }
 #log_table td { overflow-wrap:anywhere; max-width:360px; }
 #main form label { display:inline-block; margin:0.25em; }
+
+#site-notice-heading a {text-decoration:underline;}

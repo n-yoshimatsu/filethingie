@@ -173,7 +173,7 @@ function ftb_backup($appArg,$homeArg,$webArg,&$created) {
     ftb_write($created.'/summary.json',ftb_json($summary));
     ftb_write($created.'/COMPLETE.json',ftb_json(['manifest_sha256'=>hash('sha256',$encoded)]));return $summary;
 }
-function ftb_restore($backupArg,$homeArg,$webArg,&$created) {
+function ftb_load_backup($backupArg,$homeArg,$webArg) {
     [$home,$web]=ftb_context($homeArg,$webArg);$backup=realpath($backupArg);
     ftb_need($backup && !is_link($backupArg) && dirname($backup)===$home && !ftb_inside($backup,$web)
         && preg_match('/^\.ft-stage6-backup-\d{8}-\d{6}-[a-f0-9]{10}$/D',basename($backup)), 'A completed private backup is required.');
@@ -195,6 +195,11 @@ function ftb_restore($backupArg,$homeArg,$webArg,&$created) {
         $expectedExtra=$item['entry'];$expectedExtra['mode']=0600;
         ftb_need(ftb_entry($backup.'/extra/'.$id)===$expectedExtra,'Authentication backup mismatch.');
     }
+    return [$backup,$m];
+}
+function ftb_restore($backupArg,$homeArg,$webArg,&$created) {
+    [$home,$web]=ftb_context($homeArg,$webArg);
+    [$backup,$m]=ftb_load_backup($backupArg,$home,$web);$entries=$m['entries'];
     $created=ftb_new($home,$web,'restore');ftb_copy_tree($backup.'/app',$created.'/app',$entries,true);ftb_mkdir($created.'/extra');
     foreach ($m['extra'] as $id=>$item) { ftb_copy($backup.'/extra/'.$id,$created.'/extra/'.$id,$item['entry'],true); }
     ftb_need(ftb_tree($created.'/app')===$entries,'Restored content, modes or timestamps mismatch.');
@@ -205,6 +210,8 @@ function ftb_restore($backupArg,$homeArg,$webArg,&$created) {
         'content_modes_mtime_match'=>true,'production_modified'=>false];
     ftb_write($created.'/summary.json',ftb_json($summary));return $summary;
 }
+// Reuse validated backup reads without executing the CLI entry point.
+if (realpath($_SERVER['SCRIPT_FILENAME'] ?? '') !== __FILE__) { return; }
 $created=null;
 try {
     ftb_need($argc===5 && in_array($argv[1],['backup','restore'],true),'Usage: php sakura-backup.php backup|restore APPLICATION_OR_BACKUP HOME WEB_ROOT');

@@ -1,0 +1,150 @@
+{
+  "case_id": "TS-610",
+  "name": "Basic認証だけの画面・通常操作",
+  "service": "php83",
+  "verdict": "FAIL",
+  "checks": [
+    {
+      "label": "未認証401 index.php",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "未認証401 files/既存.txt",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "未認証401 css/ft.css",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "アプリログインなし",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "一覧表示",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "ページタイトル",
+      "actual": "Fixture & files",
+      "expected": "Fixture & files",
+      "verdict": "PASS"
+    },
+    {
+      "label": "見出し文字列",
+      "actual": "会議 <&>",
+      "expected": "会議 <&>",
+      "verdict": "PASS"
+    },
+    {
+      "label": "案内文字列・HTML非実行",
+      "actual": "同じファイル名の登録は、上書きしません。\nファイル名の案内。\n日付と登録者名の追加。\n引用符 \" & <script>。",
+      "expected": "同じファイル名の登録は、上書きしません。\nファイル名の案内。\n日付と登録者名の追加。\n引用符 \" & <script>。",
+      "verdict": "PASS"
+    },
+    {
+      "label": "案内内スクリプトなし",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "配色",
+      "actual": "rgb(141, 147, 200)",
+      "expected": "rgb(141, 147, 200)",
+      "verdict": "PASS"
+    },
+    {
+      "label": "3箇所の幅",
+      "actual": [
+        "420px",
+        "280px",
+        "260px"
+      ],
+      "expected": [
+        "420px",
+        "280px",
+        "260px"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "label": "作成メニュー",
+      "actual": [
+        "folder"
+      ],
+      "expected": [
+        "folder"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "label": "空のフッター",
+      "actual": "",
+      "expected": "",
+      "verdict": "PASS"
+    },
+    {
+      "label": "favicon",
+      "actual": "favicon.ico",
+      "expected": "favicon.ico",
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 config.php",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 config.sample.php",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 .htaccess",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 files/",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "アップロード一覧 試験-日本語.txt",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接filesリンク 試験-日本語.txt",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "クリック取得SHA256 試験-日本語.txt",
+      "actual": "b4532ae182f537b16dd907e6e0d3a2e014c802ced3fabe9f0db03e57efb0673a",
+      "expected": "c71ab2d50bce51190dd364e6ba4765d25cf1fa907a5c76a05fd645531fdacc96",
+      "verdict": "FAIL"
+    }
+  ],
+  "errors": [],
+  "browser": "156.0.8078.47",
+  "error": "クリック取得SHA256 試験-日本語.txt",
+  "harness_sha256": "5bf12d5e1ec9890755694953c79d957e3c2925a345ad8c3e98c6385992e49464"
+}

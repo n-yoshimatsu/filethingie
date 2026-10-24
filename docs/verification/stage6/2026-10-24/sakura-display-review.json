@@ -1,0 +1,31 @@
+{
+  "scope": "段階6 保全コピー内の表示関連2ファイルの読取り専用比較",
+  "checked_at_utc": "2026-10-24T13:01:53+00:00",
+  "php": "8.3.36",
+  "comparison_completed": true,
+  "upstream_commit": "a7511ad57e65b64d603e9cb68a20359ad0a3a4e6",
+  "backup_source_unchanged": true,
+  "configuration_read": false,
+  "installed_php_executed": false,
+  "production_modified": false,
+  "case_id": "SA-604",
+  "verdict": "PASS",
+  "attachment_sha256": "e075dbf7e2a379d0a7ca2650dfab40f40899aca1599efb522582f6c13fe371cc",
+  "privacy": "生の表示文字列・差分の非掲載。利用者提供証跡のレビュー、実機での新しい画面表示の判定対象外",
+  "files": {
+    "index.php": {
+      "changed": true,
+      "withheld_sensitive_marker": false
+    },
+    "css/ft.css": {
+      "changed": true,
+      "withheld_sensitive_marker": false
+    }
+  },
+  "decisions": [
+    "タイトル・見出し・案内・配色・幅・favicon・フッターと一部メニュー非表示の引継ぎ",
+    "旧ファイル名検査の削除は非移植、日本語対応済みの検査維持",
+    "同名上書きの案内を同名拒否へ修正",
+    "無効なCSSコメント記法の非移植、空文字メニューを生成しない表示条件"
+  ]
+}

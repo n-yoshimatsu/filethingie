@@ -1181,10 +1181,39 @@ function ft_make_body() {
 	return $str;
 }
 
+/** Optional, plain-text presentation settings; no arbitrary HTML or CSS. */
+function ft_presentation($key, $default = NULL) {
+  global $ft;
+  $p = $ft['external_config']['presentation'] ?? array();
+  if (!is_array($p) || !array_key_exists($key, $p)) { return $default; }
+  $value = $p[$key];
+  if (in_array($key, array('title', 'home_label', 'notice_heading', 'notice_text'), TRUE)) {
+    return is_string($value) ? $value : $default;
+  }
+  if ($key === 'accent') { return is_string($value) && preg_match('/^#[0-9a-fA-F]{6}$/D', $value) ? $value : $default; }
+  if (in_array($key, array('sidebar_width', 'upload_width', 'filelist_width'), TRUE)) {
+    return is_int($value) && $value >= 100 && $value <= 1600 ? $value : $default;
+  }
+  if (in_array($key, array('favicon', 'hide_footer', 'hide_create_file', 'hide_create_url', 'hide_duplicate', 'hide_unzip'), TRUE)) {
+    return is_bool($value) ? $value : $default;
+  }
+  return $default;
+}
+
+function ft_presentation_css() {
+  $css = '';
+  if (($accent = ft_presentation('accent')) !== NULL) { $css .= ':root{--ft-accent:'.$accent.';}'; }
+  foreach (array('sidebar_width'=>'#sidebar', 'upload_width'=>'#uploadsection input.upload', 'filelist_width'=>'#filelist') as $key=>$selector) {
+    if (($width = ft_presentation($key)) !== NULL) { $css .= $selector.'{width:'.$width.'px;}'; }
+  }
+  return $css;
+}
+
 /**
  * Create HTML for page footer.
  */
 function ft_make_footer() {
+  if (ft_presentation('hide_footer', FALSE)) { return '<div id="footer"></div>'; }
 	return "<div id=\"footer\"><p><a href=\"http://www.solitude.dk/filethingie/\" target=\"_BLANK\">File Thingie &bull; PHP File Manager</a> &copy; <!-- Copyright --> 2003-".date("Y")." <a href=\"http://www.solitude.dk\" target=\"_BLANK\">Andreas Haugstrup Pedersen</a>.</p><p><a href=\"http://www.solitude.dk/filethingie/documentation\" target=\"_BLANK\">".t('Online documentation')."</a></p></div>";
 }
 
@@ -1193,7 +1222,7 @@ function ft_make_footer() {
  */
 function ft_make_header() {
   global $ft;
-	$str = "<h1 id='title'>".ft_make_link(t("Home"), '', t("Go to home folder"))." ";
+	$str = "<h1 id='title'>".ft_make_link(ft_presentation('home_label', t("Home")), '', t("Go to home folder"))." ";
 	if (empty($_REQUEST['dir'])) {
 		$str .= "/</h1>";
 	} else {
@@ -1391,8 +1420,8 @@ function ft_make_sidebar() {
 		<form action="'.ft_get_self().'" method="post">
 		<div>
 		  <input type="radio" name="type" value="folder" id="type-folder" checked="checked" /> <label for="type-folder" class="label_highlight">'.t('Folder').'</label>
-		  <input type="radio" name="type" value="file" id="type-file" /> <label for="type-file">'.t('File').'</label>
-          '.(ft_url_import_enabled() ? '<input type="radio" name="type" value="url" id="type-url" /> <label for="type-url">'.t('From URL').'</label>' : '').'
+          '.(!ft_presentation('hide_create_file', FALSE) ? '<input type="radio" name="type" value="file" id="type-file" /> <label for="type-file">'.t('File').'</label>' : '').'
+          '.(ft_url_import_enabled() && !ft_presentation('hide_create_url', FALSE) ? '<input type="radio" name="type" value="url" id="type-url" /> <label for="type-url">'.t('From URL').'</label>' : '').'
 		</div>
 			<div>
 				<input type="text" name="newdir" id="newdir" size="16" />
@@ -1413,6 +1442,12 @@ function ft_make_sidebar() {
     }
   }
 	$str .= '</div>';
+  if (($heading = ft_presentation('notice_heading', '')) !== '') {
+    $str .= '<h3 id="site-notice-heading">'.ft_make_link($heading).'</h3>';
+  }
+  if (($notice = ft_presentation('notice_text', '')) !== '') {
+    $str .= '<p id="site-notice">'.nl2br(ft_escape($notice)).'</p>';
+  }
 	return $str;
 }
 
@@ -1967,7 +2002,8 @@ if (headers_sent()) {
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="csrf-token" content="<?php echo ft_csrf_token();?>" />
-	<title>File Thingie <?php echo VERSION;?></title>
+	<title><?php echo ft_escape(ft_presentation('title', 'File Thingie '.VERSION));?></title>
+  <?php if (ft_presentation('favicon', FALSE)) { echo '<link rel="icon" href="favicon.ico" />'; } ?>
 	<link rel="author" href="http://www.solitude.dk/" title="Andreas Haugstrup Pedersen" />
 	<link rel="home" href="<?php echo ft_get_self();?>" title="<?php echo t('Go to home folder');?>" />
 	<link rel="help" href="http://www.solitude.dk/filethingie/documentation" title="<?php echo t('Online documentation');?>" />
@@ -1994,6 +2030,8 @@ if (headers_sent()) {
 		// Prep file actions.
 		$('#filelist').ft_filelist({
 		  fileactions: ft.fileactions,
+      show_duplicate: <?php echo ft_presentation('hide_duplicate', FALSE) ? 'false' : 'true';?>,
+      show_unzip: <?php echo ft_presentation('hide_unzip', FALSE) ? 'false' : 'true';?>,
 		  rename_link: "<?php echo t('Rename');?>",
 		  move_link: "<?php echo t('Move');?>",
 		  del_link: "<?php echo t('Delete');?>",
@@ -2032,6 +2070,7 @@ if (headers_sent()) {
 	</script>
 	<style type="text/css">
 	  @import "css/ft.css";
+    <?php echo ft_presentation_css();?>
     <?php echo implode("\r\n", ft_invoke_hook('add_css'));?>
 	</style>
 </head>

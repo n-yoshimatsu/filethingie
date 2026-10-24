@@ -1,0 +1,19 @@
+{
+  "application_baseline": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
+  "kit_sha256": "75f470a892900ff097e4010343f0f8f5320868b5b2fa5851521d93d209434f7c",
+  "source_sha256": {
+    "ft2.php": "6407a10292750459f49248331aed7ee32679cc7c947965bcbfd102c8167c0b43",
+    "config.sample.php": "25bbddae1f17ff06e7a879340274c332d04a834be0a4ffb27f630a395ef177ea",
+    "css/ft.css": "94433be8df818f2a19af66c71b7211332edb095cca1e6d6722b1a31c13853552",
+    "js/filethingie.js": "3f12c6eddddc032d178f78da1feaeaff05c1a1fe7b7180dbcf52a2113809fc1d",
+    "tools/sakura-rehearsal.php": "f8719b2b0077966e8efb8b9ad0ee6c440521c280582051c11f592202af527140",
+    "tools/sakura-backup.php": "f9afc400f5efcd38f6b7c5905b4c30a1b05799a6d3b96e5658a2c4c7559d4949",
+    "tools/sakura-inventory.php": "6bc4f2d72a8c0a06b87d1a76418f0ace2b126a4ea09262977bfe4aec0576ae36",
+    "tools/stage6-rehearsal-test.php": "157b8883bf2e6c761465aaecd21be88bcd2d3a1ff87582fd48c0fbc7b6989545",
+    "tools/browser/stage6.cjs": "67debe0bcabdd93a873645386f1b735bcd8d2688a9fdbadc54758ceab8bdc744",
+    "tools/build-stage6-rehearsal.py": "c9135b8491610f9499a4b3ffcf4729f20a0a331afbfc8804c1a434324c07a186",
+    "docs/STAGE6_REHEARSAL.md": "12d7b58106bc814d56104945bd86b0104d46ad19e2a3cd9b25694572f6d67a04"
+  },
+  "local_runtime": "Linux Apache 2.4.69, PHP 8.3.36 / 8.5.12, Chrome 156.0.8078.47",
+  "production_cutover": "NOT RUN"
+}

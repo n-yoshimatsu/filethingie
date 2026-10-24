@@ -1,5 +1,5 @@
 {
-  "scope": "段階6 棚卸し・配布候補・本番保全コピー・隔離復元の確認。表示差分確認と本番切替は未実施",
+  "scope": "段階6 棚卸し・保全コピー・隔離復元・表示差分レビュー・Basic認証リハーサル準備。本番切替は未実施",
   "results": [
     {
       "case_id": "SA-601",
@@ -23,8 +23,9 @@
     },
     {
       "case_id": "SA-604",
-      "verdict": "NOT RUN",
-      "scope": "保全コピー内の表示関連2ファイルの比較・内容確認待ち"
+      "verdict": "PASS",
+      "scope": "利用者提供の2ファイル差分のレビュー・引継ぎ判断",
+      "evidence": "sakura-display-review.json"
     },
     {
       "case_id": "TS-601",
@@ -51,14 +52,14 @@
       "php": "8.3.36",
       "verdict": "PASS",
       "checks": 34,
-      "evidence": "backup-php83.json"
+      "evidence": "backup-shared-php83.json"
     },
     {
       "case_id": "TS-605",
       "php": "8.5.12",
       "verdict": "PASS",
       "checks": 34,
-      "evidence": "backup-php85.json"
+      "evidence": "backup-shared-php85.json"
     },
     {
       "case_id": "TS-606",
@@ -73,17 +74,118 @@
       "php": "8.5.12",
       "checks": 22,
       "evidence": "diff-php85.json"
+    },
+    {
+      "case_id": "TS-608",
+      "verdict": "PASS",
+      "checks": 23,
+      "evidence": "rehearsal-php83.json"
+    },
+    {
+      "case_id": "TS-610",
+      "verdict": "PASS",
+      "checks": 46,
+      "evidence": "basic-browser-php83/result.json"
+    },
+    {
+      "case_id": "TS-609",
+      "verdict": "PASS",
+      "checks": 23,
+      "evidence": "rehearsal-php85.json"
+    },
+    {
+      "case_id": "TS-611",
+      "verdict": "PASS",
+      "checks": 46,
+      "evidence": "basic-browser-php85/result.json"
+    },
+    {
+      "case_id": "SA-605",
+      "verdict": "NOT RUN",
+      "scope": "さくらのBasic認証リハーサル配置・照合"
+    },
+    {
+      "case_id": "SA-606",
+      "verdict": "NOT RUN",
+      "scope": "さくらのBasic認証だけの画面・通常操作"
     }
   ],
   "source_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
   "tool_hashes": {
     "build-stage6.py": "02219a30e39340952c893cfba18695a2dd607057afa05f2e2b41497ba03a517d",
-    "sakura-backup.php": "0ea76cd4ceabd6ab3754f796af1b078f7793db464baaab67e8a8637188248f4a",
+    "sakura-backup.php": "f9afc400f5efcd38f6b7c5905b4c30a1b05799a6d3b96e5658a2c4c7559d4949",
     "sakura-inventory.php": "6bc4f2d72a8c0a06b87d1a76418f0ace2b126a4ea09262977bfe4aec0576ae36",
     "stage6-backup-test.php": "a5016917a60351bff25ff88055f8aac3268ae894539dab9ebd67b7b6265fa50a",
     "stage6-package-test.py": "0c99409e597c43fc94d9257a7f818021ec7eda3f33f5f309ecec9a2a9abed17f",
     "sakura-display-diff.php": "1b1fa8aa840e0a345fdbfde1ab5912ca2682d6ce13d2b5d9e6bf11feb3272469",
     "stage6-diff-test.php": "addcdf404e696e8bc7933fadbf63726d2f825d56232d589fe2058856313a6aee",
-    "build-stage6-diff.py": "24f41c3e12d3271ad1d83d4d67cada8ae00b1d6a17789760eccddef17d623320"
-  }
+    "build-stage6-diff.py": "24f41c3e12d3271ad1d83d4d67cada8ae00b1d6a17789760eccddef17d623320",
+    "sakura-rehearsal.php": "f8719b2b0077966e8efb8b9ad0ee6c440521c280582051c11f592202af527140",
+    "stage6-rehearsal-test.php": "157b8883bf2e6c761465aaecd21be88bcd2d3a1ff87582fd48c0fbc7b6989545",
+    "build-stage6-rehearsal.py": "c9135b8491610f9499a4b3ffcf4729f20a0a331afbfc8804c1a434324c07a186",
+    "stage6.cjs": "67debe0bcabdd93a873645386f1b735bcd8d2688a9fdbadc54758ceab8bdc744"
+  },
+  "rehearsal_application_files": {
+    "LICENSE": "60be50732c7642ccb6d1df338fa8453e883e788758e0397941568e837c3c823c",
+    "config.sample.php": "25bbddae1f17ff06e7a879340274c332d04a834be0a4ffb27f630a395ef177ea",
+    "css/ft.css": "94433be8df818f2a19af66c71b7211332edb095cca1e6d6722b1a31c13853552",
+    "hooks.php": "00f4a6152a80daec9cdd033064dfd72b34f850dd552c436453e5622be35a403b",
+    "index.php": "6407a10292750459f49248331aed7ee32679cc7c947965bcbfd102c8167c0b43",
+    "js/filethingie.js": "3f12c6eddddc032d178f78da1feaeaff05c1a1fe7b7180dbcf52a2113809fc1d",
+    "js/jquery-4.0.0.min.js": "39a546ea9ad97f8bfaf5d3e0e8f8556adb415e470e59007ada9759dce472adaa",
+    "js/jquery-LICENSE.txt": "d4db9ebe6f29f5168eac45ad713f055623ac5d0dcd5ba92da23d650ae012020d",
+    "locales/bg.php": "fcd55e8612ee0f9a2b3c27f85dba47c3eff48685874e9fe0f50bf8b9359c9a58",
+    "locales/bn.php": "6e7bb17f2d5d5b40a07c96f1bc91433703b9e89a2634f9ca83c3322a7134c12d",
+    "locales/bs.php": "0e30f2edc0b7b148a295613bb72742cc92fbe22b51d540c6ccb00334432f4298",
+    "locales/ca.php": "b2c8159f2576f494a21c7a2370cc17a9ba8fbf79b8a4d82935309f7e22c98c50",
+    "locales/cy.php": "2dbe3c12a5b72a7b1d0ff8ab0f43f1add09e2c91ccf53bf87824ae81ccbb325a",
+    "locales/cz.php": "cebe7fd35b557747891e95035440b1b181f3fd18d8b3d8e06e495c1d6c230c10",
+    "locales/da.php": "d165d9662df9a8b9e97e84f3c325096c4c32b257545ef9fc2b8998a2cae589dc",
+    "locales/de.php": "3fc40e4ce5909bce2d78716d2fca9545902741c6b0d13657086ac804fdbf89d5",
+    "locales/es.php": "65b66d96ccd3648d331cdc5650d6b9321fec80b67de64cd8140a28ea6bb9307c",
+    "locales/fa.php": "b21b6fef94c9c4c3e0668a26b30f37c99846fd7e919c6d33467108dcad40e3e3",
+    "locales/fi.php": "4f5bef9753e7574566a917ccee39eba745f12c701e137ed1854c60f599c3ef97",
+    "locales/fr.php": "06ff19d3eb80682c28b3ac82c341d6c648fc0a664ecf73d23c718a95c480a388",
+    "locales/hu.php": "b5c0957b8f02c47ab5dad15787d24894493760d6e495783759551ddc1b3734f8",
+    "locales/it.php": "df31e5e16a96342d35ed58df8f21721e62e1f55a3a9109f7f370bcab8fcf4885",
+    "locales/ja.php": "1c16808b16067bc24ad665be22ca40d5c1b88b2572626cbb65ab20d6efddf45c",
+    "locales/lv.php": "74212d3b64945f307ed97d0180aee983243d7b9faaefaf9d13fd8afb2ac36391",
+    "locales/nl.php": "8bf0fd958445174eaaaecd9616fed8e4084e590070aa900bad7a1d42f6533eb9",
+    "locales/no.php": "df7def783210f3ab6ce1b6aa37026f213e276b13959a2ef336dd388ec3bcfd56",
+    "locales/pl.php": "dc7ff2807d218ebc8a88a53350f8e385067555108a59a2b13a6c2b91a6f9f79d",
+    "locales/pt-br.php": "ce8a577da2c6bb0475fb6d1b3e4e73acadd9a724b70da6bd498f4701e3e4d219",
+    "locales/pt-pt.php": "bc2c06f9abfa4c788290dc1c20e561521fd663e64d56586eab0fa917b3c419f9",
+    "locales/ro.php": "55050e55bad442d1495c3d434edf800f458c43897c7eb267f4ed38a26b7b5935",
+    "locales/ru.php": "e91a547cd2011fc634810f6cee29890b174052c11ad96f181fe62cddbc517389",
+    "locales/sk.php": "89e15671ea97edfcbd5174ee4a89d07ca2ccd90f7c7a059be9886a1c8ac22c3b",
+    "locales/sv.php": "241f9d39203022a83ea201ea227fe6ff7b6a73da3af42c585e65fd67ea052225",
+    "locales/tr.php": "042d101321275a300253c1272358a21346dd7fa66d813780a283becc36012c73",
+    "locales/vn.php": "0497e43eb2a3b979de197eddf5b09caae0f9a1b03b28cc6c6c3c08bedeb000ec",
+    "plugins/config.plugin.php": "7b569df8706aa52da2f6af4377cc53b52c7d1c0b77a9c964a8de7c60fa490da3",
+    "plugins/db.plugin.php": "ca4aa6ead13c7d1e787c3995eb4aaeeef4a4b27c5e1e6670d8e4bf6790a80243",
+    "plugins/edit.plugin.php": "e2ffdfa0a25d12e0ad706c6b56eed0e14a92f6bcb653e89d714459825b9e270d",
+    "plugins/editorck.plugin.php": "49ca3467cc629f54a50ded479ff145702a7301dfb69cd2daa7be3cb5530a7e1d",
+    "plugins/fckeditor.plugin.php": "e69350b5305c3e80685b0147dd3c1bea853a933e00377665c7e5fb5048be566d",
+    "plugins/fileinfo.plugin.php": "210209924a2e68806a4b0a14bfe00fbf6466318f75bf36a02d1b2dc6ce489f64",
+    "plugins/jquery.fileinfo.js": "926597c1fdd7f29263ec0d511af5a45b09f08263e1e36b955929448c71b2b851",
+    "plugins/log.plugin.php": "505fddb18b0ca0b91e0db0793813a3c23388cdb5b966028d8c8a11e099849cf5",
+    "plugins/search.plugin.php": "9953cb911b8b6d89ff4eb45a63f281f9933f0b75efb43a18c976278ff73da434",
+    "plugins/tinymce.plugin.php": "23a5919290a735853cfd5c7112b8c2a70384ad7efc5c87decc6a2c61c53fe55c",
+    "plugins/zip.plugin.php": "e080c8e87570c896578037b5b2545e61c94672451720c11a24e7f1b7b5730048"
+  },
+  "regression_results": [
+    {
+      "case_id": "TS-413",
+      "verdict": "PASS",
+      "checks": 18,
+      "evidence": "default-browser-php83.json"
+    },
+    {
+      "case_id": "TS-414",
+      "verdict": "PASS",
+      "checks": 18,
+      "evidence": "default-browser-php85.json"
+    }
+  ],
+  "rehearsal_kit_sha256": "75f470a892900ff097e4010343f0f8f5320868b5b2fa5851521d93d209434f7c"
 }

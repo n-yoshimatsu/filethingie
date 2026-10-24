@@ -1,6 +1,6 @@
 # 段階6 既存表示・デザインの引継ぎ
 
-利用者回答は「表示やデザインを変更した」。変更箇所と値は未取得、機能変更が一切ないとするソース確認は未実施。SA-602で改行以外の差があるindex.php／css/ft.cssを確認対象とする方針。
+SA-604の差分を利用者から受領、内容レビューPASS。index.php／css/ft.cssの変更と引継ぎ方針の確定。表示の移植・実機画面の合格とは別の判定。
 
 ## 読取り専用比較
 
@@ -35,3 +35,18 @@ unzip -q artifacts/stage6/reproduce-diff.zip -d artifacts/stage6/reproduce-diff-
 docker compose run --rm --no-deps -T -v "$PWD:/workspace:ro" --entrypoint php php83 /workspace/tools/stage6-diff-test.php /workspace/artifacts/stage6/reproduce-diff-kit
 docker compose run --rm --no-deps -T -v "$PWD:/workspace:ro" --entrypoint php php85 /workspace/tools/stage6-diff-test.php /workspace/artifacts/stage6/reproduce-diff-kit
 ```
+
+## 受領した差分と判断
+
+2026年10月24日13:01:53 UTC、PHP 8.3.36の比較出力。比較完了、両ファイル変更あり、認証語による出力保留なし、保全コピー不変、設定読取り・旧PHP実行・本番変更なし。[公開用レビュー記録](verification/stage6/2026-10-24/sakura-display-review.json)。サイト固有の表示文字列と生の差分の非掲載。
+
+| 変更 | 更新版での扱い |
+|---|---|
+| ページタイトル・Home見出し・案内の見出しと本文 | 任意のpresentation設定としての引継ぎ。文字列のHTMLエスケープ、改行のみbrへの変換 |
+| 一覧420px、サイドバー280px、選択欄260px、アクセント色 | CSS設定の引継ぎ、旧CSSの無効な#コメント記法の非移植 |
+| favicon、空のフッター | サイト内favicon.icoのコピーと任意表示。ソースの著作権表示・LICENSEの保持 |
+| File／From URL、Duplicate／Unzipの非表示 | メニュー生成条件への移行。空ラベルの操作項目を生成しない仕様。表示条件と権限制御の区別 |
+| ファイル名検査の関数・呼出し削除 | 更新版への非移植。日本語対応済みの検査・パス制限の維持 |
+| 「同じファイル名の登録は、上書きされます。」 | 「同じファイル名の登録は、上書きしません。」への訂正。受領した旧コードにも存在する同名拒否、更新版での内容保全 |
+
+設定を指定しない既存導入先は従来表示の継続。[Basic認証リハーサル](STAGE6_REHEARSAL.md)での内容・表示・通常操作の確認。ローカルChromeで両PHPの試験済み、さくら実機の新表示は未確認。

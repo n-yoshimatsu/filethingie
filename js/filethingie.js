@@ -32,8 +32,8 @@
         if (!toggle.hasClass('writeable')) return;
         const file = row.attr('data-filename');
         const actions = {rename: options.rename_link, move: options.move_link, del: options.del_link};
-        if (row.hasClass('file')) actions.duplicate = options.duplicate_link;
-        if (options.canunzip && file.toLowerCase().endsWith('.zip')) actions.unzip = options.unzip_link;
+        if (row.hasClass('file') && options.show_duplicate !== false) actions.duplicate = options.duplicate_link;
+        if (options.canunzip && options.show_unzip !== false && file.toLowerCase().endsWith('.zip')) actions.unzip = options.unzip_link;
         if (options.advancedactions === 'true') { actions.chmod = options.chmod_link; actions.symlink = options.symlink_link; }
         Object.keys(options.fileactions).forEach(function (key) { if (toggle.hasClass(key)) actions[key] = options.fileactions[key].link; });
         const details = $('<tr>', {class: 'filedetails'}), cell = $('<td>', {colspan: 3}).appendTo(details);

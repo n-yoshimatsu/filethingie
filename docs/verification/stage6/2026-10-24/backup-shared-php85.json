@@ -1,0 +1,213 @@
+{
+    "case_id": "TS-605",
+    "name": "保全コピーと隔離復元",
+    "php": "8.5.12",
+    "scope": "使い捨てfixtureでのCLIコピー・復元。さくら実機での実行結果ではない記録",
+    "verdict": "PASS",
+    "checks": [
+        {
+            "name": "正常コピーの終了状態",
+            "actual": 0,
+            "expected": 0,
+            "verdict": "PASS"
+        },
+        {
+            "name": "正常コピーのPHP診断なし",
+            "actual": "",
+            "expected": "",
+            "verdict": "PASS"
+        },
+        {
+            "name": "コピー結果",
+            "actual": "PASS",
+            "expected": "PASS",
+            "verdict": "PASS"
+        },
+        {
+            "name": "原本ツリーの内容・権限・時刻不変",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "name": "外部認証原本の内容不変",
+            "actual": "d69d18b615c03b5f7ca961817c2260c01c7f6e70ff747bc9b7a85e6b4cb1ba26",
+            "expected": "d69d18b615c03b5f7ca961817c2260c01c7f6e70ff747bc9b7a85e6b4cb1ba26",
+            "verdict": "PASS"
+        },
+        {
+            "name": "users.shの非実行",
+            "actual": false,
+            "expected": false,
+            "verdict": "PASS"
+        },
+        {
+            "name": "未解決の認証参照を保持",
+            "actual": 1,
+            "expected": 1,
+            "verdict": "PASS"
+        },
+        {
+            "name": "直接のfiles配置を検出",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "name": "CRLF差分の分類",
+            "actual": "LINE_ENDINGS_ONLY",
+            "expected": "LINE_ENDINGS_ONLY",
+            "verdict": "PASS"
+        },
+        {
+            "name": "変更済みソースの分類",
+            "actual": "MODIFIED",
+            "expected": "MODIFIED",
+            "verdict": "PASS"
+        },
+        {
+            "name": "バックアップ親の0700",
+            "actual": 448,
+            "expected": 448,
+            "verdict": "PASS"
+        },
+        {
+            "name": "バックアップ全体の0700／0600",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "name": "上位・子フォルダー参照の外部ファイル3本の保全",
+            "actual": 3,
+            "expected": 3,
+            "verdict": "PASS"
+        },
+        {
+            "name": "完了マーカーの存在",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "name": "隠しファイルの保全",
+            "actual": "fixture-hidden-content",
+            "expected": "fixture-hidden-content",
+            "verdict": "PASS"
+        },
+        {
+            "name": "秘密情報・実保存ファイル名・フルパスの非出力",
+            "actual": false,
+            "expected": false,
+            "verdict": "PASS"
+        },
+        {
+            "name": "隔離復元の終了状態",
+            "actual": 0,
+            "expected": 0,
+            "verdict": "PASS"
+        },
+        {
+            "name": "隔離復元のPHP診断なし",
+            "actual": "",
+            "expected": "",
+            "verdict": "PASS"
+        },
+        {
+            "name": "復元結果",
+            "actual": "PASS",
+            "expected": "PASS",
+            "verdict": "PASS"
+        },
+        {
+            "name": "独立走査による全復元内容・権限・時刻一致",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "name": "復元後も原本不変",
+            "actual": true,
+            "expected": true,
+            "verdict": "PASS"
+        },
+        {
+            "name": "復元親の0700",
+            "actual": 448,
+            "expected": 448,
+            "verdict": "PASS"
+        },
+        {
+            "name": "改変コピーの拒否",
+            "actual": 2,
+            "expected": 2,
+            "verdict": "PASS"
+        },
+        {
+            "name": "改変検出時の復元先非作成",
+            "actual": null,
+            "expected": null,
+            "verdict": "PASS"
+        },
+        {
+            "name": "改変拒否のPHP診断なし",
+            "actual": "",
+            "expected": "",
+            "verdict": "PASS"
+        },
+        {
+            "name": "manifestパス逸脱の拒否",
+            "actual": 2,
+            "expected": 2,
+            "verdict": "PASS"
+        },
+        {
+            "name": "逸脱先の非作成",
+            "actual": false,
+            "expected": false,
+            "verdict": "PASS"
+        },
+        {
+            "name": "未完了コピーの復元拒否",
+            "actual": 2,
+            "expected": 2,
+            "verdict": "PASS"
+        },
+        {
+            "name": "原本リンクの拒否",
+            "actual": 2,
+            "expected": 2,
+            "verdict": "PASS"
+        },
+        {
+            "name": "リンク拒否時のコピー先非作成",
+            "actual": null,
+            "expected": null,
+            "verdict": "PASS"
+        },
+        {
+            "name": "副作用コードを含む設定の拒否",
+            "actual": 2,
+            "expected": 2,
+            "verdict": "PASS"
+        },
+        {
+            "name": "設定の非実行",
+            "actual": false,
+            "expected": false,
+            "verdict": "PASS"
+        },
+        {
+            "name": "アプリ外データの不完全保全の防止",
+            "actual": 2,
+            "expected": 2,
+            "verdict": "PASS"
+        },
+        {
+            "name": "公開範囲外アプリ指定の拒否",
+            "actual": 2,
+            "expected": 2,
+            "verdict": "PASS"
+        }
+    ]
+}

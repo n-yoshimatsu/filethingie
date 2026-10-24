@@ -39,6 +39,17 @@ function ft_settings_external_load() {
   // Requires cURL, TLS verification and public IPv4. No redirects or overwrites.
   $ft["settings"]["URL_HOSTS"] = "";
 
+  // Optional site presentation. Text is escaped; newlines in notice_text become line breaks.
+  // Menu visibility is presentation only, not an authorization rule.
+  // $ft['presentation'] = [
+  //   'title' => 'Shared files', 'home_label' => 'Home',
+  //   'notice_heading' => 'File naming', 'notice_text' => 'Use distinct filenames.',
+  //   'accent' => '#326532', 'sidebar_width' => 280, 'upload_width' => 260,
+  //   'filelist_width' => 420, 'favicon' => true, 'hide_footer' => false,
+  //   'hide_create_file' => true, 'hide_create_url' => true,
+  //   'hide_duplicate' => true, 'hide_unzip' => true,
+  // ];
+
   # Plugin settings #
   $ft["plugins"]["search"] = TRUE;
   $ft["plugins"]["edit"] = array(

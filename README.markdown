@@ -14,6 +14,7 @@ File Thingie was one of my very first PHP projects and it's going on github so I
 未完成の設定画面・ファイル説明・旧外部エディター3種は無効化し、移行方法を明示しています。
 段階5でPHP 8.3／8.5のCIを追加し、32ケースがPASSです。HTTPS・URL取得・同時アップロード・Firefoxも検証しました。
 さくら実機のCLIとWeb環境はPHP 8.3.36／FreeBSDで確認済みです。分離配置での受入と長時間セッション試験は継続中です。現在は開発中の検証版です。
+30分の無操作期限は両PHPで実時間試験がPASS、8時間の絶対期限は確認中です。
 
 - [移行計画と対応範囲](docs/PHP85_MIGRATION.md)
 - [既存機能と依存関係](docs/FEATURE_INVENTORY.md)

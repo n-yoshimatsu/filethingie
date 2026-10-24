@@ -1,0 +1,30 @@
+[
+  {
+    "case_id": "TS-513",
+    "case": "実時間アイドル期限",
+    "verdict": "PASS",
+    "started_at": "2026-10-23T23:40:44.307868+00:00",
+    "finished_at": "2026-10-24T00:10:54.702928+00:00",
+    "elapsed": {
+      "seconds": 1810.0060271269977,
+      "intermediate_requests": 0
+    },
+    "checks": 13,
+    "requests": 5,
+    "diagnostics": []
+  },
+  {
+    "case_id": "TS-514",
+    "case": "実時間アイドル期限",
+    "verdict": "PASS",
+    "started_at": "2026-10-23T23:40:44.287341+00:00",
+    "finished_at": "2026-10-24T00:10:54.650957+00:00",
+    "elapsed": {
+      "seconds": 1810.0182957850047,
+      "intermediate_requests": 0
+    },
+    "checks": 13,
+    "requests": 5,
+    "diagnostics": []
+  }
+]

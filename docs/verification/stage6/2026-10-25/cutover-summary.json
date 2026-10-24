@@ -1,0 +1,84 @@
+{
+  "scope": "切替ツールのローカル検証とSA-607実機準備の受領。実機切替は未実施",
+  "actual_sakura": [
+    {
+      "case_id": "SA-607",
+      "verdict": "PASS",
+      "evidence": "sakura-cutover-prepared.json"
+    },
+    {
+      "case_id": "SA-608",
+      "verdict": "NOT RUN",
+      "scope": "本番停止・最終バックアップ・配置・再開"
+    },
+    {
+      "case_id": "SA-609",
+      "verdict": "NOT RUN",
+      "scope": "本番URLのWeb操作と内部照合"
+    }
+  ],
+  "local_results": [
+    {
+      "case_id": "TS-616",
+      "verdict": "PASS",
+      "checks": 36,
+      "evidence": "cutover-php83.json"
+    },
+    {
+      "case_id": "TS-618",
+      "verdict": "PASS",
+      "readiness_checks": 2,
+      "maintenance_checks": 11,
+      "browser_checks": 87,
+      "server_checks": 7,
+      "total_checks": 107,
+      "evidence": [
+        "cutover-readiness-php83.json",
+        "cutover-maintenance-php83.json",
+        "cutover-browser-php83.json",
+        "cutover-server-php83.json"
+      ]
+    },
+    {
+      "case_id": "TS-617",
+      "verdict": "PASS",
+      "checks": 36,
+      "evidence": "cutover-php85.json"
+    },
+    {
+      "case_id": "TS-619",
+      "verdict": "PASS",
+      "readiness_checks": 2,
+      "maintenance_checks": 11,
+      "browser_checks": 87,
+      "server_checks": 7,
+      "total_checks": 107,
+      "evidence": [
+        "cutover-readiness-php85.json",
+        "cutover-maintenance-php85.json",
+        "cutover-browser-php85.json",
+        "cutover-server-php85.json"
+      ]
+    }
+  ],
+  "local_total_checks": 286,
+  "kit_sha256": "61c43a8a50b5173a1fb4aeefda64b4136d12c664e1624d3bb0e590b7ea4c8b65",
+  "kit_reproduces_tested_archive": true,
+  "application_files_unchanged_from_accepted_rehearsal": 46,
+  "tool_hashes": {
+    "tools/sakura-cutover.php": "b88c9ff07f2dd2ea75ea409d5e163b4c5107ac5b6f44dc77c57836f74feb9bc8",
+    "tools/build-stage6-cutover.py": "91c54be3536872f560a41f116a501ebdfe99a7956dbab7f8f3f693c0fe54207f",
+    "tools/stage6-cutover-test.php": "ed36b95f8404aee26d0a56e27c79093a5e875bdcf80155de6c5d5d956b184576",
+    "tools/stage6-cutover-browser-test.py": "0584209a7591d4bcffd9c718f469312c740bb30982d86c77f22788e3181a8530",
+    "tools/browser/sakura-cutover.cjs": "8d47979338d6fae6d880154a378621dd0074422f91667fead1c3c9f2b9ec9395",
+    "tools/browser/sakura-cutover-maintenance.cjs": "44b6a8bbe5ee8f7658eed24f4d006e29f7ace623043c71d06b8f1132a4996047",
+    "tools/sakura-credentials.py": "0a8d64461516c1252ebb8cb2a4c01eaebb2ffaca041c28ee05c5294f154e2dff"
+  },
+  "constraints": [
+    "ローカルLinuxコンテナーの結果とFreeBSD実機結果の区別",
+    "CLIとWebの同一実行ユーザー条件",
+    "停止入口のみのHTTP 503。Basic認証済みの保存ファイル読取りは継続可能",
+    "旧ソース復元後もHTTP 503の維持。PHP 8.3での旧ソース稼働復旧の主張なし",
+    "所有者・ACL・拡張属性・ハードリンク関係・OS電源断時の完全な永続化保証は対象外"
+  ]
+}

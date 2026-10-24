@@ -1,0 +1,49 @@
+{
+  "scope": "本番切替後のCLI照合。Web受入は別の記録",
+  "checks": [
+    {
+      "name": "配置49ファイルの不一致数",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "name": "Basic認証ファイルの不変",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "faviconの不変",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "保存データと停止時バックアップの一致",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "PHPログのバイト数",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "name": "非公開設定0600",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "name": "メンテナンス入口の解除",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    }
+  ],
+  "verdict": "PASS",
+  "managed_files": 3
+}

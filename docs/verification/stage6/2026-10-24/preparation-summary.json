@@ -1,5 +1,5 @@
 {
-  "scope": "段階6 棚卸し・保全・隔離復元・表示差分・Basic認証リハーサル受入完了。本番切替前の資材準備中",
+  "scope": "段階6 SA-601〜607完了。本番切替前",
   "results": [
     {
       "case_id": "SA-601",
@@ -143,8 +143,9 @@
     },
     {
       "case_id": "SA-607",
-      "verdict": "NOT RUN",
-      "scope": "実機での非公開の本番切替資材準備。停止・切替を含まない範囲"
+      "verdict": "PASS",
+      "scope": "実機での非公開の本番切替資材準備。停止・切替を含まない範囲",
+      "evidence": "../2026-10-25/sakura-cutover-prepared.json"
     }
   ],
   "source_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",

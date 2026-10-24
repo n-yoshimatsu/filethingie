@@ -80,7 +80,7 @@ php tools/sakura-inventory.php 本番アプリのディレクトリ ホームデ
 - さくらの配置SA-605：初回FAILを保持、DIR=./files対応後の再実行でPASS。
 - さくらの受入SA-606：Web84比較・内部19比較の計103比較PASS。
 - 書込み経路：利用者回答によりFile Thingie画面のみ。
-- 本番切替前資材準備SA-607：ツールのローカル自己検証完了、実機は未実施。[切替手順と準備範囲](STAGE6_CUTOVER.md)。
+- 本番切替前資材準備SA-607：利用者提供のPREPARED出力によりPASS、337ファイルとBasic認証の不変。切替・復元ツールは両PHPのローカル4ケース286比較PASS、実機の停止・切替は未実施。[切替手順と準備範囲](STAGE6_CUTOVER.md)。
 - 本番切替・正式タグ：未実施。
 
 [準備段階の結果](STAGE6_REPORT.md)、[最新証跡一覧](verification/stage6/2026-10-24/preparation-summary.json)。本番切替には書込み停止中の新しいバックアップが必要。今回用意したオンライン保全コピーだけを最終バックアップとする扱いなし。

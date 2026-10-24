@@ -1,0 +1,11 @@
+{
+  "scope": "TS-616／617 初回FAILの保持と再実行の対応",
+  "initial": "CLIをroot、Webをwww-dataとして実行。再開後のHTTP 500、非公開設定のWebユーザーからの読取り不可の観測",
+  "passed_before_failure": 27,
+  "failed": "入口再開後の実HTTP 200",
+  "remaining_after_failure": "NOT RUN",
+  "correction": "人工環境のCLIをWebと同じwww-dataへ統一、自己検証スクリプトへの実行UID条件の追加",
+  "product_changes_for_correction": false,
+  "expectations_changed": false,
+  "rerun": "両PHPで同じ36比較PASS。初回は公開前のローカル人工環境のみ"
+}

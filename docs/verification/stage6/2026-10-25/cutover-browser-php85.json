@@ -1,0 +1,555 @@
+{
+  "case_id": "TS-619",
+  "name": "切替後のBasic認証・表示・通常操作",
+  "started_at": "2026-10-24T15:45:48.284Z",
+  "verdict": "PASS",
+  "checks": [
+    {
+      "label": "未認証401 index.php",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "未認証401 css/ft.css",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "Basic認証後のHTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "追加アプリログインなし",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "一覧表示",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "管理設定ファイルの非表示",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "ページタイトルの引継ぎ",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "見出しの引継ぎ",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "案内見出しの引継ぎ",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "案内文の引継ぎ・同名拒否への訂正",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "配色の引継ぎ",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "3箇所の幅の引継ぎ",
+      "actual": [
+        "420px",
+        "280px",
+        "260px"
+      ],
+      "expected": [
+        "420px",
+        "280px",
+        "260px"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "label": "作成メニュー",
+      "actual": [
+        "folder"
+      ],
+      "expected": [
+        "folder"
+      ],
+      "verdict": "PASS"
+    },
+    {
+      "label": "空のフッター",
+      "actual": "",
+      "expected": "",
+      "verdict": "PASS"
+    },
+    {
+      "label": "favicon指定",
+      "actual": "favicon.ico",
+      "expected": "favicon.ico",
+      "verdict": "PASS"
+    },
+    {
+      "label": "favicon取得",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 config.php",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 config.sample.php",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 .htaccess",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 files/",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 phpinfo.php",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 users.sh",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "直接取得拒否 users.txt",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "新規フォルダー名の未使用",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "フォルダー作成",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "アップロード選択数",
+      "actual": 2,
+      "expected": 2,
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "アップロード一覧 日本語.txt",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "試験フォルダー内の直接ファイルリンク",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存時のファイル名",
+      "actual": "日本語.txt",
+      "expected": "日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存ファイルSHA-256 日本語.txt",
+      "actual": "c71ab2d50bce51190dd364e6ba4765d25cf1fa907a5c76a05fd645531fdacc96",
+      "expected": "c71ab2d50bce51190dd364e6ba4765d25cf1fa907a5c76a05fd645531fdacc96",
+      "verdict": "PASS"
+    },
+    {
+      "label": "アップロード一覧 empty.txt",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "試験フォルダー内の直接ファイルリンク",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存時のファイル名",
+      "actual": "empty.txt",
+      "expected": "empty.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存ファイルSHA-256 empty.txt",
+      "actual": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "expected": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "verdict": "PASS"
+    },
+    {
+      "label": "未認証の直接ファイル取得401",
+      "actual": 401,
+      "expected": 401,
+      "verdict": "PASS"
+    },
+    {
+      "label": "アップロード選択数",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "同名アップロードのエラー表示",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "試験フォルダー内の直接ファイルリンク",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存時のファイル名",
+      "actual": "日本語.txt",
+      "expected": "日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存ファイルSHA-256 日本語.txt",
+      "actual": "c71ab2d50bce51190dd364e6ba4765d25cf1fa907a5c76a05fd645531fdacc96",
+      "expected": "c71ab2d50bce51190dd364e6ba4765d25cf1fa907a5c76a05fd645531fdacc96",
+      "verdict": "PASS"
+    },
+    {
+      "label": "複製・解凍項目なし",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "空メニュー項目なし",
+      "actual": false,
+      "expected": false,
+      "verdict": "PASS"
+    },
+    {
+      "label": "新規フォルダー名の未使用",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "フォルダー作成",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "操作対象ファイル名の一致",
+      "actual": "日本語.txt",
+      "expected": "日本語.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "変更前の名前なし",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "変更後の名前表示",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "操作対象ファイル名の一致",
+      "actual": "変更後.txt",
+      "expected": "変更後.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "編集元の内容",
+      "actual": "転送確認 日本語\n",
+      "expected": "転送確認 日本語\n",
+      "verdict": "PASS"
+    },
+    {
+      "label": "編集フォームの保存先制限",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "編集フォームのファイル名",
+      "actual": "変更後.txt",
+      "expected": "変更後.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "試験フォルダー内の直接ファイルリンク",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存時のファイル名",
+      "actual": "変更後.txt",
+      "expected": "変更後.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存ファイルSHA-256 変更後.txt",
+      "actual": "4989ca7f7dfd9e9f5a1e31364cb4571163395c0b4494db769bc0c9c1da69de88",
+      "expected": "4989ca7f7dfd9e9f5a1e31364cb4571163395c0b4494db769bc0c9c1da69de88",
+      "verdict": "PASS"
+    },
+    {
+      "label": "検索結果",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "操作対象ファイル名の一致",
+      "actual": "変更後.txt",
+      "expected": "変更後.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "移動元からの除去",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "移動先の表示",
+      "actual": 1,
+      "expected": 1,
+      "verdict": "PASS"
+    },
+    {
+      "label": "試験フォルダー内の直接ファイルリンク",
+      "actual": true,
+      "expected": true,
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存時のファイル名",
+      "actual": "変更後.txt",
+      "expected": "変更後.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "保存ファイルSHA-256 変更後.txt",
+      "actual": "4989ca7f7dfd9e9f5a1e31364cb4571163395c0b4494db769bc0c9c1da69de88",
+      "expected": "4989ca7f7dfd9e9f5a1e31364cb4571163395c0b4494db769bc0c9c1da69de88",
+      "verdict": "PASS"
+    },
+    {
+      "label": "操作対象ファイル名の一致",
+      "actual": "変更後.txt",
+      "expected": "変更後.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "削除後の一覧からの除外",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "操作対象ファイル名の一致",
+      "actual": "移動先",
+      "expected": "移動先",
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "削除後の一覧からの除外",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "操作対象ファイル名の一致",
+      "actual": "empty.txt",
+      "expected": "empty.txt",
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "削除後の一覧からの除外",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "CSRFなしの作成要求403",
+      "actual": 403,
+      "expected": 403,
+      "verdict": "PASS"
+    },
+    {
+      "label": "CSRF拒否後の未作成",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "試験フォルダーが空",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "操作対象ファイル名の一致",
+      "actual": "ft-auto-stage6-24bc8c547c6c",
+      "expected": "ft-auto-stage6-24bc8c547c6c",
+      "verdict": "PASS"
+    },
+    {
+      "label": "画面遷移HTTP状態",
+      "actual": 200,
+      "expected": 200,
+      "verdict": "PASS"
+    },
+    {
+      "label": "削除後の一覧からの除外",
+      "actual": 0,
+      "expected": 0,
+      "verdict": "PASS"
+    },
+    {
+      "label": "ブラウザーエラーなし",
+      "actual": [],
+      "expected": [],
+      "verdict": "PASS"
+    }
+  ],
+  "errors": [],
+  "test_directory": "ft-auto-stage6-24bc8c547c6c",
+  "harness_sha256": "8d47979338d6fae6d880154a378621dd0074422f91667fead1c3c9f2b9ec9395",
+  "server_verification": "NOT RUN",
+  "remaining": [
+    "サーバー内の配備49ファイル・停止時保存データ・PHPログ確認"
+  ],
+  "production_cutover": false,
+  "local_synthetic_fixture": true,
+  "browser": "156.0.8078.47",
+  "fixture_cleanup": "新規試験フォルダー・試験ファイルのUI削除完了",
+  "overall_case_verdict": "サーバー内部確認待ち",
+  "finished_at": "2026-10-24T15:46:15.568Z"
+}

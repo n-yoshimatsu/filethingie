@@ -1,0 +1,121 @@
+{
+    "case_id": "TS-617",
+    "name": "切替・中断・復元の自己検証",
+    "php": "8.5.12",
+    "verdict": "FAIL",
+    "checks": [
+        {
+            "name": "準備状態の読取り",
+            "verdict": "PASS"
+        },
+        {
+            "name": "利用終了確認なしの停止拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "拒否後の原本不変",
+            "verdict": "PASS"
+        },
+        {
+            "name": "配置前の再開拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "候補改変時の停止前拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "候補改変拒否で原本不変",
+            "verdict": "PASS"
+        },
+        {
+            "name": "停止状態と503入口の配置",
+            "verdict": "PASS"
+        },
+        {
+            "name": "Basic認証後の実HTTP GET 503",
+            "verdict": "PASS"
+        },
+        {
+            "name": "空POSTの実HTTP 503",
+            "verdict": "PASS"
+        },
+        {
+            "name": "停止中のBasic認証継続",
+            "verdict": "PASS"
+        },
+        {
+            "name": "Web停止確認なしのバックアップ拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "停止時バックアップと最新保存データ一致",
+            "verdict": "PASS"
+        },
+        {
+            "name": "停止用入口と停止前入口の別保全",
+            "verdict": "PASS"
+        },
+        {
+            "name": "3ファイル配置後の中断注入",
+            "verdict": "PASS"
+        },
+        {
+            "name": "途中中断後も実HTTP 503",
+            "verdict": "PASS"
+        },
+        {
+            "name": "途中中断で保存データ不変",
+            "verdict": "PASS"
+        },
+        {
+            "name": "部分配置からの再開拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "中断後の再実行で48ファイル配置完了",
+            "verdict": "PASS"
+        },
+        {
+            "name": "配置後も実HTTP 503",
+            "verdict": "PASS"
+        },
+        {
+            "name": "Basic通過後のHTTP保護 config.php",
+            "verdict": "PASS"
+        },
+        {
+            "name": "Basic通過後のHTTP保護 config.sample.php",
+            "verdict": "PASS"
+        },
+        {
+            "name": "Basic通過後のHTTP保護 .htaccess",
+            "verdict": "PASS"
+        },
+        {
+            "name": "Basic通過後のHTTP保護 files/",
+            "verdict": "PASS"
+        },
+        {
+            "name": "Basic通過後のHTTP保護 phpinfo.php",
+            "verdict": "PASS"
+        },
+        {
+            "name": "Basic通過後のHTTP保護 users.sh",
+            "verdict": "PASS"
+        },
+        {
+            "name": "Basic通過後のHTTP保護 users.txt",
+            "verdict": "PASS"
+        },
+        {
+            "name": "同時操作の排他",
+            "verdict": "PASS"
+        },
+        {
+            "name": "入口再開後の実HTTP 200",
+            "verdict": "FAIL"
+        }
+    ],
+    "error": "入口再開後の実HTTP 200"
+}

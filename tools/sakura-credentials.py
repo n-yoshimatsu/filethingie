@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Prepare short-lived, private credentials for the isolated Sakura UI test."""
+"""Prepare short-lived, private credentials for Sakura acceptance."""
 import argparse
 import datetime
 import getpass
@@ -16,17 +16,22 @@ from urllib.parse import urlsplit
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('url', help='HTTPS URL of an isolated stage5 preview or stage6 rehearsal index.php')
+    parser.add_argument('--production', action='store_true', help='Explicit production cutover acceptance; Basic authentication only')
     args = parser.parse_args()
     url = urlsplit(args.url)
     stage5 = bool(re.search(r'/ft-stage5-\d{8}-\d{6}-[0-9a-f]{8}/index\.php$', url.path))
     stage6 = bool(re.search(r'/ft-stage6-rehearsal-\d{8}-\d{6}-[0-9a-f]{10}/index\.php$', url.path))
+    production = (args.production and url.path.endswith('/index.php')
+                  and not re.search(r'/ft-(?:stage[0-9]|php-check)-', url.path))
     if (url.scheme != 'https' or not url.hostname or url.username or url.password
-            or url.query or url.fragment or not (stage5 or stage6)):
-        parser.error('Only an isolated HTTPS stage5 preview or stage6 rehearsal URL is accepted.')
+            or url.query or url.fragment or not (production if args.production else stage5 or stage6)):
+        parser.error('Use an isolated preview/rehearsal URL, or --production with the explicit HTTPS index.php URL.')
     if not sys.stdin.isatty():
         parser.error('Run in an interactive terminal; passwords must not be echoed.')
     print('入力先のUbuntu:', socket.gethostname())
     print('検証対象:', args.url)
+    if production:
+        print('本番切替のWeb受入用です。この操作ではサーバーを変更しません。')
     print('パスワードは画面に表示されません。チャットへ送る必要はありません。')
     basic_user = input('サイトのBasic認証ユーザー名: ').strip()
     basic_password = getpass.getpass('サイトのBasic認証パスワード: ')
@@ -35,7 +40,7 @@ def main():
         parser.error('All prompted values are required; nothing was saved.')
     now = datetime.datetime.now(datetime.timezone.utc)
     record = {
-        'purpose': 'filethingie-sakura-preview' if stage5 else 'filethingie-sakura-rehearsal',
+        'purpose': 'filethingie-sakura-cutover' if production else ('filethingie-sakura-preview' if stage5 else 'filethingie-sakura-rehearsal'),
         'url': args.url,
         'created_at': now.isoformat(),
         'expires_at': (now + datetime.timedelta(hours=2)).isoformat(),

@@ -1,0 +1,21 @@
+{
+  "scope": "SA-607で使用した準備版の総合CI。今回の切替ツール検証とは別の記録",
+  "head_sha": "f2a68bd26fef9cdeec54dccebf1b305427acdba8",
+  "run_url": "https://github.com/n-yoshimatsu/filethingie/actions/runs/40102757444",
+  "jobs": [
+    {
+      "name": "integration (php85)",
+      "status": "completed",
+      "conclusion": "success",
+      "completed_at": "2026-10-24T14:31:40Z",
+      "url": "https://github.com/n-yoshimatsu/filethingie/actions/runs/40102757444/job/120898110867"
+    },
+    {
+      "name": "integration (php83)",
+      "status": "completed",
+      "conclusion": "success",
+      "completed_at": "2026-10-24T14:31:58Z",
+      "url": "https://github.com/n-yoshimatsu/filethingie/actions/runs/40102757444/job/120898111083"
+    }
+  ]
+}

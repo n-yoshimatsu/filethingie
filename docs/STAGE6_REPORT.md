@@ -17,7 +17,7 @@
 | TS-608／609 | Basic認証だけのリハーサル配置 | PASS | PHP 8.3／8.5で各23比較、複製一致・設定非実行・原本不変・未対応認証や改変コピーの停止 |
 | TS-610／611 | Basic認証だけの画面・通常操作 | PASS | 両PHP＋Chromeで各46比較、認証・表示・日本語／空ファイルの保存ハッシュ・同名拒否・作成／名前変更／移動／編集／検索／削除・CSRF・保護設定・PHPログ |
 
-ローカル15ケース484比較のPASS、利用者提供証跡によるSA-601〜605のPASS。ローカル試験環境はLinuxコンテナー。さくらFreeBSDでは保全コピーと隔離復元を確認済み、表示差分の取得も確認済み、移行リハーサルは初回配置でFAIL、修正版の配置・337ファイル照合でPASS。Web受入SA-606のChrome操作は84比較PASS、サーバー内部照合は未実施。ツールの合格と本番移行完了の区別。
+ローカル15ケース484比較のPASS、利用者提供証跡によるSA-601〜605のPASS。ローカル試験環境はLinuxコンテナー。さくらFreeBSDでは保全コピーと隔離復元を確認済み、表示差分の取得も確認済み、移行リハーサルは初回配置でFAIL、修正版の配置・337ファイル照合でPASS。SA-606はChrome84比較・利用者提供のサーバー内部19比較の計103比較PASS。ツールの合格と本番移行完了の区別。
 
 最初のコピー試験は両PHPで34比較PASS。その後、子フォルダーの.htaccessからの認証ファイル参照を追加保全対象とした同じシナリオの再実行も各34比較PASS。掲載証跡は最終版。失敗を省略したPASS記録ではない経緯。
 
@@ -58,7 +58,7 @@ docker compose run --rm --no-deps -T -v "$PWD:/workspace:ro" --entrypoint php ph
 
 ## 残る作業
 
-さくらで複製データを使うBasic認証だけのWeb受入SA-606、最終停止バックアップ・切替・再確認、正式リリース。現在の公開URL・Basic認証・既存保存データ・表示変更の維持方針。[表示差分の確認手順](STAGE6_DISPLAY.md)。
+本番切替前の非公開資材準備SA-607、最終停止バックアップ・切替・再確認、正式リリース。現在の公開URL・Basic認証・既存保存データ・表示変更の維持方針。[表示差分の確認手順](STAGE6_DISPLAY.md)。
 
 認証の未解決参照は取得した事実として記録、現在の認証不良とする断定なし。旧PHPアプリを戻してもPHP 8.3での稼働回復とは別問題のため、旧ソースの保全とサービス復旧の区別。
 
@@ -94,6 +94,20 @@ TS-612／613は各35比較PASS、./filesでの複製先への解決・設定保�
 
 初回は編集画面のPOST描画でURLにdirがないことによる試験側の操作先制限の停止。フォーム内の実送信先の確認へ修正。2回目は試験側の相対移動先の指定誤りで停止。正しい相対値へ修正、画面遷移時のHTTP 200確認を追加。判定基準・製品コードの変更なし。[途中試行・診断・後片付け](verification/stage6/2026-10-24/sakura-rehearsal-trials/diagnosis.json)。2回目の「移動元からの除去」は一覧存在確認不足のため、成功根拠から除外。最終試行では移動先の表示・保存ハッシュ・削除までの確認。
 
-サーバー内の配備ファイル・複製337ファイル・設定・権限・PHPログは未照合。Web部分のPASSと、サーバー内部確認待ちのSA-606全体INCONCLUSIVEの区別。本番切替なし。[読取り専用照合キット](verification/stage6/2026-10-24/sakura-rehearsal-verifier.zip)、[SHA-256](verification/stage6/2026-10-24/sakura-rehearsal-verifier-SHA256SUMS)。CLIツールはPHP 8.3／8.5のローカル自己検証で各11比較PASS。正常系19項目の一致、内容・権限・残存ファイル・ログ・リンクの異常検出、検証中の不変性。実機証跡とは別の記録。
+Web操作終了時点では、サーバー内の配備ファイル・複製337ファイル・設定・権限・PHPログが未照合。Web部分のPASSと、当時のSA-606全体INCONCLUSIVEの区別。後続のCLI照合結果は次節。本番切替なし。[読取り専用照合キット](verification/stage6/2026-10-24/sakura-rehearsal-verifier.zip)、[SHA-256](verification/stage6/2026-10-24/sakura-rehearsal-verifier-SHA256SUMS)。CLIツールはPHP 8.3／8.5のローカル自己検証で各11比較PASS。正常系19項目の一致、内容・権限・残存ファイル・ログ・リンクの異常検出、検証中の不変性。実機証跡とは別の記録。
 
 修正版167ec018の[CI run 40099368310](https://github.com/n-yoshimatsu/filethingie/actions/runs/40099368310)もPHP 8.3／8.5の両ジョブsuccess。[完了記録](verification/stage6/2026-10-24/relative-dir-ci.json)。
+
+## SA-606のサーバー内照合と統合判定
+
+利用者提供の2026年10月24日14:09:34 UTC（23:09:34 JST）のCLI出力による19項目PASS。[内部照合証跡](verification/stage6/2026-10-24/sakura-rehearsal-server.json)。配備46ファイル、複製337ファイルの内容・通常権限・更新時刻、設定・表示抽出・Basic認証・保護・favicon・非公開権限の一致。試験データ残存0、PHPログ0バイト、公開先への旧診断・管理ファイル混入0。管理ルート自身の更新時刻だけは保護設定・試験フォルダー作成削除に伴う変更として比較対象外。
+
+[SA-606統合判定](verification/stage6/2026-10-24/sakura-rehearsal-acceptance.json)はPASS。Chrome84比較と内部19比較の計103比較。初回CLIのWEB_ROOT引数欠落は開始前のINCOMPLETE、正しい引数で再実行済み。[初回呼出しの記録](verification/stage6/2026-10-24/sakura-rehearsal-trials/server-incomplete.json)。既存の途中試行記録の保持。
+
+更新版ad58fec5の[CI run 40100894214](https://github.com/n-yoshimatsu/filethingie/actions/runs/40100894214)も両PHPでsuccess。[CI証跡](verification/stage6/2026-10-24/acceptance-ci.json)。さくら実機でのPHP 8.5試験や本番切替を意味しない結果。
+
+## 本番切替前の資材準備
+
+利用者回答により保存データの書込み経路はFile Thingie画面のみ。新規非公開フォルダーへアプリ46ファイルと設定・保護ファイルの計49ファイルを準備するツールの作成。現在のURL、files保存先、Basic認証ファイルの維持方針。[具体的な配置・停止・戻し方の計画](STAGE6_CUTOVER.md)。
+
+準備ツールはPHP 8.3／8.5の使い捨てfixtureで各20比較PASS。原本・検証版の全エントリー不変、既存データの追加を含む最新状態の取得、設定非実行、全準備先0700／0600、レビュー後のソース変更・副作用設定・未レビュー保護設定・リンク先への配置の拒否。[PHP 8.3自己検証](verification/stage6/2026-10-24/cutover-prepare-selfcheck-php83.json)、[PHP 8.5自己検証](verification/stage6/2026-10-24/cutover-prepare-selfcheck-php85.json)。実機SA-607は未実施、本番の停止・配置・再開の機能はこのツールに未実装。

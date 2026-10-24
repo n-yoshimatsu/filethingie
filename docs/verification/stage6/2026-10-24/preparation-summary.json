@@ -1,5 +1,5 @@
 {
-  "scope": "段階6 棚卸し・保全コピー・隔離復元・表示差分レビュー・Basic認証リハーサル準備。本番切替は未実施",
+  "scope": "段階6 棚卸し・保全・隔離復元・表示差分・Basic認証リハーサル受入完了。本番切替前の資材準備中",
   "results": [
     {
       "case_id": "SA-601",
@@ -108,12 +108,14 @@
     },
     {
       "case_id": "SA-606",
-      "verdict": "INCONCLUSIVE",
-      "scope": "実機Chromeの84比較一致。サーバー内配備・データ不変・ログ照合待ち",
+      "verdict": "PASS",
+      "scope": "実機Chrome84比較と利用者提供CLI19比較の一致。リハーサル受入完了、本番切替は未実施",
       "browser_verdict": "PASS",
       "browser_checks": 84,
-      "server_verification": "NOT RUN",
-      "evidence": "sakura-rehearsal-browser.json"
+      "server_verification": "PASS",
+      "evidence": "sakura-rehearsal-acceptance.json",
+      "server_checks": 19,
+      "total_checks": 103
     },
     {
       "case_id": "TS-612",
@@ -138,6 +140,11 @@
       "verdict": "PASS",
       "checks": 46,
       "evidence": "relative-browser-php85/result.json"
+    },
+    {
+      "case_id": "SA-607",
+      "verdict": "NOT RUN",
+      "scope": "実機での非公開の本番切替資材準備。停止・切替を含まない範囲"
     }
   ],
   "source_commit": "3ab04adb323c1f5fe2d8b1cd144b6cbb3d0a1eb4",
@@ -158,7 +165,10 @@
     "build-stage6-verifier.py": "811c74230158369c8524c9c8879468c102ede847f6c67911ac018f41c40b22e1",
     "sakura-credentials.py": "72a0569c89d0bcd77d1d2f35e48a020306d53dc9ea73344add12b4caefa038c4",
     "stage6-verifier-check.php": "99a45d7033e8869f703647ac769034e1857b8873c463894ed95e178a7364dbd8",
-    "sakura-stage6.cjs": "17d2f8ba87a440390156c92e201ac9591671e71a93853bd33f3c39e7e233d0ad"
+    "sakura-stage6.cjs": "17d2f8ba87a440390156c92e201ac9591671e71a93853bd33f3c39e7e233d0ad",
+    "sakura-cutover-prepare.php": "33a86546ff157ffe52807adbd98f8d7805796f664829df8f7384097e1a343f78",
+    "build-stage6-cutover-prepare.py": "1851ebb29cdcaa394f2fc5cb58e5d75088106aaa4e0cfdec5cedf19184f8896c",
+    "stage6-cutover-prepare-check.php": "def9ac98436a8ff1a99032646a70ead4c40c84bc7ddc9257cbe89165c46edeb2"
   },
   "rehearsal_application_files": {
     "LICENSE": "60be50732c7642ccb6d1df338fa8453e883e788758e0397941568e837c3c823c",
@@ -238,5 +248,24 @@
       "checks": 11,
       "evidence": "verifier-selfcheck-php85.json"
     }
-  ]
+  ],
+  "cutover_prepare_selfchecks": [
+    {
+      "php": "8.3.36",
+      "checks": 20,
+      "verdict": "PASS",
+      "evidence": "cutover-prepare-selfcheck-php83.json"
+    },
+    {
+      "php": "8.5.12",
+      "checks": 20,
+      "verdict": "PASS",
+      "evidence": "cutover-prepare-selfcheck-php85.json"
+    }
+  ],
+  "writer_scope": {
+    "source": "利用者の選択肢1回答",
+    "production_managed_files": "File Thingieの画面だけ",
+    "other_writer_paths_reported": false
+  }
 }

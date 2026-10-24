@@ -1,0 +1,15 @@
+{
+  "case_id": "SA-606",
+  "scope": "サーバー内部照合の初回呼出し",
+  "execution_state": "BLOCKED",
+  "result": {
+    "case_id": "SA-606",
+    "verdict": "INCOMPLETE",
+    "message": "Usage: php sakura-rehearsal-verify.php REHEARSAL_DIRECTORY HOME WEB_ROOT",
+    "configuration_executed": false,
+    "writes_performed": false
+  },
+  "cause": "利用者が貼り付けたコマンドの末尾WEB_ROOT引数の欠落",
+  "resolution": "同じ固定版ツールへ3引数を渡す再実行。判定基準の変更なし",
+  "final_evidence": "../sakura-rehearsal-server.json"
+}

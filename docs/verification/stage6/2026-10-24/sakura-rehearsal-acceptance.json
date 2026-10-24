@@ -1,0 +1,40 @@
+{
+  "case_id": "SA-606",
+  "name": "さくらのBasic認証だけの移行リハーサル受入",
+  "verdict": "PASS",
+  "environment": {
+    "server_php": "8.3.36",
+    "server_os": "FreeBSD 13.0-RELEASE-p15",
+    "web_sapi": "cgi-fcgi",
+    "browser": "Chrome 156.0.8078.47"
+  },
+  "browser": {
+    "verdict": "PASS",
+    "checks": 84,
+    "evidence": "sakura-rehearsal-browser.json"
+  },
+  "server": {
+    "verdict": "PASS",
+    "checks": 19,
+    "evidence": "sakura-rehearsal-server.json",
+    "execution": "利用者のSSHターミナルからのCLI実行"
+  },
+  "total_checks": 103,
+  "retained_previous_trials": "sakura-rehearsal-trials/diagnosis.json",
+  "application_files": 46,
+  "managed_files": 337,
+  "test_data_remaining": 0,
+  "php_log_bytes": 0,
+  "credential_cleanup": "本人限定一時認証ファイルと専用ディレクトリの削除完了",
+  "production_cutover": false,
+  "remaining": [
+    "書込み停止前の資材準備と状態確認",
+    "書込み停止中の最終バックアップ",
+    "本番切替・受入・正式配布"
+  ],
+  "limits": [
+    "管理ルート自身の更新時刻のみ比較対象外。保存ファイルと既存子フォルダーの更新時刻は照合済み",
+    "PHP 8.5はローカル・CIでの検証。さくらの実機試験はPHP 8.3.36"
+  ],
+  "server_checked_at_jst": "2026-10-24 23:09:34 JST"
+}

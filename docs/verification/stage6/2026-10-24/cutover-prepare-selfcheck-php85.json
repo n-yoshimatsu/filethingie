@@ -1,0 +1,87 @@
+{
+    "scope": "本番切替前の資材準備ツールのローカル自己検証。実機の準備・切替とは別の記録",
+    "php": "8.5.12",
+    "verdict": "PASS",
+    "checks": [
+        {
+            "name": "非公開準備完了",
+            "verdict": "PASS"
+        },
+        {
+            "name": "アプリ46・配置予定49ファイル",
+            "verdict": "PASS"
+        },
+        {
+            "name": "本番・検証版の全エントリー不変",
+            "verdict": "PASS"
+        },
+        {
+            "name": "設定PHPの非実行",
+            "verdict": "PASS"
+        },
+        {
+            "name": "停止・切替・本番書込みなし",
+            "verdict": "PASS"
+        },
+        {
+            "name": "最終停止バックアップとの区別",
+            "verdict": "PASS"
+        },
+        {
+            "name": "計画ファイルのハッシュ一致",
+            "verdict": "PASS"
+        },
+        {
+            "name": "コピーではなく既存保存先を使う設定",
+            "verdict": "PASS"
+        },
+        {
+            "name": "元のBasic認証ファイル参照の維持",
+            "verdict": "PASS"
+        },
+        {
+            "name": "旧診断・管理ファイルのHTTP保護準備",
+            "verdict": "PASS"
+        },
+        {
+            "name": "準備先の全ディレクトリ0700・全ファイル0600",
+            "verdict": "PASS"
+        },
+        {
+            "name": "49ファイルの準備内容と計画の一致",
+            "verdict": "PASS"
+        },
+        {
+            "name": "設定・認証・フルパス・固有表示の非出力",
+            "verdict": "PASS"
+        },
+        {
+            "name": "直近の保存データの取得と維持",
+            "verdict": "PASS"
+        },
+        {
+            "name": "レビュー後のソース変更の拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "実行式を追加した設定の拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "設定内の副作用コードの非実行",
+            "verdict": "PASS"
+        },
+        {
+            "name": "保存先への未レビュー保護設定の拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "配置予定先の親シンボリックリンクの拒否",
+            "verdict": "PASS"
+        },
+        {
+            "name": "人工原本の最終復元一致",
+            "verdict": "PASS"
+        }
+    ]
+}

@@ -3,6 +3,8 @@
 // No stop/apply/resume operation is implemented in this tool.
 if (PHP_SAPI !== 'cli') { http_response_code(404); exit; }
 require __DIR__.'/sakura-rehearsal-verify.php';
+// Preserve bookmarks to an optional legacy entry while keeping one activation gate.
+function ftcp_legacy_entry(){return "<?php\nrequire __DIR__.'/index.php';\n";}
 function ftcp_target($app,$rel) {
     ftb_path($rel);$parts=explode('/',$rel);$p=$app;
     foreach($parts as $i=>$part){
@@ -35,6 +37,8 @@ function ftcp_prepare($homeArg,$id,&$created) {
     foreach($manifest['files'] as $rel=>$sha){
         ftb_path($rel);$data=ftb_read(__DIR__.'/app/'.$rel);ftb_need(hash('sha256',$data)===$sha,'Candidate application checksum mismatch.');$next[$rel]=$data;
     }
+    $legacyEntry=ftcp_target($app,'ft2.php');
+    if($legacyEntry!==null){$next['ft2.php']=ftcp_legacy_entry();}
     $config=ftb_read($app.'/config.php');$index=ftb_read($app.'/index.php');$css=ftb_read($app.'/css/ft.css');$auth=ftb_read($app.'/.htaccess');
     $presentation=ftr_presentation(str_replace("\r\n","\n",$index),str_replace("\r\n","\n",$css));
     ftb_need($presentation===$deployed['presentation'],'Production display changed since the accepted rehearsal; review required.');
@@ -83,7 +87,7 @@ function ftcp_prepare($homeArg,$id,&$created) {
         'managed_before'=>$managed,'retained_favicon'=>$favicon,'auth_file'=>$authFile,'auth_entry'=>$authEntry,'presentation'=>$presentation,
         'private_config_sha256'=>hash_file('sha256',$created.'/config.php'),'maintenance_index_sha256'=>hash('sha256',$maintenance),
         'final_backup'=>null,'writer_scope'=>'UI only per operator; in-flight activity must be checked before stop',
-        'cutover_operations_implemented'=>false];
+        'legacy_entry_present'=>$legacyEntry!==null,'cutover_operations_implemented'=>false];
     $encoded=ftb_json($plan);ftb_write($created.'/plan.json',$encoded);
     ftb_write($created.'/COMPLETE.json',ftb_json(['plan_sha256'=>hash('sha256',$encoded)]));
     $summary=['scope'=>'段階6 本番切替前の非公開資材準備。本番書込み・停止・切替なし','checked_at_utc'=>gmdate('c'),'php'=>PHP_VERSION,
@@ -93,6 +97,7 @@ function ftcp_prepare($homeArg,$id,&$created) {
         'current_managed_bytes'=>array_sum(array_column($managed,'bytes')),'source_unchanged_during_preparation'=>true,
         'configuration_executed'=>false,'production_written'=>false,'maintenance_started'=>false,'cutover_performed'=>false,
         'final_stopped_backup'=>'NOT RUN','basic_credential_file_changed'=>false,
+        'legacy_entry_redirect_planned'=>$legacyEntry!==null,'rehearsal_web_acceptance'=>'別途Web確認が必要',
         'privacy'=>'設定・認証情報・保存ファイル名・フルパスの非出力'];
     ftb_write($created.'/summary.json',ftb_json($summary));return $summary;
 }

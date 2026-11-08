@@ -14,7 +14,10 @@ function ftc_load($homeArg,$id){
     $app=$p['application'];ftb_need(realpath($app)===$app&&ftb_inside($app,$web)&&dirname($p['rehearsal'])===$app,'Canonical production parent required.');
     $fixed=json_decode(ftb_read(__DIR__.'/rehearsal-manifest.json'),true,512,JSON_THROW_ON_ERROR);
     ftb_need($fixed===$p['application_manifest']&&count($fixed['files'])===46,'Accepted application manifest required.');
-    $keys=array_merge(array_keys($fixed['files']),['config.php','.htaccess','files/.htaccess']);sort($keys);
+    $keys=array_merge(array_keys($fixed['files']),['config.php','.htaccess','files/.htaccess']);
+    ftb_need(is_bool($p['legacy_entry_present']??false),'Invalid legacy-entry flag.');
+    if($p['legacy_entry_present']??false){$keys[]='ft2.php';ftb_need(($p['before']['ft2.php']['type']??null)==='file','Existing legacy entry required.');}
+    sort($keys);
     foreach(['before','new'] as $key){$actual=array_keys($p[$key]);sort($actual);ftb_need($actual===$keys,'Unexpected deployment targets.');}
     ftb_need($p['maintenance_index_sha256']===hash('sha256',ftc_maintenance()),'Known maintenance payload required.');
     ftb_need(stat($app)['dev']===stat($private)['dev'],'Same filesystem required for atomic single-file replacement.');
@@ -25,7 +28,7 @@ function ftc_state($p){
     $file=$p['private'].'/cutover-state.json';
     if(!file_exists($file)&&!is_link($file)){return ['phase'=>'PREPARED','events'=>0,'created_directories'=>[],'backup_id'=>null];}
     $s=json_decode(ftc_private($file),true,512,JSON_THROW_ON_ERROR);
-    ftb_need(in_array($s['phase']??'', ['PREPARED','STOPPING','STOPPED','BACKING_UP','BACKED_UP','APPLYING','APPLIED','RESUMING','LIVE','HOLDING','HELD','RESTORING','RESTORED_STOPPED'],true),'Invalid cutover state.');return $s;
+    ftb_need(in_array($s['phase']??'', ['PREPARED','STOPPING','STOPPED','BACKING_UP','BACKED_UP','APPLYING','APPLIED','RESUMING','LIVE','HOLDING','HELD','RESTORING','RESTORED_STOPPED','CANCELLING','CANCELLED'],true),'Invalid cutover state.');return $s;
 }
 function ftc_write_private($p,$name,$bytes){
     $target=$p['private'].'/'.$name;if(file_exists($target)||is_link($target)){ftc_private($target);}
@@ -42,6 +45,7 @@ function ftc_save($p,&$s,$event){
 function ftc_payload($p){
     foreach($p['before'] as $rel=>$e){if($e!==null){ftb_need($e['type']==='file'&&is_int($e['mode'])&&$e['mode']>=0&&$e['mode']<=0777,'Invalid prior-file metadata.');ftb_need(hash('sha256',ftc_private($p['private'].'/before/'.$rel))===$e['sha256'],'Prior-file backup checksum mismatch.');}}
     $expected=$p['application_manifest']['files'];
+    if($p['legacy_entry_present']??false){$expected['ft2.php']=hash('sha256',ftcp_legacy_entry());}
     $config=ftr_config(ftc_private($p['private'].'/before/config.php'),$p['presentation'],$p['private']);
     ftb_need(hash('sha256',$config)===$p['private_config_sha256']&&ftc_private($p['private'].'/config.php')===$config,'Private configuration mismatch.');
     $expected['config.php']=hash('sha256',"<?php\nrequire ".var_export($p['private'].'/config.php',true).";\n");
@@ -54,7 +58,7 @@ function ftc_payload($p){
 function ftc_new_match($p,$rel,$e){$want=$p['new'][$rel];return $e!==null&&$e['type']==='file'&&$e['sha256']===$want['sha256']&&$e['bytes']===$want['bytes']&&$e['mode']===$want['mode'];}
 function ftc_is_maintenance($p){$e=ftcp_target($p['application'],'index.php');return $e!==null&&$e['sha256']===$p['maintenance_index_sha256']&&$e['mode']===0644;}
 function ftc_identity($p){ftb_need(ftb_entry($p['auth_file'])===$p['auth_entry'],'Basic credential file changed; review required.');ftb_need(ftcp_target($p['application'],'favicon.ico')===$p['retained_favicon'],'Favicon changed; review required.');}
-function ftc_original($p,$allowMaintenance=false){foreach($p['before'] as $rel=>$e){if($rel==='index.php'&&$allowMaintenance&&ftc_is_maintenance($p)){continue;}ftb_need(ftcp_target($p['application'],$rel)===$e,'Production source changed; no unreviewed overwrite.');}ftc_identity($p);}
+function ftc_original($p,$allowMaintenance=false){foreach($p['before'] as $rel=>$e){if($allowMaintenance&&(($rel==='index.php'&&ftc_is_maintenance($p))||($rel==='ft2.php'&&ftc_new_match($p,$rel,ftcp_target($p['application'],$rel))))){continue;}ftb_need(ftcp_target($p['application'],$rel)===$e,'Production source changed; no unreviewed overwrite.');}ftc_identity($p);}
 function ftc_known_targets($p){foreach($p['before'] as $rel=>$e){$current=ftcp_target($p['application'],$rel);if($rel==='index.php'&&ftc_is_maintenance($p)){continue;}ftb_need($current===$e||ftc_new_match($p,$rel,$current),'Unknown target change; operation stopped.');}}
 function ftc_dirs($p,&$s,$rel){
     $parts=explode('/',dirname($rel));if($parts===['.']){return;}$sub='';
@@ -87,6 +91,8 @@ function ftc_ready($p,$s,$withData=true){
 function ftc_stop($p,&$s,$idle){
     ftb_need($idle,'Explicit writers-idle confirmation required.');ftb_need(in_array($s['phase'],['PREPARED','STOPPING','STOPPED'],true),'Stop requires prepared or stopped state.');
     ftc_payload($p);ftc_original($p,true);$s['phase']='STOPPING';$s['writers_idle_confirmed']=true;ftc_save($p,$s,'stop-intent');
+    // Route the legacy URL through index.php before installing its maintenance gate.
+    if($p['legacy_entry_present']??false){$current=ftcp_target($p['application'],'ft2.php');if(!ftc_new_match($p,'ft2.php',$current)){ftc_replace($p,$s,'ft2.php',ftcp_legacy_entry(),0644,$current);}}
     if(!ftc_is_maintenance($p)){ftc_replace($p,$s,'index.php',ftc_maintenance(),0644,ftcp_target($p['application'],'index.php'));}
     ftb_need(ftc_is_maintenance($p),'Maintenance entry installation failed.');$s['phase']='STOPPED';$s['stopped_at_utc']=gmdate('c');ftc_save($p,$s,'stopped');
 }
@@ -132,7 +138,7 @@ function ftc_rollback($p,&$s){
     ftb_need(in_array($s['phase'],['STOPPED','BACKING_UP','BACKED_UP','APPLYING','APPLIED','RESUMING','LIVE','HOLDING','HELD','RESTORING','RESTORED_STOPPED'],true),'No stopped or changed deployment to restore.');
     ftc_hold($p,$s);ftc_payload($p);ftc_known_targets($p);ftc_identity($p);$beforeData=ftc_data($p);
     $s['phase']='RESTORING';ftc_save($p,$s,'restore-start');
-    foreach(array_reverse(array_keys($p['before'])) as $rel){if($rel==='index.php'){continue;}$current=ftcp_target($p['application'],$rel);$old=$p['before'][$rel];if($current===$old){continue;}
+    foreach(array_reverse(array_keys($p['before'])) as $rel){if($rel==='index.php'||$rel==='ft2.php'){continue;}$current=ftcp_target($p['application'],$rel);$old=$p['before'][$rel];if($current===$old){continue;}
         ftb_need(ftc_new_match($p,$rel,$current),'Unknown target change; restore stopped.');
         if($old===null){ftc_save($p,$s,'remove-created-intent:'.$rel);ftb_need(unlink($p['application'].'/'.$rel),'Could not remove created target.');ftc_save($p,$s,'removed-created:'.$rel);}
         else{ftc_replace($p,$s,$rel,ftc_private($p['private'].'/before/'.$rel),$old['mode'],$current,$old['mtime']);}
@@ -141,10 +147,25 @@ function ftc_rollback($p,&$s){
     ftc_original($p,true);ftb_need(ftc_data($p)===$beforeData,'Managed data changed during source restoration.');ftb_need(ftc_is_maintenance($p),'Restoration must remain stopped.');
     $s['phase']='RESTORED_STOPPED';ftc_save($p,$s,'sources-restored-data-preserved-still-stopped');
 }
+function ftc_cancel($p,&$s,$legacyRuntime){
+    // Only the operator can confirm that the Web runtime supports the old application.
+    ftb_need($legacyRuntime,'Explicit legacy Web runtime confirmation required.');
+    ftb_need(in_array($s['phase'],['STOPPED','RESTORED_STOPPED','CANCELLING','CANCELLED'],true),'Cancel requires stopped original sources or completed rollback.');
+    ftc_payload($p);ftc_original($p,true);$data=ftc_data($p);
+    if($s['phase']==='CANCELLED'){ftc_original($p);return;}
+    if($s['phase']!=='CANCELLING'){ftb_need(ftc_is_maintenance($p),'Maintenance entry required before cancellation.');}
+    $s['phase']='CANCELLING';ftc_save($p,$s,'cancel-intent');
+    foreach(['ft2.php','index.php'] as $rel){
+        if(!isset($p['before'][$rel])){continue;}$old=$p['before'][$rel];$current=ftcp_target($p['application'],$rel);
+        if($current!==$old){ftc_replace($p,$s,$rel,ftc_private($p['private'].'/before/'.$rel),$old['mode'],$current,$old['mtime']);}
+    }
+    ftc_original($p);ftb_need(ftc_data($p)===$data,'Managed data changed during cancellation.');
+    $s['phase']='CANCELLED';$s['legacy_web_runtime_confirmed']=true;ftc_save($p,$s,'original-entries-restored');
+}
 function ftc_verify($p,$s){
     ftb_need($s['phase']==='LIVE','Live state required for post-cutover verification.');ftc_payload($p);$checks=[];
     $add=function($name,$actual,$expected)use(&$checks){$checks[]=['name'=>$name,'actual'=>$actual,'expected'=>$expected,'verdict'=>$actual===$expected?'PASS':'FAIL'];};
-    $bad=0;foreach($p['new'] as $rel=>$e){if(!ftc_new_match($p,$rel,ftcp_target($p['application'],$rel))){$bad++;}}$add('配置49ファイルの不一致数',$bad,0);
+    $bad=0;foreach($p['new'] as $rel=>$e){if(!ftc_new_match($p,$rel,ftcp_target($p['application'],$rel))){$bad++;}}$add('配置'.count($p['new']).'ファイルの不一致数',$bad,0);
     $add('Basic認証ファイルの不変',ftb_entry($p['auth_file'])===$p['auth_entry'],true);$add('faviconの不変',ftcp_target($p['application'],'favicon.ico')===$p['retained_favicon'],true);
     $m=ftc_final_backup($p,$s);$add('保存データと停止時バックアップの一致',ftc_data($p)===ftc_backup_data($m),true);
     $add('PHPログのバイト数',strlen(ftc_private($p['private'].'/php-error.log')),0);
@@ -152,9 +173,9 @@ function ftc_verify($p,$s){
     return ['scope'=>'本番切替後のCLI照合。Web受入は別の記録','checks'=>$checks,'verdict'=>count(array_filter($checks,fn($c)=>$c['verdict']!=='PASS'))?'FAIL':'PASS','managed_files'=>count(array_filter(ftc_backup_data($m),fn($e)=>$e['type']==='file'))];
 }
 function ftc_execute($action,$home,$id,$flag=''){
-    ftb_need(in_array($action,['status','stop','backup','apply','resume','hold','rollback','verify'],true),'Unsupported cutover action.');
-    ftb_need(in_array($flag,['','--writers-idle','--web-503-confirmed'],true),'Unsupported confirmation.');
-    ftb_need($flag===''||($action==='stop'&&$flag==='--writers-idle')||($action==='backup'&&$flag==='--web-503-confirmed'),'Confirmation does not match action.');
+    ftb_need(in_array($action,['status','stop','backup','apply','resume','hold','rollback','cancel','verify'],true),'Unsupported cutover action.');
+    ftb_need(in_array($flag,['','--writers-idle','--web-503-confirmed','--legacy-runtime-confirmed'],true),'Unsupported confirmation.');
+    ftb_need($flag===''||($action==='stop'&&$flag==='--writers-idle')||($action==='backup'&&$flag==='--web-503-confirmed')||($action==='cancel'&&$flag==='--legacy-runtime-confirmed'),'Confirmation does not match action.');
     $p=ftc_load($home,$id);$lockPath=$p['private'].'/operations.lock';if(file_exists($lockPath)||is_link($lockPath)){ftc_private($lockPath);}else{ftb_write($lockPath,'');}
     $lock=fopen($lockPath,'r+b');ftb_need($lock!==false&&flock($lock,LOCK_EX|LOCK_NB),'Another cutover operation is running.');
     try{
@@ -165,6 +186,7 @@ function ftc_execute($action,$home,$id,$flag=''){
         elseif($action==='resume'){ftc_resume($p,$s);}
         elseif($action==='hold'){ftc_hold($p,$s);}
         elseif($action==='rollback'){ftc_rollback($p,$s);}
+        elseif($action==='cancel'){ftc_cancel($p,$s,$flag==='--legacy-runtime-confirmed');}
         elseif($action==='verify'){$verification=ftc_verify($p,$s);}
         return ['scope'=>'段階6 本番切替の状態管理','checked_at_utc'=>gmdate('c'),'php'=>PHP_VERSION,'action'=>$action,'preparation_id'=>$id,'phase'=>$s['phase'],
             'maintenance_index_on_disk'=>ftc_is_maintenance($p),'web_status'=>'別途HTTP確認が必要','final_backup_id'=>$s['backup_id']??null,
@@ -173,6 +195,6 @@ function ftc_execute($action,$home,$id,$flag=''){
     }finally{flock($lock,LOCK_UN);fclose($lock);}
 }
 if(realpath($_SERVER['SCRIPT_FILENAME']??'')!==__FILE__){return;}
-try{ftb_need(in_array($argc,[4,5],true),'Usage: php sakura-cutover.php ACTION HOME PREPARATION_ID [--writers-idle|--web-503-confirmed]');$r=ftc_execute($argv[1],$argv[2],$argv[3],$argv[4]??'');echo ftb_json($r);exit($r['verdict']==='FAIL'?1:0);}
+try{ftb_need(in_array($argc,[4,5],true),'Usage: php sakura-cutover.php ACTION HOME PREPARATION_ID [--writers-idle|--web-503-confirmed|--legacy-runtime-confirmed]');$r=ftc_execute($argv[1],$argv[2],$argv[3],$argv[4]??'');echo ftb_json($r);exit($r['verdict']==='FAIL'?1:0);}
 catch(Throwable $e){echo ftb_json(['verdict'=>'INCOMPLETE','message'=>get_class($e)===RuntimeException::class?$e->getMessage():'Metadata or runtime error. Inspect status before the next operation.',
     'action'=>$argv[1]??null,'managed_user_files_written_by_tool'=>false,'basic_credential_file_written_by_tool'=>false,'instruction'=>'状態を確認し、停止中の入口を維持。未確認の再開なし']);exit(2);}

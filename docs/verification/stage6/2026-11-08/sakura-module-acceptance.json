@@ -48,7 +48,7 @@
   "privacy": "サイト識別情報・認証情報・フルパス・表示文字列・保存ファイル名・画面の非掲載",
   "normal_use_resumption": "Web受入および利用者提供の最終CLI総合PASS受領後の再開案内",
   "temporary_credentials": "本番・検証版の一時認証ファイル2件と専用親フォルダーの削除完了",
-  "temporary_probe_cleanup": "利用者への削除依頼済み、完了報告待ち",
+  "temporary_probe_cleanup": "一時診断ページ2件の削除完了。利用者提供のrm/rmdir実行記録に基づく確認",
   "stop_web": {
     "verdict": "PASS",
     "checks": 29,
@@ -1228,5 +1228,12 @@
       ],
       "functional_inputs_and_assertions_changed": false
     }
+  },
+  "repository_ci": {
+    "head_sha": "a22d815fa2807103f65722782730129c312922d6",
+    "run_id": 42440099752,
+    "conclusion": "success",
+    "url": "https://github.com/n-yoshimatsu/filethingie/actions/runs/42440099752",
+    "scope": "切替ツール・実機受入記録を含むコミット。後続変更は削除完了記録と本CI情報のみ"
   }
 }

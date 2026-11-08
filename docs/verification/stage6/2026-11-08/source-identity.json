@@ -1,0 +1,11 @@
+{
+  "sha256": {
+    "sakura-cutover.php": "539f49b5d642eb619a56ea72aaa1476cdd9ad20a3c1b67c8ef1e1a4d4a7ffd7d",
+    "sakura-cutover-prepare.php": "8427b43ce310591426c766d06a53ece1266860a1480cc84aba4bdf528c6fdb86",
+    "stage6-legacy-cutover-test.php": "c4967e2cb54b4a16c140e827d75b31f3ffc7ef3ad1e92b383cf0d7f85c7fd1eb",
+    "stage6-legacy-test.py": "4f7a181f23b6958e9edec41c61e34cb435a6093f9fe4dd6f44290a64a3963fb8"
+  },
+  "kit_sha256": "8c15cc096fdb21d173b2d14e6bd107dfe34d217d7e1c2aa58c08efb361c87559",
+  "application_files": 46,
+  "application_bytes_changed": false
+}

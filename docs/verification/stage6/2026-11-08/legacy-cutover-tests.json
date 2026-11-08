@@ -1,0 +1,148 @@
+{
+  "scope": "旧ft2.phpを持つ構成と従来構成のローカル切替検証。実機配置・PHP版変更・稼働復旧の結果ではない記録",
+  "verdict": "PASS",
+  "kit_sha256": "8c15cc096fdb21d173b2d14e6bd107dfe34d217d7e1c2aa58c08efb361c87559",
+  "results": [
+    {
+      "service": "php83",
+      "suite": "baseline",
+      "image_id": "sha256:e5359b05692e67b1ec72b5a1bbcefe1b55e7b28aa302ff607a708a3b5defa81c",
+      "records": [
+        {
+          "label": "fixture",
+          "case_id": "TS-612",
+          "verdict": "PASS",
+          "checks": 35,
+          "exit_code": 0
+        },
+        {
+          "label": "prepare",
+          "case_id": null,
+          "verdict": "PASS",
+          "checks": 20,
+          "exit_code": 0
+        },
+        {
+          "label": "cutover",
+          "case_id": "TS-616",
+          "verdict": "PASS",
+          "checks": 36,
+          "exit_code": 0
+        }
+      ],
+      "error": null,
+      "verdict": "PASS",
+      "source_hashes": {
+        "sakura-cutover.php": "539f49b5d642eb619a56ea72aaa1476cdd9ad20a3c1b67c8ef1e1a4d4a7ffd7d",
+        "sakura-cutover-prepare.php": "8427b43ce310591426c766d06a53ece1266860a1480cc84aba4bdf528c6fdb86",
+        "stage6-legacy-cutover-test.php": "c4967e2cb54b4a16c140e827d75b31f3ffc7ef3ad1e92b383cf0d7f85c7fd1eb"
+      },
+      "scope": "使い捨てLinux環境。実機PHP版の切替と旧本番アプリの稼働復旧は対象外"
+    },
+    {
+      "service": "php85",
+      "suite": "baseline",
+      "image_id": "sha256:2fa36c7dab9e09b7de57f8126097d0fe7c99ee0727542fb8a03841811841da52",
+      "records": [
+        {
+          "label": "fixture",
+          "case_id": "TS-613",
+          "verdict": "PASS",
+          "checks": 35,
+          "exit_code": 0
+        },
+        {
+          "label": "prepare",
+          "case_id": null,
+          "verdict": "PASS",
+          "checks": 20,
+          "exit_code": 0
+        },
+        {
+          "label": "cutover",
+          "case_id": "TS-617",
+          "verdict": "PASS",
+          "checks": 36,
+          "exit_code": 0
+        }
+      ],
+      "error": null,
+      "verdict": "PASS",
+      "source_hashes": {
+        "sakura-cutover.php": "539f49b5d642eb619a56ea72aaa1476cdd9ad20a3c1b67c8ef1e1a4d4a7ffd7d",
+        "sakura-cutover-prepare.php": "8427b43ce310591426c766d06a53ece1266860a1480cc84aba4bdf528c6fdb86",
+        "stage6-legacy-cutover-test.php": "c4967e2cb54b4a16c140e827d75b31f3ffc7ef3ad1e92b383cf0d7f85c7fd1eb"
+      },
+      "scope": "使い捨てLinux環境。実機PHP版の切替と旧本番アプリの稼働復旧は対象外"
+    },
+    {
+      "service": "php83",
+      "suite": "legacy",
+      "image_id": "sha256:e5359b05692e67b1ec72b5a1bbcefe1b55e7b28aa302ff607a708a3b5defa81c",
+      "records": [
+        {
+          "label": "fixture",
+          "case_id": "TS-612",
+          "verdict": "PASS",
+          "checks": 35,
+          "exit_code": 0
+        },
+        {
+          "label": "legacy-cutover",
+          "case_id": "TS-620",
+          "verdict": "PASS",
+          "checks": 122,
+          "exit_code": 0
+        }
+      ],
+      "error": null,
+      "verdict": "PASS",
+      "source_hashes": {
+        "sakura-cutover.php": "539f49b5d642eb619a56ea72aaa1476cdd9ad20a3c1b67c8ef1e1a4d4a7ffd7d",
+        "sakura-cutover-prepare.php": "8427b43ce310591426c766d06a53ece1266860a1480cc84aba4bdf528c6fdb86",
+        "stage6-legacy-cutover-test.php": "c4967e2cb54b4a16c140e827d75b31f3ffc7ef3ad1e92b383cf0d7f85c7fd1eb"
+      },
+      "scope": "使い捨てLinux環境。実機PHP版の切替と旧本番アプリの稼働復旧は対象外"
+    },
+    {
+      "service": "php85",
+      "suite": "legacy",
+      "image_id": "sha256:2fa36c7dab9e09b7de57f8126097d0fe7c99ee0727542fb8a03841811841da52",
+      "records": [
+        {
+          "label": "fixture",
+          "case_id": "TS-613",
+          "verdict": "PASS",
+          "checks": 35,
+          "exit_code": 0
+        },
+        {
+          "label": "legacy-cutover",
+          "case_id": "TS-621",
+          "verdict": "PASS",
+          "checks": 122,
+          "exit_code": 0
+        }
+      ],
+      "error": null,
+      "verdict": "PASS",
+      "source_hashes": {
+        "sakura-cutover.php": "539f49b5d642eb619a56ea72aaa1476cdd9ad20a3c1b67c8ef1e1a4d4a7ffd7d",
+        "sakura-cutover-prepare.php": "8427b43ce310591426c766d06a53ece1266860a1480cc84aba4bdf528c6fdb86",
+        "stage6-legacy-cutover-test.php": "c4967e2cb54b4a16c140e827d75b31f3ffc7ef3ad1e92b383cf0d7f85c7fd1eb"
+      },
+      "scope": "使い捨てLinux環境。実機PHP版の切替と旧本番アプリの稼働復旧は対象外"
+    }
+  ],
+  "initial_trials": {
+    "verdict": "BLOCKED",
+    "functional_cases": "NOT RUN",
+    "reason": "Apacheの起動とgraceful再読込みの競合。コンテナー起動前の設定配置で解消",
+    "evidence": [
+      "trial1-php83-baseline",
+      "trial1-php85-baseline",
+      "trial2-php83-baseline"
+    ],
+    "classification_correction": "初回ランナーのFAILラベルは基盤起動失敗。機能試験未到達のためBLOCKEDへ訂正。元ログの保持"
+  }
+}
